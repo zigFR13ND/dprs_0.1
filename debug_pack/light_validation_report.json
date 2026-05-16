@@ -1,5 +1,5 @@
 {
-  "output_dir": "output",
+  "output_dir": "output\\match730_v2",
   "checks": {
     "match_summary.json": true,
     "game_events_list.csv": true,
@@ -7,263 +7,1011 @@
     "meta\\player_info.csv": true,
     "events": true,
     "ticks": true,
-    "errors": true
+    "errors": true,
+    "errors\\failed_events.csv": true,
+    "errors\\failed_tick_groups.csv": true,
+    "errors\\failed_meta_methods.csv": true
   },
+  "players_count": 10,
+  "player_info_columns": [
+    "steamid",
+    "name",
+    "team_number"
+  ],
+  "player_death_rows": 160,
+  "player_death_columns": [
+    "assistedflash",
+    "assister_name",
+    "assister_steamid",
+    "attacker_name",
+    "attacker_steamid",
+    "attackerblind",
+    "attackerinair",
+    "distance",
+    "dmg_armor",
+    "dmg_health",
+    "dominated",
+    "headshot",
+    "hitgroup",
+    "noreplay",
+    "noscope",
+    "penetrated",
+    "revenge",
+    "thrusmoke",
+    "tick",
+    "user_name",
+    "user_steamid",
+    "weapon",
+    "weapon_fauxitemid",
+    "weapon_itemid",
+    "weapon_originalowner_xuid",
+    "wipe"
+  ],
+  "player_hurt_rows": 650,
+  "player_hurt_columns": [
+    "armor",
+    "attacker_name",
+    "attacker_steamid",
+    "dmg_armor",
+    "dmg_health",
+    "health",
+    "hitgroup",
+    "tick",
+    "user_name",
+    "user_steamid",
+    "weapon"
+  ],
+  "weapon_fire_rows": 3441,
+  "weapon_fire_columns": [
+    "silenced",
+    "tick",
+    "user_name",
+    "user_steamid",
+    "weapon"
+  ],
+  "round_start_rows": 22,
+  "round_start_source": "events\\round_prestart.csv",
+  "round_end_rows": 42,
+  "round_end_source": "events\\round_officially_ended.csv",
+  "ticks_aggregate_rows": 1448620,
+  "ticks_aggregate_columns": [
+    "total_rounds_played",
+    "cash_spent_this_round",
+    "kills_total",
+    "deaths_total",
+    "assists_total",
+    "score",
+    "mvps",
+    "current_equip_value",
+    "round_start_equip_value",
+    "tick",
+    "steamid",
+    "name"
+  ],
+  "available_files": [
+    "errors\\failed_events.csv",
+    "errors\\failed_meta_methods.csv",
+    "errors\\failed_tick_groups.csv",
+    "events\\announce_phase_end.csv",
+    "events\\begin_new_match.csv",
+    "events\\bomb_begindefuse.csv",
+    "events\\bomb_beginplant.csv",
+    "events\\bomb_defused.csv",
+    "events\\bomb_dropped.csv",
+    "events\\bomb_exploded.csv",
+    "events\\bomb_pickup.csv",
+    "events\\bomb_planted.csv",
+    "events\\bullet_damage.csv",
+    "events\\buytime_ended.csv",
+    "events\\chat_message.csv",
+    "events\\cs_pre_restart.csv",
+    "events\\cs_round_final_beep.csv",
+    "events\\cs_round_start_beep.csv",
+    "events\\cs_win_panel_match.csv",
+    "events\\decoy_detonate.csv",
+    "events\\decoy_started.csv",
+    "events\\fire_bullets.csv",
+    "events\\flashbang_detonate.csv",
+    "events\\hegrenade_detonate.csv",
+    "events\\hltv_versioninfo.csv",
+    "events\\inferno_expire.csv",
+    "events\\inferno_startburn.csv",
+    "events\\item_equip.csv",
+    "events\\item_pickup.csv",
+    "events\\player_blind.csv",
+    "events\\player_bullet_hit.csv",
+    "events\\player_death.csv",
+    "events\\player_disconnect.csv",
+    "events\\player_footstep.csv",
+    "events\\player_hurt.csv",
+    "events\\player_spawn.csv",
+    "events\\player_team.csv",
+    "events\\rank_update.csv",
+    "events\\round_announce_last_round_half.csv",
+    "events\\round_announce_match_point.csv",
+    "events\\round_announce_match_start.csv",
+    "events\\round_freeze_end.csv",
+    "events\\round_officially_ended.csv",
+    "events\\round_poststart.csv",
+    "events\\round_prestart.csv",
+    "events\\round_time_warning.csv",
+    "events\\server_cvar.csv",
+    "events\\smokegrenade_detonate.csv",
+    "events\\smokegrenade_expired.csv",
+    "events\\weapon_fire.csv",
+    "events\\weapon_reload.csv",
+    "events\\weapon_zoom.csv",
+    "game_events_list.csv",
+    "light_validation_report.json",
+    "match_summary.json",
+    "meta\\grenades.csv",
+    "meta\\header.json",
+    "meta\\item_drops.csv",
+    "meta\\player_info.csv",
+    "meta\\skins.csv",
+    "ticks\\ticks_aggregate.csv",
+    "ticks\\ticks_buttons.csv",
+    "ticks\\ticks_damage_and_status.csv",
+    "ticks\\ticks_game_state.csv",
+    "ticks\\ticks_player_core.csv",
+    "ticks\\ticks_usercommands.csv",
+    "ticks\\ticks_view_and_movement.csv",
+    "ticks\\ticks_weapon.csv"
+  ],
   "csv_files": [
     {
-      "path": "errors\\failed_metadata.csv",
-      "rows": 2
+      "path": "errors\\failed_events.csv",
+      "exists": true,
+      "rows": 0,
+      "columns": [
+        "event_name",
+        "error"
+      ]
+    },
+    {
+      "path": "errors\\failed_meta_methods.csv",
+      "exists": true,
+      "rows": 2,
+      "columns": [
+        "method",
+        "status",
+        "severity",
+        "error"
+      ]
+    },
+    {
+      "path": "errors\\failed_tick_groups.csv",
+      "exists": true,
+      "rows": 0,
+      "columns": [
+        "group",
+        "error",
+        "fields"
+      ]
     },
     {
       "path": "events\\announce_phase_end.csv",
-      "rows": 1
+      "exists": true,
+      "rows": 1,
+      "columns": [
+        "tick"
+      ]
     },
     {
       "path": "events\\begin_new_match.csv",
-      "rows": 1
+      "exists": true,
+      "rows": 1,
+      "columns": [
+        "tick"
+      ]
     },
     {
       "path": "events\\bomb_begindefuse.csv",
-      "rows": 6
+      "exists": true,
+      "rows": 6,
+      "columns": [
+        "haskit",
+        "tick",
+        "user_name",
+        "user_steamid"
+      ]
     },
     {
       "path": "events\\bomb_beginplant.csv",
-      "rows": 12
+      "exists": true,
+      "rows": 12,
+      "columns": [
+        "site",
+        "tick",
+        "user_name",
+        "user_steamid"
+      ]
     },
     {
       "path": "events\\bomb_defused.csv",
-      "rows": 4
+      "exists": true,
+      "rows": 4,
+      "columns": [
+        "site",
+        "tick",
+        "user_name",
+        "user_steamid"
+      ]
     },
     {
       "path": "events\\bomb_dropped.csv",
-      "rows": 33
+      "exists": true,
+      "rows": 33,
+      "columns": [
+        "entindex",
+        "tick",
+        "user_name",
+        "user_steamid"
+      ]
     },
     {
       "path": "events\\bomb_exploded.csv",
-      "rows": 3
+      "exists": true,
+      "rows": 3,
+      "columns": [
+        "site",
+        "tick",
+        "user_name",
+        "user_steamid"
+      ]
     },
     {
       "path": "events\\bomb_pickup.csv",
-      "rows": 45
+      "exists": true,
+      "rows": 45,
+      "columns": [
+        "tick",
+        "user_name",
+        "user_steamid"
+      ]
     },
     {
       "path": "events\\bomb_planted.csv",
-      "rows": 12
+      "exists": true,
+      "rows": 12,
+      "columns": [
+        "site",
+        "tick",
+        "user_name",
+        "user_steamid"
+      ]
     },
     {
       "path": "events\\bullet_damage.csv",
-      "rows": 526
+      "exists": true,
+      "rows": 526,
+      "columns": [
+        "aim_punch_x",
+        "aim_punch_y",
+        "aim_punch_z",
+        "attack_tick_count",
+        "attack_tick_frac",
+        "attacker_name",
+        "attacker_steamid",
+        "damage_dir_x",
+        "damage_dir_y",
+        "damage_dir_z",
+        "distance",
+        "in_air",
+        "inaccuracy_air",
+        "inaccuracy_move",
+        "inaccuracy_total",
+        "no_scope",
+        "num_penetrations",
+        "recoil_index",
+        "render_tick_count",
+        "render_tick_frac",
+        "shoot_ang_x",
+        "shoot_ang_y",
+        "shoot_ang_z",
+        "tick",
+        "type",
+        "victim_name",
+        "victim_steamid"
+      ]
     },
     {
       "path": "events\\buytime_ended.csv",
-      "rows": 23
+      "exists": true,
+      "rows": 23,
+      "columns": [
+        "tick"
+      ]
     },
     {
       "path": "events\\chat_message.csv",
-      "rows": 2
+      "exists": true,
+      "rows": 2,
+      "columns": [
+        "chat_message",
+        "tick",
+        "user_name",
+        "user_steamid"
+      ]
     },
     {
       "path": "events\\cs_pre_restart.csv",
-      "rows": 22
+      "exists": true,
+      "rows": 22,
+      "columns": [
+        "tick"
+      ]
     },
     {
       "path": "events\\cs_round_final_beep.csv",
-      "rows": 22
+      "exists": true,
+      "rows": 22,
+      "columns": [
+        "tick"
+      ]
     },
     {
       "path": "events\\cs_round_start_beep.csv",
-      "rows": 66
+      "exists": true,
+      "rows": 66,
+      "columns": [
+        "tick"
+      ]
     },
     {
       "path": "events\\cs_win_panel_match.csv",
-      "rows": 1
+      "exists": true,
+      "rows": 1,
+      "columns": [
+        "tick"
+      ]
     },
     {
       "path": "events\\decoy_detonate.csv",
-      "rows": 4
+      "exists": true,
+      "rows": 4,
+      "columns": [
+        "entityid",
+        "tick",
+        "user_name",
+        "user_steamid",
+        "x",
+        "y",
+        "z"
+      ]
     },
     {
       "path": "events\\decoy_started.csv",
-      "rows": 5
+      "exists": true,
+      "rows": 5,
+      "columns": [
+        "entityid",
+        "tick",
+        "user_name",
+        "user_steamid",
+        "x",
+        "y",
+        "z"
+      ]
     },
     {
       "path": "events\\fire_bullets.csv",
-      "rows": 2476
+      "exists": true,
+      "rows": 2476,
+      "columns": [
+        "angles_x",
+        "angles_y",
+        "angles_z",
+        "attack_type",
+        "ent_origin_x",
+        "ent_origin_y",
+        "ent_origin_z",
+        "inaccuracy",
+        "item_def_index",
+        "mode",
+        "num_bullets_remaining",
+        "origin_x",
+        "origin_y",
+        "origin_z",
+        "player",
+        "player_inair",
+        "player_scoped",
+        "recoil_index",
+        "round",
+        "seed",
+        "sound_dsp_effect",
+        "sound_type",
+        "spread",
+        "tick",
+        "user_name",
+        "user_steamid",
+        "weapon_id"
+      ]
     },
     {
       "path": "events\\flashbang_detonate.csv",
-      "rows": 88
+      "exists": true,
+      "rows": 88,
+      "columns": [
+        "entityid",
+        "tick",
+        "user_name",
+        "user_steamid",
+        "x",
+        "y",
+        "z"
+      ]
     },
     {
       "path": "events\\hegrenade_detonate.csv",
-      "rows": 71
+      "exists": true,
+      "rows": 71,
+      "columns": [
+        "entityid",
+        "tick",
+        "user_name",
+        "user_steamid",
+        "x",
+        "y",
+        "z"
+      ]
     },
     {
       "path": "events\\hltv_versioninfo.csv",
-      "rows": 1
+      "exists": true,
+      "rows": 1,
+      "columns": [
+        "tick",
+        "version"
+      ]
     },
     {
       "path": "events\\inferno_expire.csv",
-      "rows": 59
+      "exists": true,
+      "rows": 59,
+      "columns": [
+        "entityid",
+        "tick",
+        "user_name",
+        "user_steamid",
+        "x",
+        "y",
+        "z"
+      ]
     },
     {
       "path": "events\\inferno_startburn.csv",
-      "rows": 59
+      "exists": true,
+      "rows": 59,
+      "columns": [
+        "entityid",
+        "tick",
+        "user_name",
+        "user_steamid",
+        "x",
+        "y",
+        "z"
+      ]
     },
     {
       "path": "events\\item_equip.csv",
-      "rows": 5705
+      "exists": true,
+      "rows": 5705,
+      "columns": [
+        "canzoom",
+        "defindex",
+        "hassilencer",
+        "hastracers",
+        "ispainted",
+        "issilenced",
+        "item",
+        "tick",
+        "user_name",
+        "user_steamid",
+        "weptype"
+      ]
     },
     {
       "path": "events\\item_pickup.csv",
-      "rows": 1372
+      "exists": true,
+      "rows": 1372,
+      "columns": [
+        "defindex",
+        "item",
+        "silent",
+        "tick",
+        "user_name",
+        "user_steamid"
+      ]
     },
     {
       "path": "events\\player_blind.csv",
-      "rows": 161
+      "exists": true,
+      "rows": 161,
+      "columns": [
+        "attacker_name",
+        "attacker_steamid",
+        "blind_duration",
+        "entityid",
+        "tick",
+        "user_name",
+        "user_steamid"
+      ]
     },
     {
       "path": "events\\player_bullet_hit.csv",
-      "rows": 526
+      "exists": true,
+      "rows": 526,
+      "columns": [
+        "attacker_slot",
+        "damage",
+        "hit_group",
+        "is_kill",
+        "penetration_count",
+        "round",
+        "tick",
+        "victim_pos_x",
+        "victim_pos_y",
+        "victim_pos_z",
+        "victim_slot"
+      ]
     },
     {
       "path": "events\\player_death.csv",
-      "rows": 160
+      "exists": true,
+      "rows": 160,
+      "columns": [
+        "assistedflash",
+        "assister_name",
+        "assister_steamid",
+        "attacker_name",
+        "attacker_steamid",
+        "attackerblind",
+        "attackerinair",
+        "distance",
+        "dmg_armor",
+        "dmg_health",
+        "dominated",
+        "headshot",
+        "hitgroup",
+        "noreplay",
+        "noscope",
+        "penetrated",
+        "revenge",
+        "thrusmoke",
+        "tick",
+        "user_name",
+        "user_steamid",
+        "weapon",
+        "weapon_fauxitemid",
+        "weapon_itemid",
+        "weapon_originalowner_xuid",
+        "wipe"
+      ]
     },
     {
       "path": "events\\player_disconnect.csv",
-      "rows": 6
+      "exists": true,
+      "rows": 6,
+      "columns": [
+        "PlayerID",
+        "ever_fully_connected",
+        "name",
+        "networkid",
+        "reason",
+        "tick",
+        "user_name",
+        "user_steamid",
+        "xuid"
+      ]
     },
     {
       "path": "events\\player_footstep.csv",
-      "rows": 1589
+      "exists": true,
+      "rows": 1589,
+      "columns": [
+        "tick",
+        "user_name",
+        "user_steamid"
+      ]
     },
     {
       "path": "events\\player_hurt.csv",
-      "rows": 650
+      "exists": true,
+      "rows": 650,
+      "columns": [
+        "armor",
+        "attacker_name",
+        "attacker_steamid",
+        "dmg_armor",
+        "dmg_health",
+        "health",
+        "hitgroup",
+        "tick",
+        "user_name",
+        "user_steamid",
+        "weapon"
+      ]
     },
     {
       "path": "events\\player_spawn.csv",
-      "rows": 217
+      "exists": true,
+      "rows": 217,
+      "columns": [
+        "tick",
+        "user_name",
+        "user_steamid"
+      ]
     },
     {
       "path": "events\\player_team.csv",
-      "rows": 10
+      "exists": true,
+      "rows": 10,
+      "columns": [
+        "disconnect",
+        "isbot",
+        "oldteam",
+        "silent",
+        "team",
+        "tick",
+        "user_name",
+        "user_steamid"
+      ]
     },
     {
       "path": "events\\rank_update.csv",
-      "rows": 10
+      "exists": true,
+      "rows": 10,
+      "columns": [
+        "num_wins",
+        "rank_change",
+        "rank_new",
+        "rank_old",
+        "rank_type_id",
+        "tick",
+        "user_name",
+        "user_steamid"
+      ]
     },
     {
       "path": "events\\round_announce_last_round_half.csv",
-      "rows": 1
+      "exists": true,
+      "rows": 1,
+      "columns": [
+        "tick"
+      ]
     },
     {
       "path": "events\\round_announce_match_point.csv",
-      "rows": 4
+      "exists": true,
+      "rows": 4,
+      "columns": [
+        "tick"
+      ]
     },
     {
       "path": "events\\round_announce_match_start.csv",
-      "rows": 1
+      "exists": true,
+      "rows": 1,
+      "columns": [
+        "tick"
+      ]
     },
     {
       "path": "events\\round_freeze_end.csv",
-      "rows": 22
+      "exists": true,
+      "rows": 22,
+      "columns": [
+        "tick"
+      ]
     },
     {
       "path": "events\\round_officially_ended.csv",
-      "rows": 42
+      "exists": true,
+      "rows": 42,
+      "columns": [
+        "tick"
+      ]
     },
     {
       "path": "events\\round_poststart.csv",
-      "rows": 22
+      "exists": true,
+      "rows": 22,
+      "columns": [
+        "tick"
+      ]
     },
     {
       "path": "events\\round_prestart.csv",
-      "rows": 22
+      "exists": true,
+      "rows": 22,
+      "columns": [
+        "tick"
+      ]
     },
     {
       "path": "events\\round_time_warning.csv",
-      "rows": 2
+      "exists": true,
+      "rows": 2,
+      "columns": [
+        "tick"
+      ]
     },
     {
       "path": "events\\server_cvar.csv",
-      "rows": 1082
+      "exists": true,
+      "rows": 1082,
+      "columns": [
+        "name",
+        "tick",
+        "value"
+      ]
     },
     {
       "path": "events\\smokegrenade_detonate.csv",
-      "rows": 86
+      "exists": true,
+      "rows": 86,
+      "columns": [
+        "entityid",
+        "tick",
+        "user_name",
+        "user_steamid",
+        "x",
+        "y",
+        "z"
+      ]
     },
     {
       "path": "events\\smokegrenade_expired.csv",
-      "rows": 76
+      "exists": true,
+      "rows": 76,
+      "columns": [
+        "entityid",
+        "tick",
+        "user_name",
+        "user_steamid",
+        "x",
+        "y",
+        "z"
+      ]
     },
     {
       "path": "events\\weapon_fire.csv",
-      "rows": 3441
+      "exists": true,
+      "rows": 3441,
+      "columns": [
+        "silenced",
+        "tick",
+        "user_name",
+        "user_steamid",
+        "weapon"
+      ]
     },
     {
       "path": "events\\weapon_reload.csv",
-      "rows": 231
+      "exists": true,
+      "rows": 231,
+      "columns": [
+        "tick",
+        "user_name",
+        "user_steamid"
+      ]
     },
     {
       "path": "events\\weapon_zoom.csv",
-      "rows": 606
+      "exists": true,
+      "rows": 606,
+      "columns": [
+        "tick",
+        "user_name",
+        "user_steamid"
+      ]
     },
     {
       "path": "game_events_list.csv",
-      "rows": 49
+      "exists": true,
+      "rows": 49,
+      "columns": [
+        "event_name"
+      ]
     },
     {
       "path": "meta\\grenades.csv",
-      "rows": 1593691
+      "exists": true,
+      "rows": 1593691,
+      "columns": [
+        "grenade_type",
+        "grenade_entity_id",
+        "x",
+        "y",
+        "z",
+        "tick",
+        "steamid",
+        "name"
+      ]
     },
     {
       "path": "meta\\item_drops.csv",
-      "rows": 0
+      "exists": true,
+      "rows": 0,
+      "columns": [
+        "account_id",
+        "def_index",
+        "dropreason",
+        "inventory",
+        "item_id",
+        "paint_index",
+        "paint_seed",
+        "paint_wear",
+        "custom_name"
+      ]
     },
     {
       "path": "meta\\player_info.csv",
-      "rows": 10
+      "exists": true,
+      "rows": 10,
+      "columns": [
+        "steamid",
+        "name",
+        "team_number"
+      ]
     },
     {
       "path": "meta\\skins.csv",
-      "rows": 16
+      "exists": true,
+      "rows": 16,
+      "columns": [
+        "def_index",
+        "item_id",
+        "paint_index",
+        "paint_seed",
+        "paint_wear",
+        "custom_name",
+        "steamid"
+      ]
     },
     {
       "path": "ticks\\ticks_aggregate.csv",
-      "rows": 1448620
+      "exists": true,
+      "rows": 1448620,
+      "columns": [
+        "total_rounds_played",
+        "cash_spent_this_round",
+        "kills_total",
+        "deaths_total",
+        "assists_total",
+        "score",
+        "mvps",
+        "current_equip_value",
+        "round_start_equip_value",
+        "tick",
+        "steamid",
+        "name"
+      ]
     },
     {
       "path": "ticks\\ticks_buttons.csv",
-      "rows": 1448620
+      "exists": true,
+      "rows": 1448620,
+      "columns": [
+        "buttons",
+        "is_walking",
+        "is_scoped",
+        "is_defusing",
+        "is_grabbing_hostage",
+        "tick",
+        "steamid",
+        "name"
+      ]
     },
     {
       "path": "ticks\\ticks_damage_and_status.csv",
-      "rows": 1448620
+      "exists": true,
+      "rows": 1448620,
+      "columns": [
+        "armor",
+        "health",
+        "move_type",
+        "duck_amount",
+        "duck_speed",
+        "flash_duration",
+        "flash_max_alpha",
+        "is_airborne",
+        "tick",
+        "steamid",
+        "name"
+      ]
     },
     {
       "path": "ticks\\ticks_game_state.csv",
-      "rows": 1448620
+      "exists": true,
+      "rows": 1448620,
+      "columns": [
+        "is_freeze_period",
+        "is_warmup_period",
+        "is_terrorist_timeout",
+        "is_ct_timeout",
+        "is_technical_timeout",
+        "is_waiting_for_resume",
+        "round_start_time",
+        "game_time",
+        "tick",
+        "steamid",
+        "name"
+      ]
     },
     {
       "path": "ticks\\ticks_player_core.csv",
-      "rows": 1448620
+      "exists": true,
+      "rows": 1448620,
+      "columns": [
+        "is_connected",
+        "ping",
+        "score",
+        "armor",
+        "health",
+        "life_state",
+        "team_num",
+        "has_defuser",
+        "has_helmet",
+        "team_name",
+        "is_alive",
+        "tick",
+        "steamid",
+        "name"
+      ]
     },
     {
       "path": "ticks\\ticks_usercommands.csv",
-      "rows": 1448620
+      "exists": true,
+      "rows": 1448620,
+      "columns": [
+        "usercmd_viewangle_y",
+        "usercmd_impulse",
+        "usercmd_viewangle_x",
+        "tick",
+        "steamid",
+        "name"
+      ]
     },
     {
       "path": "ticks\\ticks_view_and_movement.csv",
-      "rows": 1448620
+      "exists": true,
+      "rows": 1448620,
+      "columns": [
+        "velocity_X",
+        "Y",
+        "agent_skin",
+        "velocity_Z",
+        "X",
+        "pitch",
+        "yaw",
+        "Z",
+        "velocity_Y",
+        "tick",
+        "steamid",
+        "name"
+      ]
     },
     {
       "path": "ticks\\ticks_weapon.csv",
-      "rows": 1448620
+      "exists": true,
+      "rows": 1448620,
+      "columns": [
+        "inventory",
+        "weapon_name",
+        "active_weapon_original_owner",
+        "weapon_skin",
+        "tick",
+        "steamid",
+        "name"
+      ]
     }
   ],
   "json_files": [
+    {
+      "path": "light_validation_report.json"
+    },
     {
       "path": "match_summary.json"
     },

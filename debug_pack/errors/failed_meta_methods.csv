@@ -1,0 +1,3 @@
+﻿method,status,severity,error
+parse_convars,method_not_found,non_critical,Parser method not found: parse_convars
+parse_chat_messages,method_not_found,non_critical,Parser method not found: parse_chat_messages
