@@ -1,0 +1,275 @@
+{
+  "output_dir": "output",
+  "checks": {
+    "match_summary.json": true,
+    "game_events_list.csv": true,
+    "meta\\header.json": true,
+    "meta\\player_info.csv": true,
+    "events": true,
+    "ticks": true,
+    "errors": true
+  },
+  "csv_files": [
+    {
+      "path": "errors\\failed_metadata.csv",
+      "rows": 2
+    },
+    {
+      "path": "events\\announce_phase_end.csv",
+      "rows": 1
+    },
+    {
+      "path": "events\\begin_new_match.csv",
+      "rows": 1
+    },
+    {
+      "path": "events\\bomb_begindefuse.csv",
+      "rows": 6
+    },
+    {
+      "path": "events\\bomb_beginplant.csv",
+      "rows": 12
+    },
+    {
+      "path": "events\\bomb_defused.csv",
+      "rows": 4
+    },
+    {
+      "path": "events\\bomb_dropped.csv",
+      "rows": 33
+    },
+    {
+      "path": "events\\bomb_exploded.csv",
+      "rows": 3
+    },
+    {
+      "path": "events\\bomb_pickup.csv",
+      "rows": 45
+    },
+    {
+      "path": "events\\bomb_planted.csv",
+      "rows": 12
+    },
+    {
+      "path": "events\\bullet_damage.csv",
+      "rows": 526
+    },
+    {
+      "path": "events\\buytime_ended.csv",
+      "rows": 23
+    },
+    {
+      "path": "events\\chat_message.csv",
+      "rows": 2
+    },
+    {
+      "path": "events\\cs_pre_restart.csv",
+      "rows": 22
+    },
+    {
+      "path": "events\\cs_round_final_beep.csv",
+      "rows": 22
+    },
+    {
+      "path": "events\\cs_round_start_beep.csv",
+      "rows": 66
+    },
+    {
+      "path": "events\\cs_win_panel_match.csv",
+      "rows": 1
+    },
+    {
+      "path": "events\\decoy_detonate.csv",
+      "rows": 4
+    },
+    {
+      "path": "events\\decoy_started.csv",
+      "rows": 5
+    },
+    {
+      "path": "events\\fire_bullets.csv",
+      "rows": 2476
+    },
+    {
+      "path": "events\\flashbang_detonate.csv",
+      "rows": 88
+    },
+    {
+      "path": "events\\hegrenade_detonate.csv",
+      "rows": 71
+    },
+    {
+      "path": "events\\hltv_versioninfo.csv",
+      "rows": 1
+    },
+    {
+      "path": "events\\inferno_expire.csv",
+      "rows": 59
+    },
+    {
+      "path": "events\\inferno_startburn.csv",
+      "rows": 59
+    },
+    {
+      "path": "events\\item_equip.csv",
+      "rows": 5705
+    },
+    {
+      "path": "events\\item_pickup.csv",
+      "rows": 1372
+    },
+    {
+      "path": "events\\player_blind.csv",
+      "rows": 161
+    },
+    {
+      "path": "events\\player_bullet_hit.csv",
+      "rows": 526
+    },
+    {
+      "path": "events\\player_death.csv",
+      "rows": 160
+    },
+    {
+      "path": "events\\player_disconnect.csv",
+      "rows": 6
+    },
+    {
+      "path": "events\\player_footstep.csv",
+      "rows": 1589
+    },
+    {
+      "path": "events\\player_hurt.csv",
+      "rows": 650
+    },
+    {
+      "path": "events\\player_spawn.csv",
+      "rows": 217
+    },
+    {
+      "path": "events\\player_team.csv",
+      "rows": 10
+    },
+    {
+      "path": "events\\rank_update.csv",
+      "rows": 10
+    },
+    {
+      "path": "events\\round_announce_last_round_half.csv",
+      "rows": 1
+    },
+    {
+      "path": "events\\round_announce_match_point.csv",
+      "rows": 4
+    },
+    {
+      "path": "events\\round_announce_match_start.csv",
+      "rows": 1
+    },
+    {
+      "path": "events\\round_freeze_end.csv",
+      "rows": 22
+    },
+    {
+      "path": "events\\round_officially_ended.csv",
+      "rows": 42
+    },
+    {
+      "path": "events\\round_poststart.csv",
+      "rows": 22
+    },
+    {
+      "path": "events\\round_prestart.csv",
+      "rows": 22
+    },
+    {
+      "path": "events\\round_time_warning.csv",
+      "rows": 2
+    },
+    {
+      "path": "events\\server_cvar.csv",
+      "rows": 1082
+    },
+    {
+      "path": "events\\smokegrenade_detonate.csv",
+      "rows": 86
+    },
+    {
+      "path": "events\\smokegrenade_expired.csv",
+      "rows": 76
+    },
+    {
+      "path": "events\\weapon_fire.csv",
+      "rows": 3441
+    },
+    {
+      "path": "events\\weapon_reload.csv",
+      "rows": 231
+    },
+    {
+      "path": "events\\weapon_zoom.csv",
+      "rows": 606
+    },
+    {
+      "path": "game_events_list.csv",
+      "rows": 49
+    },
+    {
+      "path": "meta\\grenades.csv",
+      "rows": 1593691
+    },
+    {
+      "path": "meta\\item_drops.csv",
+      "rows": 0
+    },
+    {
+      "path": "meta\\player_info.csv",
+      "rows": 10
+    },
+    {
+      "path": "meta\\skins.csv",
+      "rows": 16
+    },
+    {
+      "path": "ticks\\ticks_aggregate.csv",
+      "rows": 1448620
+    },
+    {
+      "path": "ticks\\ticks_buttons.csv",
+      "rows": 1448620
+    },
+    {
+      "path": "ticks\\ticks_damage_and_status.csv",
+      "rows": 1448620
+    },
+    {
+      "path": "ticks\\ticks_game_state.csv",
+      "rows": 1448620
+    },
+    {
+      "path": "ticks\\ticks_player_core.csv",
+      "rows": 1448620
+    },
+    {
+      "path": "ticks\\ticks_usercommands.csv",
+      "rows": 1448620
+    },
+    {
+      "path": "ticks\\ticks_view_and_movement.csv",
+      "rows": 1448620
+    },
+    {
+      "path": "ticks\\ticks_weapon.csv",
+      "rows": 1448620
+    }
+  ],
+  "json_files": [
+    {
+      "path": "match_summary.json"
+    },
+    {
+      "path": "meta\\header.json"
+    }
+  ],
+  "status": "ok"
+}

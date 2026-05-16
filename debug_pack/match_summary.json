@@ -1,0 +1,492 @@
+{
+  "demo_path": "data\\demos\\match730_003818993284328456497_1142615716_185.dem",
+  "output_dir": "output",
+  "package_versions": {
+    "demoparser2": "0.41.3",
+    "pandas": "2.3.3"
+  },
+  "metadata": [
+    {
+      "method": "parse_header",
+      "status": "ok",
+      "path": "output\\meta\\header.json",
+      "rows": null
+    },
+    {
+      "method": "parse_convars",
+      "status": "error",
+      "path": "output\\meta\\convars.json",
+      "error": "Parser method not found: parse_convars"
+    },
+    {
+      "method": "parse_player_info",
+      "status": "ok",
+      "path": "output\\meta\\player_info.csv",
+      "rows": 10
+    },
+    {
+      "method": "parse_grenades",
+      "status": "ok",
+      "path": "output\\meta\\grenades.csv",
+      "rows": 1593691
+    },
+    {
+      "method": "parse_item_drops",
+      "status": "ok",
+      "path": "output\\meta\\item_drops.csv",
+      "rows": 0
+    },
+    {
+      "method": "parse_skins",
+      "status": "ok",
+      "path": "output\\meta\\skins.csv",
+      "rows": 16
+    },
+    {
+      "method": "parse_chat_messages",
+      "status": "error",
+      "path": "output\\meta\\chat_messages.csv",
+      "error": "Parser method not found: parse_chat_messages"
+    }
+  ],
+  "voice": {
+    "method_exists": true,
+    "status": "skipped"
+  },
+  "game_events": {
+    "status": "ok",
+    "count": 49,
+    "exported": 49,
+    "failed": 0,
+    "items": [
+      {
+        "event_name": "player_footstep",
+        "status": "ok",
+        "path": "output\\events\\player_footstep.csv",
+        "rows": 1589
+      },
+      {
+        "event_name": "cs_win_panel_match",
+        "status": "ok",
+        "path": "output\\events\\cs_win_panel_match.csv",
+        "rows": 1
+      },
+      {
+        "event_name": "weapon_fire",
+        "status": "ok",
+        "path": "output\\events\\weapon_fire.csv",
+        "rows": 3441
+      },
+      {
+        "event_name": "decoy_detonate",
+        "status": "ok",
+        "path": "output\\events\\decoy_detonate.csv",
+        "rows": 4
+      },
+      {
+        "event_name": "cs_pre_restart",
+        "status": "ok",
+        "path": "output\\events\\cs_pre_restart.csv",
+        "rows": 22
+      },
+      {
+        "event_name": "cs_round_final_beep",
+        "status": "ok",
+        "path": "output\\events\\cs_round_final_beep.csv",
+        "rows": 22
+      },
+      {
+        "event_name": "smokegrenade_expired",
+        "status": "ok",
+        "path": "output\\events\\smokegrenade_expired.csv",
+        "rows": 76
+      },
+      {
+        "event_name": "inferno_startburn",
+        "status": "ok",
+        "path": "output\\events\\inferno_startburn.csv",
+        "rows": 59
+      },
+      {
+        "event_name": "weapon_reload",
+        "status": "ok",
+        "path": "output\\events\\weapon_reload.csv",
+        "rows": 231
+      },
+      {
+        "event_name": "bomb_planted",
+        "status": "ok",
+        "path": "output\\events\\bomb_planted.csv",
+        "rows": 12
+      },
+      {
+        "event_name": "bomb_beginplant",
+        "status": "ok",
+        "path": "output\\events\\bomb_beginplant.csv",
+        "rows": 12
+      },
+      {
+        "event_name": "announce_phase_end",
+        "status": "ok",
+        "path": "output\\events\\announce_phase_end.csv",
+        "rows": 1
+      },
+      {
+        "event_name": "bomb_pickup",
+        "status": "ok",
+        "path": "output\\events\\bomb_pickup.csv",
+        "rows": 45
+      },
+      {
+        "event_name": "bomb_dropped",
+        "status": "ok",
+        "path": "output\\events\\bomb_dropped.csv",
+        "rows": 33
+      },
+      {
+        "event_name": "cs_round_start_beep",
+        "status": "ok",
+        "path": "output\\events\\cs_round_start_beep.csv",
+        "rows": 66
+      },
+      {
+        "event_name": "round_announce_last_round_half",
+        "status": "ok",
+        "path": "output\\events\\round_announce_last_round_half.csv",
+        "rows": 1
+      },
+      {
+        "event_name": "round_announce_match_point",
+        "status": "ok",
+        "path": "output\\events\\round_announce_match_point.csv",
+        "rows": 4
+      },
+      {
+        "event_name": "bullet_damage",
+        "status": "ok",
+        "path": "output\\events\\bullet_damage.csv",
+        "rows": 526
+      },
+      {
+        "event_name": "bomb_begindefuse",
+        "status": "ok",
+        "path": "output\\events\\bomb_begindefuse.csv",
+        "rows": 6
+      },
+      {
+        "event_name": "bomb_defused",
+        "status": "ok",
+        "path": "output\\events\\bomb_defused.csv",
+        "rows": 4
+      },
+      {
+        "event_name": "round_freeze_end",
+        "status": "ok",
+        "path": "output\\events\\round_freeze_end.csv",
+        "rows": 22
+      },
+      {
+        "event_name": "item_equip",
+        "status": "ok",
+        "path": "output\\events\\item_equip.csv",
+        "rows": 5705
+      },
+      {
+        "event_name": "fire_bullets",
+        "status": "ok",
+        "path": "output\\events\\fire_bullets.csv",
+        "rows": 2476
+      },
+      {
+        "event_name": "buytime_ended",
+        "status": "ok",
+        "path": "output\\events\\buytime_ended.csv",
+        "rows": 23
+      },
+      {
+        "event_name": "chat_message",
+        "status": "ok",
+        "path": "output\\events\\chat_message.csv",
+        "rows": 2
+      },
+      {
+        "event_name": "round_prestart",
+        "status": "ok",
+        "path": "output\\events\\round_prestart.csv",
+        "rows": 22
+      },
+      {
+        "event_name": "item_pickup",
+        "status": "ok",
+        "path": "output\\events\\item_pickup.csv",
+        "rows": 1372
+      },
+      {
+        "event_name": "weapon_zoom",
+        "status": "ok",
+        "path": "output\\events\\weapon_zoom.csv",
+        "rows": 606
+      },
+      {
+        "event_name": "server_cvar",
+        "status": "ok",
+        "path": "output\\events\\server_cvar.csv",
+        "rows": 1082
+      },
+      {
+        "event_name": "begin_new_match",
+        "status": "ok",
+        "path": "output\\events\\begin_new_match.csv",
+        "rows": 1
+      },
+      {
+        "event_name": "round_officially_ended",
+        "status": "ok",
+        "path": "output\\events\\round_officially_ended.csv",
+        "rows": 42
+      },
+      {
+        "event_name": "decoy_started",
+        "status": "ok",
+        "path": "output\\events\\decoy_started.csv",
+        "rows": 5
+      },
+      {
+        "event_name": "bomb_exploded",
+        "status": "ok",
+        "path": "output\\events\\bomb_exploded.csv",
+        "rows": 3
+      },
+      {
+        "event_name": "player_bullet_hit",
+        "status": "ok",
+        "path": "output\\events\\player_bullet_hit.csv",
+        "rows": 526
+      },
+      {
+        "event_name": "round_time_warning",
+        "status": "ok",
+        "path": "output\\events\\round_time_warning.csv",
+        "rows": 2
+      },
+      {
+        "event_name": "player_team",
+        "status": "ok",
+        "path": "output\\events\\player_team.csv",
+        "rows": 10
+      },
+      {
+        "event_name": "hltv_versioninfo",
+        "status": "ok",
+        "path": "output\\events\\hltv_versioninfo.csv",
+        "rows": 1
+      },
+      {
+        "event_name": "rank_update",
+        "status": "ok",
+        "path": "output\\events\\rank_update.csv",
+        "rows": 10
+      },
+      {
+        "event_name": "hegrenade_detonate",
+        "status": "ok",
+        "path": "output\\events\\hegrenade_detonate.csv",
+        "rows": 71
+      },
+      {
+        "event_name": "player_hurt",
+        "status": "ok",
+        "path": "output\\events\\player_hurt.csv",
+        "rows": 650
+      },
+      {
+        "event_name": "player_disconnect",
+        "status": "ok",
+        "path": "output\\events\\player_disconnect.csv",
+        "rows": 6
+      },
+      {
+        "event_name": "round_poststart",
+        "status": "ok",
+        "path": "output\\events\\round_poststart.csv",
+        "rows": 22
+      },
+      {
+        "event_name": "inferno_expire",
+        "status": "ok",
+        "path": "output\\events\\inferno_expire.csv",
+        "rows": 59
+      },
+      {
+        "event_name": "round_announce_match_start",
+        "status": "ok",
+        "path": "output\\events\\round_announce_match_start.csv",
+        "rows": 1
+      },
+      {
+        "event_name": "player_death",
+        "status": "ok",
+        "path": "output\\events\\player_death.csv",
+        "rows": 160
+      },
+      {
+        "event_name": "smokegrenade_detonate",
+        "status": "ok",
+        "path": "output\\events\\smokegrenade_detonate.csv",
+        "rows": 86
+      },
+      {
+        "event_name": "player_blind",
+        "status": "ok",
+        "path": "output\\events\\player_blind.csv",
+        "rows": 161
+      },
+      {
+        "event_name": "player_spawn",
+        "status": "ok",
+        "path": "output\\events\\player_spawn.csv",
+        "rows": 217
+      },
+      {
+        "event_name": "flashbang_detonate",
+        "status": "ok",
+        "path": "output\\events\\flashbang_detonate.csv",
+        "rows": 88
+      }
+    ]
+  },
+  "entity_fields": {
+    "status": "method_not_found"
+  },
+  "tick_groups": {
+    "status": "ok",
+    "exported": 8,
+    "failed": 0,
+    "groups": [
+      {
+        "group": "ticks_player_core",
+        "status": "ok",
+        "path": "output\\ticks\\ticks_player_core.csv",
+        "rows": 1448620,
+        "fields": [
+          "steamid",
+          "name",
+          "team_name",
+          "team_num",
+          "health",
+          "armor",
+          "has_helmet",
+          "is_alive",
+          "life_state"
+        ]
+      },
+      {
+        "group": "ticks_view_and_movement",
+        "status": "ok",
+        "path": "output\\ticks\\ticks_view_and_movement.csv",
+        "rows": 1448620,
+        "fields": [
+          "X",
+          "Y",
+          "Z",
+          "velocity_X",
+          "velocity_Y",
+          "velocity_Z",
+          "pitch",
+          "yaw",
+          "eye_angle_x",
+          "eye_angle_y"
+        ]
+      },
+      {
+        "group": "ticks_buttons",
+        "status": "ok",
+        "path": "output\\ticks\\ticks_buttons.csv",
+        "rows": 1448620,
+        "fields": [
+          "buttons",
+          "is_walking",
+          "is_scoped",
+          "is_ducking",
+          "is_defusing",
+          "is_planting"
+        ]
+      },
+      {
+        "group": "ticks_weapon",
+        "status": "ok",
+        "path": "output\\ticks\\ticks_weapon.csv",
+        "rows": 1448620,
+        "fields": [
+          "active_weapon_name",
+          "active_weapon_original_owner",
+          "inventory",
+          "weapon_skin",
+          "weapon_name",
+          "weapon_paint_id"
+        ]
+      },
+      {
+        "group": "ticks_damage_and_status",
+        "status": "ok",
+        "path": "output\\ticks\\ticks_damage_and_status.csv",
+        "rows": 1448620,
+        "fields": [
+          "health",
+          "armor",
+          "flash_duration",
+          "flash_max_alpha",
+          "is_blinded",
+          "is_airborne",
+          "move_type"
+        ]
+      },
+      {
+        "group": "ticks_game_state",
+        "status": "ok",
+        "path": "output\\ticks\\ticks_game_state.csv",
+        "rows": 1448620,
+        "fields": [
+          "game_time",
+          "round_start_time",
+          "round_num",
+          "tick",
+          "seconds",
+          "is_freeze_period",
+          "is_warmup_period"
+        ]
+      },
+      {
+        "group": "ticks_aggregate",
+        "status": "ok",
+        "path": "output\\ticks\\ticks_aggregate.csv",
+        "rows": 1448620,
+        "fields": [
+          "total_rounds_played",
+          "score",
+          "kills_total",
+          "deaths_total",
+          "assists_total",
+          "mvps",
+          "cash_spent_this_round",
+          "cash_spent_total"
+        ]
+      },
+      {
+        "group": "ticks_usercommands",
+        "status": "ok",
+        "path": "output\\ticks\\ticks_usercommands.csv",
+        "rows": 1448620,
+        "fields": [
+          "usercmd_viewangle_x",
+          "usercmd_viewangle_y",
+          "usercmd_forwardmove",
+          "usercmd_leftmove",
+          "usercmd_upmove",
+          "usercmd_buttons",
+          "usercmd_impulse"
+        ]
+      }
+    ]
+  }
+}
