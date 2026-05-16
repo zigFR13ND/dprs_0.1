@@ -7,15 +7,15 @@
 - Читает demo-файл через `demoparser2.DemoParser`.
 - Экспортирует metadata в папку `meta/`:
   - `header.json`
-  - `convars.json`
+  - `convars.json` — если метод доступен в установленной версии `demoparser2`
   - `player_info.csv`
   - `grenades.csv`
   - `item_drops.csv`
   - `skins.csv`
-  - `chat_messages.csv`
+  - `chat_messages.csv` — если метод доступен в установленной версии `demoparser2`; чат также может быть доступен как `events/chat_message.csv`
 - Получает список игровых событий и сохраняет его в `game_events_list.csv`.
 - Пытается выгрузить каждое событие отдельно в `events/{event_name}.csv`.
-- Не останавливает весь процесс, если отдельное событие или tick-группа не распарсились: ошибки сохраняются в `errors/`.
+- Не останавливает весь процесс, если отдельное событие, metadata method или tick-группа не распарсились: ошибки сохраняются в `errors/`.
 - Если доступен метод `list_entity_values()`, сохраняет частотность entity fields в `entity_fields_frequency.csv`.
 - Выгружает несколько независимых tick-групп в папку `ticks/`.
 - Создаёт итоговые файлы контроля:
@@ -59,6 +59,8 @@ data/demos/
 
 Файл `.gitkeep` нужен только для того, чтобы пустая папка сохранялась в репозитории.
 
+Не коммитьте `.dem`-файлы и результаты `output/`: они игнорируются Git и должны оставаться локальными артефактами.
+
 ## Запуск
 
 Минимальный запуск:
@@ -79,14 +81,15 @@ python main.py --demo data/demos/match.dem --output output/my_match
 
 Сначала откройте:
 
-1. `match_summary.json` — общий статус экспорта, версии пакетов, skipped-статус voice, ошибки по событиям и tick-группам.
-2. `light_validation_report.json` — лёгкая проверка наличия ключевых файлов и количества строк в CSV.
+1. `match_summary.json` — общий статус экспорта, версии пакетов, skipped-статус voice, ошибки по metadata methods, событиям и tick-группам.
+2. `light_validation_report.json` — лёгкая проверка наличия ключевых файлов, количества игроков, строк и колонок ключевых CSV.
 3. `meta/header.json` — базовая информация demo-файла.
 4. `meta/player_info.csv` — игроки, SteamID и базовые сведения по участникам.
 5. `game_events_list.csv` — список событий, которые удалось получить из парсера.
-6. `errors/failed_events.csv` — события, которые не удалось выгрузить.
-7. `errors/failed_tick_groups.csv` — tick-группы, которые не удалось выгрузить.
-8. `ticks/` — отдельные CSV с tick-данными по группам.
+6. `errors/failed_events.csv` — события, которые не удалось выгрузить; файл создаётся всегда, пустой файл означает отсутствие ошибок.
+7. `errors/failed_tick_groups.csv` — tick-группы, которые не удалось выгрузить; файл создаётся всегда, пустой файл означает отсутствие ошибок.
+8. `errors/failed_meta_methods.csv` — metadata methods, которые не удалось вызвать; `parse_convars` и `parse_chat_messages` зависят от версии `demoparser2` и считаются non-critical, если метода нет.
+9. `ticks/` — отдельные CSV с tick-данными по группам.
 
 ## Как сверять первый результат с csstats/scope.gg
 
@@ -96,7 +99,8 @@ python main.py --demo data/demos/match.dem --output output/my_match
 2. Сравните карту, команды и игроков с данными из `meta/header.json` и `meta/player_info.csv`.
 3. Сравните примерное количество раундов и участников с данными из metadata и tick/event-экспортов.
 4. Проверьте, что ключевые события присутствуют в `game_events_list.csv` и выгрузились в `events/`.
-5. Если событие отсутствует или упало, посмотрите `errors/failed_events.csv` и `match_summary.json`.
-6. Не сравнивайте на этом этапе ADR/KAST/Rating: проект их не рассчитывает.
+5. Если `round_end` отсутствует, смотрите ближайшие аналоги: `events/round_officially_ended.csv`, `events/round_prestart.csv`, `events/round_poststart.csv`, `events/round_freeze_end.csv`.
+6. Если событие отсутствует или упало, посмотрите `errors/failed_events.csv` и `match_summary.json`.
+7. Не сравнивайте на этом этапе ADR/KAST/Rating: проект их не рассчитывает.
 
 Цель первой сверки — убедиться, что demo читается, основные таблицы создаются, игроки совпадают, а ошибки локализованы в `errors/`, не ломая весь экспорт.

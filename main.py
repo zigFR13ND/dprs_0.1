@@ -3,8 +3,8 @@ import json
 from importlib import metadata
 from pathlib import Path
 
-import pandas as pd
-from demoparser2 import DemoParser
+pd = None
+DemoParser = None
 
 
 METADATA_EXPORTS = {
@@ -26,8 +26,12 @@ TICK_GROUPS = {
         "health",
         "armor",
         "has_helmet",
+        "has_defuser",
         "is_alive",
         "life_state",
+        "is_connected",
+        "ping",
+        "score",
     ],
     "ticks_view_and_movement": [
         "X",
@@ -40,6 +44,8 @@ TICK_GROUPS = {
         "yaw",
         "eye_angle_x",
         "eye_angle_y",
+        "eye_angle_z",
+        "agent_skin",
     ],
     "ticks_buttons": [
         "buttons",
@@ -48,6 +54,8 @@ TICK_GROUPS = {
         "is_ducking",
         "is_defusing",
         "is_planting",
+        "is_grabbing_hostage",
+        "is_rescuing_hostage",
     ],
     "ticks_weapon": [
         "active_weapon_name",
@@ -56,6 +64,10 @@ TICK_GROUPS = {
         "weapon_skin",
         "weapon_name",
         "weapon_paint_id",
+        "weapon_original_owner_xuid",
+        "weapon_zoom_level",
+        "ammo_clip",
+        "ammo_clip_max",
     ],
     "ticks_damage_and_status": [
         "health",
@@ -65,6 +77,8 @@ TICK_GROUPS = {
         "is_blinded",
         "is_airborne",
         "move_type",
+        "duck_amount",
+        "duck_speed",
     ],
     "ticks_game_state": [
         "game_time",
@@ -74,6 +88,10 @@ TICK_GROUPS = {
         "seconds",
         "is_freeze_period",
         "is_warmup_period",
+        "is_terrorist_timeout",
+        "is_ct_timeout",
+        "is_technical_timeout",
+        "is_waiting_for_resume",
     ],
     "ticks_aggregate": [
         "total_rounds_played",
@@ -84,6 +102,10 @@ TICK_GROUPS = {
         "mvps",
         "cash_spent_this_round",
         "cash_spent_total",
+        "money",
+        "current_equip_value",
+        "round_start_equip_value",
+        "freezetime_end_equip_value",
     ],
     "ticks_usercommands": [
         "usercmd_viewangle_x",
@@ -93,8 +115,31 @@ TICK_GROUPS = {
         "usercmd_upmove",
         "usercmd_buttons",
         "usercmd_impulse",
+        "usercmd_weaponselect",
+        "usercmd_weaponsubtype",
+        "usercmd_random_seed",
+        "usercmd_mousedx",
+        "usercmd_mousedy",
     ],
 }
+
+ERROR_FILE_COLUMNS = {
+    "failed_events.csv": ["event_name", "error"],
+    "failed_tick_groups.csv": ["group", "error", "fields"],
+    "failed_meta_methods.csv": ["method", "status", "severity", "error"],
+}
+
+
+def require_runtime_dependencies():
+    global pd, DemoParser
+    if pd is None:
+        import pandas as pandas_module
+
+        pd = pandas_module
+    if DemoParser is None:
+        from demoparser2 import DemoParser as demo_parser_class
+
+        DemoParser = demo_parser_class
 
 
 def ensure_dirs(output_dir):
@@ -122,6 +167,24 @@ def save_dataframe(df, path):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(path, index=False, encoding="utf-8-sig")
+
+
+
+
+def save_error_csv(rows, path, columns):
+    df = pd.DataFrame(rows, columns=columns)
+    save_dataframe(df, path)
+
+
+def validate_demo_path(demo_path):
+    demo_path = Path(demo_path)
+    if not demo_path.exists():
+        raise FileNotFoundError(f"Demo file does not exist: {demo_path}")
+    if not demo_path.is_file():
+        raise ValueError(f"Demo path is not a file: {demo_path}")
+    if demo_path.suffix.lower() != ".dem":
+        raise ValueError(f"Demo file must have .dem extension: {demo_path}")
+    return demo_path
 
 
 def get_package_version(package_name):
@@ -189,19 +252,50 @@ def export_metadata(parser, paths):
                     "rows": len(result) if isinstance(result, pd.DataFrame) else None,
                 }
             )
+        except AttributeError as exc:
+            error = str(exc)
+            failures.append(
+                {
+                    "method": method_name,
+                    "status": "method_not_found",
+                    "severity": "non_critical",
+                    "error": error,
+                }
+            )
+            meta_results.append(
+                {
+                    "method": method_name,
+                    "status": "method_not_found",
+                    "severity": "non_critical",
+                    "path": str(target_path),
+                    "error": error,
+                }
+            )
         except Exception as exc:
-            failures.append({"method": method_name, "error": str(exc)})
+            error = str(exc)
+            failures.append(
+                {
+                    "method": method_name,
+                    "status": "error",
+                    "severity": "non_critical",
+                    "error": error,
+                }
+            )
             meta_results.append(
                 {
                     "method": method_name,
                     "status": "error",
+                    "severity": "non_critical",
                     "path": str(target_path),
-                    "error": str(exc),
+                    "error": error,
                 }
             )
 
-    if failures:
-        save_dataframe(pd.DataFrame(failures), paths["errors"] / "failed_metadata.csv")
+    save_error_csv(
+        failures,
+        paths["errors"] / "failed_meta_methods.csv",
+        ERROR_FILE_COLUMNS["failed_meta_methods.csv"],
+    )
 
     return meta_results
 
@@ -250,8 +344,11 @@ def export_events(parser, event_names, paths):
             failures.append({"event_name": event_name, "error": str(exc)})
             exported.append({"event_name": event_name, "status": "error", "error": str(exc)})
 
-    if failures:
-        save_dataframe(pd.DataFrame(failures), paths["errors"] / "failed_events.csv")
+    save_error_csv(
+        failures,
+        paths["errors"] / "failed_events.csv",
+        ERROR_FILE_COLUMNS["failed_events.csv"],
+    )
 
     return exported, failures
 
@@ -277,10 +374,14 @@ def export_tick_groups(parser, paths):
     results = []
 
     if not hasattr(parser, "parse_ticks"):
-        for group_name in TICK_GROUPS:
-            failures.append({"group": group_name, "error": "method_not_found"})
-            results.append({"group": group_name, "status": "error", "error": "method_not_found"})
-        save_dataframe(pd.DataFrame(failures), paths["errors"] / "failed_tick_groups.csv")
+        for group_name, fields in TICK_GROUPS.items():
+            failures.append({"group": group_name, "error": "method_not_found", "fields": ",".join(fields)})
+            results.append({"group": group_name, "status": "error", "error": "method_not_found", "fields": fields})
+        save_error_csv(
+            failures,
+            paths["errors"] / "failed_tick_groups.csv",
+            ERROR_FILE_COLUMNS["failed_tick_groups.csv"],
+        )
         return results, failures
 
     for group_name, fields in TICK_GROUPS.items():
@@ -308,20 +409,73 @@ def export_tick_groups(parser, paths):
                 }
             )
 
-    if failures:
-        save_dataframe(pd.DataFrame(failures), paths["errors"] / "failed_tick_groups.csv")
+    save_error_csv(
+        failures,
+        paths["errors"] / "failed_tick_groups.csv",
+        ERROR_FILE_COLUMNS["failed_tick_groups.csv"],
+    )
 
     return results, failures
 
 
+def count_csv_rows(csv_path):
+    with Path(csv_path).open("r", encoding="utf-8-sig", newline="") as file_obj:
+        line_count = sum(1 for _ in file_obj)
+    return max(line_count - 1, 0)
+
+
+def read_csv_columns(csv_path):
+    return pd.read_csv(csv_path, nrows=0).columns.tolist()
+
+
+def csv_info(csv_path):
+    csv_path = Path(csv_path)
+    if not csv_path.exists():
+        return {"exists": False, "rows": None, "columns": []}
+    try:
+        return {
+            "exists": True,
+            "rows": count_csv_rows(csv_path),
+            "columns": read_csv_columns(csv_path),
+        }
+    except Exception as exc:
+        return {"exists": True, "rows": None, "columns": [], "read_error": str(exc)}
+
+
+def first_existing_csv(output_dir, relative_paths):
+    for relative_path in relative_paths:
+        csv_path = output_dir / relative_path
+        if csv_path.exists():
+            info = csv_info(csv_path)
+            info["path"] = str(relative_path)
+            return info
+    return {"exists": False, "path": None, "rows": None, "columns": []}
+
+
 def build_light_validation_report(output_dir):
     output_dir = Path(output_dir)
-    report = {
-        "output_dir": str(output_dir),
-        "checks": {},
-        "csv_files": [],
-        "json_files": [],
-    }
+    player_info = csv_info(output_dir / "meta" / "player_info.csv")
+    player_death = csv_info(output_dir / "events" / "player_death.csv")
+    player_hurt = csv_info(output_dir / "events" / "player_hurt.csv")
+    weapon_fire = csv_info(output_dir / "events" / "weapon_fire.csv")
+    ticks_aggregate = csv_info(output_dir / "ticks" / "ticks_aggregate.csv")
+    round_start = first_existing_csv(
+        output_dir,
+        [
+            Path("events") / "round_start.csv",
+            Path("events") / "round_prestart.csv",
+            Path("events") / "round_poststart.csv",
+            Path("events") / "round_freeze_end.csv",
+        ],
+    )
+    round_end = first_existing_csv(
+        output_dir,
+        [
+            Path("events") / "round_end.csv",
+            Path("events") / "round_officially_ended.csv",
+            Path("events") / "cs_win_panel_match.csv",
+        ],
+    )
 
     expected_paths = [
         output_dir / "match_summary.json",
@@ -331,29 +485,69 @@ def build_light_validation_report(output_dir):
         output_dir / "events",
         output_dir / "ticks",
         output_dir / "errors",
+        output_dir / "errors" / "failed_events.csv",
+        output_dir / "errors" / "failed_tick_groups.csv",
+        output_dir / "errors" / "failed_meta_methods.csv",
     ]
+    checks = {str(path.relative_to(output_dir)): path.exists() for path in expected_paths}
 
-    for path in expected_paths:
-        report["checks"][str(path.relative_to(output_dir))] = path.exists()
-
+    csv_files = []
     for csv_path in sorted(output_dir.rglob("*.csv")):
         item = {"path": str(csv_path.relative_to(output_dir))}
-        try:
-            item["rows"] = len(pd.read_csv(csv_path))
-        except Exception as exc:
-            item["read_error"] = str(exc)
-        report["csv_files"].append(item)
+        item.update(csv_info(csv_path))
+        csv_files.append(item)
 
-    for json_path in sorted(output_dir.rglob("*.json")):
-        report["json_files"].append({"path": str(json_path.relative_to(output_dir))})
+    json_files = [
+        {"path": str(json_path.relative_to(output_dir))}
+        for json_path in sorted(output_dir.rglob("*.json"))
+    ]
+    available_files = [
+        str(path.relative_to(output_dir))
+        for path in sorted(output_dir.rglob("*"))
+        if path.is_file()
+    ][:100]
 
-    report["status"] = "ok" if all(report["checks"].values()) else "warning"
+    report = {
+        "output_dir": str(output_dir),
+        "checks": checks,
+        "players_count": player_info["rows"],
+        "player_info_columns": player_info["columns"],
+        "player_death_rows": player_death["rows"],
+        "player_death_columns": player_death["columns"],
+        "player_hurt_rows": player_hurt["rows"],
+        "player_hurt_columns": player_hurt["columns"],
+        "weapon_fire_rows": weapon_fire["rows"],
+        "weapon_fire_columns": weapon_fire["columns"],
+        "round_start_rows": round_start["rows"],
+        "round_start_source": round_start["path"],
+        "round_end_rows": round_end["rows"],
+        "round_end_source": round_end["path"],
+        "ticks_aggregate_rows": ticks_aggregate["rows"],
+        "ticks_aggregate_columns": ticks_aggregate["columns"],
+        "available_files": available_files,
+        "csv_files": csv_files,
+        "json_files": json_files,
+    }
+    report["status"] = "ok" if all(checks.values()) else "warning"
     save_json(report, output_dir / "light_validation_report.json")
     return report
 
 
+def add_metadata_fallback_notes(summary, event_names):
+    event_names = set(event_names)
+    fallback_by_method = {
+        "parse_chat_messages": ("chat_message", "Chat messages may be available in events/chat_message.csv."),
+        "parse_convars": ("server_cvar", "Convars may be available in events/server_cvar.csv."),
+    }
+    for item in summary["metadata"]:
+        fallback = fallback_by_method.get(item.get("method"))
+        if fallback and item.get("status") == "method_not_found" and fallback[0] in event_names:
+            item["fallback_note"] = fallback[1]
+
+
 def parse_demo(demo_path, output_dir):
-    demo_path = Path(demo_path)
+    demo_path = validate_demo_path(demo_path)
+    require_runtime_dependencies()
     output_dir = Path(output_dir)
     paths = ensure_dirs(output_dir)
 
@@ -382,13 +576,11 @@ def parse_demo(demo_path, output_dir):
     summary["game_events"]["count"] = len(event_names)
     save_dataframe(pd.DataFrame({"event_name": event_names}), output_dir / "game_events_list.csv")
 
-    if event_names:
-        exported_events, failed_events = export_events(parser, event_names, paths)
-        summary["game_events"]["exported"] = len([item for item in exported_events if item["status"] == "ok"])
-        summary["game_events"]["failed"] = len(failed_events)
-        summary["game_events"]["items"] = exported_events
-    else:
-        summary["game_events"]["items"] = []
+    exported_events, failed_events = export_events(parser, event_names, paths)
+    summary["game_events"]["exported"] = len([item for item in exported_events if item["status"] == "ok"])
+    summary["game_events"]["failed"] = len(failed_events)
+    summary["game_events"]["items"] = exported_events
+    add_metadata_fallback_notes(summary, event_names)
 
     summary["entity_fields"] = export_entity_fields(parser, paths)
 
@@ -409,7 +601,10 @@ def main():
     argument_parser.add_argument("--output", default="output", help="Output directory. Default: output")
     args = argument_parser.parse_args()
 
-    parse_demo(Path(args.demo), Path(args.output))
+    try:
+        parse_demo(Path(args.demo), Path(args.output))
+    except (FileNotFoundError, ValueError) as exc:
+        argument_parser.error(str(exc))
 
 
 if __name__ == "__main__":
