@@ -1,13 +1,13 @@
-﻿.venv/
+.venv/
 __pycache__/
 *.pyc
 
 output/
 data/demos/*.dem
+*.dem
 
 .env
 .DS_Store
 
 output/*
 !output/.gitkeep
-
