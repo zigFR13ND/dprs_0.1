@@ -1,0 +1,9 @@
+﻿.venv/
+__pycache__/
+*.pyc
+
+output/
+data/demos/*.dem
+
+.env
+.DS_Store
