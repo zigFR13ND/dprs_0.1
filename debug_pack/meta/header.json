@@ -1,0 +1,14 @@
+{
+  "patch_version": "14160",
+  "allow_clientside_entities": "true",
+  "map_name": "de_dust2",
+  "demo_version_guid": "8e9d71ab-04a1-4c01-bb61-acfede27c046",
+  "server_name": "Valve Counter-Strike 2 eu_north Server (srcds5003-sto1.185.127)",
+  "client_name": "SourceTV Demo",
+  "fullpackets_version": "2",
+  "allow_clientside_particles": "true",
+  "addons": "",
+  "demo_version_name": "valve_demo_2",
+  "game_directory": "/opt/srcds/cs2/csgo_v2000814/csgo",
+  "demo_file_stamp": "PBDEMS2\u0000"
+}

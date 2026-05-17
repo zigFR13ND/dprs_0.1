@@ -1,5 +1,5 @@
 {
-  "output_dir": "output\\match730_v2",
+  "output_dir": "output\\recheck_raw_v1",
   "checks": {
     "match_summary.json": true,
     "game_events_list.csv": true,
@@ -142,7 +142,6 @@
     "events\\weapon_reload.csv",
     "events\\weapon_zoom.csv",
     "game_events_list.csv",
-    "light_validation_report.json",
     "match_summary.json",
     "meta\\grenades.csv",
     "meta\\header.json",
@@ -1009,9 +1008,6 @@
     }
   ],
   "json_files": [
-    {
-      "path": "light_validation_report.json"
-    },
     {
       "path": "match_summary.json"
     },
