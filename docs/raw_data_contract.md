@@ -1,0 +1,71 @@
+# Контракт raw-слоя экспорта демо
+
+Документ фиксирует минимальный файловый контракт raw-слоя после экспорта данных из `.dem`-файла. Raw-слой должен хранить данные максимально близко к результатам `demoparser2`: без нормализации, агрегаций бизнес-уровня и переименования исходных полей без необходимости.
+
+## Обязательные файлы после экспорта
+
+После завершения экспорта в корне выходной директории и во вложенных директориях должны присутствовать следующие файлы:
+
+| Путь | Назначение |
+| --- | --- |
+| `match_summary.json` | Сводка запуска экспорта: входной demo-файл, версии пакетов, статусы экспорта metadata/events/ticks и сведения об ошибках. |
+| `light_validation_report.json` | Лёгкий отчёт проверки результата: наличие ключевых файлов, базовые количества строк и списки доступных CSV/JSON. |
+| `game_events_list.csv` | Список игровых событий, обнаруженных парсером и использованных как источник для экспорта `events/*.csv`. |
+| `meta/player_info.csv` | Минимальный справочник игроков матча. |
+| `errors/failed_events.csv` | События, которые не удалось выгрузить, и текст ошибки. Файл должен существовать даже при отсутствии ошибок. |
+| `errors/failed_tick_groups.csv` | Группы tick-полей, которые не удалось выгрузить, и текст ошибки. Файл должен существовать даже при отсутствии ошибок. |
+| `errors/failed_meta_methods.csv` | Metadata-методы, которые отсутствуют или завершились ошибкой. Файл должен существовать даже при отсутствии ошибок. |
+
+## Основные директории
+
+| Директория | Назначение |
+| --- | --- |
+| `meta/` | Metadata-выгрузки: информация об игроках, заголовок демо, convars, гранаты, скины, сообщения чата и другие результаты metadata-методов, если они доступны в установленной версии `demoparser2`. |
+| `events/` | Сырые игровые события. Обычно один CSV соответствует одному событию из `game_events_list.csv`, например `events/player_death.csv`. |
+| `ticks/` | Tick-срезы по заранее определённым группам полей, например состояние игрока, состояние игры и агрегированные счётчики. |
+| `errors/` | Диагностические CSV по неуспешным выгрузкам. Ошибки в отдельных событиях, tick-группах или metadata-методах не должны прерывать весь экспорт, если остальная часть данных доступна. |
+
+## Ключевые файлы и минимальные колонки
+
+Ниже перечислены минимальные колонки, на которые могут рассчитывать downstream-потребители raw-слоя. Дополнительные колонки допустимы и должны сохраняться без удаления, если их возвращает `demoparser2`.
+
+### События в `events/`
+
+| Файл | Назначение | Минимальные колонки |
+| --- | --- | --- |
+| `events/player_death.csv` | Смерти игроков, включая атакующего, жертву, ассистента и параметры убийства. | `tick`, `user_steamid`, `user_name`, `attacker_steamid`, `attacker_name`, `assister_steamid`, `assister_name`, `weapon`, `headshot`, `hitgroup` |
+| `events/player_hurt.csv` | Урон по игрокам: кто атаковал, кто получил урон, оружие, здоровье/броня и hitgroup. | `tick`, `user_steamid`, `user_name`, `attacker_steamid`, `attacker_name`, `weapon`, `dmg_health`, `dmg_armor`, `health`, `armor`, `hitgroup` |
+| `events/weapon_fire.csv` | Факты выстрелов/использования оружия игроками. | `tick`, `user_steamid`, `user_name`, `weapon` |
+| `events/round_prestart.csv` | Точки начала подготовки нового раунда до freeze time. | `tick` |
+| `events/round_freeze_end.csv` | Точки окончания freeze time и начала активной фазы раунда. | `tick` |
+| `events/round_officially_ended.csv` | Официальное завершение раунда на timeline демо. | `tick` |
+
+### Tick-файлы в `ticks/`
+
+| Файл | Назначение | Минимальные колонки |
+| --- | --- | --- |
+| `ticks/ticks_player_core.csv` | Базовое состояние игрока на tick: идентификация, команда, здоровье, броня и жизненный статус. | `tick`, `steamid`, `name`, `team_name`, `team_num`, `health`, `armor`, `has_helmet`, `has_defuser`, `is_alive`, `life_state`, `is_connected`, `ping`, `score` |
+| `ticks/ticks_game_state.csv` | Состояние матча/раунда на tick: игровое время, freeze/warmup/timeouts и ожидание resume. | `tick`, `steamid`, `name`, `game_time`, `round_start_time`, `round_num`, `seconds`, `is_freeze_period`, `is_warmup_period`, `is_terrorist_timeout`, `is_ct_timeout`, `is_technical_timeout`, `is_waiting_for_resume` |
+| `ticks/ticks_aggregate.csv` | Накопленные и экономические показатели игрока на tick. | `tick`, `steamid`, `name`, `total_rounds_played`, `score`, `kills_total`, `deaths_total`, `assists_total`, `mvps`, `cash_spent_this_round`, `cash_spent_total`, `money`, `current_equip_value`, `round_start_equip_value`, `freezetime_end_equip_value` |
+
+## Основные связующие поля
+
+| Поле | Где встречается | Как использовать |
+| --- | --- | --- |
+| `tick` | `events/*.csv`, `ticks/*.csv` | Основная временная ось raw-слоя. Используется для сопоставления событий с состоянием игроков и игры на конкретном tick. |
+| `steamid` | `ticks/*.csv`, `meta/player_info.csv` | Идентификатор игрока в tick-таблицах и metadata. Основной ключ для связи tick-срезов с игроком. |
+| `name` | `ticks/*.csv`, `meta/player_info.csv` | Отображаемое имя игрока. Удобно для диагностики и человекочитаемых отчётов, но не должно заменять `steamid` как стабильный ключ. |
+| `user_steamid` | События действий над игроком, например `player_death`, `player_hurt`, `weapon_fire` | SteamID субъекта события. В damage/death-событиях обычно означает жертву или игрока, с которым произошло событие; в `weapon_fire` — стрелявшего игрока. |
+| `attacker_steamid` | Damage/death-события, например `player_death`, `player_hurt` | SteamID атакующего. Используется для построения связей атакующий → жертва и расчёта combat-метрик. |
+| `assister_steamid` | События с ассистом, например `player_death` | SteamID ассистента, если он есть. Поле может быть пустым для убийств без ассиста. |
+
+## Особенности `parse_convars` и `parse_chat_messages`
+
+В некоторых версиях `demoparser2` методы `parse_convars` и `parse_chat_messages` могут отсутствовать. Это не считается критической ошибкой raw-экспорта: отсутствие метода должно фиксироваться в `errors/failed_meta_methods.csv` со статусом `method_not_found` или аналогичным диагностическим статусом.
+
+При этом сами данные могут быть доступны через игровые события:
+
+- convars — через событие `server_cvar`, если оно присутствует в `game_events_list.csv`; ожидаемый файл: `events/server_cvar.csv`;
+- сообщения чата — через событие `chat_message`, если оно присутствует в `game_events_list.csv`; ожидаемый файл: `events/chat_message.csv`.
+
+Downstream-потребители должны сначала проверять наличие metadata-файлов в `meta/`, а затем использовать event fallback из `events/`, если metadata-метод недоступен в текущей версии `demoparser2`.
