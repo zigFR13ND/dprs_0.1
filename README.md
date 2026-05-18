@@ -104,3 +104,28 @@ python main.py --demo data/demos/match.dem --output output/my_match
 7. Не сравнивайте на этом этапе ADR/KAST/Rating: проект их не рассчитывает.
 
 Цель первой сверки — убедиться, что demo читается, основные таблицы создаются, игроки совпадают, а ошибки локализованы в `errors/`, не ломая весь экспорт.
+## Derived pipeline для raw-экспорта
+
+Raw-файлы в `meta/`, `events/`, `ticks/` и `errors/` считаются неизменяемыми. Производные таблицы строятся отдельным скриптом и записываются вне raw-слоя, по умолчанию в `output/recheck_raw_v1/derived/`.
+
+Запуск для рекомендованной recheck-директории:
+
+```bash
+python tools/build_derived.py --input output/recheck_raw_v1
+```
+
+Скрипт читает следующие raw-источники, если они есть: `meta/player_info.csv`, события `player_death`, `player_hurt`, `weapon_fire`, `round_prestart`, `round_freeze_end`, `round_officially_ended` и все `events/bomb_*.csv`. На первом этапе он создаёт таблицы:
+
+- `players.csv` — справочник игроков из `meta/player_info.csv`.
+- `rounds.csv` — границы раундов по событиям prestart/freeze/end.
+- `kills.csv` — события убийств с добавленным `round_number`.
+- `damage.csv` — события урона с добавленным `round_number`.
+- `shots.csv` — выстрелы с добавленным `round_number`.
+- `bomb_events.csv` — объединённая хронология `bomb_*` событий.
+
+Для быстрой проверки через GitHub скрипт также создаёт маленький `debug_pack/derived/`: `summary.json` и samples из первых строк каждой derived-таблицы. Если debug-pack не нужен, его можно отключить пустым значением:
+
+```bash
+python tools/build_derived.py --input output/recheck_raw_v1 --debug-pack ""
+```
+

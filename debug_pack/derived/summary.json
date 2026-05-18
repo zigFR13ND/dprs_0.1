@@ -1,0 +1,111 @@
+{
+  "built_at": "2026-05-18T17:56:14.163812Z",
+  "source_derived_directory": "output/recheck_raw_v1/derived",
+  "sample_rows_per_table": 10,
+  "tables": [
+    {
+      "table": "players",
+      "rows": 10,
+      "columns": [
+        "player_id",
+        "steamid",
+        "name",
+        "team_number"
+      ],
+      "sample": "samples/players_head_10.csv"
+    },
+    {
+      "table": "rounds",
+      "rows": 22,
+      "columns": [
+        "round_number",
+        "prestart_tick",
+        "freeze_end_tick",
+        "officially_ended_tick",
+        "next_prestart_tick"
+      ],
+      "sample": "samples/rounds_head_10.csv"
+    },
+    {
+      "table": "kills",
+      "rows": 160,
+      "columns": [
+        "round_number",
+        "tick",
+        "user_steamid",
+        "user_name",
+        "attacker_steamid",
+        "attacker_name",
+        "assister_steamid",
+        "assister_name",
+        "weapon",
+        "headshot",
+        "hitgroup",
+        "distance",
+        "dmg_health",
+        "dmg_armor",
+        "noscope",
+        "thrusmoke",
+        "penetrated",
+        "attackerblind",
+        "attackerinair",
+        "assistedflash",
+        "dominated",
+        "noreplay",
+        "revenge",
+        "weapon_fauxitemid",
+        "weapon_itemid",
+        "weapon_originalowner_xuid",
+        "wipe"
+      ],
+      "sample": "samples/kills_head_10.csv"
+    },
+    {
+      "table": "damage",
+      "rows": 650,
+      "columns": [
+        "round_number",
+        "tick",
+        "user_steamid",
+        "user_name",
+        "attacker_steamid",
+        "attacker_name",
+        "weapon",
+        "hitgroup",
+        "dmg_health",
+        "dmg_armor",
+        "health",
+        "armor"
+      ],
+      "sample": "samples/damage_head_10.csv"
+    },
+    {
+      "table": "shots",
+      "rows": 3441,
+      "columns": [
+        "round_number",
+        "tick",
+        "user_steamid",
+        "user_name",
+        "weapon",
+        "silenced"
+      ],
+      "sample": "samples/shots_head_10.csv"
+    },
+    {
+      "table": "bomb_events",
+      "rows": 115,
+      "columns": [
+        "round_number",
+        "event_name",
+        "tick",
+        "user_steamid",
+        "user_name",
+        "site",
+        "haskit",
+        "entindex"
+      ],
+      "sample": "samples/bomb_events_head_10.csv"
+    }
+  ]
+}
