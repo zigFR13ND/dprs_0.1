@@ -1,0 +1,11 @@
+round_number,event_name,tick,user_steamid,user_name,site,haskit,entindex
+1,bomb_pickup,65,76561198171814417,Faat,,,
+1,bomb_dropped,1248,76561198171814417,Faat,,,176.0
+1,bomb_pickup,1824,76561198274174345,zig,,,
+1,bomb_beginplant,5456,76561198274174345,zig,169.0,,
+1,bomb_planted,5656,76561198274174345,zig,169.0,,
+1,bomb_begindefuse,7215,76561199826895670,RME | Пацан,,False,
+1,bomb_defused,7855,76561199826895670,RME | Пацан,169.0,,
+2,bomb_pickup,8303,76561198171814417,Faat,,,
+2,bomb_dropped,8455,76561198171814417,Faat,,,406.0
+2,bomb_pickup,8462,76561198274174345,zig,,,
