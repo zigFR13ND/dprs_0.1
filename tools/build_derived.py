@@ -20,6 +20,15 @@ import pandas as pd
 
 DEFAULT_INPUT_DIR = Path("output/recheck_raw_v1")
 DERIVED_TABLES = ("players", "rounds", "kills", "damage", "shots", "bomb_events")
+EXPLICIT_ID_COLUMNS = {
+    "weapon_itemid",
+    "weapon_fauxitemid",
+    "weapon_originalowner_xuid",
+    "weapon_original_owner_xuid",
+    "active_weapon_original_owner",
+    "active_weapon_original_owner_xuid",
+    "entindex",
+}
 
 
 @dataclass(frozen=True)
@@ -34,15 +43,14 @@ def read_csv_if_exists(path: Path) -> pd.DataFrame:
     """Read a CSV file if it exists, otherwise return an empty DataFrame."""
     if not path.exists():
         return pd.DataFrame()
-    return pd.read_csv(
-        path,
-        dtype={
-            "steamid": "string",
-            "user_steamid": "string",
-            "attacker_steamid": "string",
-            "assister_steamid": "string",
-        },
-    )
+    id_dtype_columns = {
+        "steamid",
+        "user_steamid",
+        "attacker_steamid",
+        "assister_steamid",
+        *EXPLICIT_ID_COLUMNS,
+    }
+    return pd.read_csv(path, dtype={column: "string" for column in id_dtype_columns})
 
 
 def normalize_steamid(value: object) -> str | pd.NA:
@@ -62,6 +70,26 @@ def normalize_steamid(value: object) -> str | pd.NA:
 def normalize_steamid_columns(df: pd.DataFrame) -> pd.DataFrame:
     for column in df.columns:
         if column.endswith("steamid") or column == "steamid":
+            df[column] = df[column].map(normalize_steamid).astype("string")
+    return df
+
+
+def is_identifier_column(column: str) -> bool:
+    if column in EXPLICIT_ID_COLUMNS:
+        return True
+    lowered = column.lower()
+    return (
+        lowered.endswith("_steamid")
+        or lowered.endswith("_xuid")
+        or lowered.endswith("_id")
+        or lowered.endswith("id")
+        or lowered == "steamid"
+    )
+
+
+def normalize_identifier_columns(df: pd.DataFrame) -> pd.DataFrame:
+    for column in df.columns:
+        if is_identifier_column(column):
             df[column] = df[column].map(normalize_steamid).astype("string")
     return df
 
@@ -195,6 +223,7 @@ def build_kills(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
     if kills.empty:
         return pd.DataFrame()
     kills = normalize_steamid_columns(kills.copy())
+    kills = normalize_identifier_columns(kills)
     kills = assign_round_numbers(kills, rounds)
     preferred = [
         "round_number",
@@ -267,6 +296,7 @@ def build_bomb_events(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
         if frame.empty and not path.exists():
             continue
         frame = normalize_steamid_columns(frame.copy())
+        frame = normalize_identifier_columns(frame)
         frame.insert(0, "event_name", path.stem)
         frames.append(frame)
     if not frames:
