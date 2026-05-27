@@ -12,6 +12,7 @@ import argparse
 import json
 import shutil
 from dataclasses import dataclass
+from decimal import Decimal, InvalidOperation
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable
@@ -29,6 +30,7 @@ EXPLICIT_ID_COLUMNS = {
     "active_weapon_original_owner_xuid",
     "entindex",
 }
+IDENTIFIER_DIAGNOSTICS: dict[str, dict[str, int]] = {}
 
 
 @dataclass(frozen=True)
@@ -54,16 +56,20 @@ def read_csv_if_exists(path: Path) -> pd.DataFrame:
 
 
 def normalize_steamid(value: object) -> str | pd.NA:
-    """Normalize SteamID-like values that may have been parsed as floats."""
+    """Normalize identifier values and avoid float/scientific notation artifacts."""
     if pd.isna(value):
         return pd.NA
     text = str(value).strip()
     if not text or text.lower() in {"nan", "none"}:
         return pd.NA
-    if text.endswith(".0"):
+    try:
+        numeric = Decimal(text)
+    except InvalidOperation:
+        return text
+    if numeric == numeric.to_integral_value():
+        text = str(numeric.to_integral_value())
+    elif text.endswith(".0"):
         text = text[:-2]
-    # Pandas may stringify very large IDs read from older CSVs as 7.65612e+16.
-    # Keep those values as-is instead of inventing precision that is already lost.
     return text
 
 
@@ -87,10 +93,16 @@ def is_identifier_column(column: str) -> bool:
     )
 
 
-def normalize_identifier_columns(df: pd.DataFrame) -> pd.DataFrame:
+def normalize_identifier_columns(df: pd.DataFrame, table_name: str) -> pd.DataFrame:
+    table_stats = IDENTIFIER_DIAGNOSTICS.setdefault(table_name, {})
     for column in df.columns:
         if is_identifier_column(column):
-            df[column] = df[column].map(normalize_steamid).astype("string")
+            before = df[column].astype("string")
+            after = before.map(normalize_steamid).astype("string")
+            changed = int((before.fillna("") != after.fillna("")).sum())
+            if changed > 0:
+                table_stats[column] = changed
+            df[column] = after
     return df
 
 
@@ -105,6 +117,7 @@ def build_players(raw_dir: Path) -> pd.DataFrame:
     if players.empty:
         return pd.DataFrame(columns=["player_id", "steamid", "name", "team_number"])
     players = normalize_steamid_columns(players.copy())
+    players = normalize_identifier_columns(players, "players")
     players = select_existing(players, ["steamid", "name", "team_number"])
     players.insert(0, "player_id", range(1, len(players) + 1))
     return players
@@ -291,7 +304,7 @@ def build_kills(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
     if kills.empty:
         return pd.DataFrame()
     kills = normalize_steamid_columns(kills.copy())
-    kills = normalize_identifier_columns(kills)
+    kills = normalize_identifier_columns(kills, "kills")
     kills = assign_round_numbers(kills, rounds)
     preferred = [
         "round_number",
@@ -322,6 +335,7 @@ def build_damage(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
     if damage.empty:
         return pd.DataFrame()
     damage = normalize_steamid_columns(damage.copy())
+    damage = normalize_identifier_columns(damage, "damage")
     damage = assign_round_numbers(damage, rounds)
     preferred = [
         "round_number",
@@ -345,6 +359,7 @@ def build_shots(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
     if shots.empty:
         return pd.DataFrame()
     shots = normalize_steamid_columns(shots.copy())
+    shots = normalize_identifier_columns(shots, "shots")
     shots = assign_round_numbers(shots, rounds)
     preferred = [
         "round_number",
@@ -364,7 +379,7 @@ def build_bomb_events(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
         if frame.empty and not path.exists():
             continue
         frame = normalize_steamid_columns(frame.copy())
-        frame = normalize_identifier_columns(frame)
+        frame = normalize_identifier_columns(frame, "bomb_events")
         frame.insert(0, "event_name", path.stem)
         frames.append(frame)
     if not frames:
@@ -409,6 +424,7 @@ def write_summary(results: list[TableResult], raw_dir: Path, output_dir: Path) -
             for result in results
         ],
         "raw_directories_left_read_only": ["meta", "events", "ticks", "errors"],
+        "identifier_normalization": IDENTIFIER_DIAGNOSTICS,
     }
     (output_dir / "derived_summary.json").write_text(
         json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8"
