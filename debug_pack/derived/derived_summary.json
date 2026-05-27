@@ -1,21 +1,22 @@
 {
-  "built_at": "2026-05-27T14:44:09.003278Z",
-  "source_derived_directory": "E:/cs_stats projects/dprs_0.1/my_project/output/derived",
-  "sample_rows_per_table": 25,
+  "built_at": "2026-05-27T14:44:08.941638Z",
+  "raw_input_directory": "E:/cs_stats projects/dprs_0.1/my_project/output",
+  "derived_output_directory": "E:/cs_stats projects/dprs_0.1/my_project/output/derived",
   "tables": [
     {
-      "table": "players",
+      "name": "players",
+      "relative_path": "players.csv",
       "rows": 10,
       "columns": [
         "player_id",
         "steamid",
         "name",
         "team_number"
-      ],
-      "sample": "samples/players_head_25.csv"
+      ]
     },
     {
-      "table": "rounds",
+      "name": "rounds",
+      "relative_path": "rounds.csv",
       "rows": 22,
       "columns": [
         "round_number",
@@ -28,11 +29,11 @@
         "fallback_used",
         "start_source",
         "missing_markers"
-      ],
-      "sample": "samples/rounds_head_25.csv"
+      ]
     },
     {
-      "table": "kills",
+      "name": "kills",
+      "relative_path": "kills.csv",
       "rows": 160,
       "columns": [
         "round_number",
@@ -62,11 +63,11 @@
         "weapon_itemid",
         "weapon_originalowner_xuid",
         "wipe"
-      ],
-      "sample": "samples/kills_head_25.csv"
+      ]
     },
     {
-      "table": "damage",
+      "name": "damage",
+      "relative_path": "damage.csv",
       "rows": 650,
       "columns": [
         "round_number",
@@ -81,11 +82,11 @@
         "dmg_armor",
         "health",
         "armor"
-      ],
-      "sample": "samples/damage_head_25.csv"
+      ]
     },
     {
-      "table": "shots",
+      "name": "shots",
+      "relative_path": "shots.csv",
       "rows": 3441,
       "columns": [
         "round_number",
@@ -94,11 +95,11 @@
         "user_name",
         "weapon",
         "silenced"
-      ],
-      "sample": "samples/shots_head_25.csv"
+      ]
     },
     {
-      "table": "bomb_events",
+      "name": "bomb_events",
+      "relative_path": "bomb_events.csv",
       "rows": 115,
       "columns": [
         "round_number",
@@ -109,8 +110,13 @@
         "site",
         "haskit",
         "entindex"
-      ],
-      "sample": "samples/bomb_events_head_25.csv"
+      ]
     }
+  ],
+  "raw_directories_left_read_only": [
+    "meta",
+    "events",
+    "ticks",
+    "errors"
   ]
 }
