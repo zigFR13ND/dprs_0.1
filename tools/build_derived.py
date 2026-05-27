@@ -144,6 +144,9 @@ def build_rounds(raw_dir: Path) -> pd.DataFrame:
     prestart_ticks = unique_sorted_ticks(
         read_csv_if_exists(raw_dir / "events" / "round_prestart.csv")
     )
+    poststart_ticks = unique_sorted_ticks(
+        read_csv_if_exists(raw_dir / "events" / "round_poststart.csv")
+    )
     freeze_end_ticks = unique_sorted_ticks(
         read_csv_if_exists(raw_dir / "events" / "round_freeze_end.csv")
     )
@@ -151,38 +154,103 @@ def build_rounds(raw_dir: Path) -> pd.DataFrame:
         read_csv_if_exists(raw_dir / "events" / "round_officially_ended.csv")
     )
 
+    start_ticks = prestart_ticks
+    start_source = "round_prestart"
+    if not start_ticks:
+        if poststart_ticks:
+            start_ticks = poststart_ticks
+            start_source = "round_poststart"
+        elif freeze_end_ticks:
+            start_ticks = freeze_end_ticks
+            start_source = "round_freeze_end"
+        elif officially_ended_ticks:
+            # Last-resort fallback: treat round end markers as timeline anchors.
+            start_ticks = officially_ended_ticks
+            start_source = "round_officially_ended"
+
     rows: list[dict[str, object]] = []
-    for index, prestart_tick in enumerate(prestart_ticks):
-        next_prestart_tick = (
-            prestart_ticks[index + 1] if index + 1 < len(prestart_ticks) else None
+    for index, start_tick in enumerate(start_ticks):
+        next_start_tick = start_ticks[index + 1] if index + 1 < len(start_ticks) else None
+
+        prestart_tick = start_tick if start_source == "round_prestart" else first_tick_in_range(
+            prestart_ticks,
+            start_tick,
+            next_start_tick,
+            include_start=True,
+            include_stop=False,
         )
+        poststart_tick = first_tick_in_range(
+            poststart_ticks,
+            start_tick,
+            next_start_tick,
+            include_start=True,
+            include_stop=False,
+        )
+        freeze_end_tick = first_tick_in_range(
+            freeze_end_ticks,
+            start_tick,
+            next_start_tick,
+            include_start=True,
+            include_stop=False,
+        )
+        officially_ended_tick = first_tick_in_range(
+            officially_ended_ticks,
+            start_tick,
+            next_start_tick,
+            include_start=False,
+            include_stop=True,
+        )
+
+        missing_markers: list[str] = []
+        if pd.isna(prestart_tick):
+            missing_markers.append("prestart")
+        if pd.isna(poststart_tick):
+            missing_markers.append("poststart")
+        if pd.isna(freeze_end_tick):
+            missing_markers.append("freeze_end")
+        if pd.isna(officially_ended_tick):
+            missing_markers.append("officially_ended")
+
+        fallback_used = start_source != "round_prestart"
+        if fallback_used and len(missing_markers) <= 1:
+            timeline_confidence = "medium"
+        elif len(missing_markers) <= 1:
+            timeline_confidence = "high"
+        elif len(missing_markers) <= 2:
+            timeline_confidence = "medium"
+        else:
+            timeline_confidence = "low"
+
         rows.append(
             {
                 "round_number": index + 1,
                 "prestart_tick": prestart_tick,
-                "freeze_end_tick": first_tick_in_range(
-                    freeze_end_ticks, prestart_tick, next_prestart_tick
-                ),
-                "officially_ended_tick": first_tick_in_range(
-                    officially_ended_ticks,
-                    prestart_tick,
-                    next_prestart_tick,
-                    include_start=False,
-                    include_stop=True,
-                ),
+                "poststart_tick": poststart_tick,
+                "freeze_end_tick": freeze_end_tick,
+                "officially_ended_tick": officially_ended_tick,
                 "next_prestart_tick": (
-                    next_prestart_tick if next_prestart_tick is not None else pd.NA
+                    next_start_tick if next_start_tick is not None else pd.NA
                 ),
+                "timeline_confidence": timeline_confidence,
+                "fallback_used": fallback_used,
+                "start_source": start_source,
+                "missing_markers": ";".join(missing_markers),
             }
         )
+
     return pd.DataFrame(
         rows,
         columns=[
             "round_number",
             "prestart_tick",
+            "poststart_tick",
             "freeze_end_tick",
             "officially_ended_tick",
             "next_prestart_tick",
+            "timeline_confidence",
+            "fallback_used",
+            "start_source",
+            "missing_markers",
         ],
     )
 
