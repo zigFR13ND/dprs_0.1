@@ -18,9 +18,10 @@
 - Не останавливает весь процесс, если отдельное событие, metadata method или tick-группа не распарсились: ошибки сохраняются в `errors/`.
 - Если доступен метод `list_entity_values()`, сохраняет частотность entity fields в `entity_fields_frequency.csv`.
 - Выгружает несколько независимых tick-групп в папку `ticks/`.
-- Создаёт итоговые файлы контроля:
+- Создаёт итоговые файлы контроля и индексации:
   - `match_summary.json`
   - `light_validation_report.json`
+  - `raw_manifest.json` — отдельный machine-readable индекс raw-экспорта с версиями схемы/пакетов, размерами файлов, количеством строк, колонками, ошибками и fallback-notes.
 
 ## Что проект не делает
 
@@ -83,13 +84,14 @@ python main.py --demo data/demos/match.dem --output output/my_match
 
 1. `match_summary.json` — общий статус экспорта, версии пакетов, skipped-статус voice, ошибки по metadata methods, событиям и tick-группам.
 2. `light_validation_report.json` — лёгкая проверка наличия ключевых файлов, количества игроков, строк и колонок ключевых CSV.
-3. `meta/header.json` — базовая информация demo-файла.
-4. `meta/player_info.csv` — игроки, SteamID и базовые сведения по участникам.
-5. `game_events_list.csv` — список событий, которые удалось получить из парсера.
-6. `errors/failed_events.csv` — события, которые не удалось выгрузить; файл создаётся всегда, пустой файл означает отсутствие ошибок.
-7. `errors/failed_tick_groups.csv` — tick-группы, которые не удалось выгрузить; файл создаётся всегда, пустой файл означает отсутствие ошибок.
-8. `errors/failed_meta_methods.csv` — metadata methods, которые не удалось вызвать; `parse_convars` и `parse_chat_messages` зависят от версии `demoparser2` и считаются non-critical, если метода нет.
-9. `ticks/` — отдельные CSV с tick-данными по группам.
+3. `raw_manifest.json` — отдельный индекс raw-экспорта по формату `docs/raw_manifest_spec.md`: schema version, demo path, версии пакетов, список metadata/event/tick/error/control artifacts с размером, количеством строк и колонками, failed-records и fallback notes для `parse_convars`/`parse_chat_messages`.
+4. `meta/header.json` — базовая информация demo-файла.
+5. `meta/player_info.csv` — игроки, SteamID и базовые сведения по участникам.
+6. `game_events_list.csv` — список событий, которые удалось получить из парсера.
+7. `errors/failed_events.csv` — события, которые не удалось выгрузить; файл создаётся всегда, пустой файл означает отсутствие ошибок.
+8. `errors/failed_tick_groups.csv` — tick-группы, которые не удалось выгрузить; файл создаётся всегда, пустой файл означает отсутствие ошибок.
+9. `errors/failed_meta_methods.csv` — metadata methods, которые не удалось вызвать; `parse_convars` и `parse_chat_messages` зависят от версии `demoparser2` и считаются non-critical, если метода нет.
+10. `ticks/` — отдельные CSV с tick-данными по группам.
 
 ## Как сверять первый результат с csstats/scope.gg
 

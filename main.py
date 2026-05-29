@@ -1,5 +1,6 @@
 import argparse
 import json
+from datetime import datetime, timezone
 from importlib import metadata
 from pathlib import Path
 
@@ -187,8 +188,6 @@ def save_dataframe(df, path):
     df.to_csv(path, index=False, encoding="utf-8-sig")
 
 
-
-
 def save_error_csv(rows, path, columns):
     df = pd.DataFrame(rows, columns=columns)
     save_dataframe(df, path)
@@ -347,9 +346,13 @@ def export_events(parser, event_names, paths):
             elif hasattr(parser, "parse_events"):
                 result = parser.parse_events([event_name])
             else:
-                raise AttributeError("Parser event method not found: parse_event/parse_events")
+                raise AttributeError(
+                    "Parser event method not found: parse_event/parse_events"
+                )
 
-            saved_path = save_parser_result(result, paths["events"] / f"{event_name}.csv")
+            saved_path = save_parser_result(
+                result, paths["events"] / f"{event_name}.csv"
+            )
             exported.append(
                 {
                     "event_name": event_name,
@@ -360,7 +363,9 @@ def export_events(parser, event_names, paths):
             )
         except Exception as exc:
             failures.append({"event_name": event_name, "error": str(exc)})
-            exported.append({"event_name": event_name, "status": "error", "error": str(exc)})
+            exported.append(
+                {"event_name": event_name, "status": "error", "error": str(exc)}
+            )
 
     save_error_csv(
         failures,
@@ -377,7 +382,9 @@ def export_entity_fields(parser, paths):
 
     try:
         result = parser.list_entity_values()
-        saved_path = save_parser_result(result, paths["output"] / "entity_fields_frequency.csv")
+        saved_path = save_parser_result(
+            result, paths["output"] / "entity_fields_frequency.csv"
+        )
         return {
             "status": "ok",
             "path": output_relative_path(saved_path, paths["output"]),
@@ -393,8 +400,21 @@ def export_tick_groups(parser, paths):
 
     if not hasattr(parser, "parse_ticks"):
         for group_name, fields in TICK_GROUPS.items():
-            failures.append({"group": group_name, "error": "method_not_found", "fields": ",".join(fields)})
-            results.append({"group": group_name, "status": "error", "error": "method_not_found", "fields": fields})
+            failures.append(
+                {
+                    "group": group_name,
+                    "error": "method_not_found",
+                    "fields": ",".join(fields),
+                }
+            )
+            results.append(
+                {
+                    "group": group_name,
+                    "status": "error",
+                    "error": "method_not_found",
+                    "fields": fields,
+                }
+            )
         save_error_csv(
             failures,
             paths["errors"] / "failed_tick_groups.csv",
@@ -417,7 +437,9 @@ def export_tick_groups(parser, paths):
                 }
             )
         except Exception as exc:
-            failures.append({"group": group_name, "error": str(exc), "fields": ",".join(fields)})
+            failures.append(
+                {"group": group_name, "error": str(exc), "fields": ",".join(fields)}
+            )
             results.append(
                 {
                     "group": group_name,
@@ -507,7 +529,10 @@ def build_light_validation_report(output_dir):
         output_dir / "errors" / "failed_tick_groups.csv",
         output_dir / "errors" / "failed_meta_methods.csv",
     ]
-    checks = {path.relative_to(output_dir).as_posix(): path.exists() for path in expected_paths}
+    checks = {
+        path.relative_to(output_dir).as_posix(): path.exists()
+        for path in expected_paths
+    }
 
     csv_files = []
     for csv_path in sorted(output_dir.rglob("*.csv")):
@@ -551,15 +576,232 @@ def build_light_validation_report(output_dir):
     return report
 
 
+def file_type_for_path(path):
+    suffix = Path(path).suffix.lower()
+    if suffix == ".csv":
+        return "csv"
+    if suffix == ".json":
+        return "json"
+    if suffix == ".zip":
+        return "zip"
+    if suffix == ".txt":
+        return "txt"
+    return "other"
+
+
+def build_file_manifest_entry(path, output_dir, status=None):
+    path = Path(path)
+    output_dir = Path(output_dir)
+    exists = path.exists() and path.is_file()
+    file_type = file_type_for_path(path)
+    entry = {
+        "relative_path": output_relative_path(path, output_dir),
+        "file_type": file_type,
+        "rows": None,
+        "columns": None,
+        "size_bytes": path.stat().st_size if exists else 0,
+        "status": status or ("ok" if exists else "missing"),
+    }
+
+    if exists and file_type == "csv":
+        info = csv_info(path)
+        entry["rows"] = info.get("rows")
+        entry["columns"] = info.get("columns")
+        if info.get("read_error"):
+            entry["read_error"] = info["read_error"]
+        if status is None and info.get("rows") == 0:
+            entry["status"] = "empty"
+
+    return entry
+
+
+def expected_manifest_artifact_paths(summary, output_dir):
+    output_dir = Path(output_dir)
+    expected_paths = {
+        output_dir / "match_summary.json": "ok",
+        output_dir / "light_validation_report.json": "ok",
+        output_dir / "game_events_list.csv": "ok",
+        output_dir / "errors" / "failed_events.csv": "ok",
+        output_dir / "errors" / "failed_tick_groups.csv": "ok",
+        output_dir / "errors" / "failed_meta_methods.csv": "ok",
+    }
+
+    for item in summary.get("metadata", []):
+        item_path = item.get("path")
+        if item_path:
+            expected_paths[output_dir / item_path] = (
+                "ok" if item.get("status") == "ok" else "failed"
+            )
+
+    for item in summary.get("game_events", {}).get("items", []):
+        if item.get("path"):
+            item_path = output_dir / item["path"]
+        elif item.get("event_name"):
+            item_path = output_dir / "events" / f"{item['event_name']}.csv"
+        else:
+            continue
+        expected_paths[item_path] = "ok" if item.get("status") == "ok" else "failed"
+
+    for item in summary.get("tick_groups", {}).get("groups", []):
+        if item.get("path"):
+            item_path = output_dir / item["path"]
+        elif item.get("group"):
+            item_path = output_dir / "ticks" / f"{item['group']}.csv"
+        else:
+            continue
+        expected_paths[item_path] = "ok" if item.get("status") == "ok" else "failed"
+
+    return expected_paths
+
+
+def build_manifest_files(summary, output_dir):
+    output_dir = Path(output_dir)
+    expected_paths = expected_manifest_artifact_paths(summary, output_dir)
+    actual_paths = {
+        path
+        for path in output_dir.rglob("*")
+        if path.is_file() and path.name != "raw_manifest.json"
+    }
+    all_paths = sorted(
+        actual_paths | set(expected_paths),
+        key=lambda path: output_relative_path(path, output_dir),
+    )
+    return [
+        build_file_manifest_entry(path, output_dir, expected_paths.get(path))
+        for path in all_paths
+    ]
+
+
+def metadata_manifest_errors(summary):
+    errors = []
+    for item in summary.get("metadata", []):
+        if item.get("status") == "ok":
+            continue
+        error_item = {
+            "method": item.get("method"),
+            "status": item.get("status"),
+            "error": item.get("error"),
+        }
+        if item.get("severity"):
+            error_item["severity"] = item["severity"]
+        if item.get("fallback_note"):
+            error_item["fallback_note"] = item["fallback_note"]
+        errors.append(error_item)
+    return errors
+
+
+def event_manifest_errors(summary):
+    errors = []
+    for item in summary.get("game_events", {}).get("items", []):
+        if item.get("status") == "ok":
+            continue
+        errors.append(
+            {
+                "event": item.get("event_name"),
+                "status": item.get("status", "failed"),
+                "error": item.get("error"),
+            }
+        )
+    return errors
+
+
+def tick_group_manifest_errors(summary):
+    errors = []
+    for item in summary.get("tick_groups", {}).get("groups", []):
+        if item.get("status") == "ok":
+            continue
+        error_item = {
+            "group": item.get("group"),
+            "status": item.get("status", "failed"),
+            "error": item.get("error"),
+        }
+        if item.get("fields"):
+            error_item["fields"] = item["fields"]
+        errors.append(error_item)
+    return errors
+
+
+def fallback_manifest_notes(summary):
+    notes = []
+    fallback_events = {
+        "parse_chat_messages": ("chat_message", "events/chat_message.csv"),
+        "parse_convars": ("server_cvar", "events/server_cvar.csv"),
+    }
+    for item in summary.get("metadata", []):
+        if not item.get("fallback_note"):
+            continue
+        fallback_event, fallback_path = fallback_events.get(
+            item.get("method"), (None, None)
+        )
+        note = {
+            "method": item.get("method"),
+            "status": item.get("status"),
+            "note": item.get("fallback_note"),
+        }
+        if fallback_event:
+            note["fallback_event"] = fallback_event
+        if fallback_path:
+            note["fallback_path"] = fallback_path
+        notes.append(note)
+    return notes
+
+
+def build_raw_manifest(summary, output_dir, exported_at=None):
+    output_dir = Path(output_dir)
+    package_versions = summary.get("package_versions", {})
+    manifest = {
+        "schema_version": "1.0",
+        "export": {
+            "demo_path": summary.get("demo_path"),
+            "demoparser2_version": package_versions.get("demoparser2"),
+            "pandas_version": package_versions.get("pandas"),
+            "exported_at": exported_at
+            or datetime.now(timezone.utc)
+            .replace(microsecond=0)
+            .isoformat()
+            .replace("+00:00", "Z"),
+            "output_directory": relative_path_or_posix(output_dir, Path.cwd()),
+        },
+        "files": build_manifest_files(summary, output_dir),
+        "errors": {
+            "failed_metadata_methods": metadata_manifest_errors(summary),
+            "failed_events": event_manifest_errors(summary),
+            "failed_tick_groups": tick_group_manifest_errors(summary),
+        },
+        "optional": {
+            "fallback_notes": fallback_manifest_notes(summary),
+            "skipped_features": [
+                {
+                    "feature": "voice",
+                    "status": summary.get("voice", {}).get("status", "skipped"),
+                    "reason": "voice export is intentionally out of scope for raw export",
+                }
+            ],
+        },
+    }
+    save_json(manifest, output_dir / "raw_manifest.json")
+    return manifest
+
+
 def add_metadata_fallback_notes(summary, event_names):
     event_names = set(event_names)
     fallback_by_method = {
-        "parse_chat_messages": ("chat_message", "Chat messages may be available in events/chat_message.csv."),
-        "parse_convars": ("server_cvar", "Convars may be available in events/server_cvar.csv."),
+        "parse_chat_messages": (
+            "chat_message",
+            "Chat messages may be available in events/chat_message.csv.",
+        ),
+        "parse_convars": (
+            "server_cvar",
+            "Convars may be available in events/server_cvar.csv.",
+        ),
     }
     for item in summary["metadata"]:
         fallback = fallback_by_method.get(item.get("method"))
-        if fallback and item.get("status") == "method_not_found" and fallback[0] in event_names:
+        if (
+            fallback
+            and item.get("status") == "method_not_found"
+            and fallback[0] in event_names
+        ):
             item["fallback_note"] = fallback[1]
 
 
@@ -592,10 +834,14 @@ def parse_demo(demo_path, output_dir):
     event_names, events_status = get_game_events(parser)
     summary["game_events"]["status"] = events_status
     summary["game_events"]["count"] = len(event_names)
-    save_dataframe(pd.DataFrame({"event_name": event_names}), output_dir / "game_events_list.csv")
+    save_dataframe(
+        pd.DataFrame({"event_name": event_names}), output_dir / "game_events_list.csv"
+    )
 
     exported_events, failed_events = export_events(parser, event_names, paths)
-    summary["game_events"]["exported"] = len([item for item in exported_events if item["status"] == "ok"])
+    summary["game_events"]["exported"] = len(
+        [item for item in exported_events if item["status"] == "ok"]
+    )
     summary["game_events"]["failed"] = len(failed_events)
     summary["game_events"]["items"] = exported_events
     add_metadata_fallback_notes(summary, event_names)
@@ -604,19 +850,26 @@ def parse_demo(demo_path, output_dir):
 
     tick_results, failed_tick_groups = export_tick_groups(parser, paths)
     summary["tick_groups"]["groups"] = tick_results
-    summary["tick_groups"]["exported"] = len([item for item in tick_results if item["status"] == "ok"])
+    summary["tick_groups"]["exported"] = len(
+        [item for item in tick_results if item["status"] == "ok"]
+    )
     summary["tick_groups"]["failed"] = len(failed_tick_groups)
     summary["tick_groups"]["status"] = "error" if failed_tick_groups else "ok"
 
     save_json(summary, output_dir / "match_summary.json")
     build_light_validation_report(output_dir)
+    build_raw_manifest(summary, output_dir)
     return summary
 
 
 def main():
-    argument_parser = argparse.ArgumentParser(description="Export CS demo data with demoparser2.")
+    argument_parser = argparse.ArgumentParser(
+        description="Export CS demo data with demoparser2."
+    )
     argument_parser.add_argument("--demo", required=True, help="Path to a .dem file.")
-    argument_parser.add_argument("--output", default="output", help="Output directory. Default: output")
+    argument_parser.add_argument(
+        "--output", default="output", help="Output directory. Default: output"
+    )
     args = argument_parser.parse_args()
 
     try:
