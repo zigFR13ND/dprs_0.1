@@ -28,6 +28,7 @@ DERIVED_TABLES = (
     "damage",
     "shots",
     "bomb_events",
+    "player_round_stats",
 )
 EXPLICIT_ID_COLUMNS = {
     "weapon_itemid",
@@ -510,9 +511,7 @@ def build_round_outcomes(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
     for event_name in ("bomb_planted", "bomb_defused", "bomb_exploded"):
         frame = read_csv_if_exists(raw_dir / "events" / f"{event_name}.csv")
         bomb_frames[event_name] = (
-            assign_round_numbers(frame, rounds)
-            if not frame.empty
-            else pd.DataFrame()
+            assign_round_numbers(frame, rounds) if not frame.empty else pd.DataFrame()
         )
 
     explicit_outcomes = explicit_round_outcomes(raw_dir, rounds)
@@ -520,9 +519,11 @@ def build_round_outcomes(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
     for round_row in rounds.to_dict("records"):
         round_number = round_row.get("round_number", pd.NA)
         round_bomb_events = {
-            event_name: frame[frame["round_number"] == round_number]
-            if not frame.empty and "round_number" in frame.columns
-            else pd.DataFrame()
+            event_name: (
+                frame[frame["round_number"] == round_number]
+                if not frame.empty and "round_number" in frame.columns
+                else pd.DataFrame()
+            )
             for event_name, frame in bomb_frames.items()
         }
         bomb_planted = not round_bomb_events["bomb_planted"].empty
@@ -563,7 +564,9 @@ def build_round_outcomes(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
                 column_values(round_explicit, END_REASON_COLUMNS)
             )
             if pd.isna(explicit_side) and not pd.isna(explicit_team_number):
-                explicit_side = TEAM_NUMBER_TO_SIDE.get(int(explicit_team_number), pd.NA)
+                explicit_side = TEAM_NUMBER_TO_SIDE.get(
+                    int(explicit_team_number), pd.NA
+                )
             if pd.isna(explicit_team_number) and not pd.isna(explicit_side):
                 explicit_team_number = SIDE_TO_TEAM_NUMBER.get(explicit_side, pd.NA)
             if not pd.isna(explicit_side) and not pd.isna(explicit_reason):
@@ -701,6 +704,189 @@ def build_bomb_events(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
     )
 
 
+PLAYER_ROUND_STATS_COLUMNS = [
+    "round_number",
+    "steamid",
+    "name",
+    "team_number",
+    "kills",
+    "deaths",
+    "assists",
+    "damage_dealt",
+    "damage_taken",
+    "headshot_kills",
+    "shots",
+    "bomb_plants",
+    "bomb_defuses",
+    "survived",
+]
+
+
+def player_round_counts(
+    frame: pd.DataFrame,
+    steamid_column: str,
+    *,
+    count_column: str,
+    round_column: str = "round_number",
+) -> pd.DataFrame:
+    if (
+        frame.empty
+        or round_column not in frame.columns
+        or steamid_column not in frame.columns
+    ):
+        return pd.DataFrame(columns=[round_column, "steamid", count_column])
+
+    grouped = (
+        frame[[round_column, steamid_column]]
+        .dropna(subset=[round_column, steamid_column])
+        .groupby([round_column, steamid_column], dropna=False)
+        .size()
+        .reset_index(name=count_column)
+        .rename(columns={steamid_column: "steamid"})
+    )
+    return grouped
+
+
+def player_round_sums(
+    frame: pd.DataFrame,
+    steamid_column: str,
+    value_column: str,
+    *,
+    sum_column: str,
+    round_column: str = "round_number",
+) -> pd.DataFrame:
+    if (
+        frame.empty
+        or round_column not in frame.columns
+        or steamid_column not in frame.columns
+        or value_column not in frame.columns
+    ):
+        return pd.DataFrame(columns=[round_column, "steamid", sum_column])
+
+    usable = frame[[round_column, steamid_column, value_column]].dropna(
+        subset=[round_column, steamid_column]
+    )
+    if usable.empty:
+        return pd.DataFrame(columns=[round_column, "steamid", sum_column])
+    usable = usable.copy()
+    usable[value_column] = pd.to_numeric(usable[value_column], errors="coerce").fillna(
+        0
+    )
+    grouped = (
+        usable.groupby([round_column, steamid_column], dropna=False)[value_column]
+        .sum()
+        .reset_index(name=sum_column)
+        .rename(columns={steamid_column: "steamid"})
+    )
+    return grouped
+
+
+def truthy_series(values: pd.Series) -> pd.Series:
+    if values.empty:
+        return values.astype(bool)
+    if pd.api.types.is_bool_dtype(values):
+        return values.fillna(False)
+    text = values.astype("string").str.strip().str.lower()
+    return text.isin({"true", "1", "yes", "y", "t"})
+
+
+def build_player_round_stats(
+    players: pd.DataFrame,
+    rounds: pd.DataFrame,
+    kills: pd.DataFrame,
+    damage: pd.DataFrame,
+    shots: pd.DataFrame,
+    bomb_events: pd.DataFrame,
+) -> pd.DataFrame:
+    if players.empty or rounds.empty:
+        return pd.DataFrame(columns=PLAYER_ROUND_STATS_COLUMNS)
+
+    player_columns = [
+        column
+        for column in ("steamid", "name", "team_number")
+        if column in players.columns
+    ]
+    round_columns = [column for column in ("round_number",) if column in rounds.columns]
+    if "steamid" not in player_columns or "round_number" not in round_columns:
+        return pd.DataFrame(columns=PLAYER_ROUND_STATS_COLUMNS)
+
+    player_base = players[player_columns].dropna(subset=["steamid"]).drop_duplicates()
+    round_base = rounds[round_columns].dropna(subset=["round_number"]).drop_duplicates()
+    if player_base.empty or round_base.empty:
+        return pd.DataFrame(columns=PLAYER_ROUND_STATS_COLUMNS)
+
+    stats = round_base.merge(player_base, how="cross")
+
+    aggregates = [
+        player_round_counts(kills, "attacker_steamid", count_column="kills"),
+        player_round_counts(kills, "user_steamid", count_column="deaths"),
+        player_round_counts(kills, "assister_steamid", count_column="assists"),
+        player_round_sums(
+            damage, "attacker_steamid", "dmg_health", sum_column="damage_dealt"
+        ),
+        player_round_sums(
+            damage, "user_steamid", "dmg_health", sum_column="damage_taken"
+        ),
+        player_round_counts(shots, "user_steamid", count_column="shots"),
+    ]
+
+    if not kills.empty and "headshot" in kills.columns:
+        headshot_kills = kills[truthy_series(kills["headshot"])].copy()
+    else:
+        headshot_kills = pd.DataFrame()
+    aggregates.append(
+        player_round_counts(
+            headshot_kills,
+            "attacker_steamid",
+            count_column="headshot_kills",
+        )
+    )
+
+    if not bomb_events.empty and "event_name" in bomb_events.columns:
+        event_names = bomb_events["event_name"].astype("string")
+        plants = bomb_events[event_names == "bomb_planted"].copy()
+        defuses = bomb_events[event_names == "bomb_defused"].copy()
+    else:
+        plants = pd.DataFrame()
+        defuses = pd.DataFrame()
+    aggregates.extend(
+        [
+            player_round_counts(plants, "user_steamid", count_column="bomb_plants"),
+            player_round_counts(defuses, "user_steamid", count_column="bomb_defuses"),
+        ]
+    )
+
+    for aggregate in aggregates:
+        if aggregate.empty:
+            continue
+        stats = stats.merge(aggregate, on=["round_number", "steamid"], how="left")
+
+    atomic_columns = [
+        "kills",
+        "deaths",
+        "assists",
+        "damage_dealt",
+        "damage_taken",
+        "headshot_kills",
+        "shots",
+        "bomb_plants",
+        "bomb_defuses",
+    ]
+    for column in atomic_columns:
+        if column not in stats.columns:
+            stats[column] = 0
+        stats[column] = (
+            pd.to_numeric(stats[column], errors="coerce").fillna(0).astype(int)
+        )
+
+    stats["survived"] = stats["deaths"] == 0
+    return (
+        stats[PLAYER_ROUND_STATS_COLUMNS]
+        .sort_values(["round_number", "team_number", "steamid"], na_position="last")
+        .reset_index(drop=True)
+    )
+
+
 def write_table(df: pd.DataFrame, name: str, output_dir: Path) -> TableResult:
     path = output_dir / f"{name}.csv"
     df.to_csv(path, index=False)
@@ -784,6 +970,14 @@ def build_derived(
         "shots": build_shots(raw_dir, rounds),
         "bomb_events": build_bomb_events(raw_dir, rounds),
     }
+    tables["player_round_stats"] = build_player_round_stats(
+        tables["players"],
+        tables["rounds"],
+        tables["kills"],
+        tables["damage"],
+        tables["shots"],
+        tables["bomb_events"],
+    )
 
     results = [write_table(tables[name], name, output_dir) for name in DERIVED_TABLES]
     write_summary(results, raw_dir, output_dir)

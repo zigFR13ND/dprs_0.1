@@ -123,6 +123,7 @@ python tools/build_derived.py --input output/recheck_raw_v1
 - `shots.csv` — выстрелы с добавленным `round_number`.
 - `round_outcomes.csv` — итоговые признаки раунда на таймлайне `rounds.csv`; winner/reason заполняются только при достоверном выводе из objective/raw-событий, иначе остаются пустыми с `outcome_confidence=low`.
 - `bomb_events.csv` — объединённая хронология `bomb_*` событий.
+- `player_round_stats.csv` — полный каркас `player × round` с проверяемыми atomic-компонентами для будущих ADR/KAST/Rating: kills/deaths/assists, damage, headshots, shots, bomb plants/defuses и survived.
 
 Для быстрой проверки через GitHub скрипт также создаёт маленький `debug_pack/derived/`: `summary.json` и samples из первых строк каждой derived-таблицы. Если debug-pack не нужен, его можно отключить пустым значением:
 
