@@ -1,7 +1,7 @@
 {
-  "built_at": "2026-05-27T14:44:08.941638Z",
-  "raw_input_directory": "E:/cs_stats projects/dprs_0.1/my_project/output",
-  "derived_output_directory": "E:/cs_stats projects/dprs_0.1/my_project/output/derived",
+  "built_at": "2026-05-29T07:24:08.102150Z",
+  "raw_input_directory": "debug_pack",
+  "derived_output_directory": "debug_pack/derived",
   "tables": [
     {
       "name": "players",
@@ -23,11 +23,10 @@
         "prestart_tick",
         "poststart_tick",
         "freeze_end_tick",
-        "officially_ended_tick",
+        "round_close_tick",
         "next_prestart_tick",
+        "end_marker_source",
         "timeline_confidence",
-        "fallback_used",
-        "start_source",
         "missing_markers"
       ]
     },
@@ -118,5 +117,12 @@
     "events",
     "ticks",
     "errors"
-  ]
+  ],
+  "identifier_normalization": {
+    "players": {},
+    "kills": {},
+    "damage": {},
+    "shots": {},
+    "bomb_events": {}
+  }
 }
