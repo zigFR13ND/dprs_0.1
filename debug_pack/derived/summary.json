@@ -1,6 +1,6 @@
 {
   "built_at": "2026-05-29T07:42:37.670518Z",
-  "source_derived_directory": "debug_pack/derived",
+  "source_derived_directory": "derived",
   "sample_rows_per_table": 25,
   "tables": [
     {
@@ -12,6 +12,7 @@
         "name",
         "team_number"
       ],
+      "source_path": "derived/players.csv",
       "sample": "samples/players_head_25.csv"
     },
     {
@@ -28,6 +29,7 @@
         "timeline_confidence",
         "missing_markers"
       ],
+      "source_path": "derived/rounds.csv",
       "sample": "samples/rounds_head_25.csv"
     },
     {
@@ -46,6 +48,7 @@
         "end_reason",
         "outcome_confidence"
       ],
+      "source_path": "derived/round_outcomes.csv",
       "sample": "samples/round_outcomes_head_25.csv"
     },
     {
@@ -80,6 +83,7 @@
         "weapon_originalowner_xuid",
         "wipe"
       ],
+      "source_path": "derived/kills.csv",
       "sample": "samples/kills_head_25.csv"
     },
     {
@@ -99,6 +103,7 @@
         "health",
         "armor"
       ],
+      "source_path": "derived/damage.csv",
       "sample": "samples/damage_head_25.csv"
     },
     {
@@ -112,6 +117,7 @@
         "weapon",
         "silenced"
       ],
+      "source_path": "derived/shots.csv",
       "sample": "samples/shots_head_25.csv"
     },
     {
@@ -127,6 +133,7 @@
         "haskit",
         "entindex"
       ],
+      "source_path": "derived/bomb_events.csv",
       "sample": "samples/bomb_events_head_25.csv"
     }
   ]

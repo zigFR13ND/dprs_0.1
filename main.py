@@ -156,6 +156,24 @@ def ensure_dirs(output_dir):
     return paths
 
 
+def relative_path_or_posix(path, base):
+    """Return a stable POSIX path relative to base when possible."""
+    path = Path(path)
+    base = Path(base)
+    try:
+        return path.relative_to(base).as_posix()
+    except ValueError:
+        pass
+    try:
+        return path.resolve().relative_to(base.resolve()).as_posix()
+    except ValueError:
+        return path.as_posix()
+
+
+def output_relative_path(path, output_dir):
+    return relative_path_or_posix(path, output_dir)
+
+
 def save_json(data, path):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -248,7 +266,7 @@ def export_metadata(parser, paths):
                 {
                     "method": method_name,
                     "status": "ok",
-                    "path": str(saved_path),
+                    "path": output_relative_path(saved_path, paths["output"]),
                     "rows": len(result) if isinstance(result, pd.DataFrame) else None,
                 }
             )
@@ -267,7 +285,7 @@ def export_metadata(parser, paths):
                     "method": method_name,
                     "status": "method_not_found",
                     "severity": "non_critical",
-                    "path": str(target_path),
+                    "path": output_relative_path(target_path, paths["output"]),
                     "error": error,
                 }
             )
@@ -286,7 +304,7 @@ def export_metadata(parser, paths):
                     "method": method_name,
                     "status": "error",
                     "severity": "non_critical",
-                    "path": str(target_path),
+                    "path": output_relative_path(target_path, paths["output"]),
                     "error": error,
                 }
             )
@@ -336,7 +354,7 @@ def export_events(parser, event_names, paths):
                 {
                     "event_name": event_name,
                     "status": "ok",
-                    "path": str(saved_path),
+                    "path": output_relative_path(saved_path, paths["output"]),
                     "rows": len(result) if isinstance(result, pd.DataFrame) else None,
                 }
             )
@@ -362,7 +380,7 @@ def export_entity_fields(parser, paths):
         saved_path = save_parser_result(result, paths["output"] / "entity_fields_frequency.csv")
         return {
             "status": "ok",
-            "path": str(saved_path),
+            "path": output_relative_path(saved_path, paths["output"]),
             "rows": len(result) if isinstance(result, pd.DataFrame) else None,
         }
     except Exception as exc:
@@ -393,7 +411,7 @@ def export_tick_groups(parser, paths):
                 {
                     "group": group_name,
                     "status": "ok",
-                    "path": str(saved_path),
+                    "path": output_relative_path(saved_path, paths["output"]),
                     "rows": len(result) if isinstance(result, pd.DataFrame) else None,
                     "fields": fields,
                 }
@@ -447,7 +465,7 @@ def first_existing_csv(output_dir, relative_paths):
         csv_path = output_dir / relative_path
         if csv_path.exists():
             info = csv_info(csv_path)
-            info["path"] = str(relative_path)
+            info["path"] = relative_path.as_posix()
             return info
     return {"exists": False, "path": None, "rows": None, "columns": []}
 
@@ -489,26 +507,26 @@ def build_light_validation_report(output_dir):
         output_dir / "errors" / "failed_tick_groups.csv",
         output_dir / "errors" / "failed_meta_methods.csv",
     ]
-    checks = {str(path.relative_to(output_dir)): path.exists() for path in expected_paths}
+    checks = {path.relative_to(output_dir).as_posix(): path.exists() for path in expected_paths}
 
     csv_files = []
     for csv_path in sorted(output_dir.rglob("*.csv")):
-        item = {"path": str(csv_path.relative_to(output_dir))}
+        item = {"path": csv_path.relative_to(output_dir).as_posix()}
         item.update(csv_info(csv_path))
         csv_files.append(item)
 
     json_files = [
-        {"path": str(json_path.relative_to(output_dir))}
+        {"path": json_path.relative_to(output_dir).as_posix()}
         for json_path in sorted(output_dir.rglob("*.json"))
     ]
     available_files = [
-        str(path.relative_to(output_dir))
+        path.relative_to(output_dir).as_posix()
         for path in sorted(output_dir.rglob("*"))
         if path.is_file()
     ][:100]
 
     report = {
-        "output_dir": str(output_dir),
+        "output_dir": ".",
         "checks": checks,
         "players_count": player_info["rows"],
         "player_info_columns": player_info["columns"],
@@ -553,8 +571,8 @@ def parse_demo(demo_path, output_dir):
 
     parser = DemoParser(str(demo_path))
     summary = {
-        "demo_path": str(demo_path),
-        "output_dir": str(output_dir),
+        "demo_path": relative_path_or_posix(demo_path, Path.cwd()),
+        "output_dir": ".",
         "package_versions": {
             "demoparser2": get_package_version("demoparser2"),
             "pandas": get_package_version("pandas"),
