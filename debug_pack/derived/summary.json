@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-05-29T07:24:08.154390Z",
+  "built_at": "2026-05-29T07:42:37.670518Z",
   "source_derived_directory": "debug_pack/derived",
   "sample_rows_per_table": 25,
   "tables": [
@@ -29,6 +29,24 @@
         "missing_markers"
       ],
       "sample": "samples/rounds_head_25.csv"
+    },
+    {
+      "table": "round_outcomes",
+      "rows": 22,
+      "columns": [
+        "round_number",
+        "start_tick",
+        "live_start_tick",
+        "end_tick",
+        "bomb_planted",
+        "bomb_defused",
+        "bomb_exploded",
+        "winner_side",
+        "winner_team_number",
+        "end_reason",
+        "outcome_confidence"
+      ],
+      "sample": "samples/round_outcomes_head_25.csv"
     },
     {
       "table": "kills",

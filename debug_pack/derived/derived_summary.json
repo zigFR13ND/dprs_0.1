@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-05-29T07:24:08.102150Z",
+  "built_at": "2026-05-29T07:42:37.606646Z",
   "raw_input_directory": "debug_pack",
   "derived_output_directory": "debug_pack/derived",
   "tables": [
@@ -28,6 +28,24 @@
         "end_marker_source",
         "timeline_confidence",
         "missing_markers"
+      ]
+    },
+    {
+      "name": "round_outcomes",
+      "relative_path": "round_outcomes.csv",
+      "rows": 22,
+      "columns": [
+        "round_number",
+        "start_tick",
+        "live_start_tick",
+        "end_tick",
+        "bomb_planted",
+        "bomb_defused",
+        "bomb_exploded",
+        "winner_side",
+        "winner_team_number",
+        "end_reason",
+        "outcome_confidence"
       ]
     },
     {
