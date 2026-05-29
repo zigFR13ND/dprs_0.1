@@ -1,6 +1,6 @@
 {
-  "built_at": "2026-05-27T14:44:09.003278Z",
-  "source_derived_directory": "E:/cs_stats projects/dprs_0.1/my_project/output/derived",
+  "built_at": "2026-05-29T07:24:08.154390Z",
+  "source_derived_directory": "debug_pack/derived",
   "sample_rows_per_table": 25,
   "tables": [
     {
@@ -22,11 +22,10 @@
         "prestart_tick",
         "poststart_tick",
         "freeze_end_tick",
-        "officially_ended_tick",
+        "round_close_tick",
         "next_prestart_tick",
+        "end_marker_source",
         "timeline_confidence",
-        "fallback_used",
-        "start_source",
         "missing_markers"
       ],
       "sample": "samples/rounds_head_25.csv"

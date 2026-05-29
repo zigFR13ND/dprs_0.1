@@ -166,6 +166,9 @@ def build_rounds(raw_dir: Path) -> pd.DataFrame:
     officially_ended_ticks = unique_sorted_ticks(
         read_csv_if_exists(raw_dir / "events" / "round_officially_ended.csv")
     )
+    win_panel_ticks = unique_sorted_ticks(
+        read_csv_if_exists(raw_dir / "events" / "cs_win_panel_match.csv")
+    )
 
     start_ticks = prestart_ticks
     start_source = "round_prestart"
@@ -183,14 +186,20 @@ def build_rounds(raw_dir: Path) -> pd.DataFrame:
 
     rows: list[dict[str, object]] = []
     for index, start_tick in enumerate(start_ticks):
-        next_start_tick = start_ticks[index + 1] if index + 1 < len(start_ticks) else None
+        next_start_tick = (
+            start_ticks[index + 1] if index + 1 < len(start_ticks) else None
+        )
 
-        prestart_tick = start_tick if start_source == "round_prestart" else first_tick_in_range(
-            prestart_ticks,
-            start_tick,
-            next_start_tick,
-            include_start=True,
-            include_stop=False,
+        prestart_tick = (
+            start_tick
+            if start_source == "round_prestart"
+            else first_tick_in_range(
+                prestart_ticks,
+                start_tick,
+                next_start_tick,
+                include_start=True,
+                include_stop=False,
+            )
         )
         poststart_tick = first_tick_in_range(
             poststart_ticks,
@@ -206,13 +215,43 @@ def build_rounds(raw_dir: Path) -> pd.DataFrame:
             include_start=True,
             include_stop=False,
         )
-        officially_ended_tick = first_tick_in_range(
+
+        # A round_officially_ended marker that lands exactly on the next prestart
+        # is only a boundary echo, not proof of the active phase close.  Only a
+        # strictly in-window marker can be used as an official close tick.
+        official_close_tick = first_tick_in_range(
             officially_ended_ticks,
             start_tick,
             next_start_tick,
             include_start=False,
-            include_stop=True,
+            include_stop=False,
         )
+        boundary_official_tick = (
+            next_start_tick
+            if next_start_tick is not None and next_start_tick in officially_ended_ticks
+            else pd.NA
+        )
+
+        if not pd.isna(official_close_tick):
+            round_close_tick = official_close_tick
+            end_marker_source = "round_officially_ended"
+        elif index == len(start_ticks) - 1:
+            round_close_tick = first_tick_in_range(
+                win_panel_ticks,
+                start_tick,
+                None,
+                include_start=False,
+                include_stop=False,
+            )
+            end_marker_source = (
+                "cs_win_panel_match" if not pd.isna(round_close_tick) else "missing"
+            )
+        elif next_start_tick is not None:
+            round_close_tick = next_start_tick
+            end_marker_source = "next_prestart_boundary"
+        else:
+            round_close_tick = pd.NA
+            end_marker_source = "missing"
 
         missing_markers: list[str] = []
         if pd.isna(prestart_tick):
@@ -221,16 +260,26 @@ def build_rounds(raw_dir: Path) -> pd.DataFrame:
             missing_markers.append("poststart")
         if pd.isna(freeze_end_tick):
             missing_markers.append("freeze_end")
-        if pd.isna(officially_ended_tick):
-            missing_markers.append("officially_ended")
+        if pd.isna(official_close_tick):
+            missing_markers.append("valid_officially_ended")
+        if not pd.isna(boundary_official_tick):
+            missing_markers.append("officially_ended_at_next_prestart")
+        if pd.isna(round_close_tick):
+            missing_markers.append("round_close")
 
-        fallback_used = start_source != "round_prestart"
-        if fallback_used and len(missing_markers) <= 1:
+        core_markers_present = all(
+            not pd.isna(tick)
+            for tick in (prestart_tick, poststart_tick, freeze_end_tick)
+        )
+        fallback_start = start_source != "round_prestart"
+        if core_markers_present and end_marker_source == "round_officially_ended":
+            timeline_confidence = "medium" if fallback_start else "high"
+        elif core_markers_present and end_marker_source == "cs_win_panel_match":
             timeline_confidence = "medium"
-        elif len(missing_markers) <= 1:
-            timeline_confidence = "high"
-        elif len(missing_markers) <= 2:
+        elif core_markers_present and end_marker_source == "next_prestart_boundary":
             timeline_confidence = "medium"
+        elif not pd.isna(round_close_tick):
+            timeline_confidence = "low"
         else:
             timeline_confidence = "low"
 
@@ -240,13 +289,12 @@ def build_rounds(raw_dir: Path) -> pd.DataFrame:
                 "prestart_tick": prestart_tick,
                 "poststart_tick": poststart_tick,
                 "freeze_end_tick": freeze_end_tick,
-                "officially_ended_tick": officially_ended_tick,
+                "round_close_tick": round_close_tick,
                 "next_prestart_tick": (
                     next_start_tick if next_start_tick is not None else pd.NA
                 ),
+                "end_marker_source": end_marker_source,
                 "timeline_confidence": timeline_confidence,
-                "fallback_used": fallback_used,
-                "start_source": start_source,
                 "missing_markers": ";".join(missing_markers),
             }
         )
@@ -258,11 +306,10 @@ def build_rounds(raw_dir: Path) -> pd.DataFrame:
             "prestart_tick",
             "poststart_tick",
             "freeze_end_tick",
-            "officially_ended_tick",
+            "round_close_tick",
             "next_prestart_tick",
+            "end_marker_source",
             "timeline_confidence",
-            "fallback_used",
-            "start_source",
             "missing_markers",
         ],
     )
@@ -274,8 +321,13 @@ def assign_round_numbers(df: pd.DataFrame, rounds: pd.DataFrame) -> pd.DataFrame
         df.insert(0, "round_number", pd.NA)
         return df
 
+    marker_columns = [
+        column
+        for column in ("prestart_tick", "poststart_tick", "freeze_end_tick")
+        if column in rounds.columns
+    ]
     round_starts = rounds[
-        ["round_number", "prestart_tick", "next_prestart_tick"]
+        ["round_number", *marker_columns, "next_prestart_tick"]
     ].copy()
     ticks = pd.to_numeric(df["tick"], errors="coerce")
     round_numbers: list[object] = []
@@ -285,12 +337,16 @@ def assign_round_numbers(df: pd.DataFrame, rounds: pd.DataFrame) -> pd.DataFrame
             continue
         tick_int = int(tick)
         matched = pd.NA
-        for row in round_starts.itertuples(index=False):
-            stop = row.next_prestart_tick
-            if tick_int >= int(row.prestart_tick) and (
-                pd.isna(stop) or tick_int < int(stop)
-            ):
-                matched = int(row.round_number)
+        for row in round_starts.to_dict("records"):
+            start = next(
+                (row[column] for column in marker_columns if not pd.isna(row[column])),
+                pd.NA,
+            )
+            if pd.isna(start):
+                continue
+            stop = row["next_prestart_tick"]
+            if tick_int >= int(start) and (pd.isna(stop) or tick_int < int(stop)):
+                matched = int(row["round_number"])
                 break
         round_numbers.append(matched)
 
@@ -434,9 +490,12 @@ def write_summary(results: list[TableResult], raw_dir: Path, output_dir: Path) -
 def write_debug_pack(
     results: list[TableResult], output_dir: Path, debug_dir: Path, sample_rows: int
 ) -> None:
-    if debug_dir.exists():
+    same_as_output = debug_dir.resolve() == output_dir.resolve()
+    if debug_dir.exists() and not same_as_output:
         shutil.rmtree(debug_dir)
     samples_dir = debug_dir / "samples"
+    if samples_dir.exists():
+        shutil.rmtree(samples_dir)
     samples_dir.mkdir(parents=True, exist_ok=True)
 
     sample_entries: list[dict[str, object]] = []
