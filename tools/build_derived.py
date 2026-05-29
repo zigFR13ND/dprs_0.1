@@ -42,6 +42,25 @@ EXPLICIT_ID_COLUMNS = {
 IDENTIFIER_DIAGNOSTICS: dict[str, dict[str, int]] = {}
 
 
+def relative_path_or_posix(path: Path, base: Path) -> str:
+    """Return a stable POSIX path relative to base when possible."""
+    path = Path(path)
+    base = Path(base)
+    try:
+        return path.relative_to(base).as_posix()
+    except ValueError:
+        pass
+    try:
+        return path.resolve().relative_to(base.resolve()).as_posix()
+    except ValueError:
+        return path.as_posix()
+
+
+def debug_pack_source_path(path: Path, raw_dir: Path) -> str:
+    """Return a debug-pack path relative to the raw export root where possible."""
+    return relative_path_or_posix(path, raw_dir)
+
+
 @dataclass(frozen=True)
 class TableResult:
     name: str
@@ -896,12 +915,12 @@ def write_table(df: pd.DataFrame, name: str, output_dir: Path) -> TableResult:
 def write_summary(results: list[TableResult], raw_dir: Path, output_dir: Path) -> None:
     summary = {
         "built_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
-        "raw_input_directory": raw_dir.as_posix(),
-        "derived_output_directory": output_dir.as_posix(),
+        "raw_input_directory": ".",
+        "derived_output_directory": debug_pack_source_path(output_dir, raw_dir),
         "tables": [
             {
                 "name": result.name,
-                "relative_path": result.path.relative_to(output_dir).as_posix(),
+                "relative_path": debug_pack_source_path(result.path, raw_dir),
                 "rows": result.rows,
                 "columns": result.columns,
             }
@@ -936,13 +955,14 @@ def write_debug_pack(
                 "table": result.name,
                 "rows": result.rows,
                 "columns": result.columns,
+                "source_path": relative_path_or_posix(result.path, output_dir.parent),
                 "sample": sample_path.relative_to(debug_dir).as_posix(),
             }
         )
 
     summary = {
         "built_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
-        "source_derived_directory": output_dir.as_posix(),
+        "source_derived_directory": relative_path_or_posix(output_dir, output_dir.parent),
         "sample_rows_per_table": sample_rows,
         "tables": sample_entries,
     }

@@ -1,16 +1,16 @@
 {
-  "output_dir": "output\\recheck_raw_v1",
+  "output_dir": ".",
   "checks": {
     "match_summary.json": true,
     "game_events_list.csv": true,
-    "meta\\header.json": true,
-    "meta\\player_info.csv": true,
+    "meta/header.json": true,
+    "meta/player_info.csv": true,
     "events": true,
     "ticks": true,
     "errors": true,
-    "errors\\failed_events.csv": true,
-    "errors\\failed_tick_groups.csv": true,
-    "errors\\failed_meta_methods.csv": true
+    "errors/failed_events.csv": true,
+    "errors/failed_tick_groups.csv": true,
+    "errors/failed_meta_methods.csv": true
   },
   "players_count": 10,
   "player_info_columns": [
@@ -70,9 +70,9 @@
     "weapon"
   ],
   "round_start_rows": 22,
-  "round_start_source": "events\\round_prestart.csv",
+  "round_start_source": "events/round_prestart.csv",
   "round_end_rows": 42,
-  "round_end_source": "events\\round_officially_ended.csv",
+  "round_end_source": "events/round_officially_ended.csv",
   "ticks_aggregate_rows": 1448620,
   "ticks_aggregate_columns": [
     "total_rounds_played",
@@ -89,77 +89,77 @@
     "name"
   ],
   "available_files": [
-    "errors\\failed_events.csv",
-    "errors\\failed_meta_methods.csv",
-    "errors\\failed_tick_groups.csv",
-    "events\\announce_phase_end.csv",
-    "events\\begin_new_match.csv",
-    "events\\bomb_begindefuse.csv",
-    "events\\bomb_beginplant.csv",
-    "events\\bomb_defused.csv",
-    "events\\bomb_dropped.csv",
-    "events\\bomb_exploded.csv",
-    "events\\bomb_pickup.csv",
-    "events\\bomb_planted.csv",
-    "events\\bullet_damage.csv",
-    "events\\buytime_ended.csv",
-    "events\\chat_message.csv",
-    "events\\cs_pre_restart.csv",
-    "events\\cs_round_final_beep.csv",
-    "events\\cs_round_start_beep.csv",
-    "events\\cs_win_panel_match.csv",
-    "events\\decoy_detonate.csv",
-    "events\\decoy_started.csv",
-    "events\\fire_bullets.csv",
-    "events\\flashbang_detonate.csv",
-    "events\\hegrenade_detonate.csv",
-    "events\\hltv_versioninfo.csv",
-    "events\\inferno_expire.csv",
-    "events\\inferno_startburn.csv",
-    "events\\item_equip.csv",
-    "events\\item_pickup.csv",
-    "events\\player_blind.csv",
-    "events\\player_bullet_hit.csv",
-    "events\\player_death.csv",
-    "events\\player_disconnect.csv",
-    "events\\player_footstep.csv",
-    "events\\player_hurt.csv",
-    "events\\player_spawn.csv",
-    "events\\player_team.csv",
-    "events\\rank_update.csv",
-    "events\\round_announce_last_round_half.csv",
-    "events\\round_announce_match_point.csv",
-    "events\\round_announce_match_start.csv",
-    "events\\round_freeze_end.csv",
-    "events\\round_officially_ended.csv",
-    "events\\round_poststart.csv",
-    "events\\round_prestart.csv",
-    "events\\round_time_warning.csv",
-    "events\\server_cvar.csv",
-    "events\\smokegrenade_detonate.csv",
-    "events\\smokegrenade_expired.csv",
-    "events\\weapon_fire.csv",
-    "events\\weapon_reload.csv",
-    "events\\weapon_zoom.csv",
+    "errors/failed_events.csv",
+    "errors/failed_meta_methods.csv",
+    "errors/failed_tick_groups.csv",
+    "events/announce_phase_end.csv",
+    "events/begin_new_match.csv",
+    "events/bomb_begindefuse.csv",
+    "events/bomb_beginplant.csv",
+    "events/bomb_defused.csv",
+    "events/bomb_dropped.csv",
+    "events/bomb_exploded.csv",
+    "events/bomb_pickup.csv",
+    "events/bomb_planted.csv",
+    "events/bullet_damage.csv",
+    "events/buytime_ended.csv",
+    "events/chat_message.csv",
+    "events/cs_pre_restart.csv",
+    "events/cs_round_final_beep.csv",
+    "events/cs_round_start_beep.csv",
+    "events/cs_win_panel_match.csv",
+    "events/decoy_detonate.csv",
+    "events/decoy_started.csv",
+    "events/fire_bullets.csv",
+    "events/flashbang_detonate.csv",
+    "events/hegrenade_detonate.csv",
+    "events/hltv_versioninfo.csv",
+    "events/inferno_expire.csv",
+    "events/inferno_startburn.csv",
+    "events/item_equip.csv",
+    "events/item_pickup.csv",
+    "events/player_blind.csv",
+    "events/player_bullet_hit.csv",
+    "events/player_death.csv",
+    "events/player_disconnect.csv",
+    "events/player_footstep.csv",
+    "events/player_hurt.csv",
+    "events/player_spawn.csv",
+    "events/player_team.csv",
+    "events/rank_update.csv",
+    "events/round_announce_last_round_half.csv",
+    "events/round_announce_match_point.csv",
+    "events/round_announce_match_start.csv",
+    "events/round_freeze_end.csv",
+    "events/round_officially_ended.csv",
+    "events/round_poststart.csv",
+    "events/round_prestart.csv",
+    "events/round_time_warning.csv",
+    "events/server_cvar.csv",
+    "events/smokegrenade_detonate.csv",
+    "events/smokegrenade_expired.csv",
+    "events/weapon_fire.csv",
+    "events/weapon_reload.csv",
+    "events/weapon_zoom.csv",
     "game_events_list.csv",
     "match_summary.json",
-    "meta\\grenades.csv",
-    "meta\\header.json",
-    "meta\\item_drops.csv",
-    "meta\\player_info.csv",
-    "meta\\skins.csv",
-    "ticks\\ticks_aggregate.csv",
-    "ticks\\ticks_buttons.csv",
-    "ticks\\ticks_damage_and_status.csv",
-    "ticks\\ticks_game_state.csv",
-    "ticks\\ticks_player_core.csv",
-    "ticks\\ticks_usercommands.csv",
-    "ticks\\ticks_view_and_movement.csv",
-    "ticks\\ticks_weapon.csv"
+    "meta/grenades.csv",
+    "meta/header.json",
+    "meta/item_drops.csv",
+    "meta/player_info.csv",
+    "meta/skins.csv",
+    "ticks/ticks_aggregate.csv",
+    "ticks/ticks_buttons.csv",
+    "ticks/ticks_damage_and_status.csv",
+    "ticks/ticks_game_state.csv",
+    "ticks/ticks_player_core.csv",
+    "ticks/ticks_usercommands.csv",
+    "ticks/ticks_view_and_movement.csv",
+    "ticks/ticks_weapon.csv"
   ],
   "csv_files": [
     {
-      "path": "errors\\failed_events.csv",
+      "path": "errors/failed_events.csv",
       "exists": true,
       "rows": 0,
       "columns": [
@@ -168,7 +168,7 @@
       ]
     },
     {
-      "path": "errors\\failed_meta_methods.csv",
+      "path": "errors/failed_meta_methods.csv",
       "exists": true,
       "rows": 2,
       "columns": [
@@ -179,7 +179,7 @@
       ]
     },
     {
-      "path": "errors\\failed_tick_groups.csv",
+      "path": "errors/failed_tick_groups.csv",
       "exists": true,
       "rows": 0,
       "columns": [
@@ -189,7 +189,7 @@
       ]
     },
     {
-      "path": "events\\announce_phase_end.csv",
+      "path": "events/announce_phase_end.csv",
       "exists": true,
       "rows": 1,
       "columns": [
@@ -197,7 +197,7 @@
       ]
     },
     {
-      "path": "events\\begin_new_match.csv",
+      "path": "events/begin_new_match.csv",
       "exists": true,
       "rows": 1,
       "columns": [
@@ -205,7 +205,7 @@
       ]
     },
     {
-      "path": "events\\bomb_begindefuse.csv",
+      "path": "events/bomb_begindefuse.csv",
       "exists": true,
       "rows": 6,
       "columns": [
@@ -216,7 +216,7 @@
       ]
     },
     {
-      "path": "events\\bomb_beginplant.csv",
+      "path": "events/bomb_beginplant.csv",
       "exists": true,
       "rows": 12,
       "columns": [
@@ -227,7 +227,7 @@
       ]
     },
     {
-      "path": "events\\bomb_defused.csv",
+      "path": "events/bomb_defused.csv",
       "exists": true,
       "rows": 4,
       "columns": [
@@ -238,7 +238,7 @@
       ]
     },
     {
-      "path": "events\\bomb_dropped.csv",
+      "path": "events/bomb_dropped.csv",
       "exists": true,
       "rows": 33,
       "columns": [
@@ -249,7 +249,7 @@
       ]
     },
     {
-      "path": "events\\bomb_exploded.csv",
+      "path": "events/bomb_exploded.csv",
       "exists": true,
       "rows": 3,
       "columns": [
@@ -260,7 +260,7 @@
       ]
     },
     {
-      "path": "events\\bomb_pickup.csv",
+      "path": "events/bomb_pickup.csv",
       "exists": true,
       "rows": 45,
       "columns": [
@@ -270,7 +270,7 @@
       ]
     },
     {
-      "path": "events\\bomb_planted.csv",
+      "path": "events/bomb_planted.csv",
       "exists": true,
       "rows": 12,
       "columns": [
@@ -281,7 +281,7 @@
       ]
     },
     {
-      "path": "events\\bullet_damage.csv",
+      "path": "events/bullet_damage.csv",
       "exists": true,
       "rows": 526,
       "columns": [
@@ -315,7 +315,7 @@
       ]
     },
     {
-      "path": "events\\buytime_ended.csv",
+      "path": "events/buytime_ended.csv",
       "exists": true,
       "rows": 23,
       "columns": [
@@ -323,7 +323,7 @@
       ]
     },
     {
-      "path": "events\\chat_message.csv",
+      "path": "events/chat_message.csv",
       "exists": true,
       "rows": 2,
       "columns": [
@@ -334,7 +334,7 @@
       ]
     },
     {
-      "path": "events\\cs_pre_restart.csv",
+      "path": "events/cs_pre_restart.csv",
       "exists": true,
       "rows": 22,
       "columns": [
@@ -342,7 +342,7 @@
       ]
     },
     {
-      "path": "events\\cs_round_final_beep.csv",
+      "path": "events/cs_round_final_beep.csv",
       "exists": true,
       "rows": 22,
       "columns": [
@@ -350,7 +350,7 @@
       ]
     },
     {
-      "path": "events\\cs_round_start_beep.csv",
+      "path": "events/cs_round_start_beep.csv",
       "exists": true,
       "rows": 66,
       "columns": [
@@ -358,7 +358,7 @@
       ]
     },
     {
-      "path": "events\\cs_win_panel_match.csv",
+      "path": "events/cs_win_panel_match.csv",
       "exists": true,
       "rows": 1,
       "columns": [
@@ -366,7 +366,7 @@
       ]
     },
     {
-      "path": "events\\decoy_detonate.csv",
+      "path": "events/decoy_detonate.csv",
       "exists": true,
       "rows": 4,
       "columns": [
@@ -380,7 +380,7 @@
       ]
     },
     {
-      "path": "events\\decoy_started.csv",
+      "path": "events/decoy_started.csv",
       "exists": true,
       "rows": 5,
       "columns": [
@@ -394,7 +394,7 @@
       ]
     },
     {
-      "path": "events\\fire_bullets.csv",
+      "path": "events/fire_bullets.csv",
       "exists": true,
       "rows": 2476,
       "columns": [
@@ -428,7 +428,7 @@
       ]
     },
     {
-      "path": "events\\flashbang_detonate.csv",
+      "path": "events/flashbang_detonate.csv",
       "exists": true,
       "rows": 88,
       "columns": [
@@ -442,7 +442,7 @@
       ]
     },
     {
-      "path": "events\\hegrenade_detonate.csv",
+      "path": "events/hegrenade_detonate.csv",
       "exists": true,
       "rows": 71,
       "columns": [
@@ -456,7 +456,7 @@
       ]
     },
     {
-      "path": "events\\hltv_versioninfo.csv",
+      "path": "events/hltv_versioninfo.csv",
       "exists": true,
       "rows": 1,
       "columns": [
@@ -465,7 +465,7 @@
       ]
     },
     {
-      "path": "events\\inferno_expire.csv",
+      "path": "events/inferno_expire.csv",
       "exists": true,
       "rows": 59,
       "columns": [
@@ -479,7 +479,7 @@
       ]
     },
     {
-      "path": "events\\inferno_startburn.csv",
+      "path": "events/inferno_startburn.csv",
       "exists": true,
       "rows": 59,
       "columns": [
@@ -493,7 +493,7 @@
       ]
     },
     {
-      "path": "events\\item_equip.csv",
+      "path": "events/item_equip.csv",
       "exists": true,
       "rows": 5705,
       "columns": [
@@ -511,7 +511,7 @@
       ]
     },
     {
-      "path": "events\\item_pickup.csv",
+      "path": "events/item_pickup.csv",
       "exists": true,
       "rows": 1372,
       "columns": [
@@ -524,7 +524,7 @@
       ]
     },
     {
-      "path": "events\\player_blind.csv",
+      "path": "events/player_blind.csv",
       "exists": true,
       "rows": 161,
       "columns": [
@@ -538,7 +538,7 @@
       ]
     },
     {
-      "path": "events\\player_bullet_hit.csv",
+      "path": "events/player_bullet_hit.csv",
       "exists": true,
       "rows": 526,
       "columns": [
@@ -556,7 +556,7 @@
       ]
     },
     {
-      "path": "events\\player_death.csv",
+      "path": "events/player_death.csv",
       "exists": true,
       "rows": 160,
       "columns": [
@@ -589,7 +589,7 @@
       ]
     },
     {
-      "path": "events\\player_disconnect.csv",
+      "path": "events/player_disconnect.csv",
       "exists": true,
       "rows": 6,
       "columns": [
@@ -605,7 +605,7 @@
       ]
     },
     {
-      "path": "events\\player_footstep.csv",
+      "path": "events/player_footstep.csv",
       "exists": true,
       "rows": 1589,
       "columns": [
@@ -615,7 +615,7 @@
       ]
     },
     {
-      "path": "events\\player_hurt.csv",
+      "path": "events/player_hurt.csv",
       "exists": true,
       "rows": 650,
       "columns": [
@@ -633,7 +633,7 @@
       ]
     },
     {
-      "path": "events\\player_spawn.csv",
+      "path": "events/player_spawn.csv",
       "exists": true,
       "rows": 217,
       "columns": [
@@ -643,7 +643,7 @@
       ]
     },
     {
-      "path": "events\\player_team.csv",
+      "path": "events/player_team.csv",
       "exists": true,
       "rows": 10,
       "columns": [
@@ -658,7 +658,7 @@
       ]
     },
     {
-      "path": "events\\rank_update.csv",
+      "path": "events/rank_update.csv",
       "exists": true,
       "rows": 10,
       "columns": [
@@ -673,7 +673,7 @@
       ]
     },
     {
-      "path": "events\\round_announce_last_round_half.csv",
+      "path": "events/round_announce_last_round_half.csv",
       "exists": true,
       "rows": 1,
       "columns": [
@@ -681,7 +681,7 @@
       ]
     },
     {
-      "path": "events\\round_announce_match_point.csv",
+      "path": "events/round_announce_match_point.csv",
       "exists": true,
       "rows": 4,
       "columns": [
@@ -689,7 +689,7 @@
       ]
     },
     {
-      "path": "events\\round_announce_match_start.csv",
+      "path": "events/round_announce_match_start.csv",
       "exists": true,
       "rows": 1,
       "columns": [
@@ -697,7 +697,7 @@
       ]
     },
     {
-      "path": "events\\round_freeze_end.csv",
+      "path": "events/round_freeze_end.csv",
       "exists": true,
       "rows": 22,
       "columns": [
@@ -705,7 +705,7 @@
       ]
     },
     {
-      "path": "events\\round_officially_ended.csv",
+      "path": "events/round_officially_ended.csv",
       "exists": true,
       "rows": 42,
       "columns": [
@@ -713,7 +713,7 @@
       ]
     },
     {
-      "path": "events\\round_poststart.csv",
+      "path": "events/round_poststart.csv",
       "exists": true,
       "rows": 22,
       "columns": [
@@ -721,7 +721,7 @@
       ]
     },
     {
-      "path": "events\\round_prestart.csv",
+      "path": "events/round_prestart.csv",
       "exists": true,
       "rows": 22,
       "columns": [
@@ -729,7 +729,7 @@
       ]
     },
     {
-      "path": "events\\round_time_warning.csv",
+      "path": "events/round_time_warning.csv",
       "exists": true,
       "rows": 2,
       "columns": [
@@ -737,7 +737,7 @@
       ]
     },
     {
-      "path": "events\\server_cvar.csv",
+      "path": "events/server_cvar.csv",
       "exists": true,
       "rows": 1082,
       "columns": [
@@ -747,7 +747,7 @@
       ]
     },
     {
-      "path": "events\\smokegrenade_detonate.csv",
+      "path": "events/smokegrenade_detonate.csv",
       "exists": true,
       "rows": 86,
       "columns": [
@@ -761,7 +761,7 @@
       ]
     },
     {
-      "path": "events\\smokegrenade_expired.csv",
+      "path": "events/smokegrenade_expired.csv",
       "exists": true,
       "rows": 76,
       "columns": [
@@ -775,7 +775,7 @@
       ]
     },
     {
-      "path": "events\\weapon_fire.csv",
+      "path": "events/weapon_fire.csv",
       "exists": true,
       "rows": 3441,
       "columns": [
@@ -787,7 +787,7 @@
       ]
     },
     {
-      "path": "events\\weapon_reload.csv",
+      "path": "events/weapon_reload.csv",
       "exists": true,
       "rows": 231,
       "columns": [
@@ -797,7 +797,7 @@
       ]
     },
     {
-      "path": "events\\weapon_zoom.csv",
+      "path": "events/weapon_zoom.csv",
       "exists": true,
       "rows": 606,
       "columns": [
@@ -815,7 +815,7 @@
       ]
     },
     {
-      "path": "meta\\grenades.csv",
+      "path": "meta/grenades.csv",
       "exists": true,
       "rows": 1593691,
       "columns": [
@@ -830,7 +830,7 @@
       ]
     },
     {
-      "path": "meta\\item_drops.csv",
+      "path": "meta/item_drops.csv",
       "exists": true,
       "rows": 0,
       "columns": [
@@ -846,7 +846,7 @@
       ]
     },
     {
-      "path": "meta\\player_info.csv",
+      "path": "meta/player_info.csv",
       "exists": true,
       "rows": 10,
       "columns": [
@@ -856,7 +856,7 @@
       ]
     },
     {
-      "path": "meta\\skins.csv",
+      "path": "meta/skins.csv",
       "exists": true,
       "rows": 16,
       "columns": [
@@ -870,7 +870,7 @@
       ]
     },
     {
-      "path": "ticks\\ticks_aggregate.csv",
+      "path": "ticks/ticks_aggregate.csv",
       "exists": true,
       "rows": 1448620,
       "columns": [
@@ -889,7 +889,7 @@
       ]
     },
     {
-      "path": "ticks\\ticks_buttons.csv",
+      "path": "ticks/ticks_buttons.csv",
       "exists": true,
       "rows": 1448620,
       "columns": [
@@ -904,7 +904,7 @@
       ]
     },
     {
-      "path": "ticks\\ticks_damage_and_status.csv",
+      "path": "ticks/ticks_damage_and_status.csv",
       "exists": true,
       "rows": 1448620,
       "columns": [
@@ -922,7 +922,7 @@
       ]
     },
     {
-      "path": "ticks\\ticks_game_state.csv",
+      "path": "ticks/ticks_game_state.csv",
       "exists": true,
       "rows": 1448620,
       "columns": [
@@ -940,7 +940,7 @@
       ]
     },
     {
-      "path": "ticks\\ticks_player_core.csv",
+      "path": "ticks/ticks_player_core.csv",
       "exists": true,
       "rows": 1448620,
       "columns": [
@@ -961,7 +961,7 @@
       ]
     },
     {
-      "path": "ticks\\ticks_usercommands.csv",
+      "path": "ticks/ticks_usercommands.csv",
       "exists": true,
       "rows": 1448620,
       "columns": [
@@ -974,7 +974,7 @@
       ]
     },
     {
-      "path": "ticks\\ticks_view_and_movement.csv",
+      "path": "ticks/ticks_view_and_movement.csv",
       "exists": true,
       "rows": 1448620,
       "columns": [
@@ -993,7 +993,7 @@
       ]
     },
     {
-      "path": "ticks\\ticks_weapon.csv",
+      "path": "ticks/ticks_weapon.csv",
       "exists": true,
       "rows": 1448620,
       "columns": [
@@ -1012,7 +1012,7 @@
       "path": "match_summary.json"
     },
     {
-      "path": "meta\\header.json"
+      "path": "meta/header.json"
     }
   ],
   "status": "ok"

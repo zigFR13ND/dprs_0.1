@@ -1,11 +1,11 @@
 {
   "built_at": "2026-05-29T07:42:37.606646Z",
-  "raw_input_directory": "debug_pack",
-  "derived_output_directory": "debug_pack/derived",
+  "raw_input_directory": ".",
+  "derived_output_directory": "derived",
   "tables": [
     {
       "name": "players",
-      "relative_path": "players.csv",
+      "relative_path": "derived/players.csv",
       "rows": 10,
       "columns": [
         "player_id",
@@ -16,7 +16,7 @@
     },
     {
       "name": "rounds",
-      "relative_path": "rounds.csv",
+      "relative_path": "derived/rounds.csv",
       "rows": 22,
       "columns": [
         "round_number",
@@ -32,7 +32,7 @@
     },
     {
       "name": "round_outcomes",
-      "relative_path": "round_outcomes.csv",
+      "relative_path": "derived/round_outcomes.csv",
       "rows": 22,
       "columns": [
         "round_number",
@@ -50,7 +50,7 @@
     },
     {
       "name": "kills",
-      "relative_path": "kills.csv",
+      "relative_path": "derived/kills.csv",
       "rows": 160,
       "columns": [
         "round_number",
@@ -84,7 +84,7 @@
     },
     {
       "name": "damage",
-      "relative_path": "damage.csv",
+      "relative_path": "derived/damage.csv",
       "rows": 650,
       "columns": [
         "round_number",
@@ -103,7 +103,7 @@
     },
     {
       "name": "shots",
-      "relative_path": "shots.csv",
+      "relative_path": "derived/shots.csv",
       "rows": 3441,
       "columns": [
         "round_number",
@@ -116,7 +116,7 @@
     },
     {
       "name": "bomb_events",
-      "relative_path": "bomb_events.csv",
+      "relative_path": "derived/bomb_events.csv",
       "rows": 115,
       "columns": [
         "round_number",
