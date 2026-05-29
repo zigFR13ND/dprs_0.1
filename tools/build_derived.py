@@ -20,7 +20,15 @@ from typing import Iterable
 import pandas as pd
 
 DEFAULT_INPUT_DIR = Path("output/recheck_raw_v1")
-DERIVED_TABLES = ("players", "rounds", "kills", "damage", "shots", "bomb_events")
+DERIVED_TABLES = (
+    "players",
+    "rounds",
+    "round_outcomes",
+    "kills",
+    "damage",
+    "shots",
+    "bomb_events",
+)
 EXPLICIT_ID_COLUMNS = {
     "weapon_itemid",
     "weapon_fauxitemid",
@@ -318,7 +326,8 @@ def build_rounds(raw_dir: Path) -> pd.DataFrame:
 def assign_round_numbers(df: pd.DataFrame, rounds: pd.DataFrame) -> pd.DataFrame:
     if df.empty or "tick" not in df.columns or rounds.empty:
         df = df.copy()
-        df.insert(0, "round_number", pd.NA)
+        if "round_number" not in df.columns:
+            df.insert(0, "round_number", pd.NA)
         return df
 
     marker_columns = [
@@ -351,8 +360,241 @@ def assign_round_numbers(df: pd.DataFrame, rounds: pd.DataFrame) -> pd.DataFrame
         round_numbers.append(matched)
 
     out = df.copy()
-    out.insert(0, "round_number", round_numbers)
+    if "round_number" in out.columns:
+        out["round_number"] = round_numbers
+    else:
+        out.insert(0, "round_number", round_numbers)
     return out
+
+
+OUTCOME_COLUMNS = [
+    "round_number",
+    "start_tick",
+    "live_start_tick",
+    "end_tick",
+    "bomb_planted",
+    "bomb_defused",
+    "bomb_exploded",
+    "winner_side",
+    "winner_team_number",
+    "end_reason",
+    "outcome_confidence",
+]
+SIDE_TO_TEAM_NUMBER = {"T": 2, "CT": 3}
+TEAM_NUMBER_TO_SIDE = {2: "T", 3: "CT"}
+WINNER_SIDE_COLUMNS = (
+    "winner_side",
+    "winning_side",
+    "winner",
+    "winning_team",
+    "winner_team",
+)
+WINNER_TEAM_NUMBER_COLUMNS = (
+    "winner_team_number",
+    "winning_team_number",
+    "team_number",
+    "winner_team_num",
+    "winning_team_num",
+    "team",
+)
+END_REASON_COLUMNS = (
+    "end_reason",
+    "reason",
+    "win_reason",
+    "round_end_reason",
+    "message",
+)
+OUTCOME_SOURCE_EVENTS = (
+    "round_officially_ended",
+    "cs_win_panel_match",
+    "round_announce_match_point",
+    "round_announce_last_round_half",
+)
+
+
+def round_timeline_value(row: dict[str, object], candidates: Iterable[str]) -> object:
+    for column in candidates:
+        value = row.get(column, pd.NA)
+        if not pd.isna(value):
+            return value
+    return pd.NA
+
+
+def normalize_side(value: object) -> str | pd.NA:
+    if pd.isna(value):
+        return pd.NA
+    if isinstance(value, str):
+        text = value.strip().lower()
+        if not text or text in {"nan", "none", "unknown"}:
+            return pd.NA
+        if text in {"t", "terrorist", "terrorists", "team_t", "tt"}:
+            return "T"
+        if text in {
+            "ct",
+            "counter-terrorist",
+            "counter-terrorists",
+            "counterterrorist",
+            "counterterrorists",
+            "team_ct",
+        }:
+            return "CT"
+    number = pd.to_numeric(pd.Series([value]), errors="coerce").iloc[0]
+    if not pd.isna(number):
+        return TEAM_NUMBER_TO_SIDE.get(int(number), pd.NA)
+    return pd.NA
+
+
+def normalize_team_number(value: object) -> int | pd.NA:
+    if pd.isna(value):
+        return pd.NA
+    number = pd.to_numeric(pd.Series([value]), errors="coerce").iloc[0]
+    if pd.isna(number):
+        side = normalize_side(value)
+        return SIDE_TO_TEAM_NUMBER.get(side, pd.NA) if not pd.isna(side) else pd.NA
+    number_int = int(number)
+    return number_int if number_int in TEAM_NUMBER_TO_SIDE else pd.NA
+
+
+def first_unique_value(values: Iterable[object]) -> object:
+    unique: list[object] = []
+    for value in values:
+        if pd.isna(value):
+            continue
+        normalized = str(value).strip() if isinstance(value, str) else value
+        if isinstance(normalized, str) and not normalized:
+            continue
+        if normalized not in unique:
+            unique.append(normalized)
+    return unique[0] if len(unique) == 1 else pd.NA
+
+
+def explicit_round_outcomes(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
+    frames: list[pd.DataFrame] = []
+    for event_name in OUTCOME_SOURCE_EVENTS:
+        frame = read_csv_if_exists(raw_dir / "events" / f"{event_name}.csv")
+        if frame.empty:
+            continue
+        useful_columns = [
+            column
+            for column in frame.columns
+            if column in WINNER_SIDE_COLUMNS
+            or column in WINNER_TEAM_NUMBER_COLUMNS
+            or column in END_REASON_COLUMNS
+            or column in {"tick", "round_number"}
+        ]
+        # Tick-only announcement events are timeline markers, not reliable outcome
+        # evidence.  Keep only rows that contain explicit winner/reason fields.
+        if set(useful_columns) <= {"tick", "round_number"}:
+            continue
+        frame = frame[useful_columns].copy()
+        frame.insert(0, "event_name", event_name)
+        frames.append(assign_round_numbers(frame, rounds))
+    if not frames:
+        return pd.DataFrame()
+    return pd.concat(frames, ignore_index=True, sort=False)
+
+
+def column_values(df: pd.DataFrame, columns: Iterable[str]) -> list[object]:
+    values: list[object] = []
+    for column in columns:
+        if column in df.columns:
+            values.extend(df[column].tolist())
+    return values
+
+
+def build_round_outcomes(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
+    if rounds.empty:
+        return pd.DataFrame(columns=OUTCOME_COLUMNS)
+
+    bomb_frames: dict[str, pd.DataFrame] = {}
+    for event_name in ("bomb_planted", "bomb_defused", "bomb_exploded"):
+        frame = read_csv_if_exists(raw_dir / "events" / f"{event_name}.csv")
+        bomb_frames[event_name] = (
+            assign_round_numbers(frame, rounds)
+            if not frame.empty
+            else pd.DataFrame()
+        )
+
+    explicit_outcomes = explicit_round_outcomes(raw_dir, rounds)
+    rows: list[dict[str, object]] = []
+    for round_row in rounds.to_dict("records"):
+        round_number = round_row.get("round_number", pd.NA)
+        round_bomb_events = {
+            event_name: frame[frame["round_number"] == round_number]
+            if not frame.empty and "round_number" in frame.columns
+            else pd.DataFrame()
+            for event_name, frame in bomb_frames.items()
+        }
+        bomb_planted = not round_bomb_events["bomb_planted"].empty
+        bomb_defused = not round_bomb_events["bomb_defused"].empty
+        bomb_exploded = not round_bomb_events["bomb_exploded"].empty
+
+        winner_side: object = pd.NA
+        winner_team_number: object = pd.NA
+        end_reason: object = pd.NA
+        outcome_confidence = "low"
+
+        if bomb_defused and not bomb_exploded:
+            winner_side = "CT"
+            winner_team_number = SIDE_TO_TEAM_NUMBER["CT"]
+            end_reason = "bomb_defused"
+            outcome_confidence = "high"
+        elif bomb_exploded and not bomb_defused:
+            winner_side = "T"
+            winner_team_number = SIDE_TO_TEAM_NUMBER["T"]
+            end_reason = "bomb_exploded"
+            outcome_confidence = "high"
+        else:
+            round_explicit = (
+                explicit_outcomes[explicit_outcomes["round_number"] == round_number]
+                if not explicit_outcomes.empty
+                and "round_number" in explicit_outcomes.columns
+                else pd.DataFrame()
+            )
+            explicit_side = first_unique_value(
+                normalize_side(value)
+                for value in column_values(round_explicit, WINNER_SIDE_COLUMNS)
+            )
+            explicit_team_number = first_unique_value(
+                normalize_team_number(value)
+                for value in column_values(round_explicit, WINNER_TEAM_NUMBER_COLUMNS)
+            )
+            explicit_reason = first_unique_value(
+                column_values(round_explicit, END_REASON_COLUMNS)
+            )
+            if pd.isna(explicit_side) and not pd.isna(explicit_team_number):
+                explicit_side = TEAM_NUMBER_TO_SIDE.get(int(explicit_team_number), pd.NA)
+            if pd.isna(explicit_team_number) and not pd.isna(explicit_side):
+                explicit_team_number = SIDE_TO_TEAM_NUMBER.get(explicit_side, pd.NA)
+            if not pd.isna(explicit_side) and not pd.isna(explicit_reason):
+                winner_side = explicit_side
+                winner_team_number = explicit_team_number
+                end_reason = explicit_reason
+                outcome_confidence = "high"
+
+        rows.append(
+            {
+                "round_number": round_number,
+                "start_tick": round_timeline_value(
+                    round_row, ("prestart_tick", "poststart_tick", "freeze_end_tick")
+                ),
+                "live_start_tick": round_timeline_value(
+                    round_row, ("freeze_end_tick", "poststart_tick", "prestart_tick")
+                ),
+                "end_tick": round_timeline_value(
+                    round_row, ("round_close_tick", "next_prestart_tick")
+                ),
+                "bomb_planted": bomb_planted,
+                "bomb_defused": bomb_defused,
+                "bomb_exploded": bomb_exploded,
+                "winner_side": winner_side,
+                "winner_team_number": winner_team_number,
+                "end_reason": end_reason,
+                "outcome_confidence": outcome_confidence,
+            }
+        )
+
+    return pd.DataFrame(rows, columns=OUTCOME_COLUMNS)
 
 
 def build_kills(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
@@ -536,6 +778,7 @@ def build_derived(
     tables = {
         "players": players,
         "rounds": rounds,
+        "round_outcomes": build_round_outcomes(raw_dir, rounds),
         "kills": build_kills(raw_dir, rounds),
         "damage": build_damage(raw_dir, rounds),
         "shots": build_shots(raw_dir, rounds),
