@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-05-29T07:42:37.606646Z",
+  "built_at": "2026-05-30T08:57:14.740928Z",
   "raw_input_directory": ".",
   "derived_output_directory": "derived",
   "tables": [
@@ -127,6 +127,27 @@
         "site",
         "haskit",
         "entindex"
+      ]
+    },
+    {
+      "name": "player_round_stats",
+      "relative_path": "derived/player_round_stats.csv",
+      "rows": 220,
+      "columns": [
+        "round_number",
+        "steamid",
+        "name",
+        "team_number",
+        "kills",
+        "deaths",
+        "assists",
+        "damage_dealt",
+        "damage_taken",
+        "headshot_kills",
+        "shots",
+        "bomb_plants",
+        "bomb_defuses",
+        "survived"
       ]
     }
   ],
