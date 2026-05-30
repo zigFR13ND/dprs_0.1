@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-05-30T08:57:14.740928Z",
+  "built_at": "2026-05-30T10:08:25.757468Z",
   "raw_input_directory": ".",
   "derived_output_directory": "derived",
   "tables": [
@@ -163,5 +163,18 @@
     "damage": {},
     "shots": {},
     "bomb_events": {}
+  },
+  "round_outcome_validation": {
+    "rounds_total": 22,
+    "bomb_objective_high_confidence": 7,
+    "explicit_high_confidence": 0,
+    "elimination_inferred": 13,
+    "time_expired_inferred": 2,
+    "low_confidence": 0,
+    "closed_bomb_objective": 7,
+    "closed_elimination": 13,
+    "closed_timeout": 2,
+    "closed_fallback": 0,
+    "closed_unknown": 0
   }
 }
