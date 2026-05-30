@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-05-29T07:42:37.670518Z",
+  "built_at": "2026-05-30T08:57:14.811151Z",
   "source_derived_directory": "derived",
   "sample_rows_per_table": 25,
   "tables": [
@@ -135,6 +135,28 @@
       ],
       "source_path": "derived/bomb_events.csv",
       "sample": "samples/bomb_events_head_25.csv"
+    },
+    {
+      "table": "player_round_stats",
+      "rows": 220,
+      "columns": [
+        "round_number",
+        "steamid",
+        "name",
+        "team_number",
+        "kills",
+        "deaths",
+        "assists",
+        "damage_dealt",
+        "damage_taken",
+        "headshot_kills",
+        "shots",
+        "bomb_plants",
+        "bomb_defuses",
+        "survived"
+      ],
+      "source_path": "derived/player_round_stats.csv",
+      "sample": "samples/player_round_stats_head_25.csv"
     }
   ]
 }
