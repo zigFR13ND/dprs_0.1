@@ -1196,6 +1196,80 @@ def build_bomb_events(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
     )
 
 
+PLAYER_ROUND_SIDES_COLUMNS = [
+    "round_number",
+    "steamid",
+    "name",
+    "team_number",
+    "side",
+    "source_tick",
+]
+
+
+def build_player_round_sides(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
+    player_core = read_csv_if_exists(raw_dir / "ticks" / "ticks_player_core.csv")
+    if player_core.empty or not {"tick", "steamid"} <= set(player_core.columns):
+        return pd.DataFrame(columns=PLAYER_ROUND_SIDES_COLUMNS)
+
+    team_column = next(
+        (
+            column
+            for column in ("team_num", "team_number", "team")
+            if column in player_core.columns
+        ),
+        None,
+    )
+    if team_column is None:
+        return pd.DataFrame(columns=PLAYER_ROUND_SIDES_COLUMNS)
+
+    player_core = normalize_steamid_columns(player_core.copy())
+    player_core["tick"] = pd.to_numeric(player_core["tick"], errors="coerce")
+    player_core["team_number"] = pd.to_numeric(
+        player_core[team_column], errors="coerce"
+    )
+    if "name" not in player_core.columns:
+        player_core["name"] = pd.NA
+
+    player_core = player_core.dropna(subset=["tick", "steamid"]).copy()
+    if player_core.empty or rounds.empty or "round_number" not in rounds.columns:
+        return pd.DataFrame(columns=PLAYER_ROUND_SIDES_COLUMNS)
+
+    player_core["source_tick"] = player_core["tick"].astype(int)
+    player_core = player_core.sort_values(["source_tick", "steamid"])
+
+    rows: list[pd.DataFrame] = []
+    for round_row in rounds.to_dict("records"):
+        target_tick = round_timeline_value(
+            round_row, ("freeze_end_tick", "poststart_tick", "prestart_tick")
+        )
+        if pd.isna(target_tick):
+            continue
+
+        target_tick_number = pd.to_numeric(
+            pd.Series([target_tick]), errors="coerce"
+        ).iloc[0]
+        if pd.isna(target_tick_number):
+            continue
+
+        candidates = player_core[
+            player_core["source_tick"] >= int(target_tick_number)
+        ].copy()
+        if candidates.empty:
+            continue
+
+        nearest = candidates.drop_duplicates(subset=["steamid"], keep="first")
+        nearest.insert(0, "round_number", round_row["round_number"])
+        rows.append(nearest)
+
+    if not rows:
+        return pd.DataFrame(columns=PLAYER_ROUND_SIDES_COLUMNS)
+
+    sides = pd.concat(rows, ignore_index=True, sort=False)
+    sides["team_number"] = pd.to_numeric(sides["team_number"], errors="coerce")
+    sides["side"] = sides["team_number"].map(TEAM_NUMBER_TO_SIDE)
+    return sides[PLAYER_ROUND_SIDES_COLUMNS].reset_index(drop=True)
+
+
 PLAYER_ROUND_STATS_COLUMNS = [
     "round_number",
     "steamid",
