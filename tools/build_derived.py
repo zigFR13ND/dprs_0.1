@@ -20,6 +20,8 @@ from typing import Iterable
 import pandas as pd
 
 DEFAULT_INPUT_DIR = Path("output/recheck_raw_v1")
+ROUND_OUTCOME_DIAGNOSTICS: dict[str, int] = {}
+
 DERIVED_TABLES = (
     "players",
     "rounds",
@@ -426,10 +428,10 @@ END_REASON_COLUMNS = (
 )
 OUTCOME_SOURCE_EVENTS = (
     "round_officially_ended",
-    "cs_win_panel_match",
     "round_announce_match_point",
     "round_announce_last_round_half",
 )
+ROUND_STATE_TICK_WINDOW = 512
 
 
 def round_timeline_value(row: dict[str, object], candidates: Iterable[str]) -> object:
@@ -514,6 +516,278 @@ def explicit_round_outcomes(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame
     return pd.concat(frames, ignore_index=True, sort=False)
 
 
+def raw_player_team_map(raw_dir: Path) -> dict[str, int]:
+    players = read_csv_if_exists(raw_dir / "meta" / "player_info.csv")
+    if (
+        players.empty
+        or "steamid" not in players.columns
+        or "team_number" not in players.columns
+    ):
+        return {}
+    players = normalize_steamid_columns(players.copy())
+    players["team_number"] = pd.to_numeric(players["team_number"], errors="coerce")
+    usable = players.dropna(subset=["steamid", "team_number"])
+    return {
+        str(row.steamid): int(row.team_number)
+        for row in usable.itertuples(index=False)
+        if int(row.team_number) in TEAM_NUMBER_TO_SIDE
+    }
+
+
+def normalize_alive_series(frame: pd.DataFrame) -> pd.Series:
+    if "is_alive" in frame.columns:
+        values = frame["is_alive"]
+        if pd.api.types.is_bool_dtype(values):
+            return values.fillna(False)
+        text = values.astype("string").str.strip().str.lower()
+        numeric = pd.to_numeric(values, errors="coerce")
+        return text.isin({"true", "t", "yes", "y"}) | (numeric == 1)
+    if "life_state" in frame.columns:
+        return pd.to_numeric(frame["life_state"], errors="coerce") == 0
+    if "health" in frame.columns:
+        return pd.to_numeric(frame["health"], errors="coerce") > 0
+    return pd.Series([pd.NA] * len(frame), index=frame.index, dtype="boolean")
+
+
+def read_player_core_states(raw_dir: Path) -> pd.DataFrame:
+    core = read_csv_if_exists(raw_dir / "ticks" / "ticks_player_core.csv")
+    if core.empty or "tick" not in core.columns or "steamid" not in core.columns:
+        return pd.DataFrame()
+    team_column = next(
+        (
+            column
+            for column in ("team_num", "team_number", "team")
+            if column in core.columns
+        ),
+        None,
+    )
+    if team_column is None:
+        return pd.DataFrame()
+    core = normalize_steamid_columns(core.copy())
+    core["tick"] = pd.to_numeric(core["tick"], errors="coerce")
+    core["team_number"] = pd.to_numeric(core[team_column], errors="coerce")
+    core["is_alive_normalized"] = normalize_alive_series(core)
+    usable = core.dropna(subset=["tick", "steamid", "team_number"])
+    usable = usable[usable["team_number"].isin(TEAM_NUMBER_TO_SIDE)].copy()
+    if usable.empty:
+        return pd.DataFrame()
+    usable["tick"] = usable["tick"].astype(int)
+    usable["team_number"] = usable["team_number"].astype(int)
+    return usable[["tick", "steamid", "team_number", "is_alive_normalized"]]
+
+
+def read_player_aggregate_states(raw_dir: Path) -> pd.DataFrame:
+    aggregate = read_csv_if_exists(raw_dir / "ticks" / "ticks_aggregate.csv")
+    if (
+        aggregate.empty
+        or "tick" not in aggregate.columns
+        or "steamid" not in aggregate.columns
+        or "deaths_total" not in aggregate.columns
+    ):
+        return pd.DataFrame()
+    aggregate = normalize_steamid_columns(aggregate.copy())
+    aggregate["tick"] = pd.to_numeric(aggregate["tick"], errors="coerce")
+    aggregate["deaths_total"] = pd.to_numeric(
+        aggregate["deaths_total"], errors="coerce"
+    )
+    aggregate = aggregate.dropna(subset=["tick", "steamid", "deaths_total"])
+    if aggregate.empty:
+        return pd.DataFrame()
+    aggregate["tick"] = aggregate["tick"].astype(int)
+    return aggregate[["tick", "steamid", "deaths_total"]]
+
+
+def round_player_snapshot(
+    player_core: pd.DataFrame,
+    start_tick: object,
+    end_tick: object,
+) -> pd.DataFrame:
+    if player_core.empty or pd.isna(end_tick):
+        return pd.DataFrame()
+    end = int(end_tick)
+    start = int(start_tick) if not pd.isna(start_tick) else None
+    window_start = max(
+        end - ROUND_STATE_TICK_WINDOW, start or end - ROUND_STATE_TICK_WINDOW
+    )
+    candidates = player_core[
+        (player_core["tick"] < end) & (player_core["tick"] >= window_start)
+    ]
+    if candidates.empty and start is not None:
+        candidates = player_core[
+            (player_core["tick"] >= start) & (player_core["tick"] < end)
+        ]
+    if candidates.empty:
+        candidates = player_core[
+            (player_core["tick"] >= end)
+            & (player_core["tick"] <= end + ROUND_STATE_TICK_WINDOW)
+        ]
+    if candidates.empty:
+        return pd.DataFrame()
+    snapshot_tick = int(candidates["tick"].max())
+    snapshot = candidates[candidates["tick"] == snapshot_tick].copy()
+    snapshot = snapshot.drop_duplicates(subset=["steamid"], keep="last")
+    return snapshot
+
+
+def alive_counts_from_snapshot(snapshot: pd.DataFrame) -> dict[int, int]:
+    counts = {2: 0, 3: 0}
+    if snapshot.empty or "is_alive_normalized" not in snapshot.columns:
+        return counts
+    alive = snapshot[snapshot["is_alive_normalized"].fillna(False).astype(bool)]
+    for team_number, count in alive.groupby("team_number").size().items():
+        team_int = int(team_number)
+        if team_int in counts:
+            counts[team_int] = int(count)
+    return counts
+
+
+def infer_elimination_from_deaths(
+    deaths: pd.DataFrame,
+    player_core: pd.DataFrame,
+    player_team_map: dict[str, int],
+    start_tick: object,
+    end_tick: object,
+) -> tuple[object, object, object, str] | None:
+    if (
+        deaths.empty
+        or "user_steamid" not in deaths.columns
+        or "tick" not in deaths.columns
+    ):
+        return None
+    snapshot = round_player_snapshot(player_core, start_tick, end_tick)
+    if not snapshot.empty:
+        alive_counts = alive_counts_from_snapshot(snapshot)
+        if alive_counts[2] == 0 and alive_counts[3] > 0:
+            return "CT", SIDE_TO_TEAM_NUMBER["CT"], "elimination", "high"
+        if alive_counts[3] == 0 and alive_counts[2] > 0:
+            return "T", SIDE_TO_TEAM_NUMBER["T"], "elimination", "high"
+
+    round_deaths = deaths.copy()
+    round_deaths["tick"] = pd.to_numeric(round_deaths["tick"], errors="coerce")
+    round_deaths = round_deaths.dropna(subset=["tick", "user_steamid"])
+    if round_deaths.empty:
+        return None
+    round_deaths = round_deaths.sort_values("tick")
+
+    # When the authoritative per-tick state is unavailable, the static player
+    # roster still lets us identify straightforward full-team wipe rounds.
+    team_to_players: dict[int, set[str]] = {2: set(), 3: set()}
+    for steamid, team_number in player_team_map.items():
+        if team_number in team_to_players:
+            team_to_players[team_number].add(steamid)
+    if not all(team_to_players.values()):
+        return None
+
+    dead_by_team: dict[int, set[str]] = {2: set(), 3: set()}
+    for row in round_deaths.itertuples(index=False):
+        victim = str(getattr(row, "user_steamid"))
+        victim_team = player_team_map.get(victim)
+        if victim_team not in dead_by_team:
+            continue
+        dead_by_team[victim_team].add(victim)
+        if team_to_players[victim_team] <= dead_by_team[victim_team]:
+            winner_team = 3 if victim_team == 2 else 2
+            return (
+                TEAM_NUMBER_TO_SIDE[winner_team],
+                winner_team,
+                "elimination",
+                "medium",
+            )
+    return None
+
+
+def tick_state_snapshot(
+    frame: pd.DataFrame,
+    target_tick: object,
+    *,
+    before: bool,
+) -> pd.DataFrame:
+    if frame.empty or pd.isna(target_tick):
+        return pd.DataFrame()
+    target = int(target_tick)
+    if before:
+        candidates = frame[frame["tick"] <= target]
+        if candidates.empty:
+            return pd.DataFrame()
+        snapshot_tick = int(candidates["tick"].max())
+    else:
+        candidates = frame[frame["tick"] >= target]
+        if candidates.empty:
+            return pd.DataFrame()
+        snapshot_tick = int(candidates["tick"].min())
+    return candidates[candidates["tick"] == snapshot_tick].drop_duplicates(
+        subset=["steamid"], keep="last"
+    )
+
+
+def infer_from_aggregate_deaths(
+    aggregate: pd.DataFrame,
+    player_team_map: dict[str, int],
+    start_tick: object,
+    end_tick: object,
+    bomb_planted: bool,
+) -> tuple[object, object, object, str] | None:
+    if aggregate.empty or not player_team_map:
+        return None
+    start = tick_state_snapshot(aggregate, start_tick, before=False)
+    end = tick_state_snapshot(aggregate, end_tick, before=True)
+    if start.empty or end.empty:
+        return None
+    deltas = start[["steamid", "deaths_total"]].merge(
+        end[["steamid", "deaths_total"]],
+        on="steamid",
+        suffixes=("_start", "_end"),
+        how="inner",
+    )
+    if deltas.empty:
+        return None
+    deltas["team_number"] = deltas["steamid"].map(player_team_map)
+    deltas["died_this_round"] = (
+        deltas["deaths_total_end"] > deltas["deaths_total_start"]
+    )
+    team_sizes = deltas.dropna(subset=["team_number"]).groupby("team_number").size()
+    deaths = (
+        deltas[deltas["died_this_round"]]
+        .dropna(subset=["team_number"])
+        .groupby("team_number")
+        .size()
+    )
+    for victim_team in (2, 3):
+        team_size = int(team_sizes.get(victim_team, 0))
+        team_deaths = int(deaths.get(victim_team, 0))
+        if team_size > 0 and team_deaths >= team_size:
+            winner_team = 3 if victim_team == 2 else 2
+            return (
+                TEAM_NUMBER_TO_SIDE[winner_team],
+                winner_team,
+                "elimination",
+                "medium",
+            )
+    teams_alive = all(
+        int(team_sizes.get(team, 0)) > int(deaths.get(team, 0)) for team in (2, 3)
+    )
+    if not bomb_planted and teams_alive:
+        return "CT", SIDE_TO_TEAM_NUMBER["CT"], "time_expired", "low"
+    return None
+
+
+def infer_time_expired_from_state(
+    player_core: pd.DataFrame,
+    start_tick: object,
+    end_tick: object,
+    bomb_planted: bool,
+) -> tuple[object, object, object, str] | None:
+    if bomb_planted:
+        return None
+    snapshot = round_player_snapshot(player_core, start_tick, end_tick)
+    if snapshot.empty:
+        return None
+    alive_counts = alive_counts_from_snapshot(snapshot)
+    if alive_counts[2] > 0 and alive_counts[3] > 0:
+        return "CT", SIDE_TO_TEAM_NUMBER["CT"], "time_expired", "medium"
+    return None
+
+
 def column_values(df: pd.DataFrame, columns: Iterable[str]) -> list[object]:
     values: list[object] = []
     for column in columns:
@@ -534,6 +808,25 @@ def build_round_outcomes(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
         )
 
     explicit_outcomes = explicit_round_outcomes(raw_dir, rounds)
+    player_deaths = read_csv_if_exists(raw_dir / "events" / "player_death.csv")
+    if not player_deaths.empty:
+        player_deaths = normalize_steamid_columns(player_deaths.copy())
+        player_deaths = assign_round_numbers(player_deaths, rounds)
+    player_core = read_player_core_states(raw_dir)
+    player_aggregate = read_player_aggregate_states(raw_dir)
+    player_team_map = raw_player_team_map(raw_dir)
+
+    ROUND_OUTCOME_DIAGNOSTICS.clear()
+    ROUND_OUTCOME_DIAGNOSTICS.update(
+        {
+            "rounds_total": int(len(rounds)),
+            "bomb_objective_high_confidence": 0,
+            "explicit_high_confidence": 0,
+            "elimination_inferred": 0,
+            "time_expired_inferred": 0,
+            "low_confidence": 0,
+        }
+    )
     rows: list[dict[str, object]] = []
     for round_row in rounds.to_dict("records"):
         round_number = round_row.get("round_number", pd.NA)
@@ -559,11 +852,13 @@ def build_round_outcomes(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
             winner_team_number = SIDE_TO_TEAM_NUMBER["CT"]
             end_reason = "bomb_defused"
             outcome_confidence = "high"
+            ROUND_OUTCOME_DIAGNOSTICS["bomb_objective_high_confidence"] += 1
         elif bomb_exploded and not bomb_defused:
             winner_side = "T"
             winner_team_number = SIDE_TO_TEAM_NUMBER["T"]
             end_reason = "bomb_exploded"
             outcome_confidence = "high"
+            ROUND_OUTCOME_DIAGNOSTICS["bomb_objective_high_confidence"] += 1
         else:
             round_explicit = (
                 explicit_outcomes[explicit_outcomes["round_number"] == round_number]
@@ -593,6 +888,52 @@ def build_round_outcomes(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
                 winner_team_number = explicit_team_number
                 end_reason = explicit_reason
                 outcome_confidence = "high"
+                ROUND_OUTCOME_DIAGNOSTICS["explicit_high_confidence"] += 1
+
+            if pd.isna(winner_side):
+                start_tick = round_timeline_value(
+                    round_row, ("freeze_end_tick", "poststart_tick", "prestart_tick")
+                )
+                end_tick = round_timeline_value(
+                    round_row, ("round_close_tick", "next_prestart_tick")
+                )
+                round_deaths = (
+                    player_deaths[player_deaths["round_number"] == round_number]
+                    if not player_deaths.empty
+                    and "round_number" in player_deaths.columns
+                    else pd.DataFrame()
+                )
+                inferred = infer_elimination_from_deaths(
+                    round_deaths, player_core, player_team_map, start_tick, end_tick
+                )
+                if inferred is None:
+                    inferred = infer_time_expired_from_state(
+                        player_core, start_tick, end_tick, bomb_planted
+                    )
+                if inferred is None:
+                    inferred = infer_from_aggregate_deaths(
+                        player_aggregate,
+                        player_team_map,
+                        start_tick,
+                        end_tick,
+                        bomb_planted,
+                    )
+                if inferred is not None:
+                    (
+                        winner_side,
+                        winner_team_number,
+                        end_reason,
+                        outcome_confidence,
+                    ) = inferred
+                    if end_reason == "elimination":
+                        ROUND_OUTCOME_DIAGNOSTICS["elimination_inferred"] += 1
+                    elif end_reason == "time_expired":
+                        ROUND_OUTCOME_DIAGNOSTICS["time_expired_inferred"] += 1
+
+        if pd.isna(end_reason):
+            end_reason = "unknown"
+        if outcome_confidence == "low":
+            ROUND_OUTCOME_DIAGNOSTICS["low_confidence"] += 1
 
         rows.append(
             {
@@ -928,6 +1269,7 @@ def write_summary(results: list[TableResult], raw_dir: Path, output_dir: Path) -
         ],
         "raw_directories_left_read_only": ["meta", "events", "ticks", "errors"],
         "identifier_normalization": IDENTIFIER_DIAGNOSTICS,
+        "round_outcome_validation": ROUND_OUTCOME_DIAGNOSTICS,
     }
     (output_dir / "derived_summary.json").write_text(
         json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8"
