@@ -614,9 +614,9 @@ def read_player_team_events(raw_dir: Path) -> pd.DataFrame:
         return pd.DataFrame()
     teams = normalize_steamid_columns(teams.copy())
     teams["tick"] = pd.to_numeric(teams["tick"], errors="coerce")
-    teams["team_number"] = pd.to_numeric(teams["team"], errors="coerce")
+    teams["team_number"] = teams["team"].map(normalize_team_number)
     if "oldteam" in teams.columns:
-        teams["old_team_number"] = pd.to_numeric(teams["oldteam"], errors="coerce")
+        teams["old_team_number"] = teams["oldteam"].map(normalize_team_number)
     else:
         teams["old_team_number"] = pd.NA
     usable = teams.dropna(subset=["tick", "user_steamid", "team_number"]).copy()
@@ -713,7 +713,7 @@ def read_player_core_states(raw_dir: Path) -> pd.DataFrame:
         return pd.DataFrame()
     core = normalize_steamid_columns(core.copy())
     core["tick"] = pd.to_numeric(core["tick"], errors="coerce")
-    core["team_number"] = pd.to_numeric(core[team_column], errors="coerce")
+    core["team_number"] = core[team_column].map(normalize_team_number)
     core["is_alive_normalized"] = normalize_alive_series(core)
     usable = core.dropna(subset=["tick", "steamid", "team_number"])
     usable = usable[usable["team_number"].isin(TEAM_NUMBER_TO_SIDE)].copy()
@@ -1543,17 +1543,19 @@ def build_player_round_sides(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFram
 
     player_core = normalize_steamid_columns(player_core.copy())
     player_core["tick"] = pd.to_numeric(player_core["tick"], errors="coerce")
-    player_core["team_number"] = pd.to_numeric(
-        player_core[team_column], errors="coerce"
-    )
+    player_core["team_number"] = player_core[team_column].map(normalize_team_number)
     if "name" not in player_core.columns:
         player_core["name"] = pd.NA
 
-    player_core = player_core.dropna(subset=["tick", "steamid"]).copy()
+    player_core = player_core.dropna(
+        subset=["tick", "steamid", "team_number"]
+    ).copy()
+    player_core = player_core[player_core["team_number"].isin(TEAM_NUMBER_TO_SIDE)]
     if player_core.empty or rounds.empty or "round_number" not in rounds.columns:
         return pd.DataFrame(columns=PLAYER_ROUND_SIDES_COLUMNS)
 
     player_core["source_tick"] = player_core["tick"].astype(int)
+    player_core["team_number"] = player_core["team_number"].astype(int)
     player_core = player_core.sort_values(["source_tick", "steamid"])
 
     rows: list[pd.DataFrame] = []
@@ -1570,9 +1572,19 @@ def build_player_round_sides(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFram
         if pd.isna(target_tick_number):
             continue
 
+        stop_tick = round_timeline_value(
+            round_row, ("round_close_tick", "next_prestart_tick")
+        )
+        stop_tick_number = pd.to_numeric(
+            pd.Series([stop_tick]), errors="coerce"
+        ).iloc[0]
         candidates = player_core[
             player_core["source_tick"] >= int(target_tick_number)
         ].copy()
+        if not pd.isna(stop_tick_number):
+            candidates = candidates[
+                candidates["source_tick"] <= int(stop_tick_number)
+            ]
         if candidates.empty:
             continue
 
@@ -1584,7 +1596,6 @@ def build_player_round_sides(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFram
         return pd.DataFrame(columns=PLAYER_ROUND_SIDES_COLUMNS)
 
     sides = pd.concat(rows, ignore_index=True, sort=False)
-    sides["team_number"] = pd.to_numeric(sides["team_number"], errors="coerce")
     sides["side"] = sides["team_number"].map(TEAM_NUMBER_TO_SIDE)
     return sides[PLAYER_ROUND_SIDES_COLUMNS].reset_index(drop=True)
 
@@ -1692,14 +1703,7 @@ def build_player_round_participants(
     } <= set(rounds.columns):
         return pd.DataFrame(columns=columns)
 
-    player_core = read_csv_if_exists(raw_dir / "ticks" / "ticks_player_core.csv")
-    if not player_core.empty and {"tick", "steamid"} <= set(player_core.columns):
-        player_core = normalize_steamid_columns(player_core.copy())
-        player_core["tick"] = pd.to_numeric(player_core["tick"], errors="coerce")
-        player_core = player_core.dropna(subset=["tick", "steamid"]).copy()
-        player_core["tick"] = player_core["tick"].astype(int)
-    else:
-        player_core = pd.DataFrame()
+    player_core = read_player_core_states(raw_dir)
 
     rows: list[pd.DataFrame] = []
     if not player_core.empty:
