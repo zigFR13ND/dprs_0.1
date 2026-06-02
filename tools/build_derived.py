@@ -50,6 +50,18 @@ DERIVED_TABLES = (
     "player_round_stats",
 )
 
+
+GRENADE_OR_FIRE_DAMAGE_WEAPONS = {
+    "decoy",
+    "decoygrenade",
+    "flashbang",
+    "hegrenade",
+    "incgrenade",
+    "inferno",
+    "molotov",
+    "smokegrenade",
+}
+
 FIREARM_WEAPONS = {
     # Pistols
     "cz75a",
@@ -630,7 +642,9 @@ def team_map_for_tick(
     result: dict[str, int] = {}
     for steamid in sorted(players):
         player_events = (
-            player_team_events[player_team_events["user_steamid"].astype(str) == steamid]
+            player_team_events[
+                player_team_events["user_steamid"].astype(str) == steamid
+            ]
             if not player_team_events.empty
             else pd.DataFrame()
         )
@@ -640,7 +654,9 @@ def team_map_for_tick(
             if not prior.empty:
                 team_number = int(prior.iloc[-1]["team_number"])
             else:
-                future = player_events[player_events["tick"] > target].sort_values("tick")
+                future = player_events[player_events["tick"] > target].sort_values(
+                    "tick"
+                )
                 if not future.empty:
                     old_team = future.iloc[0].get("old_team_number", pd.NA)
                     if not pd.isna(old_team) and int(old_team) in TEAM_NUMBER_TO_SIDE:
@@ -1173,7 +1189,8 @@ def build_kills(
     if (
         player_round_sides is not None
         and not player_round_sides.empty
-        and {"round_number", "steamid", "team_number"} <= set(player_round_sides.columns)
+        and {"round_number", "steamid", "team_number"}
+        <= set(player_round_sides.columns)
         and {"round_number", "user_steamid", "attacker_steamid"} <= set(kills.columns)
     ):
         side_lookup = (
@@ -1201,9 +1218,7 @@ def build_kills(
         same_team = (
             victim_team.notna() & attacker_team.notna() & victim_team.eq(attacker_team)
         )
-        kills["is_teamkill"] = (
-            kills["has_attacker"] & ~kills["is_suicide"] & same_team
-        )
+        kills["is_teamkill"] = kills["has_attacker"] & ~kills["is_suicide"] & same_team
         kills = kills.drop(columns=["victim_team_number", "attacker_team_number"])
 
     preferred = [
@@ -1234,13 +1249,119 @@ def build_kills(
     return select_existing(kills, preferred)
 
 
-def build_damage(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
+def live_phase_damage_series(damage: pd.DataFrame, rounds: pd.DataFrame) -> pd.Series:
+    if (
+        damage.empty
+        or "tick" not in damage.columns
+        or "round_number" not in damage.columns
+    ):
+        return pd.Series(False, index=damage.index)
+    if rounds.empty or not {
+        "round_number",
+        "freeze_end_tick",
+        "round_close_tick",
+    } <= set(rounds.columns):
+        return pd.Series(False, index=damage.index)
+
+    round_windows = rounds[
+        ["round_number", "freeze_end_tick", "round_close_tick"]
+    ].copy()
+    round_windows["freeze_end_tick"] = pd.to_numeric(
+        round_windows["freeze_end_tick"], errors="coerce"
+    )
+    round_windows["round_close_tick"] = pd.to_numeric(
+        round_windows["round_close_tick"], errors="coerce"
+    )
+    round_windows = round_windows.dropna(
+        subset=["round_number", "freeze_end_tick", "round_close_tick"]
+    )
+    if round_windows.empty:
+        return pd.Series(False, index=damage.index)
+
+    merged = damage[["round_number", "tick"]].merge(
+        round_windows, on="round_number", how="left"
+    )
+    ticks = pd.to_numeric(merged["tick"], errors="coerce")
+    is_live_phase = (
+        ticks.notna()
+        & merged["freeze_end_tick"].notna()
+        & merged["round_close_tick"].notna()
+        & ticks.ge(merged["freeze_end_tick"])
+        & ticks.le(merged["round_close_tick"])
+    )
+    is_live_phase.index = damage.index
+    return is_live_phase
+
+
+def build_damage(
+    raw_dir: Path, rounds: pd.DataFrame, player_round_sides: pd.DataFrame
+) -> pd.DataFrame:
     damage = read_csv_if_exists(raw_dir / "events" / "player_hurt.csv")
     if damage.empty:
         return pd.DataFrame()
     damage = normalize_steamid_columns(damage.copy())
     damage = normalize_identifier_columns(damage, "damage")
     damage = assign_round_numbers(damage, rounds)
+
+    attacker = (
+        damage["attacker_steamid"]
+        if "attacker_steamid" in damage.columns
+        else pd.Series(pd.NA, index=damage.index)
+    )
+    victim = (
+        damage["user_steamid"]
+        if "user_steamid" in damage.columns
+        else pd.Series(pd.NA, index=damage.index)
+    )
+    damage["is_self_damage"] = attacker.notna() & victim.notna() & attacker.eq(victim)
+
+    if (
+        not player_round_sides.empty
+        and {"round_number", "steamid", "team_number"}
+        <= set(player_round_sides.columns)
+        and {"round_number", "user_steamid", "attacker_steamid"} <= set(damage.columns)
+    ):
+        side_lookup = (
+            player_round_sides[["round_number", "steamid", "team_number"]]
+            .dropna(subset=["round_number", "steamid", "team_number"])
+            .drop_duplicates(subset=["round_number", "steamid"], keep="first")
+        )
+        victim_sides = side_lookup.rename(
+            columns={"steamid": "user_steamid", "team_number": "victim_team_number"}
+        )
+        attacker_sides = side_lookup.rename(
+            columns={
+                "steamid": "attacker_steamid",
+                "team_number": "attacker_team_number",
+            }
+        )
+        damage = damage.merge(
+            victim_sides, on=["round_number", "user_steamid"], how="left"
+        )
+        damage = damage.merge(
+            attacker_sides, on=["round_number", "attacker_steamid"], how="left"
+        )
+        victim_team = pd.to_numeric(damage["victim_team_number"], errors="coerce")
+        attacker_team = pd.to_numeric(damage["attacker_team_number"], errors="coerce")
+        known_teams = victim_team.notna() & attacker_team.notna()
+        same_team = known_teams & victim_team.eq(attacker_team)
+        enemy_team = known_teams & victim_team.ne(attacker_team)
+        damage["is_team_damage"] = ~damage["is_self_damage"] & same_team
+        damage["is_enemy_damage"] = ~damage["is_self_damage"] & enemy_team
+        damage = damage.drop(columns=["victim_team_number", "attacker_team_number"])
+    else:
+        damage["is_team_damage"] = False
+        damage["is_enemy_damage"] = False
+
+    if "weapon" in damage.columns:
+        normalized_weapons = damage["weapon"].map(normalize_weapon_name)
+        damage["is_grenade_or_fire_damage"] = normalized_weapons.isin(
+            GRENADE_OR_FIRE_DAMAGE_WEAPONS
+        )
+    else:
+        damage["is_grenade_or_fire_damage"] = False
+    damage["is_live_phase_damage"] = live_phase_damage_series(damage, rounds)
+
     preferred = [
         "round_number",
         "tick",
@@ -1254,6 +1375,11 @@ def build_damage(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
         "dmg_armor",
         "health",
         "armor",
+        "is_self_damage",
+        "is_team_damage",
+        "is_enemy_damage",
+        "is_grenade_or_fire_damage",
+        "is_live_phase_damage",
     ]
     return select_existing(damage, preferred)
 
@@ -1474,6 +1600,9 @@ PLAYER_ROUND_STATS_COLUMNS = [
     "team_deaths",
     "assists",
     "damage_dealt",
+    "team_damage_dealt",
+    "self_damage",
+    "utility_damage_dealt",
     "damage_taken",
     "headshot_kills",
     "shots",
@@ -1556,9 +1685,11 @@ def build_player_round_participants(
 ) -> pd.DataFrame:
     """Return per-round participants observed in tick state, when available."""
     columns = ["round_number", "steamid"]
-    if rounds.empty or not {"round_number", "freeze_end_tick", "round_close_tick"} <= set(
-        rounds.columns
-    ):
+    if rounds.empty or not {
+        "round_number",
+        "freeze_end_tick",
+        "round_close_tick",
+    } <= set(rounds.columns):
         return pd.DataFrame(columns=columns)
 
     player_core = read_csv_if_exists(raw_dir / "ticks" / "ticks_player_core.csv")
@@ -1597,9 +1728,8 @@ def build_player_round_participants(
     if rows:
         return pd.concat(rows, ignore_index=True, sort=False).drop_duplicates()
 
-    if (
-        not player_round_sides.empty
-        and {"round_number", "steamid"} <= set(player_round_sides.columns)
+    if not player_round_sides.empty and {"round_number", "steamid"} <= set(
+        player_round_sides.columns
     ):
         return (
             player_round_sides[["round_number", "steamid"]]
@@ -1681,10 +1811,11 @@ def build_player_round_stats(
         }
     )
 
-    if (
-        not player_round_sides.empty
-        and {"round_number", "steamid", "team_number"} <= set(player_round_sides.columns)
-    ):
+    if not player_round_sides.empty and {
+        "round_number",
+        "steamid",
+        "team_number",
+    } <= set(player_round_sides.columns):
         side_lookup = (
             player_round_sides[["round_number", "steamid", "team_number"]]
             .dropna(subset=["round_number", "steamid"])
@@ -1735,6 +1866,56 @@ def build_player_round_stats(
         suicide_deaths = pd.DataFrame()
         team_deaths = pd.DataFrame()
 
+    if not damage.empty:
+        enemy_live_damage = damage.copy()
+        if "is_enemy_damage" in enemy_live_damage.columns:
+            enemy_live_damage = enemy_live_damage[
+                truthy_series(enemy_live_damage["is_enemy_damage"])
+            ]
+        else:
+            enemy_live_damage = enemy_live_damage.iloc[0:0].copy()
+        if "is_live_phase_damage" in enemy_live_damage.columns:
+            enemy_live_damage = enemy_live_damage[
+                truthy_series(enemy_live_damage["is_live_phase_damage"])
+            ]
+        else:
+            enemy_live_damage = enemy_live_damage.iloc[0:0].copy()
+
+        team_damage = (
+            damage[truthy_series(damage["is_team_damage"])].copy()
+            if "is_team_damage" in damage.columns
+            else pd.DataFrame()
+        )
+        self_damage = (
+            damage[truthy_series(damage["is_self_damage"])].copy()
+            if "is_self_damage" in damage.columns
+            else pd.DataFrame()
+        )
+        utility_damage = damage.copy()
+        if "is_enemy_damage" in utility_damage.columns:
+            utility_damage = utility_damage[
+                truthy_series(utility_damage["is_enemy_damage"])
+            ]
+        else:
+            utility_damage = utility_damage.iloc[0:0].copy()
+        if "is_live_phase_damage" in utility_damage.columns:
+            utility_damage = utility_damage[
+                truthy_series(utility_damage["is_live_phase_damage"])
+            ]
+        else:
+            utility_damage = utility_damage.iloc[0:0].copy()
+        if "is_grenade_or_fire_damage" in utility_damage.columns:
+            utility_damage = utility_damage[
+                truthy_series(utility_damage["is_grenade_or_fire_damage"])
+            ]
+        else:
+            utility_damage = utility_damage.iloc[0:0].copy()
+    else:
+        enemy_live_damage = pd.DataFrame()
+        team_damage = pd.DataFrame()
+        self_damage = pd.DataFrame()
+        utility_damage = pd.DataFrame()
+
     aggregates = [
         player_round_counts(normal_kills, "attacker_steamid", count_column="kills"),
         player_round_counts(kills, "user_steamid", count_column="deaths"),
@@ -1742,7 +1923,25 @@ def build_player_round_stats(
         player_round_counts(team_deaths, "user_steamid", count_column="team_deaths"),
         player_round_counts(kills, "assister_steamid", count_column="assists"),
         player_round_sums(
-            damage, "attacker_steamid", "dmg_health", sum_column="damage_dealt"
+            enemy_live_damage,
+            "attacker_steamid",
+            "dmg_health",
+            sum_column="damage_dealt",
+        ),
+        player_round_sums(
+            team_damage,
+            "attacker_steamid",
+            "dmg_health",
+            sum_column="team_damage_dealt",
+        ),
+        player_round_sums(
+            self_damage, "user_steamid", "dmg_health", sum_column="self_damage"
+        ),
+        player_round_sums(
+            utility_damage,
+            "attacker_steamid",
+            "dmg_health",
+            sum_column="utility_damage_dealt",
         ),
         player_round_sums(
             damage, "user_steamid", "dmg_health", sum_column="damage_taken"
@@ -1788,6 +1987,9 @@ def build_player_round_stats(
         "team_deaths",
         "assists",
         "damage_dealt",
+        "team_damage_dealt",
+        "self_damage",
+        "utility_damage_dealt",
         "damage_taken",
         "headshot_kills",
         "shots",
@@ -1949,7 +2151,9 @@ def write_debug_pack(
 
     summary = {
         "built_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
-        "source_derived_directory": relative_path_or_posix(output_dir, output_dir.parent),
+        "source_derived_directory": relative_path_or_posix(
+            output_dir, output_dir.parent
+        ),
         "sample_rows_per_table": sample_rows,
         "tables": sample_entries,
     }
@@ -2001,7 +2205,7 @@ def build_derived(
         "rounds": rounds,
         "round_outcomes": build_round_outcomes(raw_dir, rounds),
         "kills": build_kills(raw_dir, rounds, player_round_sides),
-        "damage": build_damage(raw_dir, rounds),
+        "damage": build_damage(raw_dir, rounds, player_round_sides),
         "shots": build_shots(raw_dir, rounds, weapon_actions),
         "weapon_actions": weapon_actions,
         "bomb_events": build_bomb_events(raw_dir, rounds),
