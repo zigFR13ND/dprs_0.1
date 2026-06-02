@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-06-02T12:37:16.851467Z",
+  "built_at": "2026-06-02T17:49:43.493502Z",
   "source_derived_directory": "derived",
   "sample_rows_per_table": 25,
   "tables": [
@@ -63,6 +63,10 @@
         "attacker_name",
         "assister_steamid",
         "assister_name",
+        "is_suicide",
+        "has_attacker",
+        "is_teamkill",
+        "is_world",
         "weapon",
         "headshot",
         "hitgroup",
@@ -101,7 +105,12 @@
         "dmg_health",
         "dmg_armor",
         "health",
-        "armor"
+        "armor",
+        "is_self_damage",
+        "is_team_damage",
+        "is_enemy_damage",
+        "is_grenade_or_fire_damage",
+        "is_live_phase_damage"
       ],
       "source_path": "derived/damage.csv",
       "sample": "samples/damage_head_25.csv"
@@ -161,8 +170,13 @@
         "team_number",
         "kills",
         "deaths",
+        "suicides",
+        "team_deaths",
         "assists",
         "damage_dealt",
+        "team_damage_dealt",
+        "self_damage",
+        "utility_damage_dealt",
         "damage_taken",
         "headshot_kills",
         "shots",

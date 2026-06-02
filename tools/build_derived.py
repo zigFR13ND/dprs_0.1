@@ -1694,53 +1694,60 @@ def truthy_series(values: pd.Series) -> pd.Series:
 def build_player_round_participants(
     raw_dir: Path, rounds: pd.DataFrame, player_round_sides: pd.DataFrame
 ) -> pd.DataFrame:
-    """Return per-round participants observed in tick state, when available."""
+    """Return per-round participants observed in tick state, when available.
+
+    Participation only needs tick/player identity from ticks_player_core.  Do not
+    reuse read_player_core_states() here because that helper also requires team
+    fields for side/survival derivation; a valid participation source can be as
+    small as tick + steamid.
+    """
     columns = ["round_number", "steamid"]
-    if rounds.empty or not {
+    required_round_columns = {
         "round_number",
         "freeze_end_tick",
         "round_close_tick",
-    } <= set(rounds.columns):
+    }
+    if rounds.empty or not required_round_columns <= set(rounds.columns):
         return pd.DataFrame(columns=columns)
 
-    player_core = read_player_core_states(raw_dir)
-
+    player_core = read_csv_if_exists(raw_dir / "ticks" / "ticks_player_core.csv")
     rows: list[pd.DataFrame] = []
-    if not player_core.empty:
-        tick_steamids = player_core[["tick", "steamid"]].drop_duplicates()
-        for round_row in rounds.to_dict("records"):
-            round_number = round_row.get("round_number", pd.NA)
-            start_tick = pd.to_numeric(
-                pd.Series([round_row.get("freeze_end_tick", pd.NA)]), errors="coerce"
-            ).iloc[0]
-            close_tick = pd.to_numeric(
-                pd.Series([round_row.get("round_close_tick", pd.NA)]), errors="coerce"
-            ).iloc[0]
-            if pd.isna(round_number) or pd.isna(start_tick) or pd.isna(close_tick):
-                continue
-            if int(close_tick) < int(start_tick):
-                continue
-            participants = tick_steamids[
-                (tick_steamids["tick"] >= int(start_tick))
-                & (tick_steamids["tick"] <= int(close_tick))
-            ][["steamid"]].drop_duplicates()
-            if participants.empty:
-                continue
-            participants.insert(0, "round_number", round_number)
-            rows.append(participants)
+    if not player_core.empty and {"tick", "steamid"} <= set(player_core.columns):
+        player_core = normalize_steamid_columns(player_core.copy())
+        player_core["tick"] = pd.to_numeric(player_core["tick"], errors="coerce")
+        tick_steamids = (
+            player_core[["tick", "steamid"]]
+            .dropna(subset=["tick", "steamid"])
+            .drop_duplicates()
+            .copy()
+        )
+        if not tick_steamids.empty:
+            tick_steamids["tick"] = tick_steamids["tick"].astype(int)
+            for round_row in rounds.to_dict("records"):
+                round_number = round_row.get("round_number", pd.NA)
+                start_tick = pd.to_numeric(
+                    pd.Series([round_row.get("freeze_end_tick", pd.NA)]),
+                    errors="coerce",
+                ).iloc[0]
+                close_tick = pd.to_numeric(
+                    pd.Series([round_row.get("round_close_tick", pd.NA)]),
+                    errors="coerce",
+                ).iloc[0]
+                if pd.isna(round_number) or pd.isna(start_tick) or pd.isna(close_tick):
+                    continue
+                if int(close_tick) < int(start_tick):
+                    continue
+                participants = tick_steamids[
+                    (tick_steamids["tick"] >= int(start_tick))
+                    & (tick_steamids["tick"] <= int(close_tick))
+                ][["steamid"]].drop_duplicates()
+                if participants.empty:
+                    continue
+                participants.insert(0, "round_number", round_number)
+                rows.append(participants)
 
     if rows:
         return pd.concat(rows, ignore_index=True, sort=False).drop_duplicates()
-
-    if not player_round_sides.empty and {"round_number", "steamid"} <= set(
-        player_round_sides.columns
-    ):
-        return (
-            player_round_sides[["round_number", "steamid"]]
-            .dropna(subset=["round_number", "steamid"])
-            .drop_duplicates()
-            .reset_index(drop=True)
-        )
 
     return pd.DataFrame(columns=columns)
 

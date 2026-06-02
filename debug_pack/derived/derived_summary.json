@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-06-02T12:37:16.763881Z",
+  "built_at": "2026-06-02T17:49:43.378876Z",
   "raw_input_directory": ".",
   "derived_output_directory": "derived",
   "tables": [
@@ -61,6 +61,10 @@
         "attacker_name",
         "assister_steamid",
         "assister_name",
+        "is_suicide",
+        "has_attacker",
+        "is_teamkill",
+        "is_world",
         "weapon",
         "headshot",
         "hitgroup",
@@ -98,7 +102,12 @@
         "dmg_health",
         "dmg_armor",
         "health",
-        "armor"
+        "armor",
+        "is_self_damage",
+        "is_team_damage",
+        "is_enemy_damage",
+        "is_grenade_or_fire_damage",
+        "is_live_phase_damage"
       ]
     },
     {
@@ -154,8 +163,13 @@
         "team_number",
         "kills",
         "deaths",
+        "suicides",
+        "team_deaths",
         "assists",
         "damage_dealt",
+        "team_damage_dealt",
+        "self_damage",
+        "utility_damage_dealt",
         "damage_taken",
         "headshot_kills",
         "shots",
@@ -196,12 +210,12 @@
     "fallback_rows": 220
   },
   "player_round_participation": {
-    "participation_source": "fallback_all_players",
-    "tick_participation_rows": 0,
-    "fallback_rows": 220,
+    "participation_source": "ticks_player_core",
+    "tick_participation_rows": 10,
+    "fallback_rows": 210,
     "filtered_rows": 0,
-    "rounds_with_tick_participants": 0,
-    "rounds_with_fallback_all_players": 22
+    "rounds_with_tick_participants": 1,
+    "rounds_with_fallback_all_players": 21
   },
   "survived_source_ticks": 0,
   "survived_source_death_fallback": 220,
