@@ -25,6 +25,14 @@ PLAYER_ROUND_SIDE_DIAGNOSTICS: dict[str, int] = {
     "tick_data_rows": 0,
     "fallback_rows": 0,
 }
+PLAYER_ROUND_PARTICIPATION_DIAGNOSTICS: dict[str, object] = {
+    "participation_source": "fallback_all_players",
+    "tick_participation_rows": 0,
+    "fallback_rows": 0,
+    "filtered_rows": 0,
+    "rounds_with_tick_participants": 0,
+    "rounds_with_fallback_all_players": 0,
+}
 
 DERIVED_TABLES = (
     "players",
@@ -1360,7 +1368,68 @@ def truthy_series(values: pd.Series) -> pd.Series:
     return text.isin({"true", "1", "yes", "y", "t"})
 
 
+def build_player_round_participants(
+    raw_dir: Path, rounds: pd.DataFrame, player_round_sides: pd.DataFrame
+) -> pd.DataFrame:
+    """Return per-round participants observed in tick state, when available."""
+    columns = ["round_number", "steamid"]
+    if rounds.empty or not {"round_number", "freeze_end_tick", "round_close_tick"} <= set(
+        rounds.columns
+    ):
+        return pd.DataFrame(columns=columns)
+
+    player_core = read_csv_if_exists(raw_dir / "ticks" / "ticks_player_core.csv")
+    if not player_core.empty and {"tick", "steamid"} <= set(player_core.columns):
+        player_core = normalize_steamid_columns(player_core.copy())
+        player_core["tick"] = pd.to_numeric(player_core["tick"], errors="coerce")
+        player_core = player_core.dropna(subset=["tick", "steamid"]).copy()
+        player_core["tick"] = player_core["tick"].astype(int)
+    else:
+        player_core = pd.DataFrame()
+
+    rows: list[pd.DataFrame] = []
+    if not player_core.empty:
+        tick_steamids = player_core[["tick", "steamid"]].drop_duplicates()
+        for round_row in rounds.to_dict("records"):
+            round_number = round_row.get("round_number", pd.NA)
+            start_tick = pd.to_numeric(
+                pd.Series([round_row.get("freeze_end_tick", pd.NA)]), errors="coerce"
+            ).iloc[0]
+            close_tick = pd.to_numeric(
+                pd.Series([round_row.get("round_close_tick", pd.NA)]), errors="coerce"
+            ).iloc[0]
+            if pd.isna(round_number) or pd.isna(start_tick) or pd.isna(close_tick):
+                continue
+            if int(close_tick) < int(start_tick):
+                continue
+            participants = tick_steamids[
+                (tick_steamids["tick"] >= int(start_tick))
+                & (tick_steamids["tick"] <= int(close_tick))
+            ][["steamid"]].drop_duplicates()
+            if participants.empty:
+                continue
+            participants.insert(0, "round_number", round_number)
+            rows.append(participants)
+
+    if rows:
+        return pd.concat(rows, ignore_index=True, sort=False).drop_duplicates()
+
+    if (
+        not player_round_sides.empty
+        and {"round_number", "steamid"} <= set(player_round_sides.columns)
+    ):
+        return (
+            player_round_sides[["round_number", "steamid"]]
+            .dropna(subset=["round_number", "steamid"])
+            .drop_duplicates()
+            .reset_index(drop=True)
+        )
+
+    return pd.DataFrame(columns=columns)
+
+
 def build_player_round_stats(
+    raw_dir: Path,
     players: pd.DataFrame,
     rounds: pd.DataFrame,
     player_round_sides: pd.DataFrame,
@@ -1387,6 +1456,47 @@ def build_player_round_stats(
         return pd.DataFrame(columns=PLAYER_ROUND_STATS_COLUMNS)
 
     stats = round_base.merge(player_base, how="cross")
+    cross_join_rows = len(stats)
+
+    round_participants = build_player_round_participants(
+        raw_dir, rounds, player_round_sides
+    )
+    if not round_participants.empty:
+        participant_keys = round_participants.drop_duplicates(
+            subset=["round_number", "steamid"]
+        ).copy()
+        participant_keys["is_round_participant"] = True
+        stats = stats.merge(
+            participant_keys, on=["round_number", "steamid"], how="left"
+        )
+        rounds_with_participants = set(participant_keys["round_number"].dropna())
+        has_participant_filter = stats["round_number"].isin(rounds_with_participants)
+        participant_match = stats["is_round_participant"].fillna(False)
+        fallback_round = ~has_participant_filter
+        keep_rows = fallback_round | participant_match
+        tick_rows = int((has_participant_filter & participant_match).sum())
+        fallback_rows = int(fallback_round.sum())
+        stats = stats[keep_rows].drop(columns=["is_round_participant"]).copy()
+        participation_source = "ticks_player_core"
+    else:
+        rounds_with_participants = set()
+        tick_rows = 0
+        fallback_rows = len(stats)
+        participation_source = "fallback_all_players"
+
+    PLAYER_ROUND_PARTICIPATION_DIAGNOSTICS.clear()
+    PLAYER_ROUND_PARTICIPATION_DIAGNOSTICS.update(
+        {
+            "participation_source": participation_source,
+            "tick_participation_rows": tick_rows,
+            "fallback_rows": fallback_rows,
+            "filtered_rows": int(cross_join_rows - len(stats)),
+            "rounds_with_tick_participants": int(len(rounds_with_participants)),
+            "rounds_with_fallback_all_players": int(
+                round_base["round_number"].nunique() - len(rounds_with_participants)
+            ),
+        }
+    )
 
     if (
         not player_round_sides.empty
@@ -1513,6 +1623,7 @@ def write_summary(results: list[TableResult], raw_dir: Path, output_dir: Path) -
         "identifier_normalization": IDENTIFIER_DIAGNOSTICS,
         "round_outcome_validation": ROUND_OUTCOME_DIAGNOSTICS,
         "player_round_side_sources": PLAYER_ROUND_SIDE_DIAGNOSTICS,
+        "player_round_participation": PLAYER_ROUND_PARTICIPATION_DIAGNOSTICS,
     }
     (output_dir / "derived_summary.json").write_text(
         json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8"
@@ -1565,6 +1676,17 @@ def build_derived(
     output_dir.mkdir(parents=True, exist_ok=True)
     PLAYER_ROUND_SIDE_DIAGNOSTICS.clear()
     PLAYER_ROUND_SIDE_DIAGNOSTICS.update({"tick_data_rows": 0, "fallback_rows": 0})
+    PLAYER_ROUND_PARTICIPATION_DIAGNOSTICS.clear()
+    PLAYER_ROUND_PARTICIPATION_DIAGNOSTICS.update(
+        {
+            "participation_source": "fallback_all_players",
+            "tick_participation_rows": 0,
+            "fallback_rows": 0,
+            "filtered_rows": 0,
+            "rounds_with_tick_participants": 0,
+            "rounds_with_fallback_all_players": 0,
+        }
+    )
 
     players = build_players(raw_dir)
     rounds = build_rounds(raw_dir)
@@ -1579,6 +1701,7 @@ def build_derived(
         "bomb_events": build_bomb_events(raw_dir, rounds),
     }
     tables["player_round_stats"] = build_player_round_stats(
+        raw_dir,
         tables["players"],
         tables["rounds"],
         player_round_sides,
