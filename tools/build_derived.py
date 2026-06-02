@@ -33,6 +33,10 @@ PLAYER_ROUND_PARTICIPATION_DIAGNOSTICS: dict[str, object] = {
     "rounds_with_tick_participants": 0,
     "rounds_with_fallback_all_players": 0,
 }
+PLAYER_ROUND_SURVIVAL_DIAGNOSTICS: dict[str, int] = {
+    "survived_source_ticks": 0,
+    "survived_source_death_fallback": 0,
+}
 
 DERIVED_TABLES = (
     "players",
@@ -1591,12 +1595,86 @@ def build_player_round_stats(
             pd.to_numeric(stats[column], errors="coerce").fillna(0).astype(int)
         )
 
-    stats["survived"] = stats["deaths"] == 0
+    stats = apply_round_end_survival(stats, rounds, read_player_core_states(raw_dir))
     return (
         stats[PLAYER_ROUND_STATS_COLUMNS]
         .sort_values(["round_number", "team_number", "steamid"], na_position="last")
         .reset_index(drop=True)
     )
+
+
+def apply_round_end_survival(
+    stats: pd.DataFrame, rounds: pd.DataFrame, player_core: pd.DataFrame
+) -> pd.DataFrame:
+    """Set per-round survival from the last core tick at or before round close."""
+    stats = stats.copy()
+    stats["survived"] = stats["deaths"] == 0
+
+    tick_sources = pd.Series(False, index=stats.index)
+    if (
+        not stats.empty
+        and not rounds.empty
+        and not player_core.empty
+        and {"round_number", "steamid"} <= set(stats.columns)
+        and {"round_number", "round_close_tick"} <= set(rounds.columns)
+        and {"tick", "steamid", "is_alive_normalized"} <= set(player_core.columns)
+    ):
+        close_ticks = rounds[["round_number", "round_close_tick"]].copy()
+        close_ticks["round_close_tick"] = pd.to_numeric(
+            close_ticks["round_close_tick"], errors="coerce"
+        )
+        close_ticks = close_ticks.dropna(subset=["round_number", "round_close_tick"])
+        if not close_ticks.empty:
+            close_ticks["round_close_tick"] = close_ticks["round_close_tick"].astype(
+                int
+            )
+            round_players = (
+                stats.reset_index(names="stats_index")[
+                    ["stats_index", "round_number", "steamid"]
+                ]
+                .merge(close_ticks, on="round_number", how="left")
+                .dropna(subset=["round_close_tick", "steamid"])
+            )
+            core = player_core[["tick", "steamid", "is_alive_normalized"]].copy()
+            core["tick"] = pd.to_numeric(core["tick"], errors="coerce")
+            core = core.dropna(subset=["tick", "steamid", "is_alive_normalized"])
+            if not round_players.empty and not core.empty:
+                round_players["round_close_tick"] = round_players[
+                    "round_close_tick"
+                ].astype(int)
+                core["tick"] = core["tick"].astype(int)
+                round_players = round_players.sort_values(
+                    ["round_close_tick", "steamid", "stats_index"]
+                )
+                core = core.sort_values(["tick", "steamid"])
+                end_snapshots = pd.merge_asof(
+                    round_players,
+                    core,
+                    left_on="round_close_tick",
+                    right_on="tick",
+                    by="steamid",
+                    direction="backward",
+                    allow_exact_matches=True,
+                )
+                end_snapshots = end_snapshots.dropna(
+                    subset=["tick", "is_alive_normalized"]
+                )
+                if not end_snapshots.empty:
+                    alive = (
+                        end_snapshots["is_alive_normalized"].fillna(False).astype(bool)
+                    )
+                    snapshot_indices = end_snapshots["stats_index"].astype(int)
+                    stats.loc[snapshot_indices, "survived"] = alive.to_numpy()
+                    tick_sources.loc[snapshot_indices] = True
+
+    PLAYER_ROUND_SURVIVAL_DIAGNOSTICS.clear()
+    PLAYER_ROUND_SURVIVAL_DIAGNOSTICS.update(
+        {
+            "survived_source_ticks": int(tick_sources.sum()),
+            "survived_source_death_fallback": int((~tick_sources).sum()),
+        }
+    )
+    return stats
 
 
 def write_table(df: pd.DataFrame, name: str, output_dir: Path) -> TableResult:
@@ -1624,6 +1702,12 @@ def write_summary(results: list[TableResult], raw_dir: Path, output_dir: Path) -
         "round_outcome_validation": ROUND_OUTCOME_DIAGNOSTICS,
         "player_round_side_sources": PLAYER_ROUND_SIDE_DIAGNOSTICS,
         "player_round_participation": PLAYER_ROUND_PARTICIPATION_DIAGNOSTICS,
+        "survived_source_ticks": PLAYER_ROUND_SURVIVAL_DIAGNOSTICS.get(
+            "survived_source_ticks", 0
+        ),
+        "survived_source_death_fallback": PLAYER_ROUND_SURVIVAL_DIAGNOSTICS.get(
+            "survived_source_death_fallback", 0
+        ),
     }
     (output_dir / "derived_summary.json").write_text(
         json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8"
@@ -1686,6 +1770,10 @@ def build_derived(
             "rounds_with_tick_participants": 0,
             "rounds_with_fallback_all_players": 0,
         }
+    )
+    PLAYER_ROUND_SURVIVAL_DIAGNOSTICS.clear()
+    PLAYER_ROUND_SURVIVAL_DIAGNOSTICS.update(
+        {"survived_source_ticks": 0, "survived_source_death_fallback": 0}
     )
 
     players = build_players(raw_dir)
