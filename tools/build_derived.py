@@ -631,6 +631,7 @@ END_REASON_COLUMNS = (
 OUTCOME_SOURCE_EVENTS = EXPLICIT_ROUND_OUTCOME_EVENTS
 ROUND_STATE_TICK_WINDOW = 512
 SURVIVAL_POST_CLOSE_TICK_WINDOW = 1024
+DEFAULT_TRADE_TICK_WINDOW = 320
 PLAYER_CORE_STATE_COLUMNS = [
     "tick",
     "steamid",
@@ -1403,8 +1404,159 @@ def build_round_outcomes(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows, columns=OUTCOME_COLUMNS)
 
 
+def sort_kills_by_round_and_tick(kills: pd.DataFrame) -> pd.DataFrame:
+    """Return kills in chronological round/tick order after round assignment."""
+    if kills.empty:
+        return kills.copy()
+    out = kills.copy()
+    out["_round_sort"] = pd.to_numeric(out.get("round_number"), errors="coerce")
+    out["_tick_sort"] = pd.to_numeric(out.get("tick"), errors="coerce")
+    out = (
+        out.sort_values(
+            ["_round_sort", "_tick_sort"], kind="mergesort", na_position="last"
+        )
+        .drop(columns=["_round_sort", "_tick_sort"])
+        .reset_index(drop=True)
+    )
+    return out
+
+
+def player_round_team_lookup(
+    player_round_sides: pd.DataFrame | None,
+) -> dict[tuple[int, str], int]:
+    """Build a (round_number, steamid) -> team_number lookup from tick-derived sides."""
+    if (
+        player_round_sides is None
+        or player_round_sides.empty
+        or not {"round_number", "steamid", "team_number"}
+        <= set(player_round_sides.columns)
+    ):
+        return {}
+
+    sides = player_round_sides[["round_number", "steamid", "team_number"]].copy()
+    sides["round_number"] = pd.to_numeric(sides["round_number"], errors="coerce")
+    sides["team_number"] = pd.to_numeric(sides["team_number"], errors="coerce")
+    sides = sides.dropna(subset=["round_number", "steamid", "team_number"])
+    sides = sides.drop_duplicates(subset=["round_number", "steamid"], keep="first")
+    return {
+        (int(row["round_number"]), str(row["steamid"])): int(row["team_number"])
+        for row in sides.to_dict("records")
+    }
+
+
+def add_trade_kill_columns(
+    kills: pd.DataFrame,
+    player_round_sides: pd.DataFrame | None,
+    trade_tick_window: int,
+) -> pd.DataFrame:
+    """Annotate kills that traded a teammate's death within the configured window."""
+    out = kills.copy()
+    out["is_trade_kill"] = False
+    out["traded_victim_steamid"] = pd.Series(pd.NA, index=out.index, dtype="string")
+    out["trade_delay_ticks"] = pd.Series(pd.NA, index=out.index, dtype="Int64")
+
+    required = {"round_number", "tick", "user_steamid", "attacker_steamid"}
+    if out.empty or not required <= set(out.columns) or trade_tick_window < 0:
+        return out
+
+    team_lookup = player_round_team_lookup(player_round_sides)
+    if not team_lookup:
+        return out
+
+    tick_values = pd.to_numeric(out["tick"], errors="coerce")
+    round_values = pd.to_numeric(out["round_number"], errors="coerce")
+    has_attacker = (
+        truthy_series(out["has_attacker"])
+        if "has_attacker" in out.columns
+        else out["attacker_steamid"].notna()
+    )
+    is_suicide = (
+        truthy_series(out["is_suicide"])
+        if "is_suicide" in out.columns
+        else out["attacker_steamid"].eq(out["user_steamid"]).fillna(False)
+    )
+    is_teamkill = (
+        truthy_series(out["is_teamkill"])
+        if "is_teamkill" in out.columns
+        else pd.Series(False, index=out.index)
+    )
+
+    kill_events: list[dict[str, object]] = []
+    for idx in out.index:
+        round_number = round_values.loc[idx]
+        tick = tick_values.loc[idx]
+        victim = out.at[idx, "user_steamid"]
+        attacker = out.at[idx, "attacker_steamid"]
+        if (
+            pd.isna(round_number)
+            or pd.isna(tick)
+            or pd.isna(victim)
+            or pd.isna(attacker)
+            or not bool(has_attacker.loc[idx])
+            or bool(is_suicide.loc[idx])
+            or bool(is_teamkill.loc[idx])
+        ):
+            continue
+        round_int = int(round_number)
+        victim_text = str(victim)
+        attacker_text = str(attacker)
+        victim_team = team_lookup.get((round_int, victim_text))
+        attacker_team = team_lookup.get((round_int, attacker_text))
+        if victim_team is None or attacker_team is None or victim_team == attacker_team:
+            continue
+        kill_events.append(
+            {
+                "idx": idx,
+                "round_number": round_int,
+                "tick": int(tick),
+                "victim": victim_text,
+                "attacker": attacker_text,
+                "victim_team": victim_team,
+                "attacker_team": attacker_team,
+            }
+        )
+
+    by_round: dict[int, list[dict[str, object]]] = {}
+    for event in kill_events:
+        by_round.setdefault(int(event["round_number"]), []).append(event)
+
+    used_trade_kill_indices: set[object] = set()
+    for death in kill_events:
+        death_round = int(death["round_number"])
+        death_tick = int(death["tick"])
+        victim_team = int(death["victim_team"])
+        dead_player_attacker = str(death["attacker"])
+        trade_candidates = by_round.get(death_round, [])
+        for candidate in trade_candidates:
+            candidate_idx = candidate["idx"]
+            if (
+                candidate_idx == death["idx"]
+                or candidate_idx in used_trade_kill_indices
+            ):
+                continue
+            delay = int(candidate["tick"]) - death_tick
+            if delay < 0:
+                continue
+            if delay > trade_tick_window:
+                break
+            if (
+                str(candidate["victim"]) == dead_player_attacker
+                and int(candidate["attacker_team"]) == victim_team
+            ):
+                out.at[candidate_idx, "is_trade_kill"] = True
+                out.at[candidate_idx, "traded_victim_steamid"] = str(death["victim"])
+                out.at[candidate_idx, "trade_delay_ticks"] = delay
+                used_trade_kill_indices.add(candidate_idx)
+                break
+
+    return out
+
+
 def build_kills(
-    raw_dir: Path, rounds: pd.DataFrame, player_round_sides: pd.DataFrame | None = None
+    raw_dir: Path,
+    rounds: pd.DataFrame,
+    player_round_sides: pd.DataFrame | None = None,
+    trade_tick_window: int = DEFAULT_TRADE_TICK_WINDOW,
 ) -> pd.DataFrame:
     kills = read_csv_if_exists(raw_dir / "events" / "player_death.csv")
     if kills.empty:
@@ -1412,6 +1564,7 @@ def build_kills(
     kills = normalize_steamid_columns(kills.copy())
     kills = normalize_identifier_columns(kills, "kills")
     kills = assign_round_numbers(kills, rounds)
+    kills = sort_kills_by_round_and_tick(kills)
 
     attacker = kills.get("attacker_steamid", pd.Series(pd.NA, index=kills.index))
     victim = kills.get("user_steamid", pd.Series(pd.NA, index=kills.index))
@@ -1455,6 +1608,8 @@ def build_kills(
         kills["is_teamkill"] = kills["has_attacker"] & ~kills["is_suicide"] & same_team
         kills = kills.drop(columns=["victim_team_number", "attacker_team_number"])
 
+    kills = add_trade_kill_columns(kills, player_round_sides, trade_tick_window)
+
     preferred = [
         "round_number",
         "tick",
@@ -1468,6 +1623,9 @@ def build_kills(
         "has_attacker",
         "is_teamkill",
         "is_world",
+        "is_trade_kill",
+        "traded_victim_steamid",
+        "trade_delay_ticks",
         "weapon",
         "headshot",
         "hitgroup",
@@ -1840,6 +1998,8 @@ PLAYER_ROUND_STATS_COLUMNS = [
     "suicides",
     "team_deaths",
     "assists",
+    "trade_kills",
+    "traded_deaths",
     "damage_dealt",
     "team_damage_dealt",
     "self_damage",
@@ -2168,6 +2328,20 @@ def build_player_round_stats(
         player_round_counts(suicide_deaths, "user_steamid", count_column="suicides"),
         player_round_counts(team_deaths, "user_steamid", count_column="team_deaths"),
         player_round_counts(kills, "assister_steamid", count_column="assists"),
+        player_round_counts(
+            normal_kills[truthy_series(normal_kills["is_trade_kill"])].copy()
+            if not normal_kills.empty and "is_trade_kill" in normal_kills.columns
+            else pd.DataFrame(),
+            "attacker_steamid",
+            count_column="trade_kills",
+        ),
+        player_round_counts(
+            normal_kills[truthy_series(normal_kills["is_trade_kill"])].copy()
+            if not normal_kills.empty and "is_trade_kill" in normal_kills.columns
+            else pd.DataFrame(),
+            "traded_victim_steamid",
+            count_column="traded_deaths",
+        ),
         player_round_sums(
             enemy_live_damage,
             "attacker_steamid",
@@ -2232,6 +2406,8 @@ def build_player_round_stats(
         "suicides",
         "team_deaths",
         "assists",
+        "trade_kills",
+        "traded_deaths",
         "damage_dealt",
         "team_damage_dealt",
         "self_damage",
@@ -2253,8 +2429,7 @@ def build_player_round_stats(
     stats["kast_kill"] = stats["kills"] > 0
     stats["kast_assist"] = stats["assists"] > 0
     stats["kast_survived"] = stats["survived"].fillna(False).astype(bool)
-    # TODO: Replace this placeholder with real trade detection once available.
-    stats["kast_traded"] = False
+    stats["kast_traded"] = stats["traded_deaths"] > 0
     stats["kast"] = (
         stats["kast_kill"]
         | stats["kast_assist"]
@@ -2460,7 +2635,11 @@ def write_debug_pack(
 
 
 def build_derived(
-    raw_dir: Path, output_dir: Path, debug_dir: Path | None, sample_rows: int
+    raw_dir: Path,
+    output_dir: Path,
+    debug_dir: Path | None,
+    sample_rows: int,
+    trade_tick_window: int = DEFAULT_TRADE_TICK_WINDOW,
 ) -> list[TableResult]:
     if not raw_dir.exists():
         raise FileNotFoundError(f"Raw input directory does not exist: {raw_dir}")
@@ -2501,7 +2680,7 @@ def build_derived(
         "players": players,
         "rounds": rounds,
         "round_outcomes": build_round_outcomes(raw_dir, rounds),
-        "kills": build_kills(raw_dir, rounds, player_round_sides),
+        "kills": build_kills(raw_dir, rounds, player_round_sides, trade_tick_window),
         "damage": build_damage(raw_dir, rounds, player_round_sides),
         "shots": build_shots(raw_dir, rounds, weapon_actions),
         "weapon_actions": weapon_actions,
@@ -2553,6 +2732,12 @@ def parse_args() -> argparse.Namespace:
         default=25,
         help="Number of rows per sample CSV in the debug pack.",
     )
+    parser.add_argument(
+        "--trade-tick-window",
+        type=int,
+        default=DEFAULT_TRADE_TICK_WINDOW,
+        help="Maximum tick delay for marking a teammate's revenge kill as a trade.",
+    )
     return parser.parse_args()
 
 
@@ -2560,7 +2745,9 @@ def main() -> None:
     args = parse_args()
     output_dir = args.output or args.input / "derived"
     debug_dir = args.debug_pack if str(args.debug_pack) else None
-    results = build_derived(args.input, output_dir, debug_dir, args.sample_rows)
+    results = build_derived(
+        args.input, output_dir, debug_dir, args.sample_rows, args.trade_tick_window
+    )
     print(f"Built {len(results)} derived tables in {output_dir}")
     for result in results:
         print(f"- {result.name}: {result.rows} rows, {len(result.columns)} columns")
