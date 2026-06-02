@@ -1850,6 +1850,11 @@ PLAYER_ROUND_STATS_COLUMNS = [
     "bomb_plants",
     "bomb_defuses",
     "survived",
+    "kast_kill",
+    "kast_assist",
+    "kast_survived",
+    "kast_traded",
+    "kast",
 ]
 
 
@@ -2245,6 +2250,17 @@ def build_player_round_stats(
         )
 
     stats = apply_round_end_survival(stats, rounds, read_player_core_states(raw_dir))
+    stats["kast_kill"] = stats["kills"] > 0
+    stats["kast_assist"] = stats["assists"] > 0
+    stats["kast_survived"] = stats["survived"].fillna(False).astype(bool)
+    # TODO: Replace this placeholder with real trade detection once available.
+    stats["kast_traded"] = False
+    stats["kast"] = (
+        stats["kast_kill"]
+        | stats["kast_assist"]
+        | stats["kast_survived"]
+        | stats["kast_traded"]
+    )
     return (
         stats[PLAYER_ROUND_STATS_COLUMNS]
         .sort_values(["round_number", "team_number", "steamid"], na_position="last")

@@ -175,7 +175,12 @@
         "shots",
         "bomb_plants",
         "bomb_defuses",
-        "survived"
+        "survived",
+        "kast_kill",
+        "kast_assist",
+        "kast_survived",
+        "kast_traded",
+        "kast"
       ]
     }
   ],
