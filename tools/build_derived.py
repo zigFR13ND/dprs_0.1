@@ -505,6 +505,13 @@ OUTCOME_SOURCE_EVENTS = (
     "round_announce_last_round_half",
 )
 ROUND_STATE_TICK_WINDOW = 512
+SURVIVAL_POST_CLOSE_TICK_WINDOW = 1024
+PLAYER_CORE_STATE_COLUMNS = [
+    "tick",
+    "steamid",
+    "team_number",
+    "is_alive_normalized",
+]
 
 
 def round_timeline_value(row: dict[str, object], candidates: Iterable[str]) -> object:
@@ -686,21 +693,66 @@ def normalize_alive_series(frame: pd.DataFrame) -> pd.Series:
     if "is_alive" in frame.columns:
         values = frame["is_alive"]
         if pd.api.types.is_bool_dtype(values):
-            return values.fillna(False)
+            return values.astype("boolean")
         text = values.astype("string").str.strip().str.lower()
         numeric = pd.to_numeric(values, errors="coerce")
-        return text.isin({"true", "t", "yes", "y"}) | (numeric == 1)
+        alive = (text.isin({"true", "t", "yes", "y"}) | (numeric == 1)).astype(
+            "boolean"
+        )
+        return alive.mask(values.isna(), pd.NA)
     if "life_state" in frame.columns:
-        return pd.to_numeric(frame["life_state"], errors="coerce") == 0
+        values = frame["life_state"]
+        alive = (pd.to_numeric(values, errors="coerce") == 0).astype("boolean")
+        return alive.mask(values.isna(), pd.NA)
     if "health" in frame.columns:
-        return pd.to_numeric(frame["health"], errors="coerce") > 0
+        values = frame["health"]
+        alive = (pd.to_numeric(values, errors="coerce") > 0).astype("boolean")
+        return alive.mask(values.isna(), pd.NA)
     return pd.Series([pd.NA] * len(frame), index=frame.index, dtype="boolean")
 
 
-def read_player_core_states(raw_dir: Path) -> pd.DataFrame:
+def read_player_core_source(raw_dir: Path) -> pd.DataFrame:
+    """Read available player-core tick state, preferring the raw full export.
+
+    Debug packs may contain a reduced ``ticks/ticks_player_core.csv`` plus
+    head/tail samples with the full schema.  The raw file remains the primary
+    source, while samples are appended only when they provide state columns
+    missing from the reduced raw copy.
+    """
     core = read_csv_if_exists(raw_dir / "ticks" / "ticks_player_core.csv")
+    has_state_columns = any(
+        column in core.columns
+        for column in (
+            "is_alive",
+            "life_state",
+            "health",
+            "team_num",
+            "team_number",
+            "team",
+        )
+    )
+    if has_state_columns:
+        return core
+
+    sample_frames: list[pd.DataFrame] = []
+    for sample_name in (
+        "ticks_player_core_head_1000.csv",
+        "ticks_player_core_tail_1000.csv",
+    ):
+        sample = read_csv_if_exists(raw_dir / "samples" / sample_name)
+        if not sample.empty:
+            sample_frames.append(sample)
+
+    if sample_frames:
+        frames = [frame for frame in [core, *sample_frames] if not frame.empty]
+        return pd.concat(frames, ignore_index=True, sort=False)
+    return core
+
+
+def read_player_core_states(raw_dir: Path) -> pd.DataFrame:
+    core = read_player_core_source(raw_dir)
     if core.empty or "tick" not in core.columns or "steamid" not in core.columns:
-        return pd.DataFrame()
+        return pd.DataFrame(columns=PLAYER_CORE_STATE_COLUMNS)
     team_column = next(
         (
             column
@@ -709,19 +761,24 @@ def read_player_core_states(raw_dir: Path) -> pd.DataFrame:
         ),
         None,
     )
-    if team_column is None:
-        return pd.DataFrame()
     core = normalize_steamid_columns(core.copy())
     core["tick"] = pd.to_numeric(core["tick"], errors="coerce")
-    core["team_number"] = core[team_column].map(normalize_team_number)
+    if team_column is None:
+        core["team_number"] = pd.NA
+    else:
+        core["team_number"] = core[team_column].map(normalize_team_number)
     core["is_alive_normalized"] = normalize_alive_series(core)
-    usable = core.dropna(subset=["tick", "steamid", "team_number"])
-    usable = usable[usable["team_number"].isin(TEAM_NUMBER_TO_SIDE)].copy()
+
+    usable = core.dropna(subset=["tick", "steamid", "is_alive_normalized"]).copy()
     if usable.empty:
-        return pd.DataFrame()
+        return pd.DataFrame(columns=PLAYER_CORE_STATE_COLUMNS)
     usable["tick"] = usable["tick"].astype(int)
-    usable["team_number"] = usable["team_number"].astype(int)
-    return usable[["tick", "steamid", "team_number", "is_alive_normalized"]]
+    valid_team = usable["team_number"].isin(TEAM_NUMBER_TO_SIDE)
+    usable.loc[valid_team, "team_number"] = usable.loc[
+        valid_team, "team_number"
+    ].astype(int)
+    usable.loc[~valid_team, "team_number"] = pd.NA
+    return usable[PLAYER_CORE_STATE_COLUMNS]
 
 
 def read_player_aggregate_states(raw_dir: Path) -> pd.DataFrame:
@@ -2038,12 +2095,23 @@ def apply_round_end_survival(
         and {"round_number", "round_close_tick"} <= set(rounds.columns)
         and {"tick", "steamid", "is_alive_normalized"} <= set(player_core.columns)
     ):
-        close_ticks = rounds[["round_number", "round_close_tick"]].copy()
+        close_columns = ["round_number", "round_close_tick"]
+        if "freeze_end_tick" in rounds.columns:
+            close_columns.insert(1, "freeze_end_tick")
+        close_ticks = rounds[close_columns].copy()
+        if "freeze_end_tick" not in close_ticks.columns:
+            close_ticks["freeze_end_tick"] = pd.NA
+        close_ticks["freeze_end_tick"] = pd.to_numeric(
+            close_ticks["freeze_end_tick"], errors="coerce"
+        )
         close_ticks["round_close_tick"] = pd.to_numeric(
             close_ticks["round_close_tick"], errors="coerce"
         )
         close_ticks = close_ticks.dropna(subset=["round_number", "round_close_tick"])
         if not close_ticks.empty:
+            close_ticks["freeze_end_tick"] = close_ticks["freeze_end_tick"].astype(
+                "Int64"
+            )
             close_ticks["round_close_tick"] = close_ticks["round_close_tick"].astype(
                 int
             )
@@ -2066,7 +2134,7 @@ def apply_round_end_survival(
                     ["round_close_tick", "steamid", "stats_index"]
                 )
                 core = core.sort_values(["tick", "steamid"])
-                end_snapshots = pd.merge_asof(
+                prior_snapshots = pd.merge_asof(
                     round_players,
                     core,
                     left_on="round_close_tick",
@@ -2074,9 +2142,43 @@ def apply_round_end_survival(
                     by="steamid",
                     direction="backward",
                     allow_exact_matches=True,
+                ).dropna(subset=["tick", "is_alive_normalized"])
+                if (
+                    not prior_snapshots.empty
+                    and "freeze_end_tick" in prior_snapshots
+                ):
+                    prior_snapshots = prior_snapshots[
+                        prior_snapshots["freeze_end_tick"].isna()
+                        | (
+                            prior_snapshots["tick"]
+                            >= prior_snapshots["freeze_end_tick"]
+                        )
+                    ].copy()
+
+                snapshot_frames = [prior_snapshots]
+                prior_indices = set(
+                    prior_snapshots["stats_index"].dropna().astype(int)
                 )
-                end_snapshots = end_snapshots.dropna(
-                    subset=["tick", "is_alive_normalized"]
+                missing_players = round_players[
+                    ~round_players["stats_index"].astype(int).isin(prior_indices)
+                ]
+                if not missing_players.empty:
+                    future_snapshots = pd.merge_asof(
+                        missing_players,
+                        core,
+                        left_on="round_close_tick",
+                        right_on="tick",
+                        by="steamid",
+                        direction="forward",
+                        allow_exact_matches=True,
+                        tolerance=SURVIVAL_POST_CLOSE_TICK_WINDOW,
+                    ).dropna(subset=["tick", "is_alive_normalized"])
+                    snapshot_frames.append(future_snapshots)
+
+                end_snapshots = pd.concat(
+                    [frame for frame in snapshot_frames if not frame.empty],
+                    ignore_index=True,
+                    sort=False,
                 )
                 if not end_snapshots.empty:
                     alive = (

@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-06-02T17:49:43.378876Z",
+  "built_at": "2026-06-02T18:13:24.133690Z",
   "raw_input_directory": ".",
   "derived_output_directory": "derived",
   "tables": [
@@ -217,8 +217,8 @@
     "rounds_with_tick_participants": 1,
     "rounds_with_fallback_all_players": 21
   },
-  "survived_source_ticks": 0,
-  "survived_source_death_fallback": 220,
+  "survived_source_ticks": 10,
+  "survived_source_death_fallback": 210,
   "weapon_fire_filter": {
     "weapon_fire_rows": 3441,
     "firearm_shot_rows": 2479,
