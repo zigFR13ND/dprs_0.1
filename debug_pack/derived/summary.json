@@ -182,7 +182,12 @@
         "shots",
         "bomb_plants",
         "bomb_defuses",
-        "survived"
+        "survived",
+        "kast_kill",
+        "kast_assist",
+        "kast_survived",
+        "kast_traded",
+        "kast"
       ],
       "source_path": "derived/player_round_stats.csv",
       "sample": "samples/player_round_stats_head_25.csv"
