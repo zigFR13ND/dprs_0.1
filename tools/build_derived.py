@@ -1153,13 +1153,59 @@ def build_round_outcomes(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows, columns=OUTCOME_COLUMNS)
 
 
-def build_kills(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
+def build_kills(
+    raw_dir: Path, rounds: pd.DataFrame, player_round_sides: pd.DataFrame | None = None
+) -> pd.DataFrame:
     kills = read_csv_if_exists(raw_dir / "events" / "player_death.csv")
     if kills.empty:
         return pd.DataFrame()
     kills = normalize_steamid_columns(kills.copy())
     kills = normalize_identifier_columns(kills, "kills")
     kills = assign_round_numbers(kills, rounds)
+
+    attacker = kills.get("attacker_steamid", pd.Series(pd.NA, index=kills.index))
+    victim = kills.get("user_steamid", pd.Series(pd.NA, index=kills.index))
+    kills["has_attacker"] = attacker.notna()
+    kills["is_world"] = ~kills["has_attacker"]
+    kills["is_suicide"] = kills["has_attacker"] & attacker.eq(victim).fillna(False)
+    kills["is_teamkill"] = False
+
+    if (
+        player_round_sides is not None
+        and not player_round_sides.empty
+        and {"round_number", "steamid", "team_number"} <= set(player_round_sides.columns)
+        and {"round_number", "user_steamid", "attacker_steamid"} <= set(kills.columns)
+    ):
+        side_lookup = (
+            player_round_sides[["round_number", "steamid", "team_number"]]
+            .dropna(subset=["round_number", "steamid", "team_number"])
+            .drop_duplicates(subset=["round_number", "steamid"], keep="first")
+        )
+        victim_sides = side_lookup.rename(
+            columns={"steamid": "user_steamid", "team_number": "victim_team_number"}
+        )
+        attacker_sides = side_lookup.rename(
+            columns={
+                "steamid": "attacker_steamid",
+                "team_number": "attacker_team_number",
+            }
+        )
+        kills = kills.merge(
+            victim_sides, on=["round_number", "user_steamid"], how="left"
+        )
+        kills = kills.merge(
+            attacker_sides, on=["round_number", "attacker_steamid"], how="left"
+        )
+        victim_team = pd.to_numeric(kills["victim_team_number"], errors="coerce")
+        attacker_team = pd.to_numeric(kills["attacker_team_number"], errors="coerce")
+        same_team = (
+            victim_team.notna() & attacker_team.notna() & victim_team.eq(attacker_team)
+        )
+        kills["is_teamkill"] = (
+            kills["has_attacker"] & ~kills["is_suicide"] & same_team
+        )
+        kills = kills.drop(columns=["victim_team_number", "attacker_team_number"])
+
     preferred = [
         "round_number",
         "tick",
@@ -1169,6 +1215,10 @@ def build_kills(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
         "attacker_name",
         "assister_steamid",
         "assister_name",
+        "is_suicide",
+        "has_attacker",
+        "is_teamkill",
+        "is_world",
         "weapon",
         "headshot",
         "hitgroup",
@@ -1420,6 +1470,8 @@ PLAYER_ROUND_STATS_COLUMNS = [
     "team_number",
     "kills",
     "deaths",
+    "suicides",
+    "team_deaths",
     "assists",
     "damage_dealt",
     "damage_taken",
@@ -1660,9 +1712,34 @@ def build_player_round_stats(
         .astype("Int64")
     )
 
+    if not kills.empty:
+        normal_kills = kills.copy()
+        if "has_attacker" in normal_kills.columns:
+            normal_kills = normal_kills[truthy_series(normal_kills["has_attacker"])]
+        if "is_suicide" in normal_kills.columns:
+            normal_kills = normal_kills[~truthy_series(normal_kills["is_suicide"])]
+        if "is_teamkill" in normal_kills.columns:
+            normal_kills = normal_kills[~truthy_series(normal_kills["is_teamkill"])]
+        suicide_deaths = (
+            kills[truthy_series(kills["is_suicide"])].copy()
+            if "is_suicide" in kills.columns
+            else pd.DataFrame()
+        )
+        team_deaths = (
+            kills[truthy_series(kills["is_teamkill"])].copy()
+            if "is_teamkill" in kills.columns
+            else pd.DataFrame()
+        )
+    else:
+        normal_kills = pd.DataFrame()
+        suicide_deaths = pd.DataFrame()
+        team_deaths = pd.DataFrame()
+
     aggregates = [
-        player_round_counts(kills, "attacker_steamid", count_column="kills"),
+        player_round_counts(normal_kills, "attacker_steamid", count_column="kills"),
         player_round_counts(kills, "user_steamid", count_column="deaths"),
+        player_round_counts(suicide_deaths, "user_steamid", count_column="suicides"),
+        player_round_counts(team_deaths, "user_steamid", count_column="team_deaths"),
         player_round_counts(kills, "assister_steamid", count_column="assists"),
         player_round_sums(
             damage, "attacker_steamid", "dmg_health", sum_column="damage_dealt"
@@ -1673,8 +1750,8 @@ def build_player_round_stats(
         player_round_counts(shots, "user_steamid", count_column="shots"),
     ]
 
-    if not kills.empty and "headshot" in kills.columns:
-        headshot_kills = kills[truthy_series(kills["headshot"])].copy()
+    if not normal_kills.empty and "headshot" in normal_kills.columns:
+        headshot_kills = normal_kills[truthy_series(normal_kills["headshot"])].copy()
     else:
         headshot_kills = pd.DataFrame()
     aggregates.append(
@@ -1707,6 +1784,8 @@ def build_player_round_stats(
     atomic_columns = [
         "kills",
         "deaths",
+        "suicides",
+        "team_deaths",
         "assists",
         "damage_dealt",
         "damage_taken",
@@ -1921,7 +2000,7 @@ def build_derived(
         "players": players,
         "rounds": rounds,
         "round_outcomes": build_round_outcomes(raw_dir, rounds),
-        "kills": build_kills(raw_dir, rounds),
+        "kills": build_kills(raw_dir, rounds, player_round_sides),
         "damage": build_damage(raw_dir, rounds),
         "shots": build_shots(raw_dir, rounds, weapon_actions),
         "weapon_actions": weapon_actions,
