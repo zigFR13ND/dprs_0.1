@@ -21,6 +21,10 @@ import pandas as pd
 
 DEFAULT_INPUT_DIR = Path("output/recheck_raw_v1")
 ROUND_OUTCOME_DIAGNOSTICS: dict[str, int] = {}
+PLAYER_ROUND_SIDE_DIAGNOSTICS: dict[str, int] = {
+    "tick_data_rows": 0,
+    "fallback_rows": 0,
+}
 
 DERIVED_TABLES = (
     "players",
@@ -1359,6 +1363,7 @@ def truthy_series(values: pd.Series) -> pd.Series:
 def build_player_round_stats(
     players: pd.DataFrame,
     rounds: pd.DataFrame,
+    player_round_sides: pd.DataFrame,
     kills: pd.DataFrame,
     damage: pd.DataFrame,
     shots: pd.DataFrame,
@@ -1382,6 +1387,37 @@ def build_player_round_stats(
         return pd.DataFrame(columns=PLAYER_ROUND_STATS_COLUMNS)
 
     stats = round_base.merge(player_base, how="cross")
+
+    if (
+        not player_round_sides.empty
+        and {"round_number", "steamid", "team_number"} <= set(player_round_sides.columns)
+    ):
+        side_lookup = (
+            player_round_sides[["round_number", "steamid", "team_number"]]
+            .dropna(subset=["round_number", "steamid"])
+            .drop_duplicates(subset=["round_number", "steamid"], keep="first")
+            .rename(columns={"team_number": "tick_team_number"})
+        )
+        stats = stats.merge(side_lookup, on=["round_number", "steamid"], how="left")
+    else:
+        stats["tick_team_number"] = pd.NA
+
+    tick_team_number = pd.to_numeric(stats["tick_team_number"], errors="coerce")
+    tick_side_available = tick_team_number.isin(list(TEAM_NUMBER_TO_SIDE))
+    PLAYER_ROUND_SIDE_DIAGNOSTICS.clear()
+    PLAYER_ROUND_SIDE_DIAGNOSTICS.update(
+        {
+            "tick_data_rows": int(tick_side_available.sum()),
+            "fallback_rows": int((~tick_side_available).sum()),
+        }
+    )
+    stats["team_number"] = (
+        tick_team_number.where(
+            tick_side_available, pd.to_numeric(stats["team_number"], errors="coerce")
+        )
+        .round()
+        .astype("Int64")
+    )
 
     aggregates = [
         player_round_counts(kills, "attacker_steamid", count_column="kills"),
@@ -1476,6 +1512,7 @@ def write_summary(results: list[TableResult], raw_dir: Path, output_dir: Path) -
         "raw_directories_left_read_only": ["meta", "events", "ticks", "errors"],
         "identifier_normalization": IDENTIFIER_DIAGNOSTICS,
         "round_outcome_validation": ROUND_OUTCOME_DIAGNOSTICS,
+        "player_round_side_sources": PLAYER_ROUND_SIDE_DIAGNOSTICS,
     }
     (output_dir / "derived_summary.json").write_text(
         json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8"
@@ -1526,9 +1563,12 @@ def build_derived(
         raise FileNotFoundError(f"Raw input directory does not exist: {raw_dir}")
 
     output_dir.mkdir(parents=True, exist_ok=True)
+    PLAYER_ROUND_SIDE_DIAGNOSTICS.clear()
+    PLAYER_ROUND_SIDE_DIAGNOSTICS.update({"tick_data_rows": 0, "fallback_rows": 0})
 
     players = build_players(raw_dir)
     rounds = build_rounds(raw_dir)
+    player_round_sides = build_player_round_sides(raw_dir, rounds)
     tables = {
         "players": players,
         "rounds": rounds,
@@ -1541,6 +1581,7 @@ def build_derived(
     tables["player_round_stats"] = build_player_round_stats(
         tables["players"],
         tables["rounds"],
+        player_round_sides,
         tables["kills"],
         tables["damage"],
         tables["shots"],
