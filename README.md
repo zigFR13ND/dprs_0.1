@@ -122,12 +122,13 @@ python tools/build_derived.py --input output/recheck_raw_v1
 - `rounds.csv` — границы раундов по событиям prestart/freeze/end.
 - `kills.csv` — события убийств с добавленным `round_number`.
 - `damage.csv` — события урона с добавленным `round_number`.
-- `shots.csv` — выстрелы с добавленным `round_number`.
+- `shots.csv` — только реальные огнестрельные выстрелы из `weapon_fire` с добавленным `round_number`; ножи, гранаты и utility-события не попадают в этот счётчик.
+- `weapon_actions.csv` — полный поток `weapon_fire` с флагом `is_firearm_shot`, где можно отдельно анализировать ножи, гранаты и прочие неогнестрельные действия.
 - `round_outcomes.csv` — итоговые признаки раунда на таймлайне `rounds.csv`; winner/reason заполняются из objective-событий бомбы, явных raw-полей winner/reason, а для раундов без `bomb_defused`/`bomb_exploded` — fallback-логикой по `player_death` и ближайшему alive/team state из tick-данных. Нераспознанные раунды получают `end_reason=unknown` и `outcome_confidence=low`.
 - `bomb_events.csv` — объединённая хронология `bomb_*` событий.
 - `player_round_stats.csv` — полный каркас `player × round` с проверяемыми atomic-компонентами для будущих ADR/KAST/Rating: kills/deaths/assists, damage, headshots, shots, bomb plants/defuses и survived.
 
-В `derived_summary.json` дополнительно записывается `round_outcome_validation`, включая количество раундов с `outcome_confidence=low`. Для быстрой проверки через GitHub скрипт также создаёт маленький `debug_pack/derived/`: `summary.json` и samples из первых строк каждой derived-таблицы. Если debug-pack не нужен, его можно отключить пустым значением:
+В `derived_summary.json` дополнительно записываются `round_outcome_validation`, включая количество раундов с `outcome_confidence=low`, и `weapon_fire_filter` с количеством огнестрельных выстрелов и отброшенных из `shots.csv` неогнестрельных `weapon_fire` действий. Для быстрой проверки через GitHub скрипт также создаёт маленький `debug_pack/derived/`: `summary.json` и samples из первых строк каждой derived-таблицы. Если debug-pack не нужен, его можно отключить пустым значением:
 
 ```bash
 python tools/build_derived.py --input output/recheck_raw_v1 --debug-pack ""

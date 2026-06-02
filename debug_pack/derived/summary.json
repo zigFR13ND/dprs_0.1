@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-05-30T10:08:25.817380Z",
+  "built_at": "2026-06-02T12:37:16.851467Z",
   "source_derived_directory": "derived",
   "sample_rows_per_table": 25,
   "tables": [
@@ -108,7 +108,7 @@
     },
     {
       "table": "shots",
-      "rows": 3441,
+      "rows": 2479,
       "columns": [
         "round_number",
         "tick",
@@ -119,6 +119,21 @@
       ],
       "source_path": "derived/shots.csv",
       "sample": "samples/shots_head_25.csv"
+    },
+    {
+      "table": "weapon_actions",
+      "rows": 3441,
+      "columns": [
+        "round_number",
+        "tick",
+        "user_steamid",
+        "user_name",
+        "weapon",
+        "is_firearm_shot",
+        "silenced"
+      ],
+      "source_path": "derived/weapon_actions.csv",
+      "sample": "samples/weapon_actions_head_25.csv"
     },
     {
       "table": "bomb_events",

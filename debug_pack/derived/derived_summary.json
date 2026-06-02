@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-05-30T10:08:25.757468Z",
+  "built_at": "2026-06-02T12:37:16.763881Z",
   "raw_input_directory": ".",
   "derived_output_directory": "derived",
   "tables": [
@@ -104,6 +104,19 @@
     {
       "name": "shots",
       "relative_path": "derived/shots.csv",
+      "rows": 2479,
+      "columns": [
+        "round_number",
+        "tick",
+        "user_steamid",
+        "user_name",
+        "weapon",
+        "silenced"
+      ]
+    },
+    {
+      "name": "weapon_actions",
+      "relative_path": "derived/weapon_actions.csv",
       "rows": 3441,
       "columns": [
         "round_number",
@@ -111,6 +124,7 @@
         "user_steamid",
         "user_name",
         "weapon",
+        "is_firearm_shot",
         "silenced"
       ]
     },
@@ -159,9 +173,9 @@
   ],
   "identifier_normalization": {
     "players": {},
+    "weapon_actions": {},
     "kills": {},
     "damage": {},
-    "shots": {},
     "bomb_events": {}
   },
   "round_outcome_validation": {
@@ -176,5 +190,36 @@
     "closed_timeout": 2,
     "closed_fallback": 0,
     "closed_unknown": 0
+  },
+  "player_round_side_sources": {
+    "tick_data_rows": 0,
+    "fallback_rows": 220
+  },
+  "player_round_participation": {
+    "participation_source": "fallback_all_players",
+    "tick_participation_rows": 0,
+    "fallback_rows": 220,
+    "filtered_rows": 0,
+    "rounds_with_tick_participants": 0,
+    "rounds_with_fallback_all_players": 22
+  },
+  "survived_source_ticks": 0,
+  "survived_source_death_fallback": 220,
+  "weapon_fire_filter": {
+    "weapon_fire_rows": 3441,
+    "firearm_shot_rows": 2479,
+    "non_firearm_action_rows": 962,
+    "non_firearm_weapons": {
+      "weapon_decoy": 5,
+      "weapon_flashbang": 88,
+      "weapon_hegrenade": 71,
+      "weapon_incgrenade": 39,
+      "weapon_knife": 398,
+      "weapon_knife_canis": 33,
+      "weapon_knife_push": 38,
+      "weapon_knife_t": 183,
+      "weapon_molotov": 21,
+      "weapon_smokegrenade": 86
+    }
   }
 }
