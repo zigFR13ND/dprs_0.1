@@ -1,13 +1,4 @@
 round_number,tick,user_steamid,user_name,weapon,silenced
-1,1804,76561199068251294,prosto bo$$,weapon_knife,False
-1,1861,76561199068251294,prosto bo$$,weapon_knife,False
-1,1916,76561199068251294,prosto bo$$,weapon_knife,False
-1,1994,76561199068251294,prosto bo$$,weapon_knife,False
-1,2044,76561199068251294,prosto bo$$,weapon_knife,False
-1,2099,76561199052717313,Worfy,weapon_flashbang,False
-1,2127,76561198171814417,Faat,weapon_flashbang,False
-1,2187,76561198274174345,zig,weapon_flashbang,False
-1,2396,76561199068251294,prosto bo$$,weapon_incgrenade,False
 1,2571,76561199433997570,Simple Dimple skins.army,weapon_usp_silencer,True
 1,2578,76561198171814417,Faat,weapon_glock,False
 1,2587,76561199433997570,Simple Dimple skins.army,weapon_usp_silencer,True
@@ -21,30 +12,20 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 1,2636,76561198171814417,Faat,weapon_glock,False
 1,2639,76561199433997570,Simple Dimple skins.army,weapon_usp_silencer,True
 1,2655,76561199433997570,Simple Dimple skins.army,weapon_usp_silencer,True
-1,2663,76561199557907229,shawty#)$@,weapon_knife,False
-1,2689,76561199557907229,shawty#)$@,weapon_knife,False
-1,2715,76561199557907229,shawty#)$@,weapon_knife,False
 1,2733,76561199433997570,Simple Dimple skins.army,weapon_usp_silencer,True
-1,2740,76561199557907229,shawty#)$@,weapon_knife,False
 1,2741,76561199052717313,Worfy,weapon_glock,False
 1,2751,76561199052717313,Worfy,weapon_glock,False
 1,2753,76561199433997570,Simple Dimple skins.army,weapon_usp_silencer,True
 1,2761,76561199052717313,Worfy,weapon_glock,False
 1,2765,76561199068251294,prosto bo$$,weapon_usp_silencer,True
-1,2766,76561199557907229,shawty#)$@,weapon_knife,False
 1,2770,76561199052717313,Worfy,weapon_glock,False
 1,2771,76561199433997570,Simple Dimple skins.army,weapon_usp_silencer,True
 1,2780,76561199052717313,Worfy,weapon_glock,False
 1,2790,76561199052717313,Worfy,weapon_glock,False
-1,2791,76561199557907229,shawty#)$@,weapon_knife,False
 1,2799,76561199052717313,Worfy,weapon_glock,False
-1,2802,76561199826895670,RME | Пацан,weapon_knife_canis,False
 1,2809,76561199052717313,Worfy,weapon_glock,False
-1,2817,76561199557907229,shawty#)$@,weapon_knife,False
-1,2827,76561199826895670,RME | Пацан,weapon_knife_canis,False
 1,2834,76561199052717313,Worfy,weapon_glock,False
 1,2842,76561199068251294,prosto bo$$,weapon_usp_silencer,True
-1,2843,76561199557907229,shawty#)$@,weapon_knife,False
 1,2847,76561199433997570,Simple Dimple skins.army,weapon_usp_silencer,True
 1,2848,76561198274174345,zig,weapon_glock,False
 1,2850,76561198049602148,Moon,weapon_glock,False
@@ -73,9 +54,7 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 1,3010,76561198049602148,Moon,weapon_glock,False
 1,3027,76561198049602148,Moon,weapon_glock,False
 1,3043,76561198002613044,frees.tyler,weapon_glock,False
-1,3051,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_knife,False
 1,3055,76561198002613044,frees.tyler,weapon_glock,False
-1,3154,76561198002613044,frees.tyler,weapon_hegrenade,False
 1,3285,76561199557907229,shawty#)$@,weapon_p250,False
 1,3307,76561198049602148,Moon,weapon_glock,False
 1,3487,76561198049602148,Moon,weapon_glock,False
@@ -93,25 +72,9 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 1,3669,76561198274174345,zig,weapon_glock,False
 1,3669,76561199052717313,Worfy,weapon_glock,False
 1,3709,76561199052717313,Worfy,weapon_glock,False
-1,3761,76561198002613044,frees.tyler,weapon_smokegrenade,False
-1,3932,76561199052717313,Worfy,weapon_knife_push,False
-1,4186,76561199052717313,Worfy,weapon_knife_push,False
 1,4487,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_usp_silencer,True
 1,4498,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_usp_silencer,True
 1,4509,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_usp_silencer,True
-1,4904,76561199557907229,shawty#)$@,weapon_knife,False
-1,4930,76561199557907229,shawty#)$@,weapon_knife,False
-1,4955,76561199557907229,shawty#)$@,weapon_knife,False
-1,4987,76561199557907229,shawty#)$@,weapon_knife,False
-1,5013,76561199557907229,shawty#)$@,weapon_knife,False
-1,5039,76561199557907229,shawty#)$@,weapon_knife,False
-1,5064,76561199557907229,shawty#)$@,weapon_knife,False
-1,5090,76561199557907229,shawty#)$@,weapon_knife,False
-1,5115,76561199557907229,shawty#)$@,weapon_knife,False
-1,5141,76561199557907229,shawty#)$@,weapon_knife,False
-1,5167,76561199557907229,shawty#)$@,weapon_knife,False
-1,5192,76561199557907229,shawty#)$@,weapon_knife,False
-1,5458,76561199052717313,Worfy,weapon_smokegrenade,False
 1,5717,76561198002613044,frees.tyler,weapon_glock,False
 1,5728,76561199557907229,shawty#)$@,weapon_p250,False
 1,5732,76561198002613044,frees.tyler,weapon_glock,False
@@ -163,39 +126,16 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 1,7014,76561199826895670,RME | Пацан,weapon_usp_silencer,True
 1,7031,76561199826895670,RME | Пацан,weapon_usp_silencer,True
 1,8275,76561199826895670,RME | Пацан,weapon_usp_silencer,True
-2,9584,76561199557907229,shawty#)$@,weapon_knife,False
-2,9610,76561199557907229,shawty#)$@,weapon_knife,False
-2,9680,76561199557907229,shawty#)$@,weapon_knife,False
-2,9706,76561199557907229,shawty#)$@,weapon_knife,False
-2,9738,76561199557907229,shawty#)$@,weapon_knife,False
-2,9743,76561199052717313,Worfy,weapon_knife_push,False
-2,9763,76561199068251294,prosto bo$$,weapon_knife,False
-2,9770,76561199557907229,shawty#)$@,weapon_knife,False
-2,9795,76561199557907229,shawty#)$@,weapon_knife,False
-2,9807,76561199068251294,prosto bo$$,weapon_knife,False
 2,9817,76561198171814417,Faat,weapon_ssg08,False
 2,9823,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ssg08,False
-2,9841,76561199557907229,shawty#)$@,weapon_knife,False
-2,9849,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-2,9866,76561199557907229,shawty#)$@,weapon_knife,False
-2,9873,76561199068251294,prosto bo$$,weapon_knife,False
-2,9892,76561199557907229,shawty#)$@,weapon_knife,False
-2,9909,76561199068251294,prosto bo$$,weapon_knife,False
-2,9944,76561199068251294,prosto bo$$,weapon_knife,False
-2,10005,76561198002613044,frees.tyler,weapon_flashbang,False
-2,10033,76561199068251294,prosto bo$$,weapon_knife,False
 2,10054,76561198171814417,Faat,weapon_ssg08,False
 2,10136,76561199052717313,Worfy,weapon_deagle,False
 2,10162,76561199068251294,prosto bo$$,weapon_m4a1_silencer,True
 2,10169,76561199068251294,prosto bo$$,weapon_m4a1_silencer,True
 2,10188,76561198171814417,Faat,weapon_ssg08,False
 2,10203,76561199052717313,Worfy,weapon_deagle,False
-2,10204,76561199557907229,shawty#)$@,weapon_incgrenade,False
-2,10256,76561198002613044,frees.tyler,weapon_flashbang,False
-2,10281,76561198049602148,Moon,weapon_smokegrenade,False
 2,10607,76561198171814417,Faat,weapon_ssg08,False
 2,10827,76561198049602148,Moon,weapon_mp7,False
-2,10860,76561199052717313,Worfy,weapon_knife_push,False
 2,11087,76561198049602148,Moon,weapon_mp7,False
 2,11092,76561198049602148,Moon,weapon_mp7,False
 2,11098,76561198049602148,Moon,weapon_mp7,False
@@ -213,39 +153,24 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 2,11144,76561198049602148,Moon,weapon_mp7,False
 2,11149,76561198049602148,Moon,weapon_mp7,False
 2,11154,76561198049602148,Moon,weapon_mp7,False
-2,11158,76561198002613044,frees.tyler,weapon_hegrenade,False
 2,11159,76561198049602148,Moon,weapon_mp7,False
-2,11198,76561199557907229,shawty#)$@,weapon_smokegrenade,False
-2,11330,76561199557907229,shawty#)$@,weapon_knife,False
-2,11356,76561199557907229,shawty#)$@,weapon_knife,False
-2,11382,76561199557907229,shawty#)$@,weapon_knife,False
-2,11407,76561199557907229,shawty#)$@,weapon_knife,False
 2,11429,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
-2,11433,76561199557907229,shawty#)$@,weapon_knife,False
 2,11436,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
 2,11441,76561198274174345,zig,weapon_tec9,False
 2,11442,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
 2,11449,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
 2,11452,76561198274174345,zig,weapon_tec9,False
 2,11455,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
-2,11458,76561199557907229,shawty#)$@,weapon_knife,False
 2,11461,76561198274174345,zig,weapon_tec9,False
 2,11461,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
 2,11468,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
 2,11474,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
 2,11481,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
-2,11484,76561199557907229,shawty#)$@,weapon_knife,False
 2,11487,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
-2,11510,76561199557907229,shawty#)$@,weapon_knife,False
-2,11535,76561199557907229,shawty#)$@,weapon_knife,False
-2,11554,76561198002613044,frees.tyler,weapon_smokegrenade,False
-2,11554,76561199068251294,prosto bo$$,weapon_knife,False
-2,11561,76561199557907229,shawty#)$@,weapon_knife,False
 2,11578,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
 2,11585,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
 2,11591,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
 2,11598,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
-2,11600,76561199068251294,prosto bo$$,weapon_knife,False
 2,12075,76561199557907229,shawty#)$@,weapon_mp9,False
 2,12079,76561199557907229,shawty#)$@,weapon_mp9,False
 2,12084,76561199557907229,shawty#)$@,weapon_mp9,False
@@ -271,7 +196,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 2,12173,76561199557907229,shawty#)$@,weapon_mp9,False
 2,12178,76561199557907229,shawty#)$@,weapon_mp9,False
 2,12182,76561199557907229,shawty#)$@,weapon_mp9,False
-2,12185,76561199068251294,prosto bo$$,weapon_knife,False
 2,12187,76561199557907229,shawty#)$@,weapon_mp9,False
 2,12191,76561199557907229,shawty#)$@,weapon_mp9,False
 2,12196,76561199557907229,shawty#)$@,weapon_mp9,False
@@ -286,27 +210,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 2,12671,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
 2,12690,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
 2,12697,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
-2,12814,76561199068251294,prosto bo$$,weapon_knife,False
-2,13002,76561199557907229,shawty#)$@,weapon_knife,False
-2,13027,76561199557907229,shawty#)$@,weapon_knife,False
-2,13053,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-2,13053,76561199557907229,shawty#)$@,weapon_knife,False
-2,13078,76561199557907229,shawty#)$@,weapon_knife,False
-2,13097,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-2,13104,76561199557907229,shawty#)$@,weapon_knife,False
-2,13136,76561199557907229,shawty#)$@,weapon_knife,False
-2,13162,76561199557907229,shawty#)$@,weapon_knife,False
-2,13194,76561199557907229,shawty#)$@,weapon_knife,False
-2,13219,76561199557907229,shawty#)$@,weapon_knife,False
-2,13245,76561199557907229,shawty#)$@,weapon_knife,False
-2,13270,76561199557907229,shawty#)$@,weapon_knife,False
-2,13302,76561199557907229,shawty#)$@,weapon_knife,False
-2,13334,76561199557907229,shawty#)$@,weapon_knife,False
-2,13360,76561199557907229,shawty#)$@,weapon_knife,False
-2,13418,76561199068251294,prosto bo$$,weapon_knife,False
-2,13478,76561199068251294,prosto bo$$,weapon_knife,False
-2,13543,76561199068251294,prosto bo$$,weapon_knife,False
-2,13819,76561199068251294,prosto bo$$,weapon_knife,False
 2,14259,76561198049602148,Moon,weapon_mp7,False
 2,14264,76561198049602148,Moon,weapon_mp7,False
 2,14268,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
@@ -314,7 +217,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 2,14274,76561198049602148,Moon,weapon_mp7,False
 2,14274,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
 2,14279,76561198049602148,Moon,weapon_mp7,False
-2,14283,76561199557907229,shawty#)$@,weapon_flashbang,False
 2,14284,76561198049602148,Moon,weapon_mp7,False
 2,14289,76561198049602148,Moon,weapon_mp7,False
 2,14294,76561198049602148,Moon,weapon_mp7,False
@@ -377,19 +279,12 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 2,14975,76561198002613044,frees.tyler,weapon_mp9,False
 2,14980,76561198002613044,frees.tyler,weapon_mp9,False
 2,14984,76561198002613044,frees.tyler,weapon_mp9,False
-3,16682,76561199826895670,RME | Пацан,weapon_knife_canis,False
-3,16771,76561199557907229,shawty#)$@,weapon_knife,False
-3,16797,76561199557907229,shawty#)$@,weapon_knife,False
 3,16875,76561199068251294,prosto bo$$,weapon_deagle,False
 3,16940,76561198171814417,Faat,weapon_ssg08,False
 3,16978,76561199068251294,prosto bo$$,weapon_deagle,False
 3,17023,76561199068251294,prosto bo$$,weapon_deagle,False
 3,17030,76561199433997570,Simple Dimple skins.army,weapon_deagle,False
 3,17056,76561199068251294,prosto bo$$,weapon_deagle,False
-3,17116,76561199557907229,shawty#)$@,weapon_smokegrenade,False
-3,17133,76561198049602148,Moon,weapon_flashbang,False
-3,17281,76561198049602148,Moon,weapon_flashbang,False
-3,17284,76561199068251294,prosto bo$$,weapon_knife,False
 3,17326,76561198274174345,zig,weapon_galilar,False
 3,17326,76561199826895670,RME | Пацан,weapon_m4a1_silencer,True
 3,17331,76561198274174345,zig,weapon_galilar,False
@@ -404,14 +299,11 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 3,17358,76561199826895670,RME | Пацан,weapon_m4a1_silencer,True
 3,17364,76561199826895670,RME | Пацан,weapon_m4a1_silencer,True
 3,17371,76561199826895670,RME | Пацан,weapon_m4a1_silencer,True
-3,17393,76561199433997570,Simple Dimple skins.army,weapon_hegrenade,False
 3,17418,76561199826895670,RME | Пацан,weapon_m4a1_silencer,True
 3,17425,76561199826895670,RME | Пацан,weapon_m4a1_silencer,True
 3,17431,76561199826895670,RME | Пацан,weapon_m4a1_silencer,True
 3,17437,76561199826895670,RME | Пацан,weapon_m4a1_silencer,True
-3,17479,76561199068251294,prosto bo$$,weapon_knife,False
 3,17540,76561198002613044,frees.tyler,weapon_mp9,False
-3,17543,76561199052717313,Worfy,weapon_smokegrenade,False
 3,17544,76561198002613044,frees.tyler,weapon_mp9,False
 3,17549,76561198002613044,frees.tyler,weapon_mp9,False
 3,17553,76561198002613044,frees.tyler,weapon_mp9,False
@@ -420,7 +312,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 3,17566,76561198002613044,frees.tyler,weapon_mp9,False
 3,17571,76561198002613044,frees.tyler,weapon_mp9,False
 3,17575,76561198002613044,frees.tyler,weapon_mp9,False
-3,17577,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_knife,False
 3,17580,76561198002613044,frees.tyler,weapon_mp9,False
 3,17584,76561198002613044,frees.tyler,weapon_mp9,False
 3,17589,76561198002613044,frees.tyler,weapon_mp9,False
@@ -439,9 +330,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 3,17647,76561198002613044,frees.tyler,weapon_mp9,False
 3,17652,76561198002613044,frees.tyler,weapon_mp9,False
 3,17656,76561198002613044,frees.tyler,weapon_mp9,False
-3,17670,76561199052717313,Worfy,weapon_knife_push,False
-3,17732,76561199433997570,Simple Dimple skins.army,weapon_flashbang,False
-3,17812,76561198002613044,frees.tyler,weapon_flashbang,False
 3,18025,76561199433997570,Simple Dimple skins.army,weapon_deagle,False
 3,18038,76561199052717313,Worfy,weapon_ak47,False
 3,18045,76561199052717313,Worfy,weapon_ak47,False
@@ -465,25 +353,13 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 3,18106,76561198049602148,Moon,weapon_m4a1_silencer,True
 3,18113,76561198049602148,Moon,weapon_m4a1_silencer,True
 3,18119,76561198049602148,Moon,weapon_m4a1_silencer,True
-3,18194,76561198002613044,frees.tyler,weapon_smokegrenade,False
 3,18268,76561199052717313,Worfy,weapon_ak47,False
 3,18274,76561199052717313,Worfy,weapon_ak47,False
-3,18939,76561199068251294,prosto bo$$,weapon_knife,False
-3,19097,76561198002613044,frees.tyler,weapon_hegrenade,False
-3,19324,76561199826895670,RME | Пацан,weapon_smokegrenade,False
-3,19448,76561198002613044,frees.tyler,weapon_molotov,False
-3,19824,76561198049602148,Moon,weapon_smokegrenade,False
-3,20200,76561199052717313,Worfy,weapon_knife_push,False
-3,20227,76561199052717313,Worfy,weapon_knife_push,False
-3,20255,76561199052717313,Worfy,weapon_knife_push,False
 3,20272,76561199068251294,prosto bo$$,weapon_deagle,False
 3,20275,76561198002613044,frees.tyler,weapon_mp9,False
 3,20280,76561198002613044,frees.tyler,weapon_mp9,False
-3,20283,76561199052717313,Worfy,weapon_knife_push,False
 3,20284,76561198002613044,frees.tyler,weapon_mp9,False
 3,20296,76561199068251294,prosto bo$$,weapon_deagle,False
-3,20312,76561199052717313,Worfy,weapon_knife_push,False
-3,20342,76561199052717313,Worfy,weapon_knife_push,False
 3,20713,76561198171814417,Faat,weapon_ssg08,False
 3,20731,76561199068251294,prosto bo$$,weapon_deagle,False
 3,20782,76561199068251294,prosto bo$$,weapon_deagle,False
@@ -514,10 +390,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 3,21669,76561198049602148,Moon,weapon_m4a1_silencer,True
 3,21678,76561199068251294,prosto bo$$,weapon_deagle,False
 3,21679,76561199826895670,RME | Пацан,weapon_m4a1_silencer,True
-3,21779,76561198049602148,Moon,weapon_hegrenade,False
-3,21810,76561199052717313,Worfy,weapon_knife_push,False
-3,21840,76561198171814417,Faat,weapon_hegrenade,False
-3,21989,76561199052717313,Worfy,weapon_flashbang,False
 3,22129,76561199826895670,RME | Пацан,weapon_m4a1_silencer,True
 3,22135,76561199826895670,RME | Пацан,weapon_m4a1_silencer,True
 3,22141,76561199826895670,RME | Пацан,weapon_m4a1_silencer,True
@@ -539,16 +411,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 3,22447,76561199052717313,Worfy,weapon_ak47,False
 3,22453,76561199052717313,Worfy,weapon_ak47,False
 3,22459,76561199052717313,Worfy,weapon_ak47,False
-3,22597,76561199052717313,Worfy,weapon_knife_push,False
-4,24215,76561199068251294,prosto bo$$,weapon_knife,False
-4,24324,76561199068251294,prosto bo$$,weapon_knife,False
-4,24455,76561199826895670,RME | Пацан,weapon_knife_canis,False
-4,24463,76561199068251294,prosto bo$$,weapon_knife,False
-4,24480,76561199826895670,RME | Пацан,weapon_knife_canis,False
-4,24506,76561199826895670,RME | Пацан,weapon_knife_canis,False
-4,24524,76561198274174345,zig,weapon_flashbang,False
-4,24579,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_smokegrenade,False
-4,24667,76561198274174345,zig,weapon_flashbang,False
 4,24695,76561198002613044,frees.tyler,weapon_galilar,False
 4,24700,76561198002613044,frees.tyler,weapon_galilar,False
 4,24703,76561199068251294,prosto bo$$,weapon_mp7,False
@@ -560,7 +422,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 4,24718,76561199068251294,prosto bo$$,weapon_mp7,False
 4,24723,76561198002613044,frees.tyler,weapon_galilar,False
 4,24723,76561199068251294,prosto bo$$,weapon_mp7,False
-4,24728,76561199557907229,shawty#)$@,weapon_knife,False
 4,24728,76561199068251294,prosto bo$$,weapon_mp7,False
 4,24729,76561198002613044,frees.tyler,weapon_galilar,False
 4,24734,76561198049602148,Moon,weapon_m4a1_silencer,True
@@ -575,7 +436,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 4,24749,76561199068251294,prosto bo$$,weapon_mp7,False
 4,24752,76561198002613044,frees.tyler,weapon_galilar,False
 4,24753,76561198049602148,Moon,weapon_m4a1_silencer,True
-4,24753,76561199557907229,shawty#)$@,weapon_knife,False
 4,24754,76561199068251294,prosto bo$$,weapon_mp7,False
 4,24758,76561198002613044,frees.tyler,weapon_galilar,False
 4,24759,76561198049602148,Moon,weapon_m4a1_silencer,True
@@ -589,7 +449,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 4,24775,76561198002613044,frees.tyler,weapon_galilar,False
 4,24775,76561199068251294,prosto bo$$,weapon_mp7,False
 4,24778,76561198049602148,Moon,weapon_m4a1_silencer,True
-4,24779,76561199557907229,shawty#)$@,weapon_knife,False
 4,24780,76561199068251294,prosto bo$$,weapon_mp7,False
 4,24781,76561199826895670,RME | Пацан,weapon_m4a1,False
 4,24785,76561198049602148,Moon,weapon_m4a1_silencer,True
@@ -598,7 +457,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 4,24790,76561199068251294,prosto bo$$,weapon_mp7,False
 4,24791,76561198049602148,Moon,weapon_m4a1_silencer,True
 4,24793,76561198002613044,frees.tyler,weapon_galilar,False
-4,24793,76561199433997570,Simple Dimple skins.army,weapon_flashbang,False
 4,24793,76561199826895670,RME | Пацан,weapon_m4a1,False
 4,24795,76561199068251294,prosto bo$$,weapon_mp7,False
 4,24798,76561198049602148,Moon,weapon_m4a1_silencer,True
@@ -634,14 +492,11 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 4,24874,76561199826895670,RME | Пацан,weapon_m4a1,False
 4,24880,76561199826895670,RME | Пацан,weapon_m4a1,False
 4,24886,76561199826895670,RME | Пацан,weapon_m4a1,False
-4,24888,76561199557907229,shawty#)$@,weapon_flashbang,False
 4,24892,76561199826895670,RME | Пацан,weapon_m4a1,False
 4,24897,76561199826895670,RME | Пацан,weapon_m4a1,False
 4,25465,76561199433997570,Simple Dimple skins.army,weapon_deagle,False
 4,25480,76561198171814417,Faat,weapon_ssg08,False
 4,25500,76561199433997570,Simple Dimple skins.army,weapon_deagle,False
-4,25624,76561199826895670,RME | Пацан,weapon_smokegrenade,False
-4,25742,76561199557907229,shawty#)$@,weapon_smokegrenade,False
 4,25851,76561199826895670,RME | Пацан,weapon_m4a1,False
 4,25853,76561198274174345,zig,weapon_ak47,False
 4,25856,76561199826895670,RME | Пацан,weapon_m4a1,False
@@ -656,18 +511,8 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 4,25891,76561198274174345,zig,weapon_ak47,False
 4,25898,76561198274174345,zig,weapon_ak47,False
 4,25904,76561198274174345,zig,weapon_ak47,False
-4,26129,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_hegrenade,False
 4,26170,76561198171814417,Faat,weapon_ssg08,False
-4,26366,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_flashbang,False
-4,26547,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-4,26597,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-4,26681,76561199557907229,shawty#)$@,weapon_knife,False
-4,26706,76561199557907229,shawty#)$@,weapon_knife,False
-4,26732,76561199557907229,shawty#)$@,weapon_knife,False
-4,26758,76561199557907229,shawty#)$@,weapon_knife,False
 4,26806,76561198171814417,Faat,weapon_ssg08,False
-4,26982,76561199433997570,Simple Dimple skins.army,weapon_hegrenade,False
-4,27373,76561198274174345,zig,weapon_smokegrenade,False
 4,27408,76561199557907229,shawty#)$@,weapon_deagle,False
 4,27412,76561198171814417,Faat,weapon_ssg08,False
 4,27541,76561199433997570,Simple Dimple skins.army,weapon_deagle,False
@@ -679,31 +524,14 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 4,27601,76561199052717313,Worfy,weapon_ak47,False
 4,27607,76561199052717313,Worfy,weapon_ak47,False
 4,27614,76561198171814417,Faat,weapon_ssg08,False
-4,27791,76561198171814417,Faat,weapon_smokegrenade,False
-4,28070,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-4,28116,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-4,28205,76561198274174345,zig,weapon_molotov,False
 4,28854,76561198171814417,Faat,weapon_ssg08,False
-4,29169,76561199052717313,Worfy,weapon_knife_push,False
-5,30754,76561199052717313,Worfy,weapon_knife_push,False
-5,30859,76561199826895670,RME | Пацан,weapon_knife_canis,False
-5,30860,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-5,30885,76561199826895670,RME | Пацан,weapon_knife_canis,False
-5,30911,76561199826895670,RME | Пацан,weapon_knife_canis,False
-5,30956,76561198274174345,zig,weapon_smokegrenade,False
 5,30973,76561198171814417,Faat,weapon_ssg08,False
 5,30982,76561199068251294,prosto bo$$,weapon_ssg08,False
-5,31029,76561199433997570,Simple Dimple skins.army,weapon_knife,False
 5,31080,76561199068251294,prosto bo$$,weapon_ssg08,False
-5,31111,76561199826895670,RME | Пацан,weapon_incgrenade,False
-5,31129,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_flashbang,False
 5,31222,76561199068251294,prosto bo$$,weapon_ssg08,False
 5,31325,76561198171814417,Faat,weapon_ssg08,False
-5,31327,76561199052717313,Worfy,weapon_smokegrenade,False
 5,31336,76561199068251294,prosto bo$$,weapon_ssg08,False
-5,31433,76561199826895670,RME | Пацан,weapon_smokegrenade,False
 5,31446,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_mp9,False
-5,31448,76561199052717313,Worfy,weapon_knife_push,False
 5,31451,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_mp9,False
 5,31455,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_mp9,False
 5,31460,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_mp9,False
@@ -728,7 +556,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 5,31536,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_mp9,False
 5,31540,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_mp9,False
 5,31545,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_mp9,False
-5,31547,76561199052717313,Worfy,weapon_knife_push,False
 5,31549,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_mp9,False
 5,31567,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
 5,31572,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
@@ -737,7 +564,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 5,31605,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
 5,31611,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
 5,31642,76561199068251294,prosto bo$$,weapon_ssg08,False
-5,31679,76561199052717313,Worfy,weapon_knife_push,False
 5,31688,76561198002613044,frees.tyler,weapon_ak47,False
 5,31694,76561198002613044,frees.tyler,weapon_ak47,False
 5,31701,76561198002613044,frees.tyler,weapon_ak47,False
@@ -764,9 +590,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 5,31831,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
 5,31836,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
 5,31842,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
-5,32035,76561199557907229,shawty#)$@,weapon_smokegrenade,False
-5,32150,76561199433997570,Simple Dimple skins.army,weapon_hegrenade,False
-5,32230,76561198049602148,Moon,weapon_hegrenade,False
 5,32351,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
 5,32357,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
 5,32363,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
@@ -803,40 +626,15 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 5,32673,76561199052717313,Worfy,weapon_ak47,False
 5,33002,76561199052717313,Worfy,weapon_ak47,False
 5,33009,76561199052717313,Worfy,weapon_ak47,False
-5,33146,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_hegrenade,False
 5,33527,76561199068251294,prosto bo$$,weapon_ssg08,False
-5,33634,76561199068251294,prosto bo$$,weapon_knife,False
-5,33664,76561199826895670,RME | Пацан,weapon_knife_canis,False
-5,33696,76561199826895670,RME | Пацан,weapon_knife_canis,False
 5,33706,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_usp_silencer,True
-5,33733,76561199826895670,RME | Пацан,weapon_knife_canis,False
 5,33769,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_usp_silencer,True
-5,33805,76561199826895670,RME | Пацан,weapon_knife_canis,False
 5,33826,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_usp_silencer,True
 5,33882,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_usp_silencer,True
 5,33960,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_usp_silencer,True
 6,35496,76561198171814417,Faat,weapon_awp,False
-6,35501,76561199557907229,shawty#)$@,weapon_knife,False
-6,35527,76561199557907229,shawty#)$@,weapon_knife,False
-6,35552,76561199557907229,shawty#)$@,weapon_knife,False
-6,35578,76561199557907229,shawty#)$@,weapon_knife,False
-6,35601,76561198002613044,frees.tyler,weapon_decoy,False
-6,35730,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-6,35733,76561199826895670,RME | Пацан,weapon_smokegrenade,False
-6,35739,76561198002613044,frees.tyler,weapon_flashbang,False
-6,35842,76561199557907229,shawty#)$@,weapon_incgrenade,False
-6,35857,76561199052717313,Worfy,weapon_smokegrenade,False
-6,35931,76561199557907229,shawty#)$@,weapon_knife,False
-6,35957,76561199557907229,shawty#)$@,weapon_knife,False
-6,35982,76561199557907229,shawty#)$@,weapon_knife,False
-6,35999,76561199052717313,Worfy,weapon_knife_push,False
-6,36008,76561199557907229,shawty#)$@,weapon_knife,False
-6,36033,76561199557907229,shawty#)$@,weapon_knife,False
-6,36059,76561199557907229,shawty#)$@,weapon_knife,False
-6,36085,76561199557907229,shawty#)$@,weapon_knife,False
 6,36107,76561198274174345,zig,weapon_ak47,False
 6,36108,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_m4a1_silencer,True
-6,36110,76561199557907229,shawty#)$@,weapon_knife,False
 6,36114,76561198274174345,zig,weapon_ak47,False
 6,36115,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_m4a1_silencer,True
 6,36120,76561198274174345,zig,weapon_ak47,False
@@ -846,9 +644,7 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 6,36134,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_m4a1_silencer,True
 6,36140,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_m4a1_silencer,True
 6,36147,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_m4a1_silencer,True
-6,36197,76561199052717313,Worfy,weapon_knife_push,False
 6,36225,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
-6,36234,76561199557907229,shawty#)$@,weapon_hegrenade,False
 6,36239,76561198049602148,Moon,weapon_ak47,False
 6,36243,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 6,36245,76561198049602148,Moon,weapon_ak47,False
@@ -857,14 +653,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 6,36258,76561198049602148,Moon,weapon_ak47,False
 6,36265,76561198049602148,Moon,weapon_ak47,False
 6,36271,76561198049602148,Moon,weapon_ak47,False
-6,36303,76561199068251294,prosto bo$$,weapon_hegrenade,False
-6,36308,76561198002613044,frees.tyler,weapon_hegrenade,False
-6,36410,76561199557907229,shawty#)$@,weapon_flashbang,False
-6,36457,76561198002613044,frees.tyler,weapon_molotov,False
-6,36567,76561199557907229,shawty#)$@,weapon_smokegrenade,False
-6,36569,76561199068251294,prosto bo$$,weapon_knife,False
-6,36635,76561199068251294,prosto bo$$,weapon_knife,False
-6,36872,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_incgrenade,False
 6,37019,76561199052717313,Worfy,weapon_ak47,False
 6,37053,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 6,37059,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
@@ -887,37 +675,19 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 6,37176,76561199052717313,Worfy,weapon_ak47,False
 6,37183,76561199052717313,Worfy,weapon_ak47,False
 6,37189,76561199052717313,Worfy,weapon_ak47,False
-6,37225,76561199068251294,prosto bo$$,weapon_knife,False
-6,37232,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_hegrenade,False
-6,37234,76561199557907229,shawty#)$@,weapon_knife,False
-6,37260,76561199557907229,shawty#)$@,weapon_knife,False
-6,37271,76561199068251294,prosto bo$$,weapon_knife,False
-6,37285,76561199826895670,RME | Пацан,weapon_knife_canis,False
-6,37285,76561199557907229,shawty#)$@,weapon_knife,False
 6,37293,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 6,37300,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 6,37306,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
-6,37311,76561199826895670,RME | Пацан,weapon_knife_canis,False
 6,37312,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 6,37319,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 6,37325,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
-6,37328,76561199068251294,prosto bo$$,weapon_knife,False
 6,37332,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
-6,37336,76561199826895670,RME | Пацан,weapon_knife_canis,False
-6,37362,76561199826895670,RME | Пацан,weapon_knife_canis,False
-6,37364,76561198002613044,frees.tyler,weapon_smokegrenade,False
-6,37375,76561199557907229,shawty#)$@,weapon_knife,False
-6,37401,76561199557907229,shawty#)$@,weapon_knife,False
-6,37420,76561199068251294,prosto bo$$,weapon_knife,False
-6,37426,76561199557907229,shawty#)$@,weapon_knife,False
 6,37445,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 6,37451,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
-6,37452,76561199557907229,shawty#)$@,weapon_knife,False
 6,37457,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 6,37464,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 6,37470,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 6,37477,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
-6,37477,76561199557907229,shawty#)$@,weapon_knife,False
 6,37483,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 6,37497,76561198002613044,frees.tyler,weapon_ak47,False
 6,37501,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
@@ -929,13 +699,10 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 6,37527,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 6,37533,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 6,37540,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
-6,37710,76561199068251294,prosto bo$$,weapon_smokegrenade,False
-6,37854,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_smokegrenade,False
 6,38262,76561198049602148,Moon,weapon_ak47,False
 6,38269,76561198049602148,Moon,weapon_ak47,False
 6,38275,76561198049602148,Moon,weapon_ak47,False
 6,38282,76561198049602148,Moon,weapon_ak47,False
-6,38317,76561199557907229,shawty#)$@,weapon_flashbang,False
 6,38361,76561199826895670,RME | Пацан,weapon_ak47,False
 6,38367,76561198049602148,Moon,weapon_ak47,False
 6,38368,76561199826895670,RME | Пацан,weapon_ak47,False
@@ -954,92 +721,37 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 6,38431,76561199826895670,RME | Пацан,weapon_ak47,False
 6,38437,76561199826895670,RME | Пацан,weapon_ak47,False
 6,38555,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
-6,38575,76561199826895670,RME | Пацан,weapon_knife_canis,False
-6,38724,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-6,38769,76561199433997570,Simple Dimple skins.army,weapon_knife,False
 6,39275,76561199826895670,RME | Пацан,weapon_ak47,False
 6,39285,76561198171814417,Faat,weapon_awp,False
 6,39307,76561199826895670,RME | Пацан,weapon_ak47,False
 6,39314,76561199826895670,RME | Пацан,weapon_ak47,False
 6,39404,76561198171814417,Faat,weapon_awp,False
-6,39442,76561199557907229,shawty#)$@,weapon_knife,False
-6,39471,76561199068251294,prosto bo$$,weapon_knife,False
-6,39474,76561199557907229,shawty#)$@,weapon_knife,False
 6,39481,76561199826895670,RME | Пацан,weapon_ak47,False
 6,39487,76561199826895670,RME | Пацан,weapon_ak47,False
 6,39494,76561199826895670,RME | Пацан,weapon_ak47,False
-6,39496,76561199068251294,prosto bo$$,weapon_knife,False
-6,39506,76561199557907229,shawty#)$@,weapon_knife,False
-6,39528,76561199068251294,prosto bo$$,weapon_knife,False
 6,39529,76561199826895670,RME | Пацан,weapon_ak47,False
 6,39535,76561199826895670,RME | Пацан,weapon_ak47,False
-6,39538,76561199557907229,shawty#)$@,weapon_knife,False
 6,39542,76561199826895670,RME | Пацан,weapon_ak47,False
-6,39570,76561199557907229,shawty#)$@,weapon_knife,False
-6,39586,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-6,39602,76561199557907229,shawty#)$@,weapon_knife,False
 6,39615,76561199826895670,RME | Пацан,weapon_ak47,False
 6,39620,76561198171814417,Faat,weapon_p250,False
 6,39621,76561199826895670,RME | Пацан,weapon_ak47,False
-6,39624,76561199068251294,prosto bo$$,weapon_knife,False
 6,39628,76561199826895670,RME | Пацан,weapon_ak47,False
-6,39628,76561199557907229,shawty#)$@,weapon_knife,False
 6,39634,76561198171814417,Faat,weapon_p250,False
 6,39634,76561199826895670,RME | Пацан,weapon_ak47,False
-6,39635,76561199433997570,Simple Dimple skins.army,weapon_knife,False
 6,39640,76561199826895670,RME | Пацан,weapon_ak47,False
 6,39648,76561198171814417,Faat,weapon_p250,False
-6,39654,76561199557907229,shawty#)$@,weapon_knife,False
 6,39659,76561199826895670,RME | Пацан,weapon_ak47,False
 6,39661,76561198171814417,Faat,weapon_p250,False
 6,39665,76561199826895670,RME | Пацан,weapon_ak47,False
 6,39671,76561199826895670,RME | Пацан,weapon_ak47,False
 6,39678,76561199826895670,RME | Пацан,weapon_ak47,False
-6,39743,76561199557907229,shawty#)$@,weapon_knife,False
-6,39769,76561199557907229,shawty#)$@,weapon_knife,False
-6,39794,76561199557907229,shawty#)$@,weapon_knife,False
-6,39854,76561199068251294,prosto bo$$,weapon_knife,False
-6,39955,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-6,39955,76561199068251294,prosto bo$$,weapon_knife,False
-6,39994,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-6,40044,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-6,40102,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-6,40109,76561199557907229,shawty#)$@,weapon_knife,False
-7,41418,76561199557907229,shawty#)$@,weapon_knife,False
-7,41444,76561199557907229,shawty#)$@,weapon_knife,False
-7,41470,76561199557907229,shawty#)$@,weapon_knife,False
-7,41479,76561199052717313,Worfy,weapon_knife_push,False
-7,41495,76561199557907229,shawty#)$@,weapon_knife,False
-7,41521,76561199557907229,shawty#)$@,weapon_knife,False
-7,41546,76561199557907229,shawty#)$@,weapon_knife,False
-7,41572,76561199557907229,shawty#)$@,weapon_knife,False
-7,41598,76561199557907229,shawty#)$@,weapon_knife,False
-7,41623,76561199557907229,shawty#)$@,weapon_knife,False
-7,41649,76561199557907229,shawty#)$@,weapon_knife,False
-7,41674,76561199557907229,shawty#)$@,weapon_knife,False
-7,41700,76561199557907229,shawty#)$@,weapon_knife,False
-7,41721,76561198002613044,frees.tyler,weapon_flashbang,False
-7,41846,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-7,41906,76561198002613044,frees.tyler,weapon_flashbang,False
-7,41961,76561199557907229,shawty#)$@,weapon_incgrenade,False
-7,41984,76561198049602148,Moon,weapon_flashbang,False
-7,42039,76561199433997570,Simple Dimple skins.army,weapon_flashbang,False
 7,42077,76561199826895670,RME | Пацан,weapon_awp,False
-7,42092,76561199557907229,shawty#)$@,weapon_knife,False
-7,42118,76561199557907229,shawty#)$@,weapon_knife,False
-7,42143,76561199557907229,shawty#)$@,weapon_knife,False
 7,42232,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 7,42238,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 7,42245,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 7,42251,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
-7,42262,76561199557907229,shawty#)$@,weapon_hegrenade,False
-7,42333,76561199826895670,RME | Пацан,weapon_hegrenade,False
-7,42367,76561199557907229,shawty#)$@,weapon_knife,False
-7,42393,76561199557907229,shawty#)$@,weapon_knife,False
-7,42419,76561199557907229,shawty#)$@,weapon_knife,False
 7,42434,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_m4a1,False
 7,42440,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_m4a1,False
-7,42444,76561199557907229,shawty#)$@,weapon_knife,False
 7,42445,76561198171814417,Faat,weapon_mp7,False
 7,42446,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_m4a1,False
 7,42450,76561198171814417,Faat,weapon_mp7,False
@@ -1050,12 +762,10 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 7,42463,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_m4a1,False
 7,42466,76561198171814417,Faat,weapon_mp7,False
 7,42469,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_m4a1,False
-7,42470,76561199557907229,shawty#)$@,weapon_knife,False
 7,42475,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_m4a1,False
 7,42480,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_m4a1,False
 7,42486,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_m4a1,False
 7,42492,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_m4a1,False
-7,42495,76561199557907229,shawty#)$@,weapon_knife,False
 7,42498,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_m4a1,False
 7,42517,76561199052717313,Worfy,weapon_mac10,False
 7,42522,76561199052717313,Worfy,weapon_mac10,False
@@ -1079,7 +789,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 7,42585,76561199052717313,Worfy,weapon_mac10,False
 7,42589,76561199052717313,Worfy,weapon_mac10,False
 7,42599,76561198274174345,zig,weapon_mac10,False
-7,42640,76561199557907229,shawty#)$@,weapon_knife,False
 7,42715,76561198274174345,zig,weapon_mac10,False
 7,42720,76561198274174345,zig,weapon_mac10,False
 7,42720,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
@@ -1105,8 +814,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 7,42782,76561198274174345,zig,weapon_mac10,False
 7,42787,76561198274174345,zig,weapon_mac10,False
 7,42792,76561198274174345,zig,weapon_mac10,False
-7,42881,76561199557907229,shawty#)$@,weapon_flashbang,False
-7,42922,76561199826895670,RME | Пацан,weapon_incgrenade,False
 7,43405,76561199052717313,Worfy,weapon_mac10,False
 7,43410,76561199052717313,Worfy,weapon_mac10,False
 7,43415,76561199052717313,Worfy,weapon_mac10,False
@@ -1119,51 +826,15 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 7,43451,76561199557907229,shawty#)$@,weapon_ak47,False
 7,43457,76561199557907229,shawty#)$@,weapon_ak47,False
 7,43463,76561199557907229,shawty#)$@,weapon_ak47,False
-7,43533,76561199557907229,shawty#)$@,weapon_knife,False
 7,43546,76561198274174345,zig,weapon_m4a1,False
 7,43552,76561198274174345,zig,weapon_m4a1,False
 7,43558,76561198274174345,zig,weapon_m4a1,False
-7,43559,76561199557907229,shawty#)$@,weapon_knife,False
 7,43563,76561198274174345,zig,weapon_m4a1,False
 7,43569,76561198274174345,zig,weapon_m4a1,False
 7,43575,76561198274174345,zig,weapon_m4a1,False
 7,43581,76561198274174345,zig,weapon_m4a1,False
-7,43585,76561199557907229,shawty#)$@,weapon_knife,False
 7,43592,76561198274174345,zig,weapon_m4a1,False
 7,43598,76561198274174345,zig,weapon_m4a1,False
-7,43602,76561199052717313,Worfy,weapon_hegrenade,False
-7,43830,76561199826895670,RME | Пацан,weapon_smokegrenade,False
-7,44004,76561199052717313,Worfy,weapon_knife_push,False
-7,44119,76561199052717313,Worfy,weapon_knife_push,False
-7,45047,76561199557907229,shawty#)$@,weapon_knife,False
-7,45073,76561199557907229,shawty#)$@,weapon_knife,False
-7,45098,76561199557907229,shawty#)$@,weapon_knife,False
-7,45124,76561199557907229,shawty#)$@,weapon_knife,False
-7,45150,76561199557907229,shawty#)$@,weapon_knife,False
-7,45175,76561199557907229,shawty#)$@,weapon_knife,False
-7,45201,76561199557907229,shawty#)$@,weapon_knife,False
-7,45226,76561199557907229,shawty#)$@,weapon_knife,False
-7,45252,76561199557907229,shawty#)$@,weapon_knife,False
-7,45278,76561199557907229,shawty#)$@,weapon_knife,False
-7,45303,76561199557907229,shawty#)$@,weapon_knife,False
-7,45329,76561199557907229,shawty#)$@,weapon_knife,False
-7,45354,76561199557907229,shawty#)$@,weapon_knife,False
-7,45380,76561199557907229,shawty#)$@,weapon_knife,False
-7,45406,76561199557907229,shawty#)$@,weapon_knife,False
-7,45431,76561199557907229,shawty#)$@,weapon_knife,False
-7,45457,76561199557907229,shawty#)$@,weapon_knife,False
-7,45482,76561199557907229,shawty#)$@,weapon_knife,False
-7,45508,76561199557907229,shawty#)$@,weapon_knife,False
-7,45534,76561199557907229,shawty#)$@,weapon_knife,False
-7,45559,76561199557907229,shawty#)$@,weapon_knife,False
-7,45591,76561199557907229,shawty#)$@,weapon_knife,False
-7,45623,76561199557907229,shawty#)$@,weapon_knife,False
-7,46280,76561199826895670,RME | Пацан,weapon_knife_canis,False
-7,46489,76561199557907229,shawty#)$@,weapon_molotov,False
-7,46490,76561199052717313,Worfy,weapon_flashbang,False
-7,46744,76561198274174345,zig,weapon_incgrenade,False
-7,46939,76561199052717313,Worfy,weapon_molotov,False
-7,47176,76561198274174345,zig,weapon_hegrenade,False
 7,47269,76561199826895670,RME | Пацан,weapon_awp,False
 7,47291,76561199052717313,Worfy,weapon_mac10,False
 7,47296,76561199052717313,Worfy,weapon_mac10,False
@@ -1175,26 +846,18 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 7,47315,76561199052717313,Worfy,weapon_mac10,False
 7,47331,76561199052717313,Worfy,weapon_mac10,False
 7,47336,76561199052717313,Worfy,weapon_mac10,False
-7,47336,76561199557907229,shawty#)$@,weapon_hegrenade,False
 7,47342,76561198274174345,zig,weapon_m4a1,False
 7,47347,76561198274174345,zig,weapon_m4a1,False
 7,47368,76561198274174345,zig,weapon_m4a1,False
-7,47447,76561199052717313,Worfy,weapon_knife_push,False
-8,49546,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_smokegrenade,False
 8,49582,76561198171814417,Faat,weapon_ssg08,False
 8,49691,76561199068251294,prosto bo$$,weapon_awp,False
 8,49705,76561198171814417,Faat,weapon_ssg08,False
-8,49793,76561198049602148,Moon,weapon_flashbang,False
-8,49822,76561198002613044,frees.tyler,weapon_hegrenade,False
 8,49840,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_deagle,False
 8,49875,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_deagle,False
-8,49893,76561198049602148,Moon,weapon_smokegrenade,False
 8,49904,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_deagle,False
 8,49914,76561198171814417,Faat,weapon_ssg08,False
 8,49936,76561199068251294,prosto bo$$,weapon_awp,False
-8,50023,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_hegrenade,False
 8,50074,76561199068251294,prosto bo$$,weapon_awp,False
-8,50126,76561198002613044,frees.tyler,weapon_flashbang,False
 8,50198,76561199068251294,prosto bo$$,weapon_awp,False
 8,50310,76561198002613044,frees.tyler,weapon_mac10,False
 8,50314,76561198002613044,frees.tyler,weapon_mac10,False
@@ -1210,26 +873,17 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 8,50358,76561198002613044,frees.tyler,weapon_mac10,False
 8,50362,76561198002613044,frees.tyler,weapon_mac10,False
 8,50364,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_deagle,False
-8,50436,76561199557907229,shawty#)$@,weapon_smokegrenade,False
-8,50625,76561199052717313,Worfy,weapon_hegrenade,False
 8,50652,76561199068251294,prosto bo$$,weapon_awp,False
 8,50721,76561198002613044,frees.tyler,weapon_mac10,False
 8,50726,76561198002613044,frees.tyler,weapon_mac10,False
 8,50731,76561198002613044,frees.tyler,weapon_mac10,False
 8,50736,76561198002613044,frees.tyler,weapon_mac10,False
 8,50740,76561198002613044,frees.tyler,weapon_mac10,False
-8,50786,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-8,50826,76561199052717313,Worfy,weapon_knife_push,False
-8,50886,76561198002613044,frees.tyler,weapon_smokegrenade,False
-8,50924,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-8,51004,76561199052717313,Worfy,weapon_knife_push,False
-8,51024,76561199433997570,Simple Dimple skins.army,weapon_knife,False
 8,51033,76561198274174345,zig,weapon_m4a1,False
 8,51034,76561199068251294,prosto bo$$,weapon_awp,False
 8,51038,76561198274174345,zig,weapon_m4a1,False
 8,51062,76561198274174345,zig,weapon_m4a1,False
 8,51067,76561198274174345,zig,weapon_m4a1,False
-8,51073,76561199433997570,Simple Dimple skins.army,weapon_knife,False
 8,51087,76561198274174345,zig,weapon_m4a1,False
 8,51113,76561198274174345,zig,weapon_m4a1,False
 8,51141,76561198274174345,zig,weapon_m4a1,False
@@ -1245,66 +899,26 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 8,51286,76561198049602148,Moon,weapon_ak47,False
 8,51293,76561198049602148,Moon,weapon_ak47,False
 8,51299,76561199068251294,prosto bo$$,weapon_awp,False
-8,51336,76561198002613044,frees.tyler,weapon_molotov,False
-8,51345,76561199557907229,shawty#)$@,weapon_flashbang,False
 8,51350,76561199826895670,RME | Пацан,weapon_deagle,False
 8,51357,76561198049602148,Moon,weapon_ak47,False
 8,51363,76561198049602148,Moon,weapon_ak47,False
 8,51369,76561198049602148,Moon,weapon_ak47,False
-8,51389,76561198274174345,zig,weapon_hegrenade,False
 8,51470,76561199826895670,RME | Пацан,weapon_deagle,False
-8,51508,76561199557907229,shawty#)$@,weapon_knife,False
-8,51533,76561199557907229,shawty#)$@,weapon_knife,False
-8,51559,76561199557907229,shawty#)$@,weapon_knife,False
-8,51585,76561199557907229,shawty#)$@,weapon_knife,False
-8,51598,76561199826895670,RME | Пацан,weapon_incgrenade,False
-8,51610,76561199557907229,shawty#)$@,weapon_knife,False
-8,51636,76561199557907229,shawty#)$@,weapon_knife,False
-8,51661,76561199557907229,shawty#)$@,weapon_knife,False
-8,51684,76561199068251294,prosto bo$$,weapon_knife,False
-8,51687,76561199557907229,shawty#)$@,weapon_knife,False
 8,51694,76561199826895670,RME | Пацан,weapon_deagle,False
 8,51713,76561199826895670,RME | Пацан,weapon_deagle,False
-8,51713,76561199557907229,shawty#)$@,weapon_knife,False
 8,51720,76561198049602148,Moon,weapon_ak47,False
 8,51727,76561198049602148,Moon,weapon_ak47,False
 8,51733,76561198049602148,Moon,weapon_ak47,False
-8,51738,76561199557907229,shawty#)$@,weapon_knife,False
-8,51764,76561199557907229,shawty#)$@,weapon_knife,False
-8,51789,76561199557907229,shawty#)$@,weapon_knife,False
-8,51821,76561199557907229,shawty#)$@,weapon_knife,False
 8,51823,76561199826895670,RME | Пацан,weapon_deagle,False
 8,51832,76561198049602148,Moon,weapon_ak47,False
 8,51838,76561198049602148,Moon,weapon_ak47,False
 8,51838,76561199826895670,RME | Пацан,weapon_deagle,False
 8,51844,76561198049602148,Moon,weapon_ak47,False
-8,51847,76561199557907229,shawty#)$@,weapon_knife,False
 8,51851,76561198049602148,Moon,weapon_ak47,False
 8,51857,76561198049602148,Moon,weapon_ak47,False
 8,51864,76561198049602148,Moon,weapon_ak47,False
-8,51873,76561199557907229,shawty#)$@,weapon_knife,False
 8,51892,76561199068251294,prosto bo$$,weapon_awp,False
-8,51898,76561199557907229,shawty#)$@,weapon_knife,False
-8,51924,76561199557907229,shawty#)$@,weapon_knife,False
-8,51949,76561199557907229,shawty#)$@,weapon_knife,False
-8,51975,76561199557907229,shawty#)$@,weapon_knife,False
-8,52001,76561199557907229,shawty#)$@,weapon_knife,False
-8,52013,76561199052717313,Worfy,weapon_molotov,False
-8,52026,76561199557907229,shawty#)$@,weapon_knife,False
-8,52052,76561199557907229,shawty#)$@,weapon_knife,False
-8,52077,76561199557907229,shawty#)$@,weapon_knife,False
-8,52167,76561199557907229,shawty#)$@,weapon_knife,False
-8,52193,76561199557907229,shawty#)$@,weapon_knife,False
-8,52218,76561199557907229,shawty#)$@,weapon_knife,False
-8,52244,76561199557907229,shawty#)$@,weapon_knife,False
-8,52269,76561199557907229,shawty#)$@,weapon_knife,False
-8,52295,76561199557907229,shawty#)$@,weapon_knife,False
-8,52321,76561199557907229,shawty#)$@,weapon_knife,False
-8,52346,76561199557907229,shawty#)$@,weapon_knife,False
-8,52372,76561199557907229,shawty#)$@,weapon_knife,False
 8,52379,76561199433997570,Simple Dimple skins.army,weapon_awp,False
-8,52397,76561199557907229,shawty#)$@,weapon_knife,False
-8,52424,76561199068251294,prosto bo$$,weapon_knife,False
 8,52670,76561199433997570,Simple Dimple skins.army,weapon_awp,False
 8,52682,76561198274174345,zig,weapon_m4a1,False
 8,52688,76561198274174345,zig,weapon_m4a1,False
@@ -1316,14 +930,11 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 8,52727,76561198171814417,Faat,weapon_ssg08,False
 8,52731,76561198274174345,zig,weapon_m4a1,False
 8,52737,76561198274174345,zig,weapon_m4a1,False
-8,52892,76561199052717313,Worfy,weapon_knife_push,False
 8,52955,76561199826895670,RME | Пацан,weapon_ak47,False
 8,52961,76561198171814417,Faat,weapon_ssg08,False
 8,52963,76561199068251294,prosto bo$$,weapon_awp,False
 8,52973,76561199826895670,RME | Пацан,weapon_ak47,False
 8,53024,76561199826895670,RME | Пацан,weapon_ak47,False
-8,53189,76561199052717313,Worfy,weapon_smokegrenade,False
-8,53206,76561198171814417,Faat,weapon_smokegrenade,False
 8,53503,76561199826895670,RME | Пацан,weapon_ak47,False
 8,53510,76561199068251294,prosto bo$$,weapon_awp,False
 8,53544,76561199052717313,Worfy,weapon_galilar,False
@@ -1351,11 +962,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 8,53703,76561199826895670,RME | Пацан,weapon_ak47,False
 8,53710,76561199826895670,RME | Пацан,weapon_ak47,False
 8,53716,76561199826895670,RME | Пацан,weapon_ak47,False
-8,53830,76561199068251294,prosto bo$$,weapon_knife,False
-8,53847,76561198274174345,zig,weapon_molotov,False
-8,53909,76561199068251294,prosto bo$$,weapon_knife,False
-8,53970,76561199068251294,prosto bo$$,weapon_knife,False
-8,54068,76561199068251294,prosto bo$$,weapon_knife,False
 8,54158,76561198274174345,zig,weapon_m4a1,False
 8,54161,76561198171814417,Faat,weapon_ssg08,False
 8,54163,76561198274174345,zig,weapon_m4a1,False
@@ -1374,13 +980,9 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 8,54204,76561199557907229,shawty#)$@,weapon_mp9,False
 8,54209,76561199557907229,shawty#)$@,weapon_mp9,False
 8,54213,76561199557907229,shawty#)$@,weapon_mp9,False
-8,54313,76561199826895670,RME | Пацан,weapon_knife_canis,False
 8,54316,76561198171814417,Faat,weapon_ssg08,False
-8,54357,76561199826895670,RME | Пацан,weapon_knife_canis,False
 8,54440,76561198171814417,Faat,weapon_ssg08,False
 8,54577,76561198171814417,Faat,weapon_ssg08,False
-8,54599,76561199826895670,RME | Пацан,weapon_smokegrenade,False
-8,54661,76561199068251294,prosto bo$$,weapon_knife,False
 8,54852,76561199826895670,RME | Пацан,weapon_ak47,False
 8,54858,76561199826895670,RME | Пацан,weapon_ak47,False
 8,54865,76561199826895670,RME | Пацан,weapon_ak47,False
@@ -1393,98 +995,21 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 8,55525,76561198171814417,Faat,weapon_ssg08,False
 8,55646,76561198171814417,Faat,weapon_ssg08,False
 8,55764,76561199068251294,prosto bo$$,weapon_awp,False
-8,55917,76561199068251294,prosto bo$$,weapon_knife,False
-8,55989,76561199068251294,prosto bo$$,weapon_knife,False
-8,56026,76561199068251294,prosto bo$$,weapon_knife,False
-9,57380,76561199557907229,shawty#)$@,weapon_knife,False
-9,57405,76561199557907229,shawty#)$@,weapon_knife,False
-9,57411,76561199826895670,RME | Пацан,weapon_knife_canis,False
-9,57431,76561199557907229,shawty#)$@,weapon_knife,False
-9,57447,76561198274174345,zig,weapon_smokegrenade,False
-9,57457,76561199557907229,shawty#)$@,weapon_knife,False
-9,57489,76561199557907229,shawty#)$@,weapon_knife,False
-9,57514,76561199557907229,shawty#)$@,weapon_knife,False
-9,57529,76561198002613044,frees.tyler,weapon_decoy,False
-9,57540,76561199557907229,shawty#)$@,weapon_knife,False
-9,57565,76561199557907229,shawty#)$@,weapon_knife,False
 9,57570,76561198171814417,Faat,weapon_ssg08,False
-9,57586,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_smokegrenade,False
-9,57591,76561199557907229,shawty#)$@,weapon_knife,False
-9,57617,76561199557907229,shawty#)$@,weapon_knife,False
 9,57720,76561198171814417,Faat,weapon_ssg08,False
 9,57732,76561199826895670,RME | Пацан,weapon_awp,False
 9,57734,76561199068251294,prosto bo$$,weapon_awp,False
-9,57853,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_knife,False
-9,57877,76561198049602148,Moon,weapon_flashbang,False
-9,57879,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_knife,False
-9,57937,76561199052717313,Worfy,weapon_knife_push,False
-9,57967,76561199557907229,shawty#)$@,weapon_flashbang,False
 9,58000,76561199068251294,prosto bo$$,weapon_awp,False
-9,58210,76561199068251294,prosto bo$$,weapon_knife,False
-9,58357,76561198002613044,frees.tyler,weapon_flashbang,False
-9,58381,76561198049602148,Moon,weapon_smokegrenade,False
 9,58439,76561199826895670,RME | Пацан,weapon_awp,False
 9,58452,76561199557907229,shawty#)$@,weapon_m4a1_silencer,True
 9,58459,76561199557907229,shawty#)$@,weapon_m4a1_silencer,True
 9,58465,76561199557907229,shawty#)$@,weapon_m4a1_silencer,True
 9,58467,76561199068251294,prosto bo$$,weapon_awp,False
-9,58554,76561198002613044,frees.tyler,weapon_hegrenade,False
 9,58690,76561199068251294,prosto bo$$,weapon_awp,False
-9,59027,76561199557907229,shawty#)$@,weapon_knife,False
-9,59166,76561199826895670,RME | Пацан,weapon_hegrenade,False
-9,59228,76561199433997570,Simple Dimple skins.army,weapon_flashbang,False
 9,59297,76561199052717313,Worfy,weapon_deagle,False
-9,59320,76561199557907229,shawty#)$@,weapon_knife,False
-9,59333,76561199068251294,prosto bo$$,weapon_knife,False
-9,59352,76561199557907229,shawty#)$@,weapon_knife,False
-9,59378,76561199557907229,shawty#)$@,weapon_knife,False
-9,59403,76561199557907229,shawty#)$@,weapon_knife,False
-9,59805,76561199052717313,Worfy,weapon_knife_push,False
-9,59873,76561199557907229,shawty#)$@,weapon_incgrenade,False
-9,60093,76561199557907229,shawty#)$@,weapon_smokegrenade,False
-9,60110,76561199068251294,prosto bo$$,weapon_knife,False
-9,60145,76561199068251294,prosto bo$$,weapon_knife,False
-9,60220,76561199557907229,shawty#)$@,weapon_knife,False
-9,60246,76561199557907229,shawty#)$@,weapon_knife,False
-9,60272,76561199557907229,shawty#)$@,weapon_knife,False
-9,60297,76561199557907229,shawty#)$@,weapon_knife,False
-9,60323,76561199557907229,shawty#)$@,weapon_knife,False
-9,60325,76561199052717313,Worfy,weapon_smokegrenade,False
-9,60348,76561199557907229,shawty#)$@,weapon_knife,False
-9,60374,76561199557907229,shawty#)$@,weapon_knife,False
-9,60400,76561199557907229,shawty#)$@,weapon_knife,False
-9,60412,76561199068251294,prosto bo$$,weapon_knife,False
-9,60489,76561199557907229,shawty#)$@,weapon_knife,False
-9,60515,76561199557907229,shawty#)$@,weapon_knife,False
-9,60527,76561199068251294,prosto bo$$,weapon_knife,False
-9,60547,76561199557907229,shawty#)$@,weapon_knife,False
-9,60572,76561199557907229,shawty#)$@,weapon_knife,False
-9,60598,76561199557907229,shawty#)$@,weapon_knife,False
-9,60598,76561199068251294,prosto bo$$,weapon_knife,False
-9,60624,76561199557907229,shawty#)$@,weapon_knife,False
-9,60630,76561199068251294,prosto bo$$,weapon_knife,False
-9,60649,76561199557907229,shawty#)$@,weapon_knife,False
-9,60675,76561199557907229,shawty#)$@,weapon_knife,False
-9,60700,76561199557907229,shawty#)$@,weapon_knife,False
-9,60726,76561199557907229,shawty#)$@,weapon_knife,False
-9,60752,76561199557907229,shawty#)$@,weapon_knife,False
-9,60777,76561199557907229,shawty#)$@,weapon_knife,False
-9,60803,76561199557907229,shawty#)$@,weapon_knife,False
-9,60828,76561199557907229,shawty#)$@,weapon_knife,False
-9,60854,76561199557907229,shawty#)$@,weapon_knife,False
-9,60880,76561199557907229,shawty#)$@,weapon_knife,False
-9,60905,76561199557907229,shawty#)$@,weapon_knife,False
-9,60931,76561199557907229,shawty#)$@,weapon_knife,False
 9,60941,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 9,60948,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
-9,60956,76561199557907229,shawty#)$@,weapon_knife,False
-9,60982,76561199557907229,shawty#)$@,weapon_knife,False
-9,61008,76561199557907229,shawty#)$@,weapon_knife,False
-9,61244,76561199826895670,RME | Пацан,weapon_knife_canis,False
-9,61247,76561199068251294,prosto bo$$,weapon_knife,False
-9,61315,76561199068251294,prosto bo$$,weapon_knife,False
 9,61352,76561199557907229,shawty#)$@,weapon_ak47,False
-9,61353,76561199068251294,prosto bo$$,weapon_knife,False
 9,61357,76561199052717313,Worfy,weapon_m4a1_silencer,True
 9,61358,76561199557907229,shawty#)$@,weapon_ak47,False
 9,61363,76561199052717313,Worfy,weapon_m4a1_silencer,True
@@ -1506,7 +1031,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 9,61422,76561199557907229,shawty#)$@,weapon_ak47,False
 9,61429,76561199557907229,shawty#)$@,weapon_ak47,False
 9,61435,76561199557907229,shawty#)$@,weapon_ak47,False
-9,61436,76561199068251294,prosto bo$$,weapon_knife,False
 9,61442,76561199557907229,shawty#)$@,weapon_ak47,False
 9,61448,76561199557907229,shawty#)$@,weapon_ak47,False
 9,61454,76561199557907229,shawty#)$@,weapon_ak47,False
@@ -1515,62 +1039,26 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 9,61474,76561199557907229,shawty#)$@,weapon_ak47,False
 9,61480,76561199557907229,shawty#)$@,weapon_ak47,False
 9,61486,76561199557907229,shawty#)$@,weapon_ak47,False
-9,61486,76561199068251294,prosto bo$$,weapon_knife,False
 9,61493,76561199557907229,shawty#)$@,weapon_ak47,False
 9,61499,76561199557907229,shawty#)$@,weapon_ak47,False
 9,61506,76561199557907229,shawty#)$@,weapon_ak47,False
 9,61512,76561199557907229,shawty#)$@,weapon_ak47,False
 9,61518,76561199557907229,shawty#)$@,weapon_ak47,False
-9,61578,76561199068251294,prosto bo$$,weapon_knife,False
 9,61638,76561199826895670,RME | Пацан,weapon_awp,False
 9,61741,76561199826895670,RME | Пацан,weapon_awp,False
 9,61875,76561199826895670,RME | Пацан,weapon_awp,False
-9,61935,76561199068251294,prosto bo$$,weapon_knife,False
-9,61974,76561199068251294,prosto bo$$,weapon_knife,False
-9,62055,76561199068251294,prosto bo$$,weapon_knife,False
 9,62071,76561199826895670,RME | Пацан,weapon_deagle,False
-9,62117,76561199068251294,prosto bo$$,weapon_knife,False
-9,62138,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_knife,False
-9,62148,76561199068251294,prosto bo$$,weapon_knife,False
 9,62183,76561199826895670,RME | Пацан,weapon_deagle,False
-9,62235,76561199068251294,prosto bo$$,weapon_knife,False
 9,62269,76561199826895670,RME | Пацан,weapon_deagle,False
 9,62334,76561199826895670,RME | Пацан,weapon_deagle,False
 9,62357,76561199826895670,RME | Пацан,weapon_deagle,False
-9,62358,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_knife,False
-9,62374,76561199557907229,shawty#)$@,weapon_knife,False
-9,62384,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_knife,False
-10,63842,76561199557907229,shawty#)$@,weapon_smokegrenade,False
-10,63947,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_smokegrenade,False
-10,63966,76561199826895670,RME | Пацан,weapon_knife_canis,False
 10,63992,76561199068251294,prosto bo$$,weapon_awp,False
-10,64182,76561198049602148,Moon,weapon_smokegrenade,False
-10,64227,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_incgrenade,False
 10,64228,76561199068251294,prosto bo$$,weapon_awp,False
-10,64254,76561198002613044,frees.tyler,weapon_flashbang,False
-10,64272,76561199557907229,shawty#)$@,weapon_hegrenade,False
-10,64278,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-10,64342,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-10,64373,76561199052717313,Worfy,weapon_smokegrenade,False
-10,64425,76561199557907229,shawty#)$@,weapon_flashbang,False
-10,64493,76561199826895670,RME | Пацан,weapon_knife_canis,False
-10,64529,76561199052717313,Worfy,weapon_knife_push,False
-10,64639,76561199433997570,Simple Dimple skins.army,weapon_hegrenade,False
-10,64654,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_flashbang,False
-10,64661,76561199052717313,Worfy,weapon_knife_push,False
-10,64743,76561199557907229,shawty#)$@,weapon_knife,False
-10,64769,76561199557907229,shawty#)$@,weapon_knife,False
-10,64794,76561199557907229,shawty#)$@,weapon_knife,False
-10,64820,76561199557907229,shawty#)$@,weapon_knife,False
-10,64845,76561199557907229,shawty#)$@,weapon_knife,False
-10,64871,76561199557907229,shawty#)$@,weapon_knife,False
-10,64897,76561199557907229,shawty#)$@,weapon_knife,False
 10,64901,76561198171814417,Faat,weapon_mp7,False
 10,64906,76561198171814417,Faat,weapon_mp7,False
 10,64911,76561198171814417,Faat,weapon_mp7,False
 10,64916,76561198171814417,Faat,weapon_mp7,False
 10,64921,76561198171814417,Faat,weapon_mp7,False
-10,64922,76561199557907229,shawty#)$@,weapon_knife,False
 10,64927,76561198171814417,Faat,weapon_mp7,False
 10,64932,76561198171814417,Faat,weapon_mp7,False
 10,64937,76561198171814417,Faat,weapon_mp7,False
@@ -1581,13 +1069,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 10,64962,76561198171814417,Faat,weapon_mp7,False
 10,64967,76561198171814417,Faat,weapon_mp7,False
 10,64973,76561198171814417,Faat,weapon_mp7,False
-10,64986,76561199433997570,Simple Dimple skins.army,weapon_flashbang,False
-10,65124,76561199068251294,prosto bo$$,weapon_knife,False
-10,65190,76561199068251294,prosto bo$$,weapon_knife,False
-10,65279,76561198002613044,frees.tyler,weapon_smokegrenade,False
-10,65291,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_hegrenade,False
-10,65625,76561199068251294,prosto bo$$,weapon_incgrenade,False
-10,65690,76561198049602148,Moon,weapon_flashbang,False
 10,65849,76561199433997570,Simple Dimple skins.army,weapon_deagle,False
 10,65876,76561198049602148,Moon,weapon_ak47,False
 10,65881,76561199433997570,Simple Dimple skins.army,weapon_deagle,False
@@ -1600,9 +1081,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 10,65914,76561198049602148,Moon,weapon_ak47,False
 10,65921,76561198049602148,Moon,weapon_ak47,False
 10,65927,76561198049602148,Moon,weapon_ak47,False
-10,65981,76561199068251294,prosto bo$$,weapon_knife,False
-10,66006,76561199826895670,RME | Пацан,weapon_smokegrenade,False
-10,66030,76561199068251294,prosto bo$$,weapon_knife,False
 10,66242,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 10,66248,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 10,66254,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
@@ -1620,9 +1098,7 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 10,66299,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 10,66305,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 10,66312,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
-10,66494,76561199826895670,RME | Пацан,weapon_hegrenade,False
 10,66534,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
-10,66537,76561198274174345,zig,weapon_hegrenade,False
 10,66541,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 10,66564,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 10,66590,76561198002613044,frees.tyler,weapon_mac10,False
@@ -1639,39 +1115,18 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 10,66629,76561198002613044,frees.tyler,weapon_mac10,False
 10,66629,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 10,66634,76561198002613044,frees.tyler,weapon_mac10,False
-10,66636,76561198049602148,Moon,weapon_flashbang,False
 10,66636,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 10,66642,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 10,66871,76561199826895670,RME | Пацан,weapon_awp,False
 10,67752,76561199826895670,RME | Пацан,weapon_awp,False
-10,67852,76561199068251294,prosto bo$$,weapon_knife,False
-10,67929,76561199068251294,prosto bo$$,weapon_knife,False
-10,67996,76561199068251294,prosto bo$$,weapon_knife,False
-10,68054,76561199068251294,prosto bo$$,weapon_knife,False
 11,69580,76561199557907229,shawty#)$@,weapon_deagle,False
-11,69888,76561198002613044,frees.tyler,weapon_flashbang,False
-11,69916,76561199052717313,Worfy,weapon_knife_push,False
-11,70028,76561199068251294,prosto bo$$,weapon_incgrenade,False
-11,70052,76561199433997570,Simple Dimple skins.army,weapon_knife,False
 11,70292,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
 11,70298,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
 11,70304,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
 11,70309,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
 11,70315,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
-11,70319,76561199557907229,shawty#)$@,weapon_knife,False
 11,70321,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
 11,70327,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
-11,70345,76561199557907229,shawty#)$@,weapon_knife,False
-11,70371,76561199557907229,shawty#)$@,weapon_knife,False
-11,70396,76561199557907229,shawty#)$@,weapon_knife,False
-11,70412,76561199052717313,Worfy,weapon_smokegrenade,False
-11,70422,76561199557907229,shawty#)$@,weapon_knife,False
-11,70435,76561199068251294,prosto bo$$,weapon_knife,False
-11,70447,76561199557907229,shawty#)$@,weapon_knife,False
-11,70467,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_smokegrenade,False
-11,70473,76561199557907229,shawty#)$@,weapon_knife,False
-11,70499,76561199557907229,shawty#)$@,weapon_knife,False
-11,70598,76561199052717313,Worfy,weapon_knife_push,False
 11,70655,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
 11,70661,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
 11,70667,76561199433997570,Simple Dimple skins.army,weapon_m4a1,False
@@ -1687,12 +1142,9 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 11,70854,76561199068251294,prosto bo$$,weapon_usp_silencer,True
 11,70875,76561199068251294,prosto bo$$,weapon_usp_silencer,True
 11,70899,76561199068251294,prosto bo$$,weapon_usp_silencer,True
-11,70900,76561199433997570,Simple Dimple skins.army,weapon_knife,False
 11,70928,76561199068251294,prosto bo$$,weapon_usp_silencer,True
 11,70950,76561199068251294,prosto bo$$,weapon_usp_silencer,True
-11,71496,76561199068251294,prosto bo$$,weapon_knife,False
 11,71516,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_awp,False
-11,71930,76561199052717313,Worfy,weapon_flashbang,False
 11,72114,76561198049602148,Moon,weapon_tec9,False
 11,72125,76561198049602148,Moon,weapon_tec9,False
 11,72135,76561198049602148,Moon,weapon_tec9,False
@@ -1708,8 +1160,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 11,72233,76561199052717313,Worfy,weapon_deagle,False
 11,72235,76561198049602148,Moon,weapon_tec9,False
 11,72245,76561198049602148,Moon,weapon_tec9,False
-11,72249,76561199068251294,prosto bo$$,weapon_smokegrenade,False
-11,72344,76561199068251294,prosto bo$$,weapon_hegrenade,False
 11,72357,76561198049602148,Moon,weapon_tec9,False
 11,72367,76561198049602148,Moon,weapon_tec9,False
 11,72377,76561198049602148,Moon,weapon_tec9,False
@@ -1725,11 +1175,8 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 11,73156,76561198274174345,zig,weapon_deagle,False
 11,73240,76561198171814417,Faat,weapon_ssg08,False
 11,73371,76561198171814417,Faat,weapon_ssg08,False
-11,73484,76561199052717313,Worfy,weapon_knife_push,False
 11,73506,76561198171814417,Faat,weapon_ssg08,False
-11,73586,76561199052717313,Worfy,weapon_knife_push,False
 11,73597,76561199826895670,RME | Пацан,weapon_awp,False
-11,73733,76561198002613044,frees.tyler,weapon_flashbang,False
 11,73883,76561198171814417,Faat,weapon_ssg08,False
 11,74030,76561199068251294,prosto bo$$,weapon_awp,False
 11,74032,76561198171814417,Faat,weapon_ssg08,False
@@ -1742,8 +1189,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 11,74363,76561199826895670,RME | Пацан,weapon_deagle,False
 11,74386,76561198171814417,Faat,weapon_ssg08,False
 11,74424,76561199826895670,RME | Пацан,weapon_deagle,False
-11,74837,76561199068251294,prosto bo$$,weapon_flashbang,False
-11,75165,76561199826895670,RME | Пацан,weapon_hegrenade,False
 11,75189,76561198171814417,Faat,weapon_ssg08,False
 11,75281,76561199052717313,Worfy,weapon_deagle,False
 11,75304,76561199052717313,Worfy,weapon_deagle,False
@@ -1753,25 +1198,11 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 11,75381,76561198002613044,frees.tyler,weapon_glock,False
 11,75390,76561198002613044,frees.tyler,weapon_glock,False
 11,75400,76561198002613044,frees.tyler,weapon_glock,False
-11,75510,76561199052717313,Worfy,weapon_knife_push,False
-11,75647,76561199052717313,Worfy,weapon_knife_push,False
-12,77299,76561198002613044,frees.tyler,weapon_decoy,False
-12,77336,76561198274174345,zig,weapon_smokegrenade,False
-12,77345,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_decoy,False
 12,77403,76561198171814417,Faat,weapon_awp,False
 12,77521,76561199068251294,prosto bo$$,weapon_awp,False
-12,77617,76561199052717313,Worfy,weapon_smokegrenade,False
-12,77621,76561198049602148,Moon,weapon_smokegrenade,False
 12,77622,76561198171814417,Faat,weapon_awp,False
 12,77725,76561199068251294,prosto bo$$,weapon_awp,False
-12,77863,76561199826895670,RME | Пацан,weapon_smokegrenade,False
-12,77904,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-12,77932,76561199052717313,Worfy,weapon_knife_push,False
-12,77956,76561199433997570,Simple Dimple skins.army,weapon_knife,False
 12,77970,76561199068251294,prosto bo$$,weapon_awp,False
-12,78012,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-12,78039,76561198049602148,Moon,weapon_flashbang,False
-12,78057,76561199433997570,Simple Dimple skins.army,weapon_knife,False
 12,78086,76561199068251294,prosto bo$$,weapon_awp,False
 12,78231,76561199433997570,Simple Dimple skins.army,weapon_usp_silencer,True
 12,78281,76561199433997570,Simple Dimple skins.army,weapon_usp_silencer,True
@@ -1788,36 +1219,14 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 12,78463,76561198002613044,frees.tyler,weapon_ak47,False
 12,78469,76561198002613044,frees.tyler,weapon_ak47,False
 12,78476,76561198002613044,frees.tyler,weapon_ak47,False
-12,78481,76561199068251294,prosto bo$$,weapon_knife,False
 12,78482,76561198002613044,frees.tyler,weapon_ak47,False
-12,78535,76561199557907229,shawty#)$@,weapon_flashbang,False
-12,78538,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-12,78553,76561199052717313,Worfy,weapon_hegrenade,False
-12,78578,76561199068251294,prosto bo$$,weapon_knife,False
-12,78583,76561199433997570,Simple Dimple skins.army,weapon_knife,False
-12,78616,76561198002613044,frees.tyler,weapon_flashbang,False
-12,78684,76561199068251294,prosto bo$$,weapon_knife,False
-12,78719,76561199068251294,prosto bo$$,weapon_knife,False
 12,78767,76561199826895670,RME | Пацан,weapon_awp,False
 12,78877,76561198171814417,Faat,weapon_awp,False
-12,78930,76561199557907229,shawty#)$@,weapon_hegrenade,False
-12,78995,76561198274174345,zig,weapon_hegrenade,False
 12,79009,76561199826895670,RME | Пацан,weapon_awp,False
 12,79012,76561199052717313,Worfy,weapon_ak47,False
 12,79021,76561198171814417,Faat,weapon_awp,False
 12,79037,76561199052717313,Worfy,weapon_ak47,False
-12,79048,76561199433997570,Simple Dimple skins.army,weapon_flashbang,False
-12,79116,76561199557907229,shawty#)$@,weapon_knife,False
-12,79141,76561199557907229,shawty#)$@,weapon_knife,False
-12,79167,76561199557907229,shawty#)$@,weapon_knife,False
-12,79254,76561199557907229,shawty#)$@,weapon_smokegrenade,False
-12,79398,76561199068251294,prosto bo$$,weapon_knife,False
-12,79429,76561198274174345,zig,weapon_molotov,False
-12,79443,76561199068251294,prosto bo$$,weapon_knife,False
-12,79491,76561199068251294,prosto bo$$,weapon_knife,False
 12,79547,76561198171814417,Faat,weapon_awp,False
-12,79672,76561199826895670,RME | Пацан,weapon_incgrenade,False
-12,79755,76561198002613044,frees.tyler,weapon_smokegrenade,False
 12,79961,76561199557907229,shawty#)$@,weapon_awp,False
 12,80228,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
 12,80234,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
@@ -1832,51 +1241,11 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 12,80289,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
 12,80296,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
 12,80302,76561199433997570,Simple Dimple skins.army,weapon_m4a1_silencer,True
-12,80305,76561199557907229,shawty#)$@,weapon_knife,False
-12,80331,76561199557907229,shawty#)$@,weapon_knife,False
-12,80356,76561199557907229,shawty#)$@,weapon_knife,False
-12,80631,76561199557907229,shawty#)$@,weapon_knife,False
-12,80657,76561199557907229,shawty#)$@,weapon_knife,False
-12,80683,76561199557907229,shawty#)$@,weapon_knife,False
-12,80740,76561199557907229,shawty#)$@,weapon_knife,False
-12,80765,76561199557907229,shawty#)$@,weapon_knife,False
-12,80791,76561199557907229,shawty#)$@,weapon_knife,False
-12,80817,76561199557907229,shawty#)$@,weapon_knife,False
-12,80842,76561199557907229,shawty#)$@,weapon_knife,False
-12,80868,76561199557907229,shawty#)$@,weapon_knife,False
 12,81734,76561198274174345,zig,weapon_ak47,False
 12,81740,76561198274174345,zig,weapon_ak47,False
 12,81756,76561198274174345,zig,weapon_ak47,False
 12,81775,76561198274174345,zig,weapon_ak47,False
 12,81782,76561198274174345,zig,weapon_ak47,False
-12,82332,76561199068251294,prosto bo$$,weapon_knife,False
-12,82364,76561199068251294,prosto bo$$,weapon_knife,False
-12,82429,76561199557907229,shawty#)$@,weapon_molotov,False
-12,82461,76561199068251294,prosto bo$$,weapon_knife,False
-12,82651,76561199557907229,shawty#)$@,weapon_knife,False
-12,82677,76561199557907229,shawty#)$@,weapon_knife,False
-12,82702,76561199557907229,shawty#)$@,weapon_knife,False
-12,82728,76561199557907229,shawty#)$@,weapon_knife,False
-12,83095,76561198002613044,frees.tyler,weapon_hegrenade,False
-12,83100,76561199068251294,prosto bo$$,weapon_knife,False
-12,83151,76561199068251294,prosto bo$$,weapon_knife,False
-12,83153,76561199826895670,RME | Пацан,weapon_hegrenade,False
-12,83240,76561199068251294,prosto bo$$,weapon_knife,False
-12,83316,76561198002613044,frees.tyler,weapon_molotov,False
-12,83389,76561199068251294,prosto bo$$,weapon_knife,False
-12,83448,76561199068251294,prosto bo$$,weapon_knife,False
-12,83713,76561199433997570,Simple Dimple skins.army,weapon_molotov,False
-12,83751,76561199557907229,shawty#)$@,weapon_knife,False
-12,83776,76561199557907229,shawty#)$@,weapon_knife,False
-12,83802,76561199557907229,shawty#)$@,weapon_knife,False
-12,83825,76561199826895670,RME | Пацан,weapon_flashbang,False
-12,83827,76561199557907229,shawty#)$@,weapon_knife,False
-12,83853,76561199557907229,shawty#)$@,weapon_knife,False
-12,83878,76561199557907229,shawty#)$@,weapon_knife,False
-12,83904,76561199557907229,shawty#)$@,weapon_knife,False
-12,83930,76561199557907229,shawty#)$@,weapon_knife,False
-12,83939,76561199433997570,Simple Dimple skins.army,weapon_smokegrenade,False
-12,83955,76561199557907229,shawty#)$@,weapon_knife,False
 12,84045,76561199433997570,Simple Dimple skins.army,weapon_usp_silencer,True
 12,84056,76561199433997570,Simple Dimple skins.army,weapon_usp_silencer,True
 12,84067,76561199433997570,Simple Dimple skins.army,weapon_usp_silencer,True
@@ -1886,7 +1255,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 12,84114,76561199433997570,Simple Dimple skins.army,weapon_usp_silencer,True
 12,84125,76561199433997570,Simple Dimple skins.army,weapon_usp_silencer,True
 12,84136,76561199433997570,Simple Dimple skins.army,weapon_usp_silencer,True
-12,84147,76561199068251294,prosto bo$$,weapon_incgrenade,False
 12,84228,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 12,84235,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 12,84241,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
@@ -1911,15 +1279,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 12,84444,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 12,84450,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 12,84463,76561198274174345,zig,weapon_ak47,False
-13,86955,76561198002613044,frees.tyler,weapon_smokegrenade,False
-13,87087,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_flashbang,False
-13,87120,76561198171814417,Faat,weapon_incgrenade,False
-13,87131,76561199826895670,RME | Пацан,weapon_flashbang,False
-13,87175,76561199068251294,prosto bo$$,weapon_flashbang,False
-13,87198,76561198049602148,Moon,weapon_hegrenade,False
-13,87271,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_flashbang,False
-13,87784,76561199052717313,Worfy,weapon_flashbang,False
-13,87907,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_smokegrenade,False
 13,87986,76561199068251294,prosto bo$$,weapon_glock,False
 13,87997,76561199068251294,prosto bo$$,weapon_glock,False
 13,88006,76561199068251294,prosto bo$$,weapon_glock,False
@@ -1948,7 +1307,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 13,88162,76561199068251294,prosto bo$$,weapon_glock,False
 13,88167,76561198049602148,Moon,weapon_usp_silencer,True
 13,88178,76561198049602148,Moon,weapon_usp_silencer,True
-13,88178,76561199052717313,Worfy,weapon_knife_canis,False
 13,88185,76561199068251294,prosto bo$$,weapon_glock,False
 13,88199,76561199068251294,prosto bo$$,weapon_glock,False
 13,88216,76561199068251294,prosto bo$$,weapon_glock,False
@@ -1989,7 +1347,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 13,88513,76561198171814417,Faat,weapon_usp_silencer,True
 13,88517,76561199068251294,prosto bo$$,weapon_glock,False
 13,88524,76561199052717313,Worfy,weapon_usp_silencer,True
-13,88527,76561198002613044,frees.tyler,weapon_flashbang,False
 13,88535,76561198171814417,Faat,weapon_usp_silencer,True
 13,88539,76561199068251294,prosto bo$$,weapon_glock,False
 13,88548,76561199052717313,Worfy,weapon_usp_silencer,True
@@ -2014,7 +1371,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 13,88704,76561199433997570,Simple Dimple skins.army,weapon_glock,False
 13,88714,76561198171814417,Faat,weapon_usp_silencer,True
 13,88716,76561199433997570,Simple Dimple skins.army,weapon_glock,False
-13,88730,76561198002613044,frees.tyler,weapon_hegrenade,False
 13,88730,76561199433997570,Simple Dimple skins.army,weapon_glock,False
 13,88732,76561198171814417,Faat,weapon_usp_silencer,True
 13,88777,76561198171814417,Faat,weapon_usp_silencer,True
@@ -2061,27 +1417,11 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 13,90332,76561199826895670,RME | Пацан,weapon_glock,False
 13,90340,76561199052717313,Worfy,weapon_usp_silencer,True
 13,90348,76561199433997570,Simple Dimple skins.army,weapon_glock,False
-13,90511,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-13,90563,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-13,90654,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-14,92142,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,92168,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,92233,76561199068251294,prosto bo$$,weapon_knife_t,False
-14,92289,76561199068251294,prosto bo$$,weapon_knife_t,False
 14,92291,76561199433997570,Simple Dimple skins.army,weapon_awp,False
-14,92398,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_smokegrenade,False
-14,92465,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,92576,76561198049602148,Moon,weapon_flashbang,False
-14,92586,76561198274174345,zig,weapon_hegrenade,False
-14,92626,76561199826895670,RME | Пацан,weapon_flashbang,False
-14,92662,76561199068251294,prosto bo$$,weapon_smokegrenade,False
-14,92768,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_flashbang,False
-14,92899,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
 14,92902,76561198171814417,Faat,weapon_deagle,False
 14,92914,76561199557907229,shawty#)$@,weapon_xm1014,False
 14,92932,76561198171814417,Faat,weapon_deagle,False
 14,92936,76561199557907229,shawty#)$@,weapon_xm1014,False
-14,92946,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
 14,92959,76561199557907229,shawty#)$@,weapon_xm1014,False
 14,92971,76561198171814417,Faat,weapon_deagle,False
 14,92981,76561199557907229,shawty#)$@,weapon_xm1014,False
@@ -2090,14 +1430,11 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 14,93018,76561199068251294,prosto bo$$,weapon_galilar,False
 14,93068,76561199068251294,prosto bo$$,weapon_galilar,False
 14,93070,76561198171814417,Faat,weapon_deagle,False
-14,93071,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
 14,93074,76561199068251294,prosto bo$$,weapon_galilar,False
 14,93079,76561199068251294,prosto bo$$,weapon_galilar,False
-14,93093,76561199557907229,shawty#)$@,weapon_flashbang,False
 14,93093,76561199068251294,prosto bo$$,weapon_galilar,False
 14,93099,76561199068251294,prosto bo$$,weapon_galilar,False
 14,93104,76561199068251294,prosto bo$$,weapon_galilar,False
-14,93108,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
 14,93110,76561199068251294,prosto bo$$,weapon_galilar,False
 14,93116,76561199068251294,prosto bo$$,weapon_galilar,False
 14,93130,76561199068251294,prosto bo$$,weapon_galilar,False
@@ -2114,8 +1451,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 14,93187,76561199068251294,prosto bo$$,weapon_galilar,False
 14,93193,76561199068251294,prosto bo$$,weapon_galilar,False
 14,93199,76561199068251294,prosto bo$$,weapon_galilar,False
-14,93489,76561199068251294,prosto bo$$,weapon_knife_t,False
-14,93586,76561199068251294,prosto bo$$,weapon_knife_t,False
 14,94128,76561198274174345,zig,weapon_p250,False
 14,94138,76561198274174345,zig,weapon_p250,False
 14,94148,76561198002613044,frees.tyler,weapon_usp_silencer,True
@@ -2140,26 +1475,19 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 14,94226,76561198002613044,frees.tyler,weapon_usp_silencer,True
 14,94234,76561199557907229,shawty#)$@,weapon_xm1014,False
 14,94245,76561198002613044,frees.tyler,weapon_usp_silencer,True
-14,94317,76561199557907229,shawty#)$@,weapon_knife_t,False
 14,94325,76561198049602148,Moon,weapon_fiveseven,False
-14,94337,76561198002613044,frees.tyler,weapon_hegrenade,False
-14,94343,76561199557907229,shawty#)$@,weapon_knife_t,False
 14,94367,76561198049602148,Moon,weapon_fiveseven,False
-14,94369,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,94394,76561199557907229,shawty#)$@,weapon_knife_t,False
 14,94407,76561199068251294,prosto bo$$,weapon_galilar,False
 14,94411,76561198274174345,zig,weapon_p250,False
 14,94413,76561199068251294,prosto bo$$,weapon_galilar,False
 14,94419,76561199068251294,prosto bo$$,weapon_galilar,False
 14,94420,76561198274174345,zig,weapon_p250,False
-14,94420,76561199557907229,shawty#)$@,weapon_knife_t,False
 14,94425,76561199068251294,prosto bo$$,weapon_galilar,False
 14,94430,76561198274174345,zig,weapon_p250,False
 14,94430,76561199068251294,prosto bo$$,weapon_galilar,False
 14,94436,76561199068251294,prosto bo$$,weapon_galilar,False
 14,94440,76561198274174345,zig,weapon_p250,False
 14,94442,76561199068251294,prosto bo$$,weapon_galilar,False
-14,94445,76561199557907229,shawty#)$@,weapon_knife_t,False
 14,94448,76561199068251294,prosto bo$$,weapon_galilar,False
 14,94451,76561198274174345,zig,weapon_p250,False
 14,94453,76561199068251294,prosto bo$$,weapon_galilar,False
@@ -2167,10 +1495,8 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 14,94460,76561198274174345,zig,weapon_p250,False
 14,94465,76561199068251294,prosto bo$$,weapon_galilar,False
 14,94470,76561198274174345,zig,weapon_p250,False
-14,94471,76561199557907229,shawty#)$@,weapon_knife_t,False
 14,94471,76561199068251294,prosto bo$$,weapon_galilar,False
 14,94477,76561199068251294,prosto bo$$,weapon_galilar,False
-14,94479,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_knife_t,False
 14,94482,76561199068251294,prosto bo$$,weapon_galilar,False
 14,94488,76561199068251294,prosto bo$$,weapon_galilar,False
 14,94494,76561199068251294,prosto bo$$,weapon_galilar,False
@@ -2186,70 +1512,17 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 14,94747,76561198274174345,zig,weapon_p250,False
 14,94756,76561198274174345,zig,weapon_p250,False
 14,94766,76561198274174345,zig,weapon_p250,False
-14,94790,76561199068251294,prosto bo$$,weapon_knife_t,False
-14,95058,76561199557907229,shawty#)$@,weapon_knife_t,False
 14,95075,76561199433997570,Simple Dimple skins.army,weapon_awp,False
-14,95084,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,95110,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,95135,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,95161,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,95186,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,95212,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,95238,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,95263,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,95289,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,95314,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,95340,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,95349,76561199068251294,prosto bo$$,weapon_knife_t,False
-14,95366,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,95391,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,95432,76561199068251294,prosto bo$$,weapon_knife_t,False
 14,95627,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_galilar,False
-14,95669,76561199068251294,prosto bo$$,weapon_knife_t,False
 14,96035,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_galilar,False
 14,96091,76561199068251294,prosto bo$$,weapon_glock,False
 14,96118,76561199068251294,prosto bo$$,weapon_glock,False
 14,96162,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_galilar,False
-14,96246,76561199068251294,prosto bo$$,weapon_knife_t,False
-14,96282,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,96307,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,96326,76561199068251294,prosto bo$$,weapon_knife_t,False
-14,96333,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,96359,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,96384,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,96389,76561199068251294,prosto bo$$,weapon_knife_t,False
-14,96394,76561199433997570,Simple Dimple skins.army,weapon_incgrenade,False
-14,96410,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,96435,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,96461,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,96487,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,96512,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,96538,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,96563,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,96663,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-14,96734,76561199068251294,prosto bo$$,weapon_knife_t,False
-14,96784,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-14,96788,76561199068251294,prosto bo$$,weapon_knife_t,False
-14,96816,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
 14,96818,76561199557907229,shawty#)$@,weapon_xm1014,False
 14,96841,76561199557907229,shawty#)$@,weapon_xm1014,False
 14,96864,76561199557907229,shawty#)$@,weapon_xm1014,False
 14,96886,76561199557907229,shawty#)$@,weapon_xm1014,False
 14,96908,76561199557907229,shawty#)$@,weapon_xm1014,False
-14,97042,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-14,97084,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-14,97110,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-14,97206,76561199068251294,prosto bo$$,weapon_knife_t,False
-14,97216,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_knife_t,False
-14,97240,76561199068251294,prosto bo$$,weapon_knife_t,False
-14,97241,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_knife_t,False
-14,97295,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,97320,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,97346,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,97371,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,97397,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,97423,76561199557907229,shawty#)$@,weapon_knife_t,False
-14,97448,76561199557907229,shawty#)$@,weapon_knife_t,False
 14,97511,76561198002613044,frees.tyler,weapon_usp_silencer,True
 14,97535,76561198002613044,frees.tyler,weapon_usp_silencer,True
 14,97545,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_galilar,False
@@ -2263,44 +1536,21 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 14,97781,76561198002613044,frees.tyler,weapon_usp_silencer,True
 14,97823,76561198002613044,frees.tyler,weapon_usp_silencer,True
 14,97838,76561198002613044,frees.tyler,weapon_usp_silencer,True
-14,98238,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_knife_t,False
-14,98333,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_knife_t,False
 14,98361,76561199557907229,shawty#)$@,weapon_awp,False
-14,98368,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_knife_t,False
-15,99946,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-15,99971,76561198002613044,frees.tyler,weapon_smokegrenade,False
 15,99978,76561199557907229,shawty#)$@,weapon_awp,False
-15,100031,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_smokegrenade,False
-15,100041,76561199052717313,Worfy,weapon_knife_canis,False
-15,100101,76561198274174345,zig,weapon_flashbang,False
-15,100142,76561198002613044,frees.tyler,weapon_hegrenade,False
-15,100169,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_flashbang,False
-15,100225,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
 15,100237,76561199557907229,shawty#)$@,weapon_awp,False
-15,100461,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_molotov,False
 15,100570,76561199826895670,RME | Пацан,weapon_awp,False
-15,100630,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_hegrenade,False
 15,100700,76561199826895670,RME | Пацан,weapon_awp,False
 15,100995,76561198002613044,frees.tyler,weapon_famas,False
 15,101000,76561198002613044,frees.tyler,weapon_famas,False
 15,101006,76561198002613044,frees.tyler,weapon_famas,False
-15,101007,76561199557907229,shawty#)$@,weapon_knife_t,False
 15,101012,76561198002613044,frees.tyler,weapon_famas,False
 15,101018,76561198002613044,frees.tyler,weapon_famas,False
 15,101023,76561198002613044,frees.tyler,weapon_famas,False
 15,101029,76561198002613044,frees.tyler,weapon_famas,False
-15,101033,76561199557907229,shawty#)$@,weapon_knife_t,False
 15,101035,76561198002613044,frees.tyler,weapon_famas,False
 15,101041,76561198002613044,frees.tyler,weapon_famas,False
 15,101046,76561198002613044,frees.tyler,weapon_famas,False
-15,101059,76561199557907229,shawty#)$@,weapon_knife_t,False
-15,101084,76561199557907229,shawty#)$@,weapon_knife_t,False
-15,101110,76561199557907229,shawty#)$@,weapon_knife_t,False
-15,101135,76561199557907229,shawty#)$@,weapon_knife_t,False
-15,101161,76561199557907229,shawty#)$@,weapon_knife_t,False
-15,101187,76561199557907229,shawty#)$@,weapon_knife_t,False
-15,101212,76561199557907229,shawty#)$@,weapon_knife_t,False
-15,101235,76561199052717313,Worfy,weapon_flashbang,False
 15,101603,76561198274174345,zig,weapon_m4a1_silencer,True
 15,101604,76561199068251294,prosto bo$$,weapon_ak47,False
 15,101609,76561198274174345,zig,weapon_m4a1_silencer,True
@@ -2324,12 +1574,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 15,101663,76561199557907229,shawty#)$@,weapon_glock,False
 15,101839,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 15,101858,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
-15,101953,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-15,102027,76561198002613044,frees.tyler,weapon_flashbang,False
-15,102052,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-15,102097,76561199052717313,Worfy,weapon_flashbang,False
-15,102223,76561198002613044,frees.tyler,weapon_incgrenade,False
-15,102232,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
 15,102244,76561199052717313,Worfy,weapon_mp9,False
 15,102248,76561199052717313,Worfy,weapon_mp9,False
 15,102266,76561199052717313,Worfy,weapon_mp9,False
@@ -2343,7 +1587,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 15,102315,76561199052717313,Worfy,weapon_mp9,False
 15,102317,76561199068251294,prosto bo$$,weapon_ak47,False
 15,102320,76561199052717313,Worfy,weapon_mp9,False
-15,102321,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
 15,102324,76561199052717313,Worfy,weapon_mp9,False
 15,102329,76561199052717313,Worfy,weapon_mp9,False
 15,102333,76561199052717313,Worfy,weapon_mp9,False
@@ -2372,7 +1615,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 15,102644,76561199557907229,shawty#)$@,weapon_m4a1_silencer,True
 15,102649,76561198171814417,Faat,weapon_mp7,False
 15,102650,76561199557907229,shawty#)$@,weapon_m4a1_silencer,True
-15,102661,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
 15,102678,76561198171814417,Faat,weapon_mp7,False
 15,102683,76561198171814417,Faat,weapon_mp7,False
 15,102688,76561198171814417,Faat,weapon_mp7,False
@@ -2452,7 +1694,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 15,103323,76561198171814417,Faat,weapon_mp7,False
 15,103335,76561198171814417,Faat,weapon_mp7,False
 15,103341,76561198171814417,Faat,weapon_mp7,False
-15,103344,76561199557907229,shawty#)$@,weapon_smokegrenade,False
 15,103346,76561198171814417,Faat,weapon_mp7,False
 15,103370,76561198171814417,Faat,weapon_mp7,False
 15,103375,76561198171814417,Faat,weapon_mp7,False
@@ -2460,7 +1701,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 15,103397,76561198171814417,Faat,weapon_mp7,False
 15,103402,76561198171814417,Faat,weapon_mp7,False
 15,103407,76561198171814417,Faat,weapon_mp7,False
-15,103424,76561199826895670,RME | Пацан,weapon_smokegrenade,False
 15,103456,76561198171814417,Faat,weapon_mp7,False
 15,103461,76561198171814417,Faat,weapon_mp7,False
 15,103674,76561198171814417,Faat,weapon_mp7,False
@@ -2485,45 +1725,12 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 15,103912,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 15,103916,76561198002613044,frees.tyler,weapon_famas,False
 15,103921,76561198002613044,frees.tyler,weapon_famas,False
-15,103923,76561199557907229,shawty#)$@,weapon_molotov,False
 15,103927,76561198002613044,frees.tyler,weapon_famas,False
 15,103931,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 15,103936,76561198002613044,frees.tyler,weapon_famas,False
 15,103942,76561198002613044,frees.tyler,weapon_famas,False
 15,103948,76561198002613044,frees.tyler,weapon_famas,False
 15,104429,76561199826895670,RME | Пацан,weapon_awp,False
-15,104696,76561199557907229,shawty#)$@,weapon_knife_t,False
-15,104722,76561199557907229,shawty#)$@,weapon_knife_t,False
-15,104748,76561199557907229,shawty#)$@,weapon_knife_t,False
-15,104773,76561199557907229,shawty#)$@,weapon_knife_t,False
-15,104799,76561199557907229,shawty#)$@,weapon_knife_t,False
-15,104824,76561199557907229,shawty#)$@,weapon_knife_t,False
-15,104850,76561199557907229,shawty#)$@,weapon_knife_t,False
-15,104876,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,106383,76561199557907229,shawty#)$@,weapon_flashbang,False
-16,106482,76561198049602148,Moon,weapon_smokegrenade,False
-16,106503,76561198002613044,frees.tyler,weapon_smokegrenade,False
-16,106582,76561199557907229,shawty#)$@,weapon_flashbang,False
-16,106622,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-16,106708,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_smokegrenade,False
-16,106717,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,106734,76561198002613044,frees.tyler,weapon_incgrenade,False
-16,106742,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,106753,76561199052717313,Worfy,weapon_flashbang,False
-16,106768,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,106793,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,106794,76561199068251294,prosto bo$$,weapon_smokegrenade,False
-16,106797,76561198171814417,Faat,weapon_smokegrenade,False
-16,106819,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,106845,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,106870,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,106896,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,106921,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,106947,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,106973,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,106998,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,107247,76561198049602148,Moon,weapon_hegrenade,False
-16,107253,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_flashbang,False
 16,107256,76561198002613044,frees.tyler,weapon_m4a1_silencer,True
 16,107263,76561198002613044,frees.tyler,weapon_m4a1_silencer,True
 16,107264,76561199557907229,shawty#)$@,weapon_ak47,False
@@ -2532,14 +1739,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 16,107283,76561199557907229,shawty#)$@,weapon_ak47,False
 16,107290,76561199557907229,shawty#)$@,weapon_ak47,False
 16,107296,76561199557907229,shawty#)$@,weapon_ak47,False
-16,107365,76561199068251294,prosto bo$$,weapon_molotov,False
-16,107601,76561199068251294,prosto bo$$,weapon_flashbang,False
-16,107602,76561199052717313,Worfy,weapon_incgrenade,False
-16,107622,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_molotov,False
-16,107812,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_hegrenade,False
-16,107832,76561199826895670,RME | Пацан,weapon_molotov,False
-16,107843,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,107869,76561199557907229,shawty#)$@,weapon_knife_t,False
 16,108005,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 16,108011,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 16,108019,76561198049602148,Moon,weapon_ump45,False
@@ -2549,7 +1748,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 16,108036,76561198049602148,Moon,weapon_ump45,False
 16,108037,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 16,108044,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
-16,108191,76561199557907229,shawty#)$@,weapon_smokegrenade,False
 16,108319,76561199052717313,Worfy,weapon_mp9,False
 16,108322,76561199557907229,shawty#)$@,weapon_ak47,False
 16,108324,76561199052717313,Worfy,weapon_mp9,False
@@ -2560,7 +1758,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 16,108341,76561199557907229,shawty#)$@,weapon_ak47,False
 16,108347,76561199557907229,shawty#)$@,weapon_ak47,False
 16,108354,76561199557907229,shawty#)$@,weapon_ak47,False
-16,108396,76561199068251294,prosto bo$$,weapon_hegrenade,False
 16,108968,76561199557907229,shawty#)$@,weapon_ak47,False
 16,108975,76561199557907229,shawty#)$@,weapon_ak47,False
 16,108981,76561199557907229,shawty#)$@,weapon_ak47,False
@@ -2582,40 +1779,7 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 16,109574,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 16,109707,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 16,109737,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
-16,109894,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,109920,76561199557907229,shawty#)$@,weapon_knife_t,False
 16,109929,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
-16,109945,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,109971,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,109996,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110022,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110048,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110073,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110099,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110124,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110146,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-16,110150,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110176,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110191,76561199068251294,prosto bo$$,weapon_knife_t,False
-16,110201,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110203,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-16,110227,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110242,76561199068251294,prosto bo$$,weapon_knife_t,False
-16,110245,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-16,110248,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_flashbang,False
-16,110252,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110253,76561199826895670,RME | Пацан,weapon_hegrenade,False
-16,110274,76561199068251294,prosto bo$$,weapon_knife_t,False
-16,110278,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110304,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110329,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110352,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-16,110355,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110380,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110406,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110432,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110515,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_knife_t,False
-16,110586,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
 16,110596,76561198274174345,zig,weapon_mp7,False
 16,110601,76561198274174345,zig,weapon_mp7,False
 16,110607,76561198274174345,zig,weapon_mp7,False
@@ -2627,9 +1791,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 16,110637,76561198274174345,zig,weapon_mp7,False
 16,110642,76561198274174345,zig,weapon_mp7,False
 16,110647,76561198274174345,zig,weapon_mp7,False
-16,110740,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110766,76561199557907229,shawty#)$@,weapon_knife_t,False
-16,110791,76561199557907229,shawty#)$@,weapon_knife_t,False
 16,110802,76561198171814417,Faat,weapon_m4a1_silencer,True
 16,110808,76561198171814417,Faat,weapon_m4a1_silencer,True
 16,110814,76561198171814417,Faat,weapon_m4a1_silencer,True
@@ -2688,29 +1849,16 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 16,111195,76561199826895670,RME | Пацан,weapon_glock,False
 16,111207,76561199826895670,RME | Пацан,weapon_glock,False
 16,111216,76561199826895670,RME | Пацан,weapon_glock,False
-16,111258,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
 16,111321,76561199826895670,RME | Пацан,weapon_awp,False
-16,111354,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
 16,111431,76561199826895670,RME | Пацан,weapon_awp,False
 16,111540,76561199826895670,RME | Пацан,weapon_awp,False
 16,111556,76561199433997570,Simple Dimple skins.army,weapon_glock,False
 16,111636,76561199433997570,Simple Dimple skins.army,weapon_glock,False
-17,113010,76561199052717313,Worfy,weapon_knife_canis,False
-17,113210,76561198002613044,frees.tyler,weapon_smokegrenade,False
-17,113297,76561199052717313,Worfy,weapon_incgrenade,False
-17,113300,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-17,113392,76561199068251294,prosto bo$$,weapon_knife_t,False
-17,113403,76561198171814417,Faat,weapon_incgrenade,False
-17,113435,76561199433997570,Simple Dimple skins.army,weapon_flashbang,False
-17,113439,76561198002613044,frees.tyler,weapon_incgrenade,False
 17,113441,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_awp,False
-17,113491,76561199068251294,prosto bo$$,weapon_knife_t,False
 17,113495,76561199826895670,RME | Пацан,weapon_awp,False
 17,113554,76561199557907229,shawty#)$@,weapon_ssg08,False
 17,113567,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_awp,False
 17,113697,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_awp,False
-17,113815,76561198274174345,zig,weapon_incgrenade,False
-17,113818,76561199826895670,RME | Пацан,weapon_hegrenade,False
 17,113841,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_awp,False
 17,113932,76561198002613044,frees.tyler,weapon_mp9,False
 17,113937,76561198002613044,frees.tyler,weapon_mp9,False
@@ -2735,15 +1883,11 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 17,113995,76561198002613044,frees.tyler,weapon_mp9,False
 17,114000,76561198002613044,frees.tyler,weapon_mp9,False
 17,114013,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_awp,False
-17,114074,76561199433997570,Simple Dimple skins.army,weapon_hegrenade,False
-17,114081,76561199557907229,shawty#)$@,weapon_flashbang,False
-17,114097,76561198002613044,frees.tyler,weapon_hegrenade,False
 17,114139,76561198274174345,zig,weapon_ak47,False
 17,114145,76561198274174345,zig,weapon_ak47,False
 17,114161,76561198274174345,zig,weapon_ak47,False
 17,114167,76561198274174345,zig,weapon_ak47,False
 17,114275,76561199826895670,RME | Пацан,weapon_awp,False
-17,114610,76561198002613044,frees.tyler,weapon_flashbang,False
 17,114771,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_awp,False
 17,114878,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 17,114883,76561198049602148,Moon,weapon_famas,False
@@ -2764,8 +1908,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 17,114944,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 17,114951,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 17,114952,76561199826895670,RME | Пацан,weapon_awp,False
-17,115226,76561199826895670,RME | Пацан,weapon_smokegrenade,False
-17,115352,76561199433997570,Simple Dimple skins.army,weapon_smokegrenade,False
 17,115509,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 17,115609,76561198274174345,zig,weapon_ak47,False
 17,115616,76561198274174345,zig,weapon_ak47,False
@@ -2795,19 +1937,7 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 17,116083,76561199052717313,Worfy,weapon_m4a1_silencer,True
 17,116089,76561199052717313,Worfy,weapon_m4a1_silencer,True
 17,116096,76561199052717313,Worfy,weapon_m4a1_silencer,True
-17,116188,76561199052717313,Worfy,weapon_knife_canis,False
-17,116323,76561199052717313,Worfy,weapon_knife_canis,False
 18,117799,76561199433997570,Simple Dimple skins.army,weapon_glock,False
-18,118006,76561199052717313,Worfy,weapon_knife_canis,False
-18,118078,76561199557907229,shawty#)$@,weapon_knife_t,False
-18,118095,76561198002613044,frees.tyler,weapon_smokegrenade,False
-18,118096,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_flashbang,False
-18,118104,76561199557907229,shawty#)$@,weapon_knife_t,False
-18,118272,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_flashbang,False
-18,118292,76561199052717313,Worfy,weapon_molotov,False
-18,118311,76561198002613044,frees.tyler,weapon_incgrenade,False
-18,118346,76561198049602148,Moon,weapon_flashbang,False
-18,118408,76561199826895670,RME | Пацан,weapon_molotov,False
 18,118447,76561199557907229,shawty#)$@,weapon_mac10,False
 18,118452,76561199557907229,shawty#)$@,weapon_mac10,False
 18,118456,76561199557907229,shawty#)$@,weapon_mac10,False
@@ -2816,7 +1946,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 18,118471,76561199557907229,shawty#)$@,weapon_mac10,False
 18,118476,76561199557907229,shawty#)$@,weapon_mac10,False
 18,118480,76561199557907229,shawty#)$@,weapon_mac10,False
-18,118481,76561199068251294,prosto bo$$,weapon_hegrenade,False
 18,118485,76561199557907229,shawty#)$@,weapon_mac10,False
 18,118487,76561198049602148,Moon,weapon_mp7,False
 18,118490,76561199557907229,shawty#)$@,weapon_mac10,False
@@ -2839,9 +1968,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 18,118538,76561199557907229,shawty#)$@,weapon_mac10,False
 18,118543,76561199557907229,shawty#)$@,weapon_mac10,False
 18,118548,76561199557907229,shawty#)$@,weapon_mac10,False
-18,118706,76561198049602148,Moon,weapon_hegrenade,False
-18,118958,76561199826895670,RME | Пацан,weapon_flashbang,False
-18,119150,76561198002613044,frees.tyler,weapon_hegrenade,False
 18,119153,76561199557907229,shawty#)$@,weapon_mac10,False
 18,119156,76561198274174345,zig,weapon_ak47,False
 18,119158,76561199557907229,shawty#)$@,weapon_mac10,False
@@ -2899,7 +2025,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 18,119343,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 18,119350,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 18,119360,76561199826895670,RME | Пацан,weapon_ak47,False
-18,119762,76561198171814417,Faat,weapon_incgrenade,False
 18,119765,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 18,119771,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 18,119778,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
@@ -2907,7 +2032,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 18,119790,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 18,119797,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 18,119803,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
-18,119811,76561199826895670,RME | Пацан,weapon_smokegrenade,False
 18,119824,76561199052717313,Worfy,weapon_m4a1_silencer,True
 18,119830,76561199052717313,Worfy,weapon_m4a1_silencer,True
 18,119853,76561199052717313,Worfy,weapon_m4a1_silencer,True
@@ -2918,11 +2042,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 18,119880,76561199068251294,prosto bo$$,weapon_galilar,False
 18,119891,76561199052717313,Worfy,weapon_m4a1_silencer,True
 18,119897,76561199052717313,Worfy,weapon_m4a1_silencer,True
-18,119993,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_smokegrenade,False
-18,120063,76561199433997570,Simple Dimple skins.army,weapon_flashbang,False
-18,120124,76561199052717313,Worfy,weapon_hegrenade,False
-18,120249,76561199052717313,Worfy,weapon_flashbang,False
-18,120356,76561199433997570,Simple Dimple skins.army,weapon_flashbang,False
 18,120599,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 18,120626,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 18,120627,76561199826895670,RME | Пацан,weapon_ak47,False
@@ -2935,14 +2054,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 18,120650,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 18,120652,76561199826895670,RME | Пацан,weapon_ak47,False
 18,120656,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
-18,120826,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-18,120858,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-18,121401,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-18,121623,76561199433997570,Simple Dimple skins.army,weapon_hegrenade,False
-18,121943,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-18,122036,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-18,122096,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-18,122132,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
 18,122140,76561198049602148,Moon,weapon_mp7,False
 18,122145,76561198049602148,Moon,weapon_mp7,False
 18,122150,76561198049602148,Moon,weapon_mp7,False
@@ -2950,8 +2061,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 18,122161,76561198049602148,Moon,weapon_mp7,False
 18,122166,76561198049602148,Moon,weapon_mp7,False
 18,122171,76561198049602148,Moon,weapon_mp7,False
-18,122172,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-18,122172,76561199826895670,RME | Пацан,weapon_flashbang,False
 18,122176,76561198049602148,Moon,weapon_mp7,False
 18,122181,76561198049602148,Moon,weapon_mp7,False
 18,122186,76561198049602148,Moon,weapon_mp7,False
@@ -2959,15 +2068,12 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 18,122196,76561198049602148,Moon,weapon_mp7,False
 18,122201,76561198049602148,Moon,weapon_mp7,False
 18,122207,76561198049602148,Moon,weapon_mp7,False
-18,122209,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
 18,122212,76561198049602148,Moon,weapon_mp7,False
 18,122217,76561198049602148,Moon,weapon_mp7,False
 18,122222,76561198049602148,Moon,weapon_mp7,False
 18,122227,76561198049602148,Moon,weapon_mp7,False
 18,122232,76561198049602148,Moon,weapon_mp7,False
 18,122237,76561198049602148,Moon,weapon_mp7,False
-18,122327,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-18,122359,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
 18,122694,76561199052717313,Worfy,weapon_m4a1_silencer,True
 18,122701,76561199052717313,Worfy,weapon_m4a1_silencer,True
 18,122716,76561199052717313,Worfy,weapon_m4a1_silencer,True
@@ -3010,22 +2116,10 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 18,123880,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 18,123886,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 18,123893,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
-19,125292,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_hegrenade,False
 19,125395,76561199826895670,RME | Пацан,weapon_deagle,False
-19,125433,76561198002613044,frees.tyler,weapon_smokegrenade,False
 19,125462,76561199557907229,shawty#)$@,weapon_nova,False
 19,125462,76561199068251294,prosto bo$$,weapon_glock,False
-19,125469,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_smokegrenade,False
-19,125609,76561199052717313,Worfy,weapon_incgrenade,False
-19,125665,76561198002613044,frees.tyler,weapon_incgrenade,False
-19,125742,76561198049602148,Moon,weapon_hegrenade,False
-19,125757,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_molotov,False
-19,125835,76561199068251294,prosto bo$$,weapon_knife_t,False
-19,125933,76561198049602148,Moon,weapon_incgrenade,False
 19,125987,76561199068251294,prosto bo$$,weapon_awp,False
-19,126042,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_flashbang,False
-19,126167,76561198002613044,frees.tyler,weapon_hegrenade,False
-19,126215,76561199068251294,prosto bo$$,weapon_knife_t,False
 19,126471,76561198049602148,Moon,weapon_m4a1_silencer,True
 19,126478,76561198049602148,Moon,weapon_m4a1_silencer,True
 19,126545,76561199826895670,RME | Пацан,weapon_awp,False
@@ -3042,7 +2136,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 19,127013,76561198002613044,frees.tyler,weapon_mp9,False
 19,127017,76561198002613044,frees.tyler,weapon_mp9,False
 19,127021,76561198002613044,frees.tyler,weapon_mp9,False
-19,127156,76561198002613044,frees.tyler,weapon_flashbang,False
 19,127230,76561198171814417,Faat,weapon_ssg08,False
 19,127292,76561199826895670,RME | Пацан,weapon_awp,False
 19,127307,76561199068251294,prosto bo$$,weapon_awp,False
@@ -3057,7 +2150,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 19,127865,76561199052717313,Worfy,weapon_m4a1_silencer,True
 19,127871,76561199052717313,Worfy,weapon_m4a1_silencer,True
 19,127887,76561199052717313,Worfy,weapon_m4a1_silencer,True
-19,128003,76561199052717313,Worfy,weapon_hegrenade,False
 19,128418,76561199052717313,Worfy,weapon_m4a1_silencer,True
 19,128425,76561199052717313,Worfy,weapon_m4a1_silencer,True
 19,128432,76561199068251294,prosto bo$$,weapon_awp,False
@@ -3074,17 +2166,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 19,128545,76561198274174345,zig,weapon_m4a1_silencer,True
 19,128558,76561198274174345,zig,weapon_m4a1_silencer,True
 19,128581,76561198274174345,zig,weapon_m4a1_silencer,True
-19,128662,76561199052717313,Worfy,weapon_knife_canis,False
-20,130573,76561198002613044,frees.tyler,weapon_smokegrenade,False
-20,130719,76561199052717313,Worfy,weapon_incgrenade,False
-20,130796,76561198002613044,frees.tyler,weapon_incgrenade,False
-20,130832,76561199826895670,RME | Пацан,weapon_flashbang,False
-20,130847,76561199433997570,Simple Dimple skins.army,weapon_smokegrenade,False
-20,130935,76561199826895670,RME | Пацан,weapon_smokegrenade,False
-20,130979,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_flashbang,False
-20,131028,76561199433997570,Simple Dimple skins.army,weapon_flashbang,False
-20,131125,76561199068251294,prosto bo$$,weapon_smokegrenade,False
-20,131273,76561198171814417,Faat,weapon_hegrenade,False
 20,131279,76561199052717313,Worfy,weapon_m4a1_silencer,True
 20,131286,76561199052717313,Worfy,weapon_m4a1_silencer,True
 20,131290,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
@@ -3096,7 +2177,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 20,131434,76561198171814417,Faat,weapon_awp,False
 20,131471,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_galilar,False
 20,131477,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_galilar,False
-20,131590,76561199052717313,Worfy,weapon_flashbang,False
 20,131739,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_galilar,False
 20,131742,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 20,131745,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_galilar,False
@@ -3149,7 +2229,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 20,131906,76561199068251294,prosto bo$$,weapon_p90,False
 20,131911,76561199068251294,prosto bo$$,weapon_p90,False
 20,131915,76561199068251294,prosto bo$$,weapon_p90,False
-20,131916,76561198274174345,zig,weapon_hegrenade,False
 20,131920,76561199068251294,prosto bo$$,weapon_p90,False
 20,131924,76561199068251294,prosto bo$$,weapon_p90,False
 20,131926,76561199052717313,Worfy,weapon_m4a1_silencer,True
@@ -3170,9 +2249,7 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 20,131960,76561199068251294,prosto bo$$,weapon_p90,False
 20,131965,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_galilar,False
 20,131971,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_galilar,False
-20,131974,76561198002613044,frees.tyler,weapon_flashbang,False
 20,131977,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_galilar,False
-20,132079,76561198274174345,zig,weapon_incgrenade,False
 20,132266,76561198002613044,frees.tyler,weapon_m4a1_silencer,True
 20,132267,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_galilar,False
 20,132272,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_galilar,False
@@ -3187,7 +2264,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 20,132305,76561198002613044,frees.tyler,weapon_m4a1_silencer,True
 20,132311,76561198002613044,frees.tyler,weapon_m4a1_silencer,True
 20,132318,76561198002613044,frees.tyler,weapon_m4a1_silencer,True
-20,132402,76561198002613044,frees.tyler,weapon_hegrenade,False
 20,132522,76561199433997570,Simple Dimple skins.army,weapon_ak47,False
 20,132528,76561198002613044,frees.tyler,weapon_m4a1_silencer,True
 20,132534,76561198002613044,frees.tyler,weapon_m4a1_silencer,True
@@ -3221,19 +2297,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 20,132737,76561198002613044,frees.tyler,weapon_m4a1_silencer,True
 20,132747,76561198002613044,frees.tyler,weapon_m4a1_silencer,True
 20,132753,76561198002613044,frees.tyler,weapon_m4a1_silencer,True
-21,135184,76561198002613044,frees.tyler,weapon_smokegrenade,False
-21,135277,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_knife_t,False
-21,135280,76561199433997570,Simple Dimple skins.army,weapon_knife_t,False
-21,135286,76561199826895670,RME | Пацан,weapon_smokegrenade,False
-21,135306,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_knife_t,False
-21,135332,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_knife_t,False
-21,135355,76561199052717313,Worfy,weapon_incgrenade,False
-21,135390,76561198274174345,zig,weapon_incgrenade,False
-21,135404,76561198002613044,frees.tyler,weapon_incgrenade,False
-21,135451,76561198049602148,Moon,weapon_decoy,False
-21,135615,76561198002613044,frees.tyler,weapon_hegrenade,False
-21,135629,76561199068251294,prosto bo$$,weapon_smokegrenade,False
-21,135714,76561199826895670,RME | Пацан,weapon_knife_canis,False
 21,135827,76561198002613044,frees.tyler,weapon_m4a1_silencer,True
 21,135833,76561198002613044,frees.tyler,weapon_m4a1_silencer,True
 21,135839,76561198002613044,frees.tyler,weapon_m4a1_silencer,True
@@ -3270,37 +2333,26 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 21,136151,76561198274174345,zig,weapon_ak47,False
 21,136158,76561198274174345,zig,weapon_ak47,False
 21,136161,76561198049602148,Moon,weapon_m4a1_silencer,True
-22,138026,76561199826895670,RME | Пацан,weapon_smokegrenade,False
-22,138145,76561198002613044,frees.tyler,weapon_smokegrenade,False
-22,138320,76561199052717313,Worfy,weapon_incgrenade,False
 22,138365,76561199068251294,prosto bo$$,weapon_ssg08,False
-22,138371,76561198002613044,frees.tyler,weapon_incgrenade,False
 22,138389,76561199826895670,RME | Пацан,weapon_ssg08,False
-22,138408,76561198171814417,Faat,weapon_incgrenade,False
 22,138452,76561199068251294,prosto bo$$,weapon_ssg08,False
-22,138457,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_flashbang,False
 22,138489,76561199826895670,RME | Пацан,weapon_ssg08,False
 22,138547,76561199068251294,prosto bo$$,weapon_ssg08,False
 22,138589,76561199826895670,RME | Пацан,weapon_ssg08,False
 22,138637,76561199068251294,prosto bo$$,weapon_ssg08,False
-22,138732,76561198002613044,frees.tyler,weapon_hegrenade,False
 22,138732,76561199826895670,RME | Пацан,weapon_ssg08,False
-22,138828,76561198171814417,Faat,weapon_smokegrenade,False
 22,138838,76561199826895670,RME | Пацан,weapon_ssg08,False
 22,138944,76561199826895670,RME | Пацан,weapon_ssg08,False
-22,138951,76561199068251294,prosto bo$$,weapon_molotov,False
 22,139050,76561199826895670,RME | Пацан,weapon_ssg08,False
 22,139160,76561199052717313,Worfy,weapon_m4a1_silencer,True
 22,139167,76561199052717313,Worfy,weapon_m4a1_silencer,True
 22,139271,76561199826895670,RME | Пацан,weapon_ssg08,False
 22,139311,76561199068251294,prosto bo$$,weapon_ssg08,False
-22,139328,76561198049602148,Moon,weapon_hegrenade,False
 22,139342,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 22,139348,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 22,139355,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 22,139358,76561199052717313,Worfy,weapon_m4a1_silencer,True
 22,139361,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
-22,139365,76561199433997570,Simple Dimple skins.army,weapon_hegrenade,False
 22,139367,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
 22,139373,76561199826895670,RME | Пацан,weapon_ssg08,False
 22,139374,76561199256543526,Wybaczam.oficjalnie skins.army,weapon_ak47,False
@@ -3325,17 +2377,7 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 22,139558,76561199433997570,Simple Dimple skins.army,weapon_mp7,False
 22,139563,76561199433997570,Simple Dimple skins.army,weapon_mp7,False
 22,139568,76561199433997570,Simple Dimple skins.army,weapon_mp7,False
-22,139588,76561199068251294,prosto bo$$,weapon_knife_t,False
-22,139632,76561199068251294,prosto bo$$,weapon_knife_t,False
-22,139671,76561199068251294,prosto bo$$,weapon_knife_t,False
-22,139721,76561199068251294,prosto bo$$,weapon_knife_t,False
-22,139737,76561198274174345,zig,weapon_hegrenade,False
-22,139779,76561199068251294,prosto bo$$,weapon_knife_t,False
-22,139837,76561199068251294,prosto bo$$,weapon_knife_t,False
-22,139886,76561198274174345,zig,weapon_incgrenade,False
-22,139916,76561199068251294,prosto bo$$,weapon_knife_t,False
 22,140000,76561198274174345,zig,weapon_ak47,False
-22,140005,76561199068251294,prosto bo$$,weapon_knife_t,False
 22,140038,76561198274174345,zig,weapon_ak47,False
 22,140186,76561199433997570,Simple Dimple skins.army,weapon_mp7,False
 22,140191,76561199433997570,Simple Dimple skins.army,weapon_mp7,False
@@ -3343,7 +2385,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 22,140202,76561199433997570,Simple Dimple skins.army,weapon_mp7,False
 22,140207,76561199433997570,Simple Dimple skins.army,weapon_mp7,False
 22,140212,76561199433997570,Simple Dimple skins.army,weapon_mp7,False
-22,140215,76561199068251294,prosto bo$$,weapon_knife_t,False
 22,140217,76561199433997570,Simple Dimple skins.army,weapon_mp7,False
 22,140222,76561199433997570,Simple Dimple skins.army,weapon_mp7,False
 22,140225,76561198274174345,zig,weapon_ak47,False
@@ -3353,9 +2394,7 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 22,140250,76561198274174345,zig,weapon_ak47,False
 22,140820,76561198274174345,zig,weapon_ak47,False
 22,140826,76561198274174345,zig,weapon_ak47,False
-22,140974,76561199052717313,Worfy,weapon_hegrenade,False
 22,141022,76561199826895670,RME | Пацан,weapon_ssg08,False
-22,141207,76561198171814417,Faat,weapon_hegrenade,False
 22,141527,76561199052717313,Worfy,weapon_m4a1_silencer,True
 22,141544,76561199052717313,Worfy,weapon_m4a1_silencer,True
 22,141551,76561199052717313,Worfy,weapon_m4a1_silencer,True
@@ -3388,7 +2427,6 @@ round_number,tick,user_steamid,user_name,weapon,silenced
 22,142148,76561199826895670,RME | Пацан,weapon_glock,False
 22,142156,76561199068251294,prosto bo$$,weapon_glock,False
 22,142159,76561199826895670,RME | Пацан,weapon_glock,False
-22,142330,76561199068251294,prosto bo$$,weapon_hegrenade,False
 22,142433,76561198171814417,Faat,weapon_m4a1,False
 22,142439,76561198171814417,Faat,weapon_m4a1,False
 22,142453,76561198171814417,Faat,weapon_m4a1,False

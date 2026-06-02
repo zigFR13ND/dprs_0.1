@@ -45,9 +45,54 @@ DERIVED_TABLES = (
     "kills",
     "damage",
     "shots",
+    "weapon_actions",
     "bomb_events",
     "player_round_stats",
 )
+
+FIREARM_WEAPONS = {
+    # Pistols
+    "cz75a",
+    "deagle",
+    "elite",
+    "fiveseven",
+    "glock",
+    "hkp2000",
+    "p250",
+    "revolver",
+    "tec9",
+    "usp_silencer",
+    # Rifles
+    "ak47",
+    "aug",
+    "famas",
+    "galilar",
+    "m4a1",
+    "m4a1_silencer",
+    "sg556",
+    # SMGs
+    "bizon",
+    "mac10",
+    "mp5sd",
+    "mp7",
+    "mp9",
+    "p90",
+    "ump45",
+    # Shotguns
+    "mag7",
+    "nova",
+    "sawedoff",
+    "xm1014",
+    # Snipers
+    "awp",
+    "g3sg1",
+    "scar20",
+    "ssg08",
+    # Machine guns
+    "m249",
+    "negev",
+}
+WEAPON_FIRE_DIAGNOSTICS: dict[str, object] = {}
 EXPLICIT_ID_COLUMNS = {
     "weapon_itemid",
     "weapon_fauxitemid",
@@ -1163,13 +1208,85 @@ def build_damage(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
     return select_existing(damage, preferred)
 
 
-def build_shots(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
-    shots = read_csv_if_exists(raw_dir / "events" / "weapon_fire.csv")
-    if shots.empty:
-        return pd.DataFrame()
-    shots = normalize_steamid_columns(shots.copy())
-    shots = normalize_identifier_columns(shots, "shots")
-    shots = assign_round_numbers(shots, rounds)
+def normalize_weapon_name(value: object) -> str:
+    if pd.isna(value):
+        return ""
+    text = str(value).strip().lower()
+    if text.startswith("weapon_"):
+        text = text[len("weapon_") :]
+    return text
+
+
+def firearm_shot_series(weapons: pd.Series) -> pd.Series:
+    if weapons.empty:
+        return pd.Series(dtype=bool, index=weapons.index)
+    normalized = weapons.map(normalize_weapon_name)
+    return normalized.isin(FIREARM_WEAPONS)
+
+
+def build_weapon_actions(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
+    actions = read_csv_if_exists(raw_dir / "events" / "weapon_fire.csv")
+    preferred = [
+        "round_number",
+        "tick",
+        "user_steamid",
+        "user_name",
+        "weapon",
+        "is_firearm_shot",
+        "silenced",
+    ]
+    if actions.empty:
+        WEAPON_FIRE_DIAGNOSTICS.clear()
+        WEAPON_FIRE_DIAGNOSTICS.update(
+            {
+                "weapon_fire_rows": 0,
+                "firearm_shot_rows": 0,
+                "non_firearm_action_rows": 0,
+                "non_firearm_weapons": {},
+            }
+        )
+        return pd.DataFrame(columns=preferred)
+
+    actions = normalize_steamid_columns(actions.copy())
+    actions = normalize_identifier_columns(actions, "weapon_actions")
+    actions = assign_round_numbers(actions, rounds)
+    if "weapon" in actions.columns:
+        actions["is_firearm_shot"] = firearm_shot_series(actions["weapon"])
+        non_firearm = actions[~actions["is_firearm_shot"]]
+        non_firearm_weapons = (
+            non_firearm["weapon"]
+            .fillna("<missing>")
+            .astype("string")
+            .value_counts()
+            .sort_index()
+            .astype(int)
+            .to_dict()
+        )
+    else:
+        actions["is_firearm_shot"] = False
+        non_firearm_weapons = {"<missing>": int(len(actions))}
+
+    firearm_rows = int(actions["is_firearm_shot"].sum())
+    WEAPON_FIRE_DIAGNOSTICS.clear()
+    WEAPON_FIRE_DIAGNOSTICS.update(
+        {
+            "weapon_fire_rows": int(len(actions)),
+            "firearm_shot_rows": firearm_rows,
+            "non_firearm_action_rows": int(len(actions) - firearm_rows),
+            "non_firearm_weapons": non_firearm_weapons,
+        }
+    )
+    return select_existing(actions, preferred)
+
+
+def build_shots(
+    raw_dir: Path, rounds: pd.DataFrame, weapon_actions: pd.DataFrame | None = None
+) -> pd.DataFrame:
+    actions = (
+        build_weapon_actions(raw_dir, rounds)
+        if weapon_actions is None
+        else weapon_actions.copy()
+    )
     preferred = [
         "round_number",
         "tick",
@@ -1178,7 +1295,17 @@ def build_shots(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
         "weapon",
         "silenced",
     ]
-    return select_existing(shots, preferred)
+    if actions.empty:
+        return pd.DataFrame(columns=preferred)
+    if "is_firearm_shot" not in actions.columns:
+        return pd.DataFrame(columns=preferred)
+    firearm_mask = (
+        actions["is_firearm_shot"].fillna(False)
+        if pd.api.types.is_bool_dtype(actions["is_firearm_shot"])
+        else truthy_series(actions["is_firearm_shot"])
+    )
+    shots = actions[firearm_mask].copy()
+    return select_existing(shots.drop(columns=["is_firearm_shot"]), preferred)
 
 
 def build_bomb_events(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
@@ -1708,6 +1835,7 @@ def write_summary(results: list[TableResult], raw_dir: Path, output_dir: Path) -
         "survived_source_death_fallback": PLAYER_ROUND_SURVIVAL_DIAGNOSTICS.get(
             "survived_source_death_fallback", 0
         ),
+        "weapon_fire_filter": WEAPON_FIRE_DIAGNOSTICS,
     }
     (output_dir / "derived_summary.json").write_text(
         json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8"
@@ -1775,17 +1903,28 @@ def build_derived(
     PLAYER_ROUND_SURVIVAL_DIAGNOSTICS.update(
         {"survived_source_ticks": 0, "survived_source_death_fallback": 0}
     )
+    WEAPON_FIRE_DIAGNOSTICS.clear()
+    WEAPON_FIRE_DIAGNOSTICS.update(
+        {
+            "weapon_fire_rows": 0,
+            "firearm_shot_rows": 0,
+            "non_firearm_action_rows": 0,
+            "non_firearm_weapons": {},
+        }
+    )
 
     players = build_players(raw_dir)
     rounds = build_rounds(raw_dir)
     player_round_sides = build_player_round_sides(raw_dir, rounds)
+    weapon_actions = build_weapon_actions(raw_dir, rounds)
     tables = {
         "players": players,
         "rounds": rounds,
         "round_outcomes": build_round_outcomes(raw_dir, rounds),
         "kills": build_kills(raw_dir, rounds),
         "damage": build_damage(raw_dir, rounds),
-        "shots": build_shots(raw_dir, rounds),
+        "shots": build_shots(raw_dir, rounds, weapon_actions),
+        "weapon_actions": weapon_actions,
         "bomb_events": build_bomb_events(raw_dir, rounds),
     }
     tables["player_round_stats"] = build_player_round_stats(
