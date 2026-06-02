@@ -1,26 +1,26 @@
-round_number,tick,user_steamid,user_name,attacker_steamid,attacker_name,weapon,hitgroup,dmg_health,dmg_armor,health,armor
-1,2494,76561198049602148,Moon,76561199068251294,prosto bo$$,inferno,generic,2,0,98,0
-1,2587,76561198171814417,Faat,76561199433997570,Simple Dimple skins.army,hkp2000,chest,29,0,71,0
-1,2623,76561199433997570,Simple Dimple skins.army,76561198171814417,Faat,glock,chest,22,0,78,0
-1,2639,76561198171814417,Faat,76561199433997570,Simple Dimple skins.army,hkp2000,head,118,0,0,0
-1,2733,76561199052717313,Worfy,76561199433997570,Simple Dimple skins.army,hkp2000,chest,31,0,69,0
-1,2765,76561199052717313,Worfy,76561199068251294,prosto bo$$,hkp2000,chest,28,0,41,0
-1,2771,76561199052717313,Worfy,76561199433997570,Simple Dimple skins.army,hkp2000,right_arm,31,0,10,0
-1,2847,76561198049602148,Moon,76561199433997570,Simple Dimple skins.army,hkp2000,chest,28,0,70,0
-1,2874,76561199068251294,prosto bo$$,76561198274174345,zig,glock,right_leg,13,0,87,0
-1,2878,76561198274174345,zig,76561199068251294,prosto bo$$,hkp2000,stomach,16,8,84,92
-1,2892,76561199068251294,prosto bo$$,76561199052717313,Worfy,glock,chest,20,0,66,0
-1,2904,76561199068251294,prosto bo$$,76561198274174345,zig,glock,chest,18,0,48,0
-1,2937,76561199068251294,prosto bo$$,76561198274174345,zig,glock,left_leg,14,0,34,0
-1,2952,76561199068251294,prosto bo$$,76561198274174345,zig,glock,head,75,0,0,0
-1,3265,76561199256543526,Wybaczam.oficjalnie skins.army,76561198002613044,frees.tyler,hegrenade,generic,37,24,63,76
-1,3307,76561199557907229,shawty#)$@,76561198049602148,Moon,glock,head,56,0,44,0
-1,3585,76561199557907229,shawty#)$@,76561198274174345,zig,glock,chest,15,0,29,0
-1,3648,76561199433997570,Simple Dimple skins.army,76561198002613044,frees.tyler,glock,head,78,0,0,0
-1,5717,76561199557907229,shawty#)$@,76561198002613044,frees.tyler,glock,chest,23,0,5,0
-1,5728,76561198002613044,frees.tyler,76561199557907229,shawty#)$@,p250,stomach,40,0,60,0
-1,5758,76561199557907229,shawty#)$@,76561198002613044,frees.tyler,glock,chest,23,0,0,0
-1,5861,76561199826895670,RME | Пацан,76561198002613044,frees.tyler,glock,chest,25,0,75,0
-1,5872,76561198002613044,frees.tyler,76561199826895670,RME | Пацан,hkp2000,chest,32,0,28,0
-1,5883,76561198002613044,frees.tyler,76561199826895670,RME | Пацан,hkp2000,chest,32,0,0,0
-1,6325,76561199826895670,RME | Пацан,76561198049602148,Moon,glock,chest,28,0,46,0
+round_number,tick,user_steamid,user_name,attacker_steamid,attacker_name,weapon,hitgroup,dmg_health,dmg_armor,health,armor,is_self_damage,is_team_damage,is_enemy_damage,is_grenade_or_fire_damage,is_live_phase_damage
+1,2494,76561198049602148,Moon,76561199068251294,prosto bo$$,inferno,generic,2,0,98,0,False,False,False,True,True
+1,2587,76561198171814417,Faat,76561199433997570,Simple Dimple skins.army,hkp2000,chest,29,0,71,0,False,False,False,False,True
+1,2623,76561199433997570,Simple Dimple skins.army,76561198171814417,Faat,glock,chest,22,0,78,0,False,False,False,False,True
+1,2639,76561198171814417,Faat,76561199433997570,Simple Dimple skins.army,hkp2000,head,118,0,0,0,False,False,False,False,True
+1,2733,76561199052717313,Worfy,76561199433997570,Simple Dimple skins.army,hkp2000,chest,31,0,69,0,False,False,False,False,True
+1,2765,76561199052717313,Worfy,76561199068251294,prosto bo$$,hkp2000,chest,28,0,41,0,False,False,False,False,True
+1,2771,76561199052717313,Worfy,76561199433997570,Simple Dimple skins.army,hkp2000,right_arm,31,0,10,0,False,False,False,False,True
+1,2847,76561198049602148,Moon,76561199433997570,Simple Dimple skins.army,hkp2000,chest,28,0,70,0,False,False,False,False,True
+1,2874,76561199068251294,prosto bo$$,76561198274174345,zig,glock,right_leg,13,0,87,0,False,False,False,False,True
+1,2878,76561198274174345,zig,76561199068251294,prosto bo$$,hkp2000,stomach,16,8,84,92,False,False,False,False,True
+1,2892,76561199068251294,prosto bo$$,76561199052717313,Worfy,glock,chest,20,0,66,0,False,False,False,False,True
+1,2904,76561199068251294,prosto bo$$,76561198274174345,zig,glock,chest,18,0,48,0,False,False,False,False,True
+1,2937,76561199068251294,prosto bo$$,76561198274174345,zig,glock,left_leg,14,0,34,0,False,False,False,False,True
+1,2952,76561199068251294,prosto bo$$,76561198274174345,zig,glock,head,75,0,0,0,False,False,False,False,True
+1,3265,76561199256543526,Wybaczam.oficjalnie skins.army,76561198002613044,frees.tyler,hegrenade,generic,37,24,63,76,False,False,False,True,True
+1,3307,76561199557907229,shawty#)$@,76561198049602148,Moon,glock,head,56,0,44,0,False,False,False,False,True
+1,3585,76561199557907229,shawty#)$@,76561198274174345,zig,glock,chest,15,0,29,0,False,False,False,False,True
+1,3648,76561199433997570,Simple Dimple skins.army,76561198002613044,frees.tyler,glock,head,78,0,0,0,False,False,False,False,True
+1,5717,76561199557907229,shawty#)$@,76561198002613044,frees.tyler,glock,chest,23,0,5,0,False,False,False,False,True
+1,5728,76561198002613044,frees.tyler,76561199557907229,shawty#)$@,p250,stomach,40,0,60,0,False,False,False,False,True
+1,5758,76561199557907229,shawty#)$@,76561198002613044,frees.tyler,glock,chest,23,0,0,0,False,False,False,False,True
+1,5861,76561199826895670,RME | Пацан,76561198002613044,frees.tyler,glock,chest,25,0,75,0,False,False,False,False,True
+1,5872,76561198002613044,frees.tyler,76561199826895670,RME | Пацан,hkp2000,chest,32,0,28,0,False,False,False,False,True
+1,5883,76561198002613044,frees.tyler,76561199826895670,RME | Пацан,hkp2000,chest,32,0,0,0,False,False,False,False,True
+1,6325,76561199826895670,RME | Пацан,76561198049602148,Moon,glock,chest,28,0,46,0,False,False,False,False,True
