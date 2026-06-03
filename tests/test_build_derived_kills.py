@@ -8,6 +8,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from tools.build_derived import (
     build_clutch_attempts,
     build_kills,
+    build_player_match_stats,
     build_player_round_stats,
 )
 
@@ -267,3 +268,84 @@ def test_build_clutch_attempts_records_last_alive_state_and_round_result():
             "won": False,
         },
     ]
+
+
+def test_build_player_match_stats_aggregates_player_round_stats():
+    player_round_stats = pd.DataFrame(
+        [
+            {
+                "round_number": 1,
+                "steamid": "A",
+                "name": "Alpha",
+                "kills": 2,
+                "deaths": 0,
+                "assists": 1,
+                "damage_dealt": 150,
+                "kast": True,
+                "headshot_kills": 1,
+                "opening_kills": 1,
+                "opening_deaths": 0,
+                "clutch_attempts": 1,
+                "clutch_wins": 1,
+            },
+            {
+                "round_number": 2,
+                "steamid": "A",
+                "name": "Alpha",
+                "kills": 1,
+                "deaths": 1,
+                "assists": 0,
+                "damage_dealt": 50,
+                "kast": False,
+                "headshot_kills": 1,
+                "opening_kills": 0,
+                "opening_deaths": 1,
+                "clutch_attempts": 0,
+                "clutch_wins": 0,
+            },
+            {
+                "round_number": 1,
+                "steamid": "B",
+                "name": "Bravo",
+                "kills": 0,
+                "deaths": 1,
+                "assists": 0,
+                "damage_dealt": 25,
+                "kast": "true",
+                "headshot_kills": 0,
+                "opening_kills": 0,
+                "opening_deaths": 0,
+                "clutch_attempts": 0,
+                "clutch_wins": 0,
+            },
+        ]
+    )
+
+    match_stats = build_player_match_stats(player_round_stats).set_index("steamid")
+
+    assert list(match_stats.columns) == [
+        "name",
+        "rounds_played",
+        "kills",
+        "deaths",
+        "assists",
+        "adr",
+        "kast_percent",
+        "headshot_percent",
+        "opening_kills",
+        "opening_deaths",
+        "clutch_attempts",
+        "clutch_wins",
+    ]
+    assert match_stats.loc["A", "rounds_played"] == 2
+    assert match_stats.loc["A", "kills"] == 3
+    assert match_stats.loc["A", "deaths"] == 1
+    assert match_stats.loc["A", "assists"] == 1
+    assert match_stats.loc["A", "adr"] == 100
+    assert match_stats.loc["A", "kast_percent"] == 50
+    assert round(match_stats.loc["A", "headshot_percent"], 2) == 66.67
+    assert match_stats.loc["A", "opening_kills"] == 1
+    assert match_stats.loc["A", "opening_deaths"] == 1
+    assert match_stats.loc["A", "clutch_attempts"] == 1
+    assert match_stats.loc["A", "clutch_wins"] == 1
+    assert match_stats.loc["B", "headshot_percent"] == 0

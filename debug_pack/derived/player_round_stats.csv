@@ -1,221 +1,221 @@
-round_number,steamid,name,team_number,kills,deaths,suicides,team_deaths,assists,trade_kills,traded_deaths,damage_dealt,team_damage_dealt,self_damage,utility_damage_dealt,damage_taken,headshot_kills,shots,bomb_plants,bomb_defuses,survived,kast_kill,kast_assist,kast_survived,kast_traded,kast
-1,76561199068251294,prosto bo$$,2,0,1,0,0,0,0,0,0,0,0,0,140,0,8,0,0,False,False,False,False,False,False
-1,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,1,0,0,0,0,0,0,183,0,12,0,0,False,False,True,False,False,True
-1,76561199433997570,Simple Dimple skins.army,2,1,1,0,0,2,0,0,0,0,0,0,100,1,12,0,0,False,True,True,False,False,True
-1,76561199557907229,shawty#)$@,2,0,1,0,0,1,0,0,0,0,0,0,117,0,8,0,0,False,False,True,False,False,True
-1,76561199826895670,RME | Пацан,2,4,0,0,0,0,0,0,0,0,0,0,53,1,17,0,1,True,True,False,True,False,True
-1,76561198002613044,frees.tyler,3,2,1,0,0,1,0,0,0,0,0,0,104,1,15,0,0,False,True,True,False,False,True
-1,76561198049602148,Moon,3,0,1,0,0,1,0,0,0,0,0,0,166,0,10,0,0,False,False,True,False,False,True
-1,76561198171814417,Faat,3,0,1,0,0,0,0,0,0,0,0,0,147,0,6,0,0,False,False,False,False,False,False
-1,76561198274174345,zig,3,2,1,0,0,0,0,0,0,0,0,0,99,2,23,1,0,False,True,False,False,False,True
-1,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,121,0,16,0,0,False,False,False,False,False,False
-2,76561199068251294,prosto bo$$,2,1,1,0,0,0,0,0,0,0,0,0,121,1,10,0,0,False,True,False,False,False,True
-2,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,267,0,1,0,0,False,False,False,False,False,False
-2,76561199433997570,Simple Dimple skins.army,2,2,1,0,0,0,0,0,0,0,0,0,106,2,24,0,0,False,True,False,False,False,True
-2,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,0,0,0,117,0,43,0,0,False,False,False,False,False,False
-2,76561199826895670,RME | Пацан,2,0,1,0,0,1,0,0,0,0,0,0,100,0,3,0,0,False,False,True,False,False,True
-2,76561198002613044,frees.tyler,3,1,0,0,0,1,0,0,0,0,0,0,30,0,30,1,0,True,True,True,True,False,True
-2,76561198049602148,Moon,3,2,1,0,0,0,0,0,0,0,0,0,130,0,30,0,0,False,True,False,False,False,True
-2,76561198171814417,Faat,3,2,0,0,0,1,0,0,0,0,0,0,76,1,7,0,0,True,True,True,True,False,True
-2,76561198274174345,zig,3,0,1,0,0,0,0,0,0,0,0,0,197,0,3,0,0,False,False,False,False,False,False
-2,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,120,0,2,0,0,False,False,False,False,False,False
-3,76561199068251294,prosto bo$$,2,1,1,0,0,0,0,0,0,0,0,0,102,1,13,0,0,False,True,False,False,False,True
-3,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,110,0,0,0,0,False,False,False,False,False,False
-3,76561199433997570,Simple Dimple skins.army,2,0,1,0,0,0,0,0,0,0,0,0,104,0,4,0,0,False,False,False,False,False,False
-3,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,0,0,0,101,0,1,0,0,False,False,False,False,False,False
-3,76561199826895670,RME | Пацан,2,1,1,0,0,0,0,0,0,0,0,0,166,0,22,0,0,False,True,False,False,False,True
-3,76561198002613044,frees.tyler,3,1,1,0,0,0,0,0,0,0,0,0,131,0,30,0,0,False,True,False,False,False,True
-3,76561198049602148,Moon,3,3,0,0,0,0,0,0,0,0,0,0,60,1,27,0,0,True,True,False,True,False,True
-3,76561198171814417,Faat,3,0,0,0,0,1,0,0,0,0,0,0,24,0,5,0,0,True,False,True,True,False,True
-3,76561198274174345,zig,3,0,1,0,0,0,0,0,0,0,0,0,98,0,6,0,0,False,False,False,False,False,False
-3,76561199052717313,Worfy,3,1,0,0,0,1,0,0,0,0,0,0,0,0,24,0,0,True,True,True,True,False,True
-4,76561199068251294,prosto bo$$,2,1,1,0,0,1,0,0,0,0,0,0,105,0,29,0,0,False,True,True,False,False,True
-4,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,289,0,0,0,0,False,False,False,False,False,False
-4,76561199433997570,Simple Dimple skins.army,2,0,1,0,0,0,0,0,0,0,0,0,169,0,3,0,0,False,False,False,False,False,False
-4,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,0,0,0,137,0,1,0,0,False,False,False,False,False,False
-4,76561199826895670,RME | Пацан,2,1,1,0,0,1,0,0,0,0,0,0,195,0,18,0,0,False,True,True,False,False,True
-4,76561198002613044,frees.tyler,3,1,1,0,0,0,0,0,0,0,0,0,105,0,30,0,0,False,True,False,False,False,True
-4,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,0,0,0,103,0,11,0,0,False,False,False,False,False,False
-4,76561198171814417,Faat,3,3,0,0,0,0,0,0,0,0,0,0,63,1,6,1,0,True,True,False,True,False,True
-4,76561198274174345,zig,3,1,0,0,0,1,0,0,0,0,0,0,23,1,9,0,0,True,True,True,True,False,True
-4,76561199052717313,Worfy,3,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,True,False,False,True,False,True
-5,76561199068251294,prosto bo$$,2,2,0,0,0,0,0,0,0,0,0,0,48,0,7,0,0,True,True,False,True,False,True
-5,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,0,0,0,1,0,0,0,0,0,0,0,0,29,0,0,True,False,True,True,False,True
-5,76561199433997570,Simple Dimple skins.army,2,2,1,0,0,1,0,0,0,0,0,0,188,0,17,0,0,False,True,True,False,False,True
-5,76561199557907229,shawty#)$@,2,1,0,0,0,1,0,0,0,0,0,0,89,0,13,0,0,True,True,True,True,False,True
-5,76561199826895670,RME | Пацан,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,False,False,True,False,True
-5,76561198002613044,frees.tyler,3,0,1,0,0,1,0,0,0,0,0,0,108,0,18,0,0,False,False,True,False,False,True
-5,76561198049602148,Moon,3,1,1,0,0,0,0,0,0,0,0,0,101,1,5,0,0,False,True,False,False,False,True
-5,76561198171814417,Faat,3,0,1,0,0,0,0,0,0,0,0,0,109,0,3,0,0,False,False,False,False,False,False
-5,76561198274174345,zig,3,0,1,0,0,0,0,0,0,0,0,0,108,0,0,0,0,False,False,False,False,False,False
-5,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,115,0,15,0,0,False,False,False,False,False,False
-6,76561199068251294,prosto bo$$,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,False,False,True,False,True
-6,76561199256543526,Wybaczam.oficjalnie skins.army,2,1,1,0,0,0,0,0,0,0,0,0,136,0,21,0,0,False,True,False,False,False,True
-6,76561199433997570,Simple Dimple skins.army,2,2,0,0,0,0,0,0,0,0,0,0,94,0,25,0,0,True,True,False,True,False,True
-6,76561199557907229,shawty#)$@,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,False,False,True,False,True
-6,76561199826895670,RME | Пацан,2,2,0,0,0,0,0,0,0,0,0,0,69,1,29,0,0,True,True,False,True,False,True
-6,76561198002613044,frees.tyler,3,0,1,0,0,0,0,0,0,0,0,0,118,0,3,0,0,False,False,False,False,False,False
-6,76561198049602148,Moon,3,1,1,0,0,0,0,0,0,0,0,0,185,1,16,0,0,False,True,False,False,False,True
-6,76561198171814417,Faat,3,0,1,0,0,0,0,0,0,0,0,0,118,0,7,0,0,False,False,False,False,False,False
-6,76561198274174345,zig,3,0,1,0,0,1,0,0,0,0,0,0,106,0,4,0,0,False,False,True,False,False,True
-6,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,115,0,8,0,0,False,False,False,False,False,False
-7,76561199068251294,prosto bo$$,2,0,1,0,0,0,0,0,0,0,0,0,100,0,0,0,0,False,False,False,False,False,False
-7,76561199256543526,Wybaczam.oficjalnie skins.army,2,1,1,0,0,0,0,0,0,0,0,0,106,0,17,0,0,False,True,False,False,False,True
-7,76561199433997570,Simple Dimple skins.army,2,1,1,0,0,0,0,0,0,0,0,0,101,1,12,0,0,False,True,False,False,False,True
-7,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,0,40,0,108,0,7,0,0,False,False,False,False,False,False
-7,76561199826895670,RME | Пацан,2,1,1,0,0,0,0,0,0,0,0,0,586,0,2,0,0,False,True,False,False,False,True
-7,76561198002613044,frees.tyler,3,0,1,0,0,0,0,0,0,0,0,0,109,0,0,0,0,False,False,False,False,False,False
-7,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,0,0,0,112,0,0,0,0,False,False,False,False,False,False
-7,76561198171814417,Faat,3,0,1,0,0,1,0,0,0,0,0,0,100,0,5,0,0,False,False,True,False,False,True
-7,76561198274174345,zig,3,3,0,0,0,0,0,0,0,0,0,0,69,0,32,1,0,True,True,False,True,False,True
-7,76561199052717313,Worfy,3,1,1,0,0,1,0,0,0,0,0,0,322,0,29,0,0,False,True,True,False,False,True
-8,76561199068251294,prosto bo$$,2,2,0,0,0,0,0,0,0,0,0,0,66,0,13,0,0,True,True,False,True,False,True
-8,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,1,0,0,0,0,0,0,141,0,5,0,0,False,False,True,False,False,True
-8,76561199433997570,Simple Dimple skins.army,2,1,1,0,0,0,0,0,0,0,0,0,129,0,2,0,0,False,True,False,False,False,True
-8,76561199557907229,shawty#)$@,2,2,1,0,0,0,0,0,0,0,0,0,277,2,20,0,0,False,True,False,False,False,True
-8,76561199826895670,RME | Пацан,2,0,0,0,0,1,0,0,0,0,0,0,75,0,26,0,1,True,False,True,True,False,True
-8,76561198002613044,frees.tyler,3,1,1,0,0,0,0,0,0,0,0,0,145,1,17,0,0,False,True,False,False,False,True
-8,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,0,0,0,219,0,17,0,0,False,False,False,False,False,False
-8,76561198171814417,Faat,3,2,1,0,0,0,0,0,0,0,0,0,107,1,16,0,0,False,True,False,False,False,True
-8,76561198274174345,zig,3,0,1,0,0,1,0,0,0,0,0,0,101,0,27,1,0,False,False,True,False,False,True
-8,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,111,0,3,0,0,False,False,False,False,False,False
-9,76561199068251294,prosto bo$$,2,3,0,0,0,0,0,0,0,0,0,0,53,0,4,0,0,True,True,False,True,False,True
-9,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,1,True,False,False,True,False,True
-9,76561199433997570,Simple Dimple skins.army,2,0,1,0,0,0,0,0,0,0,0,0,171,0,0,0,0,False,False,False,False,False,False
-9,76561199557907229,shawty#)$@,2,1,0,0,0,0,0,0,0,0,0,0,96,0,30,0,0,True,True,False,True,False,True
-9,76561199826895670,RME | Пацан,2,1,0,0,0,0,0,0,0,0,0,0,0,1,10,0,0,True,True,False,True,False,True
-9,76561198002613044,frees.tyler,3,0,1,0,0,0,0,0,0,0,0,0,109,0,0,0,0,False,False,False,False,False,False
-9,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,0,0,0,109,0,0,0,0,False,False,False,False,False,False
-9,76561198171814417,Faat,3,0,1,0,0,0,0,0,0,0,0,0,105,0,2,0,0,False,False,False,False,False,False
-9,76561198274174345,zig,3,0,1,0,0,0,0,0,0,0,0,0,428,0,0,0,0,False,False,False,False,False,False
-9,76561199052717313,Worfy,3,1,1,0,0,0,0,0,0,0,0,0,106,1,9,1,0,False,True,False,False,False,True
-10,76561199068251294,prosto bo$$,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,True,False,False,True,False,True
-10,76561199256543526,Wybaczam.oficjalnie skins.army,2,2,1,0,0,0,0,0,0,0,0,0,142,2,21,0,0,False,True,False,False,False,True
-10,76561199433997570,Simple Dimple skins.army,2,1,1,0,0,1,0,0,0,0,0,0,164,1,3,0,0,False,True,True,False,False,True
-10,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,0,0,0,119,0,0,0,0,False,False,False,False,False,False
-10,76561199826895670,RME | Пацан,2,2,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,True,True,False,True,False,True
-10,76561198002613044,frees.tyler,3,0,1,0,0,1,0,0,0,0,0,0,155,0,10,0,0,False,False,True,False,False,True
-10,76561198049602148,Moon,3,1,1,0,0,0,0,0,0,0,0,0,137,1,9,0,0,False,True,False,False,False,True
-10,76561198171814417,Faat,3,1,1,0,0,0,0,0,0,0,0,0,205,1,20,0,0,False,True,False,False,False,True
-10,76561198274174345,zig,3,1,1,0,0,0,0,0,0,0,0,0,109,0,0,0,0,False,True,False,False,False,True
-10,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,187,0,0,0,0,False,False,False,False,False,False
-11,76561199068251294,prosto bo$$,2,2,1,0,0,0,0,0,0,0,0,0,115,0,17,0,0,False,True,False,False,False,True
-11,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,127,0,2,0,0,False,False,False,False,False,False
-11,76561199433997570,Simple Dimple skins.army,2,1,1,0,0,0,0,0,0,0,0,0,100,0,12,0,0,False,True,False,False,False,True
-11,76561199557907229,shawty#)$@,2,0,1,0,0,1,0,0,0,0,0,0,100,0,1,0,0,False,False,True,False,False,True
-11,76561199826895670,RME | Пацан,2,1,1,0,0,0,0,0,0,0,0,0,133,0,7,0,0,False,True,False,False,False,True
-11,76561198002613044,frees.tyler,3,1,0,0,0,0,0,0,0,0,0,0,0,1,5,1,0,True,True,False,True,False,True
-11,76561198049602148,Moon,3,0,1,0,0,1,0,0,0,0,0,0,150,0,17,0,0,False,False,True,False,False,True
-11,76561198171814417,Faat,3,1,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,True,True,False,True,False,True
-11,76561198274174345,zig,3,0,1,0,0,0,0,0,0,0,0,0,112,0,5,0,0,False,False,False,False,False,False
-11,76561199052717313,Worfy,3,1,0,0,0,1,0,0,0,0,0,0,41,0,3,0,0,True,True,True,True,False,True
-12,76561199068251294,prosto bo$$,2,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,True,False,False,True,False,True
-12,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,110,0,1,0,0,False,False,False,False,False,False
-12,76561199433997570,Simple Dimple skins.army,2,2,0,0,0,0,0,0,0,0,0,0,36,0,46,0,0,True,True,False,True,False,True
-12,76561199557907229,shawty#)$@,2,1,0,0,0,1,0,0,0,0,0,0,95,1,1,0,0,True,True,True,True,False,True
-12,76561199826895670,RME | Пацан,2,0,0,0,0,0,0,0,0,0,0,0,59,0,3,0,0,True,False,False,True,False,True
-12,76561198002613044,frees.tyler,3,1,0,0,0,0,0,0,0,0,0,0,92,1,6,0,0,True,True,False,True,False,True
-12,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,0,0,0,100,0,2,0,0,False,False,False,False,False,False
-12,76561198171814417,Faat,3,0,1,0,0,0,0,0,0,0,0,0,427,0,5,0,0,False,False,False,False,False,False
-12,76561198274174345,zig,3,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,True,False,False,True,False,True
-12,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,114,0,7,0,0,False,False,False,False,False,False
-13,76561199068251294,prosto bo$$,2,0,1,0,0,2,0,0,0,0,0,0,112,0,30,0,0,False,False,True,False,False,True
-13,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,140,0,11,0,0,False,False,False,False,False,False
-13,76561199433997570,Simple Dimple skins.army,2,3,0,0,0,1,0,0,0,0,0,0,66,2,25,0,0,True,True,True,True,False,True
-13,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,0,0,0,130,0,1,0,0,False,False,False,False,False,False
-13,76561199826895670,RME | Пацан,2,2,1,0,0,0,0,0,0,0,0,0,150,1,18,0,0,False,True,False,False,False,True
-13,76561198002613044,frees.tyler,3,0,1,0,0,1,0,0,0,0,0,0,108,0,8,0,0,False,False,True,False,False,True
-13,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,0,0,0,113,0,10,0,0,False,False,False,False,False,False
-13,76561198171814417,Faat,3,0,1,0,0,0,0,0,0,0,0,0,153,0,12,0,0,False,False,False,False,False,False
-13,76561198274174345,zig,3,1,1,0,0,1,0,0,0,0,0,0,162,1,6,0,0,False,True,True,False,False,True
-13,76561199052717313,Worfy,3,3,1,0,0,0,0,0,0,0,0,0,172,2,17,0,0,False,True,False,False,False,True
-14,76561199068251294,prosto bo$$,2,1,1,0,0,0,0,0,0,0,0,0,113,1,55,0,0,False,True,False,False,False,True
-14,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,0,0,0,0,0,0,0,0,0,0,0,0,7,1,0,True,False,False,True,False,True
-14,76561199433997570,Simple Dimple skins.army,2,3,1,0,0,0,0,0,0,0,0,0,104,0,3,0,0,False,True,False,False,False,True
-14,76561199557907229,shawty#)$@,2,0,0,0,0,1,0,0,0,0,0,0,58,0,11,0,0,True,False,True,True,False,True
-14,76561199826895670,RME | Пацан,2,0,1,0,0,1,0,0,0,0,0,0,123,0,2,0,0,False,False,True,False,False,True
-14,76561198002613044,frees.tyler,3,2,1,0,0,0,0,0,0,0,0,0,158,0,16,0,0,False,True,False,False,False,True
-14,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,0,0,0,113,0,2,0,0,False,False,False,False,False,False
-14,76561198171814417,Faat,3,0,1,0,0,0,0,0,0,0,0,0,107,0,5,0,0,False,False,False,False,False,False
-14,76561198274174345,zig,3,1,1,0,0,1,0,0,0,0,0,0,168,1,19,0,0,False,True,True,False,False,True
-14,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,108,0,0,0,0,False,False,False,False,False,False
-15,76561199068251294,prosto bo$$,2,1,1,0,0,1,0,0,0,0,0,0,145,0,10,0,0,False,True,True,False,False,True
-15,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,100,0,0,0,0,False,False,False,False,False,False
-15,76561199433997570,Simple Dimple skins.army,2,1,1,0,0,1,0,0,0,0,0,0,104,0,22,0,0,False,True,True,False,False,True
-15,76561199557907229,shawty#)$@,2,1,0,0,0,0,0,0,0,0,0,0,91,1,33,0,0,True,True,False,True,False,True
-15,76561199826895670,RME | Пацан,2,2,0,0,0,0,0,0,0,0,0,0,46,0,4,1,0,True,True,False,True,False,True
-15,76561198002613044,frees.tyler,3,2,1,0,0,0,0,0,0,0,0,0,188,0,34,0,0,False,True,False,False,False,True
-15,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,0,0,0,116,0,11,0,0,False,False,False,False,False,False
-15,76561198171814417,Faat,3,0,1,0,0,1,0,0,0,0,0,0,143,0,56,0,0,False,False,True,False,False,True
-15,76561198274174345,zig,3,0,1,0,0,1,0,0,0,0,0,0,104,0,6,0,0,False,False,True,False,False,True
-15,76561199052717313,Worfy,3,1,1,0,0,0,0,0,0,0,0,0,157,1,18,0,0,False,True,False,False,False,True
-16,76561199068251294,prosto bo$$,2,0,1,0,0,0,0,0,0,0,0,0,118,0,4,0,0,False,False,False,False,False,False
-16,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,98,0,0,1,0,False,False,False,False,False,False
-16,76561199433997570,Simple Dimple skins.army,2,1,0,0,0,2,0,0,0,0,0,0,19,0,32,0,0,True,True,True,True,False,True
-16,76561199557907229,shawty#)$@,2,2,1,0,0,0,0,0,0,0,0,0,101,2,30,0,0,False,True,False,False,False,True
-16,76561199826895670,RME | Пацан,2,1,0,0,0,0,0,0,0,0,0,0,27,0,18,0,0,True,True,False,True,False,True
-16,76561198002613044,frees.tyler,3,0,1,0,0,1,0,0,0,0,0,0,109,0,2,0,0,False,False,True,False,False,True
-16,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,0,0,0,108,0,4,0,0,False,False,False,False,False,False
-16,76561198171814417,Faat,3,2,1,0,0,0,0,0,0,0,0,0,99,0,18,0,0,False,True,False,False,False,True
-16,76561198274174345,zig,3,1,0,0,0,0,0,0,0,0,0,0,17,0,11,0,0,True,True,False,True,False,True
-16,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,144,0,4,0,0,False,False,False,False,False,False
-17,76561199068251294,prosto bo$$,2,0,1,0,0,1,0,0,0,0,0,0,136,0,6,0,0,False,False,True,False,False,True
-17,76561199256543526,Wybaczam.oficjalnie skins.army,2,1,1,0,0,0,0,0,0,0,0,0,122,0,7,0,0,False,True,False,False,False,True
-17,76561199433997570,Simple Dimple skins.army,2,1,1,0,0,0,0,0,0,0,0,0,115,0,13,0,0,False,True,False,False,False,True
-17,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,0,0,0,107,0,1,0,0,False,False,False,False,False,False
-17,76561199826895670,RME | Пацан,2,1,1,0,0,0,0,0,0,0,0,0,108,0,4,0,0,False,True,False,False,False,True
-17,76561198002613044,frees.tyler,3,1,1,0,0,1,0,0,0,0,0,0,176,1,16,0,0,False,True,True,False,False,True
-17,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,0,0,0,108,0,8,0,0,False,False,False,False,False,False
-17,76561198171814417,Faat,3,0,1,0,0,0,0,0,0,0,0,0,109,0,0,0,0,False,False,False,False,False,False
-17,76561198274174345,zig,3,3,0,0,0,0,0,0,0,0,0,0,71,1,21,0,0,True,True,False,True,False,True
-17,76561199052717313,Worfy,3,1,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,True,True,False,True,False,True
-18,76561199068251294,prosto bo$$,2,0,1,0,0,0,0,0,0,0,0,0,141,0,2,0,0,False,False,False,False,False,False
-18,76561199256543526,Wybaczam.oficjalnie skins.army,2,1,0,0,0,0,0,0,0,0,0,0,26,0,37,0,0,True,True,False,True,False,True
-18,76561199433997570,Simple Dimple skins.army,2,4,1,0,0,0,0,0,0,0,0,0,120,3,19,0,0,False,True,False,False,False,True
-18,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,0,0,0,131,0,38,0,0,False,False,False,False,False,False
-18,76561199826895670,RME | Пацан,2,0,1,0,0,0,0,0,0,0,0,0,98,0,12,0,0,False,False,False,False,False,False
-18,76561198002613044,frees.tyler,3,0,1,0,0,1,0,0,0,0,0,0,108,0,0,0,0,False,False,True,False,False,True
-18,76561198049602148,Moon,3,2,1,0,0,1,0,0,0,0,0,0,118,0,49,0,0,False,True,True,False,False,True
-18,76561198171814417,Faat,3,0,1,0,0,0,0,0,0,0,0,0,99,0,0,0,0,False,False,False,False,False,False
-18,76561198274174345,zig,3,0,1,0,0,0,0,0,0,0,0,0,106,0,8,0,0,False,False,False,False,False,False
-18,76561199052717313,Worfy,3,2,1,0,0,1,0,0,0,0,0,0,138,2,14,0,0,False,True,True,False,False,True
-19,76561199068251294,prosto bo$$,2,1,1,0,0,0,0,0,0,0,0,0,105,0,5,0,0,False,True,False,False,False,True
-19,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,107,0,0,0,0,False,False,False,False,False,False
-19,76561199433997570,Simple Dimple skins.army,2,0,1,0,0,0,0,0,0,0,0,0,123,0,0,0,0,False,False,False,False,False,False
-19,76561199557907229,shawty#)$@,2,1,1,1,0,0,0,0,0,0,0,0,0,1,1,0,0,False,True,False,False,False,True
-19,76561199826895670,RME | Пацан,2,0,1,0,0,1,0,0,0,0,0,0,120,0,3,0,0,False,False,True,False,False,True
-19,76561198002613044,frees.tyler,3,1,0,0,0,0,0,0,0,0,0,0,0,0,17,0,0,True,True,False,True,False,True
-19,76561198049602148,Moon,3,0,1,0,0,1,0,0,0,0,0,0,111,0,4,0,0,False,False,True,False,False,True
-19,76561198171814417,Faat,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,True,False,False,True,False,True
-19,76561198274174345,zig,3,1,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,True,True,False,True,False,True
-19,76561199052717313,Worfy,3,1,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,True,True,False,True,False,True
-20,76561199068251294,prosto bo$$,2,2,1,0,0,0,0,0,0,0,0,0,141,0,55,0,0,False,True,False,False,False,True
-20,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,1,0,0,0,0,0,0,110,0,25,0,0,False,False,True,False,False,True
-20,76561199433997570,Simple Dimple skins.army,2,1,1,0,0,0,0,0,0,0,0,0,141,0,9,1,0,False,True,False,False,False,True
-20,76561199557907229,shawty#)$@,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,False,False,True,False,True
-20,76561199826895670,RME | Пацан,2,0,1,0,0,0,0,0,0,0,0,0,152,0,2,0,0,False,False,False,False,False,False
-20,76561198002613044,frees.tyler,3,3,0,0,0,0,0,0,0,0,0,0,27,2,19,0,1,True,True,False,True,False,True
-20,76561198049602148,Moon,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,False,False,True,False,True
-20,76561198171814417,Faat,3,1,1,0,0,0,0,0,0,0,0,0,117,0,1,0,0,False,True,False,False,False,True
-20,76561198274174345,zig,3,0,1,0,0,0,0,0,0,0,0,0,104,0,3,0,0,False,False,False,False,False,False
-20,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,112,0,17,0,0,False,False,False,False,False,False
-21,76561199068251294,prosto bo$$,2,0,1,0,0,0,0,0,0,0,0,0,108,0,0,0,0,False,False,False,False,False,False
-21,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,141,0,1,0,0,False,False,False,False,False,False
-21,76561199433997570,Simple Dimple skins.army,2,0,1,0,0,0,0,0,0,0,0,0,107,0,4,0,0,False,False,False,False,False,False
-21,76561199557907229,shawty#)$@,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,False,False,True,False,True
-21,76561199826895670,RME | Пацан,2,0,1,0,0,0,0,0,0,0,0,0,125,0,0,0,0,False,False,False,False,False,False
-21,76561198002613044,frees.tyler,3,0,0,0,0,1,0,0,0,0,0,0,0,0,8,0,0,True,False,True,True,False,True
-21,76561198049602148,Moon,3,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,True,False,False,True,False,True
-21,76561198171814417,Faat,3,3,0,0,0,0,0,0,0,0,0,0,54,1,16,0,0,True,True,False,True,False,True
-21,76561198274174345,zig,3,1,0,0,0,0,0,0,0,0,0,0,22,1,5,0,0,True,True,False,True,False,True
-21,76561199052717313,Worfy,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,False,False,True,False,True
-22,76561199068251294,prosto bo$$,2,0,1,0,0,1,0,0,0,0,0,0,106,0,13,0,0,False,False,True,False,False,True
-22,76561199256543526,Wybaczam.oficjalnie skins.army,2,1,1,0,0,0,0,0,0,0,0,0,97,1,7,0,0,False,True,False,False,False,True
-22,76561199433997570,Simple Dimple skins.army,2,1,1,0,0,1,0,0,0,0,0,0,119,0,22,0,0,False,True,True,False,False,True
-22,76561199557907229,shawty#)$@,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,False,False,False,False,False
-22,76561199826895670,RME | Пацан,2,3,1,1,0,0,0,0,0,0,0,0,0,2,38,1,0,False,True,False,False,False,True
-22,76561198002613044,frees.tyler,3,0,1,0,0,1,0,0,0,0,0,0,108,0,1,0,0,False,False,True,False,False,True
-22,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,0,0,0,133,0,0,0,0,False,False,False,False,False,False
-22,76561198171814417,Faat,3,1,1,0,0,0,0,0,0,0,0,0,163,0,27,0,0,False,True,False,False,False,True
-22,76561198274174345,zig,3,2,1,0,0,0,0,0,0,0,0,0,380,1,9,0,0,False,True,False,False,False,True
-22,76561199052717313,Worfy,3,0,1,0,0,1,0,0,0,0,0,0,108,0,28,0,0,False,False,True,False,False,True
+round_number,steamid,name,team_number,kills,deaths,opening_kills,opening_deaths,clutch_attempts,clutch_wins,suicides,team_deaths,assists,trade_kills,traded_deaths,damage_dealt,team_damage_dealt,self_damage,utility_damage_dealt,damage_taken,headshot_kills,shots,bomb_plants,bomb_defuses,survived,kast_kill,kast_assist,kast_survived,kast_traded,kast
+1,76561199068251294,prosto bo$$,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,140,0,8,0,0,False,False,False,False,False,False
+1,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,183,0,12,0,0,False,False,True,False,False,True
+1,76561199433997570,Simple Dimple skins.army,2,1,1,1,0,0,0,0,0,2,0,0,0,0,0,0,100,1,12,0,0,False,True,True,False,False,True
+1,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,117,0,8,0,0,False,False,True,False,False,True
+1,76561199826895670,RME | Пацан,2,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,53,1,17,0,1,True,True,False,True,False,True
+1,76561198002613044,frees.tyler,3,2,1,0,0,0,0,0,0,1,0,0,0,0,0,0,104,1,15,0,0,False,True,True,False,False,True
+1,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,166,0,10,0,0,False,False,True,False,False,True
+1,76561198171814417,Faat,3,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,147,0,6,0,0,False,False,False,False,False,False
+1,76561198274174345,zig,3,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,99,2,23,1,0,False,True,False,False,False,True
+1,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,121,0,16,0,0,False,False,False,False,False,False
+2,76561199068251294,prosto bo$$,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,121,1,10,0,0,False,True,False,False,False,True
+2,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,267,0,1,0,0,False,False,False,False,False,False
+2,76561199433997570,Simple Dimple skins.army,2,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,106,2,24,0,0,False,True,False,False,False,True
+2,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,117,0,43,0,0,False,False,False,False,False,False
+2,76561199826895670,RME | Пацан,2,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,100,0,3,0,0,False,False,True,False,False,True
+2,76561198002613044,frees.tyler,3,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,30,0,30,1,0,True,True,True,True,False,True
+2,76561198049602148,Moon,3,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,130,0,30,0,0,False,True,False,False,False,True
+2,76561198171814417,Faat,3,2,0,1,0,0,0,0,0,1,0,0,0,0,0,0,76,1,7,0,0,True,True,True,True,False,True
+2,76561198274174345,zig,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,197,0,3,0,0,False,False,False,False,False,False
+2,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,120,0,2,0,0,False,False,False,False,False,False
+3,76561199068251294,prosto bo$$,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,102,1,13,0,0,False,True,False,False,False,True
+3,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,110,0,0,0,0,False,False,False,False,False,False
+3,76561199433997570,Simple Dimple skins.army,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,104,0,4,0,0,False,False,False,False,False,False
+3,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,101,0,1,0,0,False,False,False,False,False,False
+3,76561199826895670,RME | Пацан,2,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,166,0,22,0,0,False,True,False,False,False,True
+3,76561198002613044,frees.tyler,3,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,131,0,30,0,0,False,True,False,False,False,True
+3,76561198049602148,Moon,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,60,1,27,0,0,True,True,False,True,False,True
+3,76561198171814417,Faat,3,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,24,0,5,0,0,True,False,True,True,False,True
+3,76561198274174345,zig,3,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,98,0,6,0,0,False,False,False,False,False,False
+3,76561199052717313,Worfy,3,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,24,0,0,True,True,True,True,False,True
+4,76561199068251294,prosto bo$$,2,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,105,0,29,0,0,False,True,True,False,False,True
+4,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,289,0,0,0,0,False,False,False,False,False,False
+4,76561199433997570,Simple Dimple skins.army,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,169,0,3,0,0,False,False,False,False,False,False
+4,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,137,0,1,0,0,False,False,False,False,False,False
+4,76561199826895670,RME | Пацан,2,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,195,0,18,0,0,False,True,True,False,False,True
+4,76561198002613044,frees.tyler,3,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,105,0,30,0,0,False,True,False,False,False,True
+4,76561198049602148,Moon,3,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,103,0,11,0,0,False,False,False,False,False,False
+4,76561198171814417,Faat,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,63,1,6,1,0,True,True,False,True,False,True
+4,76561198274174345,zig,3,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,23,1,9,0,0,True,True,True,True,False,True
+4,76561199052717313,Worfy,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,True,False,False,True,False,True
+5,76561199068251294,prosto bo$$,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,48,0,7,0,0,True,True,False,True,False,True
+5,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,29,0,0,True,False,True,True,False,True
+5,76561199433997570,Simple Dimple skins.army,2,2,1,1,0,0,0,0,0,1,0,0,0,0,0,0,188,0,17,0,0,False,True,True,False,False,True
+5,76561199557907229,shawty#)$@,2,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,89,0,13,0,0,True,True,True,True,False,True
+5,76561199826895670,RME | Пацан,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,False,False,True,False,True
+5,76561198002613044,frees.tyler,3,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,108,0,18,0,0,False,False,True,False,False,True
+5,76561198049602148,Moon,3,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,101,1,5,0,0,False,True,False,False,False,True
+5,76561198171814417,Faat,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,109,0,3,0,0,False,False,False,False,False,False
+5,76561198274174345,zig,3,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,108,0,0,0,0,False,False,False,False,False,False
+5,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,115,0,15,0,0,False,False,False,False,False,False
+6,76561199068251294,prosto bo$$,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,False,False,True,False,True
+6,76561199256543526,Wybaczam.oficjalnie skins.army,2,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,136,0,21,0,0,False,True,False,False,False,True
+6,76561199433997570,Simple Dimple skins.army,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,94,0,25,0,0,True,True,False,True,False,True
+6,76561199557907229,shawty#)$@,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,False,False,True,False,True
+6,76561199826895670,RME | Пацан,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,69,1,29,0,0,True,True,False,True,False,True
+6,76561198002613044,frees.tyler,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,118,0,3,0,0,False,False,False,False,False,False
+6,76561198049602148,Moon,3,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,185,1,16,0,0,False,True,False,False,False,True
+6,76561198171814417,Faat,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,118,0,7,0,0,False,False,False,False,False,False
+6,76561198274174345,zig,3,0,1,0,1,0,0,0,0,1,0,0,0,0,0,0,106,0,4,0,0,False,False,True,False,False,True
+6,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,115,0,8,0,0,False,False,False,False,False,False
+7,76561199068251294,prosto bo$$,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,100,0,0,0,0,False,False,False,False,False,False
+7,76561199256543526,Wybaczam.oficjalnie skins.army,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,106,0,17,0,0,False,True,False,False,False,True
+7,76561199433997570,Simple Dimple skins.army,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,101,1,12,0,0,False,True,False,False,False,True
+7,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,0,0,0,0,0,40,0,108,0,7,0,0,False,False,False,False,False,False
+7,76561199826895670,RME | Пацан,2,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,586,0,2,0,0,True,True,False,True,False,True
+7,76561198002613044,frees.tyler,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,109,0,0,0,0,False,False,False,False,False,False
+7,76561198049602148,Moon,3,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,112,0,0,0,0,False,False,False,False,False,False
+7,76561198171814417,Faat,3,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,100,0,5,0,0,False,False,True,False,False,True
+7,76561198274174345,zig,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,69,0,32,1,0,True,True,False,True,False,True
+7,76561199052717313,Worfy,3,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,322,0,29,0,0,True,True,True,True,False,True
+8,76561199068251294,prosto bo$$,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,66,0,13,0,0,True,True,False,True,False,True
+8,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,1,0,0,0,0,1,0,0,0,0,0,0,141,0,5,0,0,False,False,True,False,False,True
+8,76561199433997570,Simple Dimple skins.army,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,129,0,2,0,0,False,True,False,False,False,True
+8,76561199557907229,shawty#)$@,2,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,277,2,20,0,0,False,True,False,False,False,True
+8,76561199826895670,RME | Пацан,2,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,75,0,26,0,1,True,False,True,True,False,True
+8,76561198002613044,frees.tyler,3,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,145,1,17,0,0,False,True,False,False,False,True
+8,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,219,0,17,0,0,False,False,False,False,False,False
+8,76561198171814417,Faat,3,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,107,1,16,0,0,False,True,False,False,False,True
+8,76561198274174345,zig,3,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,101,0,27,1,0,False,False,True,False,False,True
+8,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,111,0,3,0,0,False,False,False,False,False,False
+9,76561199068251294,prosto bo$$,2,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,53,0,4,0,0,True,True,False,True,False,True
+9,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,1,True,False,False,True,False,True
+9,76561199433997570,Simple Dimple skins.army,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,171,0,0,0,0,False,False,False,False,False,False
+9,76561199557907229,shawty#)$@,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,96,0,30,0,0,True,True,False,True,False,True
+9,76561199826895670,RME | Пацан,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,10,0,0,True,True,False,True,False,True
+9,76561198002613044,frees.tyler,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,109,0,0,0,0,False,False,False,False,False,False
+9,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,109,0,0,0,0,False,False,False,False,False,False
+9,76561198171814417,Faat,3,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,105,0,2,0,0,False,False,False,False,False,False
+9,76561198274174345,zig,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,428,0,0,0,0,False,False,False,False,False,False
+9,76561199052717313,Worfy,3,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,106,1,9,1,0,False,True,False,False,False,True
+10,76561199068251294,prosto bo$$,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,True,False,False,True,False,True
+10,76561199256543526,Wybaczam.oficjalnie skins.army,2,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,142,2,21,0,0,False,True,False,False,False,True
+10,76561199433997570,Simple Dimple skins.army,2,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,164,1,3,0,0,False,True,True,False,False,True
+10,76561199557907229,shawty#)$@,2,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,119,0,0,0,0,False,False,False,False,False,False
+10,76561199826895670,RME | Пацан,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,True,True,False,True,False,True
+10,76561198002613044,frees.tyler,3,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,155,0,10,0,0,False,False,True,False,False,True
+10,76561198049602148,Moon,3,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,137,1,9,0,0,False,True,False,False,False,True
+10,76561198171814417,Faat,3,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,205,1,20,0,0,False,True,False,False,False,True
+10,76561198274174345,zig,3,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,109,0,0,0,0,False,True,False,False,False,True
+10,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,187,0,0,0,0,False,False,False,False,False,False
+11,76561199068251294,prosto bo$$,2,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,115,0,17,0,0,False,True,False,False,False,True
+11,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,127,0,2,0,0,False,False,False,False,False,False
+11,76561199433997570,Simple Dimple skins.army,2,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,100,0,12,0,0,False,True,False,False,False,True
+11,76561199557907229,shawty#)$@,2,0,1,0,1,0,0,0,0,1,0,0,0,0,0,0,100,0,1,0,0,False,False,True,False,False,True
+11,76561199826895670,RME | Пацан,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,133,0,7,0,0,False,True,False,False,False,True
+11,76561198002613044,frees.tyler,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,5,1,0,True,True,False,True,False,True
+11,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,150,0,17,0,0,False,False,True,False,False,True
+11,76561198171814417,Faat,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,True,True,False,True,False,True
+11,76561198274174345,zig,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,112,0,5,0,0,False,False,False,False,False,False
+11,76561199052717313,Worfy,3,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,41,0,3,0,0,True,True,True,True,False,True
+12,76561199068251294,prosto bo$$,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,True,False,False,True,False,True
+12,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,110,0,1,0,0,False,False,False,False,False,False
+12,76561199433997570,Simple Dimple skins.army,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,36,0,46,0,0,True,True,False,True,False,True
+12,76561199557907229,shawty#)$@,2,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,95,1,1,0,0,True,True,True,True,False,True
+12,76561199826895670,RME | Пацан,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,59,0,3,0,0,True,False,False,True,False,True
+12,76561198002613044,frees.tyler,3,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,92,1,6,0,0,True,True,False,True,False,True
+12,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,100,0,2,0,0,False,False,False,False,False,False
+12,76561198171814417,Faat,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,427,0,5,0,0,False,False,False,False,False,False
+12,76561198274174345,zig,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,True,False,False,True,False,True
+12,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,114,0,7,0,0,False,False,False,False,False,False
+13,76561199068251294,prosto bo$$,2,0,1,0,0,0,0,0,0,2,0,0,0,0,0,0,112,0,30,0,0,False,False,True,False,False,True
+13,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,140,0,11,0,0,False,False,False,False,False,False
+13,76561199433997570,Simple Dimple skins.army,2,3,0,0,0,0,0,0,0,1,0,0,0,0,0,0,66,2,25,0,0,True,True,True,True,False,True
+13,76561199557907229,shawty#)$@,2,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,130,0,1,0,0,False,False,False,False,False,False
+13,76561199826895670,RME | Пацан,2,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,150,1,18,0,0,False,True,False,False,False,True
+13,76561198002613044,frees.tyler,3,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,108,0,8,0,0,False,False,True,False,False,True
+13,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,113,0,10,0,0,False,False,False,False,False,False
+13,76561198171814417,Faat,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,153,0,12,0,0,False,False,False,False,False,False
+13,76561198274174345,zig,3,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,162,1,6,0,0,False,True,True,False,False,True
+13,76561199052717313,Worfy,3,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,172,2,17,0,0,False,True,False,False,False,True
+14,76561199068251294,prosto bo$$,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,113,1,55,0,0,False,True,False,False,False,True
+14,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,1,0,True,False,False,True,False,True
+14,76561199433997570,Simple Dimple skins.army,2,3,1,1,0,0,0,0,0,0,0,0,0,0,0,0,104,0,3,0,0,False,True,False,False,False,True
+14,76561199557907229,shawty#)$@,2,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,58,0,11,0,0,True,False,True,True,False,True
+14,76561199826895670,RME | Пацан,2,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,123,0,2,0,0,False,False,True,False,False,True
+14,76561198002613044,frees.tyler,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,158,0,16,0,0,True,True,False,True,False,True
+14,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,113,0,2,0,0,False,False,False,False,False,False
+14,76561198171814417,Faat,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,107,0,5,0,0,False,False,False,False,False,False
+14,76561198274174345,zig,3,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,168,1,19,0,0,False,True,True,False,False,True
+14,76561199052717313,Worfy,3,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,108,0,0,0,0,False,False,False,False,False,False
+15,76561199068251294,prosto bo$$,2,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,145,0,10,0,0,False,True,True,False,False,True
+15,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,100,0,0,0,0,False,False,False,False,False,False
+15,76561199433997570,Simple Dimple skins.army,2,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,104,0,22,0,0,False,True,True,False,False,True
+15,76561199557907229,shawty#)$@,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,91,1,33,0,0,True,True,False,True,False,True
+15,76561199826895670,RME | Пацан,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46,0,4,1,0,True,True,False,True,False,True
+15,76561198002613044,frees.tyler,3,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,188,0,34,0,0,False,True,False,False,False,True
+15,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,116,0,11,0,0,False,False,False,False,False,False
+15,76561198171814417,Faat,3,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,143,0,56,0,0,False,False,True,False,False,True
+15,76561198274174345,zig,3,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,104,0,6,0,0,False,False,True,False,False,True
+15,76561199052717313,Worfy,3,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,157,1,18,0,0,False,True,False,False,False,True
+16,76561199068251294,prosto bo$$,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,118,0,4,0,0,False,False,False,False,False,False
+16,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,98,0,0,1,0,False,False,False,False,False,False
+16,76561199433997570,Simple Dimple skins.army,2,1,0,0,0,0,0,0,0,2,0,0,0,0,0,0,19,0,32,0,0,True,True,True,True,False,True
+16,76561199557907229,shawty#)$@,2,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,101,2,30,0,0,False,True,False,False,False,True
+16,76561199826895670,RME | Пацан,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,27,0,18,0,0,True,True,False,True,False,True
+16,76561198002613044,frees.tyler,3,0,1,0,1,0,0,0,0,1,0,0,0,0,0,0,109,0,2,0,0,False,False,True,False,False,True
+16,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,108,0,4,0,0,False,False,False,False,False,False
+16,76561198171814417,Faat,3,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,99,0,18,0,0,False,True,False,False,False,True
+16,76561198274174345,zig,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17,0,11,0,0,True,True,False,True,False,True
+16,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,144,0,4,0,0,False,False,False,False,False,False
+17,76561199068251294,prosto bo$$,2,0,1,0,1,0,0,0,0,1,0,0,0,0,0,0,136,0,6,0,0,False,False,True,False,False,True
+17,76561199256543526,Wybaczam.oficjalnie skins.army,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,122,0,7,0,0,False,True,False,False,False,True
+17,76561199433997570,Simple Dimple skins.army,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,115,0,13,0,0,False,True,False,False,False,True
+17,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,107,0,1,0,0,False,False,False,False,False,False
+17,76561199826895670,RME | Пацан,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,108,0,4,0,0,False,True,False,False,False,True
+17,76561198002613044,frees.tyler,3,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,176,1,16,0,0,False,True,True,False,False,True
+17,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,108,0,8,0,0,False,False,False,False,False,False
+17,76561198171814417,Faat,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,109,0,0,0,0,False,False,False,False,False,False
+17,76561198274174345,zig,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,71,1,21,0,0,True,True,False,True,False,True
+17,76561199052717313,Worfy,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,True,True,False,True,False,True
+18,76561199068251294,prosto bo$$,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,141,0,2,0,0,False,False,False,False,False,False
+18,76561199256543526,Wybaczam.oficjalnie skins.army,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,26,0,37,0,0,True,True,False,True,False,True
+18,76561199433997570,Simple Dimple skins.army,2,4,1,1,0,0,0,0,0,0,0,0,0,0,0,0,120,3,19,0,0,False,True,False,False,False,True
+18,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,131,0,38,0,0,False,False,False,False,False,False
+18,76561199826895670,RME | Пацан,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,98,0,12,0,0,False,False,False,False,False,False
+18,76561198002613044,frees.tyler,3,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,108,0,0,0,0,False,False,True,False,False,True
+18,76561198049602148,Moon,3,2,1,0,0,0,0,0,0,1,0,0,0,0,0,0,118,0,49,0,0,False,True,True,False,False,True
+18,76561198171814417,Faat,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,99,0,0,0,0,False,False,False,False,False,False
+18,76561198274174345,zig,3,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,106,0,8,0,0,False,False,False,False,False,False
+18,76561199052717313,Worfy,3,2,1,0,0,0,0,0,0,1,0,0,0,0,0,0,138,2,14,0,0,False,True,True,False,False,True
+19,76561199068251294,prosto bo$$,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,105,0,5,0,0,False,True,False,False,False,True
+19,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,107,0,0,0,0,False,False,False,False,False,False
+19,76561199433997570,Simple Dimple skins.army,2,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,123,0,0,0,0,False,False,False,False,False,False
+19,76561199557907229,shawty#)$@,2,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,True,True,False,True,False,True
+19,76561199826895670,RME | Пацан,2,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,120,0,3,0,0,False,False,True,False,False,True
+19,76561198002613044,frees.tyler,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17,0,0,True,True,False,True,False,True
+19,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,111,0,4,0,0,False,False,True,False,False,True
+19,76561198171814417,Faat,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,True,False,False,True,False,True
+19,76561198274174345,zig,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,True,True,False,True,False,True
+19,76561199052717313,Worfy,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,True,True,False,True,False,True
+20,76561199068251294,prosto bo$$,2,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,141,0,55,0,0,False,True,False,False,False,True
+20,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,110,0,25,0,0,False,False,True,False,False,True
+20,76561199433997570,Simple Dimple skins.army,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,141,0,9,1,0,False,True,False,False,False,True
+20,76561199557907229,shawty#)$@,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,False,False,True,False,True
+20,76561199826895670,RME | Пацан,2,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,152,0,2,0,0,False,False,False,False,False,False
+20,76561198002613044,frees.tyler,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,27,2,19,0,1,True,True,False,True,False,True
+20,76561198049602148,Moon,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,False,False,True,False,True
+20,76561198171814417,Faat,3,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,117,0,1,0,0,False,True,False,False,False,True
+20,76561198274174345,zig,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,104,0,3,0,0,False,False,False,False,False,False
+20,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,112,0,17,0,0,False,False,False,False,False,False
+21,76561199068251294,prosto bo$$,2,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,108,0,0,0,0,False,False,False,False,False,False
+21,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,141,0,1,0,0,False,False,False,False,False,False
+21,76561199433997570,Simple Dimple skins.army,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,107,0,4,0,0,False,False,False,False,False,False
+21,76561199557907229,shawty#)$@,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,False,False,True,False,True
+21,76561199826895670,RME | Пацан,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,125,0,0,0,0,False,False,False,False,False,False
+21,76561198002613044,frees.tyler,3,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,8,0,0,True,False,True,True,False,True
+21,76561198049602148,Moon,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,True,False,False,True,False,True
+21,76561198171814417,Faat,3,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,54,1,16,0,0,True,True,False,True,False,True
+21,76561198274174345,zig,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,22,1,5,0,0,True,True,False,True,False,True
+21,76561199052717313,Worfy,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,True,False,False,True,False,True
+22,76561199068251294,prosto bo$$,2,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,106,0,13,0,0,False,False,True,False,False,True
+22,76561199256543526,Wybaczam.oficjalnie skins.army,2,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,97,1,7,0,0,False,True,False,False,False,True
+22,76561199433997570,Simple Dimple skins.army,2,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,119,0,22,0,0,False,True,True,False,False,True
+22,76561199557907229,shawty#)$@,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,False,False,False,False,False,False
+22,76561199826895670,RME | Пацан,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,38,1,0,False,True,False,False,False,True
+22,76561198002613044,frees.tyler,3,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,108,0,1,0,0,False,False,True,False,False,True
+22,76561198049602148,Moon,3,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,133,0,0,0,0,False,False,False,False,False,False
+22,76561198171814417,Faat,3,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,163,0,27,0,0,False,True,False,False,False,True
+22,76561198274174345,zig,3,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,380,1,9,0,0,False,True,False,False,False,True
+22,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,108,0,28,0,0,False,False,True,False,False,True

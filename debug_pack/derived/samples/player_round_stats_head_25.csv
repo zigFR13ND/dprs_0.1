@@ -1,26 +1,26 @@
-round_number,steamid,name,team_number,kills,deaths,suicides,team_deaths,assists,trade_kills,traded_deaths,damage_dealt,team_damage_dealt,self_damage,utility_damage_dealt,damage_taken,headshot_kills,shots,bomb_plants,bomb_defuses,survived,kast_kill,kast_assist,kast_survived,kast_traded,kast
-1,76561199068251294,prosto bo$$,2,0,1,0,0,0,0,0,0,0,0,0,140,0,8,0,0,False,False,False,False,False,False
-1,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,1,0,0,0,0,0,0,183,0,12,0,0,False,False,True,False,False,True
-1,76561199433997570,Simple Dimple skins.army,2,1,1,0,0,2,0,0,0,0,0,0,100,1,12,0,0,False,True,True,False,False,True
-1,76561199557907229,shawty#)$@,2,0,1,0,0,1,0,0,0,0,0,0,117,0,8,0,0,False,False,True,False,False,True
-1,76561199826895670,RME | Пацан,2,4,0,0,0,0,0,0,0,0,0,0,53,1,17,0,1,True,True,False,True,False,True
-1,76561198002613044,frees.tyler,3,2,1,0,0,1,0,0,0,0,0,0,104,1,15,0,0,False,True,True,False,False,True
-1,76561198049602148,Moon,3,0,1,0,0,1,0,0,0,0,0,0,166,0,10,0,0,False,False,True,False,False,True
-1,76561198171814417,Faat,3,0,1,0,0,0,0,0,0,0,0,0,147,0,6,0,0,False,False,False,False,False,False
-1,76561198274174345,zig,3,2,1,0,0,0,0,0,0,0,0,0,99,2,23,1,0,False,True,False,False,False,True
-1,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,121,0,16,0,0,False,False,False,False,False,False
-2,76561199068251294,prosto bo$$,2,1,1,0,0,0,0,0,0,0,0,0,121,1,10,0,0,False,True,False,False,False,True
-2,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,267,0,1,0,0,False,False,False,False,False,False
-2,76561199433997570,Simple Dimple skins.army,2,2,1,0,0,0,0,0,0,0,0,0,106,2,24,0,0,False,True,False,False,False,True
-2,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,0,0,0,117,0,43,0,0,False,False,False,False,False,False
-2,76561199826895670,RME | Пацан,2,0,1,0,0,1,0,0,0,0,0,0,100,0,3,0,0,False,False,True,False,False,True
-2,76561198002613044,frees.tyler,3,1,0,0,0,1,0,0,0,0,0,0,30,0,30,1,0,True,True,True,True,False,True
-2,76561198049602148,Moon,3,2,1,0,0,0,0,0,0,0,0,0,130,0,30,0,0,False,True,False,False,False,True
-2,76561198171814417,Faat,3,2,0,0,0,1,0,0,0,0,0,0,76,1,7,0,0,True,True,True,True,False,True
-2,76561198274174345,zig,3,0,1,0,0,0,0,0,0,0,0,0,197,0,3,0,0,False,False,False,False,False,False
-2,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,120,0,2,0,0,False,False,False,False,False,False
-3,76561199068251294,prosto bo$$,2,1,1,0,0,0,0,0,0,0,0,0,102,1,13,0,0,False,True,False,False,False,True
-3,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,110,0,0,0,0,False,False,False,False,False,False
-3,76561199433997570,Simple Dimple skins.army,2,0,1,0,0,0,0,0,0,0,0,0,104,0,4,0,0,False,False,False,False,False,False
-3,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,0,0,0,101,0,1,0,0,False,False,False,False,False,False
-3,76561199826895670,RME | Пацан,2,1,1,0,0,0,0,0,0,0,0,0,166,0,22,0,0,False,True,False,False,False,True
+round_number,steamid,name,team_number,kills,deaths,opening_kills,opening_deaths,clutch_attempts,clutch_wins,suicides,team_deaths,assists,trade_kills,traded_deaths,damage_dealt,team_damage_dealt,self_damage,utility_damage_dealt,damage_taken,headshot_kills,shots,bomb_plants,bomb_defuses,survived,kast_kill,kast_assist,kast_survived,kast_traded,kast
+1,76561199068251294,prosto bo$$,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,140,0,8,0,0,False,False,False,False,False,False
+1,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,183,0,12,0,0,False,False,True,False,False,True
+1,76561199433997570,Simple Dimple skins.army,2,1,1,1,0,0,0,0,0,2,0,0,0,0,0,0,100,1,12,0,0,False,True,True,False,False,True
+1,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,117,0,8,0,0,False,False,True,False,False,True
+1,76561199826895670,RME | Пацан,2,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,53,1,17,0,1,True,True,False,True,False,True
+1,76561198002613044,frees.tyler,3,2,1,0,0,0,0,0,0,1,0,0,0,0,0,0,104,1,15,0,0,False,True,True,False,False,True
+1,76561198049602148,Moon,3,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,166,0,10,0,0,False,False,True,False,False,True
+1,76561198171814417,Faat,3,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,147,0,6,0,0,False,False,False,False,False,False
+1,76561198274174345,zig,3,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,99,2,23,1,0,False,True,False,False,False,True
+1,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,121,0,16,0,0,False,False,False,False,False,False
+2,76561199068251294,prosto bo$$,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,121,1,10,0,0,False,True,False,False,False,True
+2,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,267,0,1,0,0,False,False,False,False,False,False
+2,76561199433997570,Simple Dimple skins.army,2,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,106,2,24,0,0,False,True,False,False,False,True
+2,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,117,0,43,0,0,False,False,False,False,False,False
+2,76561199826895670,RME | Пацан,2,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,100,0,3,0,0,False,False,True,False,False,True
+2,76561198002613044,frees.tyler,3,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,30,0,30,1,0,True,True,True,True,False,True
+2,76561198049602148,Moon,3,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,130,0,30,0,0,False,True,False,False,False,True
+2,76561198171814417,Faat,3,2,0,1,0,0,0,0,0,1,0,0,0,0,0,0,76,1,7,0,0,True,True,True,True,False,True
+2,76561198274174345,zig,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,197,0,3,0,0,False,False,False,False,False,False
+2,76561199052717313,Worfy,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,120,0,2,0,0,False,False,False,False,False,False
+3,76561199068251294,prosto bo$$,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,102,1,13,0,0,False,True,False,False,False,True
+3,76561199256543526,Wybaczam.oficjalnie skins.army,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,110,0,0,0,0,False,False,False,False,False,False
+3,76561199433997570,Simple Dimple skins.army,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,104,0,4,0,0,False,False,False,False,False,False
+3,76561199557907229,shawty#)$@,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,101,0,1,0,0,False,False,False,False,False,False
+3,76561199826895670,RME | Пацан,2,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,166,0,22,0,0,False,True,False,False,False,True
