@@ -131,3 +131,55 @@ def test_minimal_raw_match_filters_firearm_shots_only():
     assert shots["weapon"].tolist() == ["ak47", "weapon_m4a1_silencer"]
     assert WEAPON_FIRE_DIAGNOSTICS["weapon_fire_rows"] == 4
     assert WEAPON_FIRE_DIAGNOSTICS["firearm_shot_rows"] == 2
+
+
+def test_player_round_sides_uses_team_events_when_tick_core_has_no_team_column(tmp_path):
+    (tmp_path / "ticks").mkdir(parents=True)
+    (tmp_path / "events").mkdir(parents=True)
+    (tmp_path / "meta").mkdir(parents=True)
+
+    pd.DataFrame(
+        [
+            {"tick": 120, "steamid": "A", "name": "Alpha"},
+            {"tick": 120, "steamid": "B", "name": "Bravo"},
+            {"tick": 320, "steamid": "A", "name": "Alpha"},
+            {"tick": 320, "steamid": "B", "name": "Bravo"},
+        ]
+    ).to_csv(tmp_path / "ticks" / "ticks_player_core.csv", index=False)
+    pd.DataFrame(
+        [
+            {"steamid": "A", "name": "Alpha", "team_number": 2},
+            {"steamid": "B", "name": "Bravo", "team_number": 3},
+        ]
+    ).to_csv(tmp_path / "meta" / "player_info.csv", index=False)
+    pd.DataFrame(
+        [
+            {"tick": 250, "user_steamid": "A", "team": 3, "oldteam": 2},
+            {"tick": 250, "user_steamid": "B", "team": 2, "oldteam": 3},
+        ]
+    ).to_csv(tmp_path / "events" / "player_team.csv", index=False)
+
+    rounds = pd.DataFrame(
+        [
+            {
+                "round_number": 1,
+                "prestart_tick": 100,
+                "freeze_end_tick": 120,
+                "round_close_tick": 200,
+            },
+            {
+                "round_number": 2,
+                "prestart_tick": 300,
+                "freeze_end_tick": 320,
+                "round_close_tick": 400,
+            },
+        ]
+    )
+    sides = build_player_round_sides(tmp_path, rounds).set_index(
+        ["round_number", "steamid"]
+    )
+
+    assert sides.loc[(1, "A"), "team_number"] == 2
+    assert sides.loc[(1, "B"), "team_number"] == 3
+    assert sides.loc[(2, "A"), "team_number"] == 3
+    assert sides.loc[(2, "B"), "team_number"] == 2

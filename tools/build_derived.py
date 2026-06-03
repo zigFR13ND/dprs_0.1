@@ -2256,22 +2256,36 @@ def build_player_round_sides(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFram
         ),
         None,
     )
-    if team_column is None:
+    fallback_team_map = raw_player_team_map(raw_dir) if team_column is None else {}
+    fallback_team_events = (
+        read_player_team_events(raw_dir) if team_column is None else pd.DataFrame()
+    )
+    if team_column is None and not fallback_team_map and fallback_team_events.empty:
         return pd.DataFrame(columns=PLAYER_ROUND_SIDES_COLUMNS)
 
     player_core = normalize_steamid_columns(player_core.copy())
     player_core["tick"] = pd.to_numeric(player_core["tick"], errors="coerce")
-    player_core["team_number"] = player_core[team_column].map(normalize_team_number)
+    if team_column is not None:
+        player_core["team_number"] = player_core[team_column].map(normalize_team_number)
+    else:
+        # Some lightweight/debug exports keep only tick, steamid and name in
+        # ticks_player_core.  In that case the tick rows still provide the
+        # per-round participant snapshot, while player_team/meta data provide
+        # the side assignment for the same round tick.
+        player_core["team_number"] = pd.NA
     if "name" not in player_core.columns:
         player_core["name"] = pd.NA
 
-    player_core = player_core.dropna(subset=["tick", "steamid", "team_number"]).copy()
-    player_core = player_core[player_core["team_number"].isin(TEAM_NUMBER_TO_SIDE)]
+    drop_columns = ["tick", "steamid"] + (["team_number"] if team_column else [])
+    player_core = player_core.dropna(subset=drop_columns).copy()
+    if team_column is not None:
+        player_core = player_core[player_core["team_number"].isin(TEAM_NUMBER_TO_SIDE)]
     if player_core.empty or rounds.empty or "round_number" not in rounds.columns:
         return pd.DataFrame(columns=PLAYER_ROUND_SIDES_COLUMNS)
 
     player_core["source_tick"] = player_core["tick"].astype(int)
-    player_core["team_number"] = player_core["team_number"].astype(int)
+    if team_column is not None:
+        player_core["team_number"] = player_core["team_number"].astype(int)
     player_core = player_core.sort_values(["source_tick", "steamid"])
 
     rows: list[pd.DataFrame] = []
@@ -2302,7 +2316,17 @@ def build_player_round_sides(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFram
         if candidates.empty:
             continue
 
-        nearest = candidates.drop_duplicates(subset=["steamid"], keep="first")
+        nearest = candidates.drop_duplicates(subset=["steamid"], keep="first").copy()
+        if team_column is None:
+            team_map = team_map_for_tick(
+                fallback_team_map, fallback_team_events, target_tick_number
+            )
+            nearest["team_number"] = nearest["steamid"].astype(str).map(team_map)
+            nearest = nearest.dropna(subset=["team_number"])
+            nearest = nearest[nearest["team_number"].isin(TEAM_NUMBER_TO_SIDE)]
+            if nearest.empty:
+                continue
+            nearest["team_number"] = nearest["team_number"].astype(int)
         nearest.insert(0, "round_number", round_row["round_number"])
         rows.append(nearest)
 
