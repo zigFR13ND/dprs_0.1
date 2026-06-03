@@ -322,38 +322,39 @@ def last_tick_in_range(
     return matched
 
 
-def first_available_round_end_tick(
+def latest_available_round_end_tick(
     *,
     start_tick: int,
     stop_tick: int | None,
     bomb_defused_ticks: list[int],
     bomb_exploded_ticks: list[int],
-    death_ticks: list[int],
     explicit_ticks: list[int],
+    elimination_death_tick: object = pd.NA,
 ) -> tuple[object, str]:
+    candidates: list[tuple[int, str]] = []
     for source, ticks in (
         ("bomb_defused", bomb_defused_ticks),
         ("bomb_exploded", bomb_exploded_ticks),
+        ("explicit_outcome_event", explicit_ticks),
     ):
-        tick = first_tick_in_range(
+        tick = last_tick_in_range(
             ticks, start_tick, stop_tick, include_start=False, include_stop=False
         )
         if not pd.isna(tick):
-            return tick, source
+            candidates.append((int(tick), source))
 
-    death_tick = last_tick_in_range(
-        death_ticks, start_tick, stop_tick, include_start=False, include_stop=False
-    )
-    if not pd.isna(death_tick):
-        return death_tick, "last_valid_death"
+    if not pd.isna(elimination_death_tick):
+        death_tick = int(elimination_death_tick)
+        after_start = death_tick > int(start_tick)
+        before_stop = True if stop_tick is None else death_tick < int(stop_tick)
+        if after_start and before_stop:
+            candidates.append((death_tick, "last_valid_death"))
 
-    explicit_tick = first_tick_in_range(
-        explicit_ticks, start_tick, stop_tick, include_start=False, include_stop=False
-    )
-    if not pd.isna(explicit_tick):
-        return explicit_tick, "explicit_outcome_event"
+    if not candidates:
+        return pd.NA, "missing"
 
-    return pd.NA, "missing"
+    tick, source = max(candidates, key=lambda item: item[0])
+    return tick, source
 
 
 def build_rounds(raw_dir: Path) -> pd.DataFrame:
@@ -378,7 +379,6 @@ def build_rounds(raw_dir: Path) -> pd.DataFrame:
     bomb_exploded_ticks = unique_sorted_ticks(
         read_csv_if_exists(raw_dir / "events" / "bomb_exploded.csv")
     )
-    death_ticks = valid_death_ticks(raw_dir)
     explicit_ticks = explicit_outcome_event_ticks(raw_dir)
 
     start_ticks = prestart_ticks
@@ -465,12 +465,11 @@ def build_rounds(raw_dir: Path) -> pd.DataFrame:
             end_marker_source = "missing"
 
         assignment_end_tick = next_start_tick if next_start_tick is not None else pd.NA
-        inferred_round_end_tick, round_end_source = first_available_round_end_tick(
+        inferred_round_end_tick, round_end_source = latest_available_round_end_tick(
             start_tick=start_tick,
             stop_tick=next_start_tick,
             bomb_defused_ticks=bomb_defused_ticks,
             bomb_exploded_ticks=bomb_exploded_ticks,
-            death_ticks=death_ticks,
             explicit_ticks=explicit_ticks,
         )
 
@@ -523,23 +522,76 @@ def build_rounds(raw_dir: Path) -> pd.DataFrame:
             }
         )
 
-    return pd.DataFrame(
-        rows,
-        columns=[
-            "round_number",
-            "prestart_tick",
-            "poststart_tick",
-            "freeze_end_tick",
-            "round_close_tick",
-            "assignment_end_tick",
-            "inferred_round_end_tick",
-            "round_end_source",
-            "next_prestart_tick",
-            "end_marker_source",
-            "timeline_confidence",
-            "missing_markers",
-        ],
-    )
+    round_columns = [
+        "round_number",
+        "prestart_tick",
+        "poststart_tick",
+        "freeze_end_tick",
+        "round_close_tick",
+        "assignment_end_tick",
+        "inferred_round_end_tick",
+        "round_end_source",
+        "next_prestart_tick",
+        "end_marker_source",
+        "timeline_confidence",
+        "missing_markers",
+    ]
+    rounds = pd.DataFrame(rows, columns=round_columns)
+
+    player_deaths = read_csv_if_exists(raw_dir / "events" / "player_death.csv")
+    if not player_deaths.empty:
+        player_deaths = normalize_steamid_columns(player_deaths.copy())
+        player_deaths = assign_round_numbers(player_deaths, rounds)
+        player_core = read_player_core_states(raw_dir)
+        player_team_map = raw_player_team_map(raw_dir)
+        round_roster_team_maps = build_round_roster_team_maps(
+            raw_dir, rounds, player_team_map
+        )
+        for row_index, round_row in rounds.iterrows():
+            round_number = round_row["round_number"]
+            round_deaths = (
+                player_deaths[player_deaths["round_number"] == round_number]
+                if "round_number" in player_deaths.columns
+                else pd.DataFrame()
+            )
+            start_tick = round_timeline_value(
+                round_row.to_dict(),
+                ("freeze_end_tick", "poststart_tick", "prestart_tick"),
+            )
+            assignment_end_tick = round_row.get("assignment_end_tick", pd.NA)
+            if pd.isna(start_tick):
+                continue
+            roster_team_map = round_roster_team_maps.get(round_number, player_team_map)
+            inferred = infer_elimination_from_deaths(
+                round_deaths,
+                player_core,
+                roster_team_map,
+                start_tick,
+                assignment_end_tick,
+            )
+            elimination_death_tick = (
+                last_valid_death_tick(round_deaths)
+                if inferred is not None and inferred[2] == "elimination"
+                else pd.NA
+            )
+            if pd.isna(elimination_death_tick):
+                continue
+            inferred_tick, source = latest_available_round_end_tick(
+                start_tick=int(start_tick),
+                stop_tick=(
+                    int(assignment_end_tick)
+                    if not pd.isna(assignment_end_tick)
+                    else None
+                ),
+                bomb_defused_ticks=bomb_defused_ticks,
+                bomb_exploded_ticks=bomb_exploded_ticks,
+                explicit_ticks=explicit_ticks,
+                elimination_death_tick=elimination_death_tick,
+            )
+            rounds.at[row_index, "inferred_round_end_tick"] = inferred_tick
+            rounds.at[row_index, "round_end_source"] = source
+
+    return rounds
 
 
 def assign_round_numbers(df: pd.DataFrame, rounds: pd.DataFrame) -> pd.DataFrame:
@@ -1370,7 +1422,7 @@ def build_round_outcomes(raw_dir: Path, rounds: pd.DataFrame) -> pd.DataFrame:
                 inferred_round_end_tick = candidate
                 round_end_source = candidate_source
         boundary_end_tick = round_timeline_value(
-            round_row, ("assignment_end_tick", "round_close_tick", "next_prestart_tick")
+            round_row, ("assignment_end_tick", "next_prestart_tick")
         )
         end_tick = inferred_round_end_tick
         if pd.isna(end_tick):
