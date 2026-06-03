@@ -1491,7 +1491,9 @@ def player_round_team_lookup(
     sides = sides.dropna(subset=["round_number", "steamid", "team_number"])
     sides = sides.drop_duplicates(subset=["round_number", "steamid"], keep="first")
     return {
-        (int(row["round_number"]), str(row["steamid"])): int(row["team_number"])
+        (int(row["round_number"]), str(normalize_steamid(row["steamid"]))): int(
+            row["team_number"]
+        )
         for row in sides.to_dict("records")
     }
 
@@ -1571,6 +1573,8 @@ def add_trade_kill_columns(
     by_round: dict[int, list[dict[str, object]]] = {}
     for event in kill_events:
         by_round.setdefault(int(event["round_number"]), []).append(event)
+    for events in by_round.values():
+        events.sort(key=lambda event: (int(event["tick"]), str(event["idx"])))
 
     used_trade_kill_indices: set[object] = set()
     for death in kill_events:
