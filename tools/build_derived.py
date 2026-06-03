@@ -37,6 +37,9 @@ PLAYER_ROUND_SURVIVAL_DIAGNOSTICS: dict[str, int] = {
     "survived_source_ticks": 0,
     "survived_source_death_fallback": 0,
 }
+OPENING_KILL_DIAGNOSTICS: dict[str, int] = {
+    "rounds_with_opening_kill": 0,
+}
 
 DERIVED_TABLES = (
     "players",
@@ -1608,6 +1611,115 @@ def add_trade_kill_columns(
     return out
 
 
+def round_live_start_ticks(rounds: pd.DataFrame) -> pd.DataFrame:
+    """Return per-round live-start ticks for opening kill detection."""
+    columns = ["round_number", "live_start_tick"]
+    if rounds.empty or "round_number" not in rounds.columns:
+        return pd.DataFrame(columns=columns)
+
+    out = rounds[["round_number"]].copy()
+    out["live_start_tick"] = pd.NA
+    for source_column in (
+        "live_start_tick",
+        "freeze_end_tick",
+        "poststart_tick",
+        "prestart_tick",
+    ):
+        if source_column not in rounds.columns:
+            continue
+        source_ticks = pd.to_numeric(rounds[source_column], errors="coerce")
+        out["live_start_tick"] = out["live_start_tick"].where(
+            pd.to_numeric(out["live_start_tick"], errors="coerce").notna(),
+            source_ticks,
+        )
+
+    out["round_number"] = pd.to_numeric(out["round_number"], errors="coerce")
+    out["live_start_tick"] = pd.to_numeric(out["live_start_tick"], errors="coerce")
+    return out.dropna(subset=["round_number", "live_start_tick"]).drop_duplicates(
+        subset=["round_number"], keep="first"
+    )
+
+
+def valid_kill_mask(kills: pd.DataFrame) -> pd.Series:
+    """Return kills that are player-vs-enemy frags, excluding world/suicide/team kills."""
+    if kills.empty:
+        return pd.Series(False, index=kills.index)
+
+    has_attacker = (
+        truthy_series(kills["has_attacker"])
+        if "has_attacker" in kills.columns
+        else kills.get("attacker_steamid", pd.Series(pd.NA, index=kills.index)).notna()
+    )
+    is_suicide = (
+        truthy_series(kills["is_suicide"])
+        if "is_suicide" in kills.columns
+        else pd.Series(False, index=kills.index)
+    )
+    is_teamkill = (
+        truthy_series(kills["is_teamkill"])
+        if "is_teamkill" in kills.columns
+        else pd.Series(False, index=kills.index)
+    )
+    is_world = (
+        truthy_series(kills["is_world"])
+        if "is_world" in kills.columns
+        else ~has_attacker
+    )
+    return has_attacker & ~is_suicide & ~is_teamkill & ~is_world
+
+
+def add_opening_kill_column(kills: pd.DataFrame, rounds: pd.DataFrame) -> pd.DataFrame:
+    """Mark the first valid kill in each round at or after live start."""
+    out = kills.copy()
+    out["is_opening_kill"] = False
+
+    OPENING_KILL_DIAGNOSTICS.clear()
+    OPENING_KILL_DIAGNOSTICS.update({"rounds_with_opening_kill": 0})
+
+    required = {"round_number", "tick"}
+    if out.empty or not required <= set(out.columns):
+        return out
+
+    live_starts = round_live_start_ticks(rounds)
+    if live_starts.empty:
+        return out
+
+    candidates = out.reset_index(names="_kill_index").merge(
+        live_starts, on="round_number", how="left"
+    )
+    ticks = pd.to_numeric(candidates["tick"], errors="coerce")
+    starts = pd.to_numeric(candidates["live_start_tick"], errors="coerce")
+    candidate_mask = (
+        valid_kill_mask(candidates) & ticks.notna() & starts.notna() & ticks.ge(starts)
+    )
+    candidates = candidates[candidate_mask].copy()
+    if candidates.empty:
+        return out
+
+    candidates["_round_sort"] = pd.to_numeric(
+        candidates["round_number"], errors="coerce"
+    )
+    candidates["_tick_sort"] = pd.to_numeric(candidates["tick"], errors="coerce")
+    opening_indices = (
+        candidates.sort_values(
+            ["_round_sort", "_tick_sort", "_kill_index"],
+            kind="mergesort",
+            na_position="last",
+        )
+        .drop_duplicates(subset=["round_number"], keep="first")["_kill_index"]
+        .tolist()
+    )
+    out.loc[opening_indices, "is_opening_kill"] = True
+    OPENING_KILL_DIAGNOSTICS.update(
+        {
+            "rounds_with_opening_kill": int(
+                out.loc[opening_indices, "round_number"].nunique()
+            )
+        }
+    )
+    return out
+
+
 def build_kills(
     raw_dir: Path,
     rounds: pd.DataFrame,
@@ -1665,6 +1777,8 @@ def build_kills(
         kills = kills.drop(columns=["victim_team_number", "attacker_team_number"])
 
     kills = add_trade_kill_columns(kills, player_round_sides, trade_tick_window)
+    kills = add_opening_kill_column(kills, rounds)
+    kills = kills[valid_kill_mask(kills)].reset_index(drop=True)
 
     preferred = [
         "round_number",
@@ -1680,6 +1794,7 @@ def build_kills(
         "is_teamkill",
         "is_world",
         "is_trade_kill",
+        "is_opening_kill",
         "traded_victim_steamid",
         "trade_delay_ticks",
         "weapon",
@@ -2051,6 +2166,8 @@ PLAYER_ROUND_STATS_COLUMNS = [
     "team_number",
     "kills",
     "deaths",
+    "opening_kills",
+    "opening_deaths",
     "suicides",
     "team_deaths",
     "assists",
@@ -2381,20 +2498,42 @@ def build_player_round_stats(
     aggregates = [
         player_round_counts(normal_kills, "attacker_steamid", count_column="kills"),
         player_round_counts(kills, "user_steamid", count_column="deaths"),
+        player_round_counts(
+            (
+                normal_kills[truthy_series(normal_kills["is_opening_kill"])].copy()
+                if not normal_kills.empty and "is_opening_kill" in normal_kills.columns
+                else pd.DataFrame()
+            ),
+            "attacker_steamid",
+            count_column="opening_kills",
+        ),
+        player_round_counts(
+            (
+                normal_kills[truthy_series(normal_kills["is_opening_kill"])].copy()
+                if not normal_kills.empty and "is_opening_kill" in normal_kills.columns
+                else pd.DataFrame()
+            ),
+            "user_steamid",
+            count_column="opening_deaths",
+        ),
         player_round_counts(suicide_deaths, "user_steamid", count_column="suicides"),
         player_round_counts(team_deaths, "user_steamid", count_column="team_deaths"),
         player_round_counts(kills, "assister_steamid", count_column="assists"),
         player_round_counts(
-            normal_kills[truthy_series(normal_kills["is_trade_kill"])].copy()
-            if not normal_kills.empty and "is_trade_kill" in normal_kills.columns
-            else pd.DataFrame(),
+            (
+                normal_kills[truthy_series(normal_kills["is_trade_kill"])].copy()
+                if not normal_kills.empty and "is_trade_kill" in normal_kills.columns
+                else pd.DataFrame()
+            ),
             "attacker_steamid",
             count_column="trade_kills",
         ),
         player_round_counts(
-            normal_kills[truthy_series(normal_kills["is_trade_kill"])].copy()
-            if not normal_kills.empty and "is_trade_kill" in normal_kills.columns
-            else pd.DataFrame(),
+            (
+                normal_kills[truthy_series(normal_kills["is_trade_kill"])].copy()
+                if not normal_kills.empty and "is_trade_kill" in normal_kills.columns
+                else pd.DataFrame()
+            ),
             "traded_victim_steamid",
             count_column="traded_deaths",
         ),
@@ -2461,6 +2600,8 @@ def build_player_round_stats(
         "deaths",
         "suicides",
         "team_deaths",
+        "opening_kills",
+        "opening_deaths",
         "assists",
         "trade_kills",
         "traded_deaths",
@@ -2648,6 +2789,7 @@ def write_summary(results: list[TableResult], raw_dir: Path, output_dir: Path) -
             "survived_source_death_fallback", 0
         ),
         "weapon_fire_filter": WEAPON_FIRE_DIAGNOSTICS,
+        "opening_kill_detection": OPENING_KILL_DIAGNOSTICS,
     }
     (output_dir / "derived_summary.json").write_text(
         json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8"
@@ -2721,6 +2863,8 @@ def build_derived(
     PLAYER_ROUND_SURVIVAL_DIAGNOSTICS.update(
         {"survived_source_ticks": 0, "survived_source_death_fallback": 0}
     )
+    OPENING_KILL_DIAGNOSTICS.clear()
+    OPENING_KILL_DIAGNOSTICS.update({"rounds_with_opening_kill": 0})
     WEAPON_FIRE_DIAGNOSTICS.clear()
     WEAPON_FIRE_DIAGNOSTICS.update(
         {

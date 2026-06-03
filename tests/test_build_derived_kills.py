@@ -75,7 +75,9 @@ def test_build_kills_sorts_and_marks_trade_kills_within_tick_window(tmp_path):
         ],
     )
 
-    kills = build_kills(tmp_path, _rounds(), _player_round_sides(), trade_tick_window=40)
+    kills = build_kills(
+        tmp_path, _rounds(), _player_round_sides(), trade_tick_window=40
+    )
 
     assert kills["raw_marker"].tolist() == [
         "traded_death",
@@ -90,7 +92,9 @@ def test_build_kills_sorts_and_marks_trade_kills_within_tick_window(tmp_path):
     assert not bool(rows.loc["late_non_trade", "is_trade_kill"])
 
 
-def test_player_round_stats_counts_trade_kills_and_traded_deaths_from_built_kills(tmp_path):
+def test_player_round_stats_counts_trade_kills_and_traded_deaths_from_built_kills(
+    tmp_path,
+):
     _write_player_death(
         tmp_path,
         [
@@ -106,7 +110,9 @@ def test_player_round_stats_counts_trade_kills_and_traded_deaths_from_built_kill
             },
         ],
     )
-    kills = build_kills(tmp_path, _rounds(), _player_round_sides(), trade_tick_window=40)
+    kills = build_kills(
+        tmp_path, _rounds(), _player_round_sides(), trade_tick_window=40
+    )
 
     stats = build_player_round_stats(
         tmp_path,
@@ -123,3 +129,86 @@ def test_player_round_stats_counts_trade_kills_and_traded_deaths_from_built_kill
     assert stats.loc["C", "traded_deaths"] == 1
     assert stats.loc["B", "trade_kills"] == 0
     assert stats.loc["D", "traded_deaths"] == 0
+
+
+def test_build_kills_filters_invalid_kills_and_marks_opening_kill(tmp_path):
+    _write_player_death(
+        tmp_path,
+        [
+            {
+                "tick": 105,
+                "user_steamid": "B",
+                "attacker_steamid": "A",
+                "raw_marker": "before_live",
+            },
+            {
+                "tick": 120,
+                "user_steamid": "A",
+                "attacker_steamid": "A",
+                "raw_marker": "suicide",
+            },
+            {
+                "tick": 130,
+                "user_steamid": "C",
+                "attacker_steamid": "A",
+                "raw_marker": "teamkill",
+            },
+            {
+                "tick": 140,
+                "user_steamid": "D",
+                "attacker_steamid": "A",
+                "raw_marker": "valid_opening",
+            },
+            {
+                "tick": 150,
+                "user_steamid": "B",
+                "attacker_steamid": "A",
+                "raw_marker": "valid_later",
+            },
+        ],
+    )
+
+    kills = build_kills(tmp_path, _rounds(), _player_round_sides())
+
+    assert kills["raw_marker"].tolist() == [
+        "before_live",
+        "valid_opening",
+        "valid_later",
+    ]
+    assert kills["is_opening_kill"].tolist() == [False, True, False]
+    assert not kills[["is_suicide", "is_teamkill", "is_world"]].any().any()
+
+
+def test_player_round_stats_counts_opening_kills_and_deaths(tmp_path):
+    _write_player_death(
+        tmp_path,
+        [
+            {
+                "tick": 140,
+                "user_steamid": "C",
+                "attacker_steamid": "B",
+            },
+            {
+                "tick": 150,
+                "user_steamid": "B",
+                "attacker_steamid": "A",
+            },
+        ],
+    )
+    kills = build_kills(tmp_path, _rounds(), _player_round_sides())
+
+    stats = build_player_round_stats(
+        tmp_path,
+        _players(),
+        _rounds(),
+        _player_round_sides(),
+        kills=kills,
+        damage=pd.DataFrame(),
+        shots=pd.DataFrame(),
+        bomb_events=pd.DataFrame(),
+    ).set_index("steamid")
+
+    assert stats.loc["B", "opening_kills"] == 1
+    assert stats.loc["C", "opening_deaths"] == 1
+    assert stats.loc["A", "opening_kills"] == 0
+    assert stats.loc["B", "opening_deaths"] == 0
