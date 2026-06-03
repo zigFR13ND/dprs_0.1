@@ -1,0 +1,6 @@
+tick,user_steamid,user_name,attacker_steamid,attacker_name,weapon,dmg_health,hitgroup
+110,B,Bravo,A,Alpha,ak47,7,chest
+130,B,Bravo,A,Alpha,ak47,25,head
+140,C,Charlie,A,Alpha,ak47,10,stomach
+145,A,Alpha,A,Alpha,weapon_molotov,5,generic
+330,A,Alpha,B,Bravo,hegrenade,40,generic

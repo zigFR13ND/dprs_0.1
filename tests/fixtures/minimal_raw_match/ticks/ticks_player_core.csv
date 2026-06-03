@@ -1,0 +1,17 @@
+tick,steamid,name,team_number,is_alive,health
+120,A,Alpha,2,true,100
+120,B,Bravo,3,true,100
+120,C,Charlie,2,true,100
+120,D,Delta,3,true,100
+300,A,Alpha,2,true,88
+300,B,Bravo,3,false,0
+300,C,Charlie,2,false,0
+300,D,Delta,3,false,0
+320,A,Alpha,3,true,100
+320,B,Bravo,2,true,100
+320,C,Charlie,3,true,100
+320,D,Delta,2,true,100
+500,A,Alpha,3,true,50
+500,B,Bravo,2,true,75
+500,C,Charlie,3,true,100
+500,D,Delta,2,false,0
