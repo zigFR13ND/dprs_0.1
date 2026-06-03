@@ -2481,7 +2481,10 @@ def build_player_round_stats(
     stats["kast_kill"] = stats["kills"] > 0
     stats["kast_assist"] = stats["assists"] > 0
     stats["kast_survived"] = stats["survived"].fillna(False).astype(bool)
-    stats["kast_traded"] = stats["traded_deaths"] > 0
+    # Trade detection is tracked in the kill aggregates, but KAST should keep
+    # the traded component disabled until the dedicated trade-detection pass is
+    # promoted for this metric.
+    stats["kast_traded"] = False
     stats["kast"] = (
         stats["kast_kill"]
         | stats["kast_assist"]

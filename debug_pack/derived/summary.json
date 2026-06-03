@@ -173,6 +173,8 @@
         "suicides",
         "team_deaths",
         "assists",
+        "trade_kills",
+        "traded_deaths",
         "damage_dealt",
         "team_damage_dealt",
         "self_damage",

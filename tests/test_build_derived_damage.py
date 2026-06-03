@@ -139,3 +139,75 @@ def test_player_round_stats_splits_enemy_live_team_self_and_utility_damage(tmp_p
     assert stats.loc["A", "utility_damage_dealt"] == 30
     assert stats.loc["B", "damage_dealt"] == 20
     assert stats.loc["B", "utility_damage_dealt"] == 20
+
+
+def test_player_round_stats_builds_kast_components_with_traded_disabled(tmp_path):
+    players = pd.DataFrame(
+        [
+            {"steamid": "A", "name": "Alpha", "team_number": 2},
+            {"steamid": "B", "name": "Bravo", "team_number": 3},
+            {"steamid": "C", "name": "Charlie", "team_number": 2},
+            {"steamid": "D", "name": "Delta", "team_number": 3},
+        ]
+    )
+    player_round_sides = pd.DataFrame(
+        [
+            {"round_number": 1, "steamid": "A", "team_number": 2},
+            {"round_number": 1, "steamid": "B", "team_number": 3},
+            {"round_number": 1, "steamid": "C", "team_number": 2},
+            {"round_number": 1, "steamid": "D", "team_number": 3},
+        ]
+    )
+    kills = pd.DataFrame(
+        [
+            {
+                "round_number": 1,
+                "attacker_steamid": "A",
+                "user_steamid": "D",
+                "assister_steamid": "C",
+                "has_attacker": True,
+                "is_suicide": False,
+                "is_teamkill": False,
+                "is_trade_kill": False,
+                "traded_victim_steamid": pd.NA,
+                "headshot": False,
+            },
+            {
+                "round_number": 1,
+                "attacker_steamid": "B",
+                "user_steamid": "C",
+                "assister_steamid": pd.NA,
+                "has_attacker": True,
+                "is_suicide": False,
+                "is_teamkill": False,
+                "is_trade_kill": True,
+                "traded_victim_steamid": "D",
+                "headshot": False,
+            },
+        ]
+    )
+
+    stats = build_player_round_stats(
+        tmp_path,
+        players,
+        _rounds(),
+        player_round_sides,
+        kills=kills,
+        damage=pd.DataFrame(),
+        shots=pd.DataFrame(),
+        bomb_events=pd.DataFrame(),
+    ).set_index("steamid")
+
+    assert bool(stats.loc["A", "kast_kill"])
+    assert bool(stats.loc["C", "kast_assist"])
+    assert bool(stats.loc["B", "kast_survived"])
+    assert stats.loc["D", "traded_deaths"] == 1
+    assert not bool(stats.loc["D", "kast_traded"])
+    assert not bool(stats.loc["D", "kast"])
+    expected_kast = (
+        stats["kast_kill"]
+        | stats["kast_assist"]
+        | stats["kast_survived"]
+        | stats["kast_traded"]
+    )
+    assert stats["kast"].equals(expected_kast)
