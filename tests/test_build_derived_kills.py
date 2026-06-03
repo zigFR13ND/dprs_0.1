@@ -5,7 +5,11 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from tools.build_derived import build_kills, build_player_round_stats
+from tools.build_derived import (
+    build_clutch_attempts,
+    build_kills,
+    build_player_round_stats,
+)
 
 
 def _rounds() -> pd.DataFrame:
@@ -212,3 +216,54 @@ def test_player_round_stats_counts_opening_kills_and_deaths(tmp_path):
     assert stats.loc["C", "opening_deaths"] == 1
     assert stats.loc["A", "opening_kills"] == 0
     assert stats.loc["B", "opening_deaths"] == 0
+
+
+def test_build_clutch_attempts_records_last_alive_state_and_round_result():
+    kills = pd.DataFrame(
+        [
+            {
+                "round_number": 1,
+                "tick": 120,
+                "user_steamid": "C",
+                "attacker_steamid": "B",
+            },
+            {
+                "round_number": 1,
+                "tick": 140,
+                "user_steamid": "D",
+                "attacker_steamid": "A",
+            },
+            {
+                "round_number": 1,
+                "tick": 160,
+                "user_steamid": "B",
+                "attacker_steamid": "A",
+            },
+        ]
+    )
+    round_outcomes = pd.DataFrame(
+        [{"round_number": 1, "winner_side": "T", "winner_team_number": 2}]
+    )
+
+    attempts = build_clutch_attempts(
+        kills, _rounds(), round_outcomes, _player_round_sides()
+    )
+
+    assert attempts.to_dict("records") == [
+        {
+            "round_number": 1,
+            "steamid": "A",
+            "side": "T",
+            "opponents_alive": 2,
+            "start_tick": 120,
+            "won": True,
+        },
+        {
+            "round_number": 1,
+            "steamid": "B",
+            "side": "CT",
+            "opponents_alive": 1,
+            "start_tick": 140,
+            "won": False,
+        },
+    ]
