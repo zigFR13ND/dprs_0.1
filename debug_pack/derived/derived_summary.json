@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-06-02T18:20:02.099493Z",
+  "built_at": "2026-06-03T07:18:29.503087Z",
   "raw_input_directory": ".",
   "derived_output_directory": "derived",
   "tables": [
@@ -24,6 +24,9 @@
         "poststart_tick",
         "freeze_end_tick",
         "round_close_tick",
+        "assignment_end_tick",
+        "inferred_round_end_tick",
+        "round_end_source",
         "next_prestart_tick",
         "end_marker_source",
         "timeline_confidence",
@@ -39,6 +42,8 @@
         "start_tick",
         "live_start_tick",
         "end_tick",
+        "inferred_round_end_tick",
+        "round_end_source",
         "bomb_planted",
         "bomb_defused",
         "bomb_exploded",
@@ -51,7 +56,7 @@
     {
       "name": "kills",
       "relative_path": "derived/kills.csv",
-      "rows": 160,
+      "rows": 155,
       "columns": [
         "round_number",
         "tick",
@@ -65,6 +70,10 @@
         "has_attacker",
         "is_teamkill",
         "is_world",
+        "is_trade_kill",
+        "is_opening_kill",
+        "traded_victim_steamid",
+        "trade_delay_ticks",
         "weapon",
         "headshot",
         "hitgroup",
@@ -163,6 +172,10 @@
         "team_number",
         "kills",
         "deaths",
+        "opening_kills",
+        "opening_deaths",
+        "clutch_attempts",
+        "clutch_wins",
         "suicides",
         "team_deaths",
         "assists",
@@ -183,6 +196,39 @@
         "kast_survived",
         "kast_traded",
         "kast"
+      ]
+    },
+    {
+      "name": "player_match_stats",
+      "relative_path": "derived/player_match_stats.csv",
+      "rows": 10,
+      "columns": [
+        "steamid",
+        "name",
+        "rounds_played",
+        "kills",
+        "deaths",
+        "assists",
+        "adr",
+        "kast_percent",
+        "headshot_percent",
+        "opening_kills",
+        "opening_deaths",
+        "clutch_attempts",
+        "clutch_wins"
+      ]
+    },
+    {
+      "name": "clutch_attempts",
+      "relative_path": "derived/clutch_attempts.csv",
+      "rows": 0,
+      "columns": [
+        "round_number",
+        "steamid",
+        "side",
+        "opponents_alive",
+        "start_tick",
+        "won"
       ]
     }
   ],
@@ -242,5 +288,8 @@
       "weapon_molotov": 21,
       "weapon_smokegrenade": 86
     }
+  },
+  "opening_kill_detection": {
+    "rounds_with_opening_kill": 22
   }
 }

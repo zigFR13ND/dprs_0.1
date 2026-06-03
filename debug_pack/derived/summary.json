@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-06-02T18:20:02.214160Z",
+  "built_at": "2026-06-03T07:18:29.611587Z",
   "source_derived_directory": "derived",
   "sample_rows_per_table": 25,
   "tables": [
@@ -24,6 +24,9 @@
         "poststart_tick",
         "freeze_end_tick",
         "round_close_tick",
+        "assignment_end_tick",
+        "inferred_round_end_tick",
+        "round_end_source",
         "next_prestart_tick",
         "end_marker_source",
         "timeline_confidence",
@@ -40,6 +43,8 @@
         "start_tick",
         "live_start_tick",
         "end_tick",
+        "inferred_round_end_tick",
+        "round_end_source",
         "bomb_planted",
         "bomb_defused",
         "bomb_exploded",
@@ -53,7 +58,7 @@
     },
     {
       "table": "kills",
-      "rows": 160,
+      "rows": 155,
       "columns": [
         "round_number",
         "tick",
@@ -67,6 +72,10 @@
         "has_attacker",
         "is_teamkill",
         "is_world",
+        "is_trade_kill",
+        "is_opening_kill",
+        "traded_victim_steamid",
+        "trade_delay_ticks",
         "weapon",
         "headshot",
         "hitgroup",
@@ -170,6 +179,10 @@
         "team_number",
         "kills",
         "deaths",
+        "opening_kills",
+        "opening_deaths",
+        "clutch_attempts",
+        "clutch_wins",
         "suicides",
         "team_deaths",
         "assists",
@@ -193,6 +206,41 @@
       ],
       "source_path": "derived/player_round_stats.csv",
       "sample": "samples/player_round_stats_head_25.csv"
+    },
+    {
+      "table": "player_match_stats",
+      "rows": 10,
+      "columns": [
+        "steamid",
+        "name",
+        "rounds_played",
+        "kills",
+        "deaths",
+        "assists",
+        "adr",
+        "kast_percent",
+        "headshot_percent",
+        "opening_kills",
+        "opening_deaths",
+        "clutch_attempts",
+        "clutch_wins"
+      ],
+      "source_path": "derived/player_match_stats.csv",
+      "sample": "samples/player_match_stats_head_25.csv"
+    },
+    {
+      "table": "clutch_attempts",
+      "rows": 0,
+      "columns": [
+        "round_number",
+        "steamid",
+        "side",
+        "opponents_alive",
+        "start_tick",
+        "won"
+      ],
+      "source_path": "derived/clutch_attempts.csv",
+      "sample": "samples/clutch_attempts_head_25.csv"
     }
   ]
 }

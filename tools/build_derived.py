@@ -51,6 +51,7 @@ DERIVED_TABLES = (
     "weapon_actions",
     "bomb_events",
     "player_round_stats",
+    "player_match_stats",
     "clutch_attempts",
 )
 
@@ -2322,6 +2323,8 @@ PLAYER_ROUND_STATS_COLUMNS = [
     "deaths",
     "opening_kills",
     "opening_deaths",
+    "clutch_attempts",
+    "clutch_wins",
     "suicides",
     "team_deaths",
     "assists",
@@ -2483,6 +2486,7 @@ def build_player_round_stats(
     damage: pd.DataFrame,
     shots: pd.DataFrame,
     bomb_events: pd.DataFrame,
+    clutch_attempts: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
     if players.empty or rounds.empty:
         return pd.DataFrame(columns=PLAYER_ROUND_STATS_COLUMNS)
@@ -2744,6 +2748,24 @@ def build_player_round_stats(
         ]
     )
 
+    clutch_frame = (
+        clutch_attempts.copy() if clutch_attempts is not None else pd.DataFrame()
+    )
+    if not clutch_frame.empty:
+        clutch_frame = normalize_steamid_columns(clutch_frame)
+        aggregates.append(
+            player_round_counts(
+                clutch_frame, "steamid", count_column="clutch_attempts"
+            )
+        )
+        if "won" in clutch_frame.columns:
+            clutch_wins = clutch_frame[truthy_series(clutch_frame["won"])].copy()
+        else:
+            clutch_wins = pd.DataFrame()
+        aggregates.append(
+            player_round_counts(clutch_wins, "steamid", count_column="clutch_wins")
+        )
+
     for aggregate in aggregates:
         if aggregate.empty:
             continue
@@ -2756,6 +2778,8 @@ def build_player_round_stats(
         "team_deaths",
         "opening_kills",
         "opening_deaths",
+        "clutch_attempts",
+        "clutch_wins",
         "assists",
         "trade_kills",
         "traded_deaths",
@@ -2793,6 +2817,111 @@ def build_player_round_stats(
     return (
         stats[PLAYER_ROUND_STATS_COLUMNS]
         .sort_values(["round_number", "team_number", "steamid"], na_position="last")
+        .reset_index(drop=True)
+    )
+
+
+PLAYER_MATCH_STATS_COLUMNS = [
+    "steamid",
+    "name",
+    "rounds_played",
+    "kills",
+    "deaths",
+    "assists",
+    "adr",
+    "kast_percent",
+    "headshot_percent",
+    "opening_kills",
+    "opening_deaths",
+    "clutch_attempts",
+    "clutch_wins",
+]
+
+
+def build_player_match_stats(player_round_stats: pd.DataFrame) -> pd.DataFrame:
+    """Aggregate per-round player stats into one match-level row per player."""
+    if player_round_stats.empty or "steamid" not in player_round_stats.columns:
+        return pd.DataFrame(columns=PLAYER_MATCH_STATS_COLUMNS)
+
+    stats = normalize_steamid_columns(player_round_stats.copy())
+    stats = stats.dropna(subset=["steamid"])
+    if stats.empty:
+        return pd.DataFrame(columns=PLAYER_MATCH_STATS_COLUMNS)
+
+    numeric_columns = [
+        "kills",
+        "deaths",
+        "assists",
+        "damage_dealt",
+        "headshot_kills",
+        "opening_kills",
+        "opening_deaths",
+        "clutch_attempts",
+        "clutch_wins",
+    ]
+    for column in numeric_columns:
+        if column not in stats.columns:
+            stats[column] = 0
+        stats[column] = pd.to_numeric(stats[column], errors="coerce").fillna(0)
+
+    if "kast" in stats.columns:
+        stats["kast"] = truthy_series(stats["kast"])
+    else:
+        stats["kast"] = False
+
+    if "round_number" in stats.columns:
+        rounds_played = (
+            stats.dropna(subset=["round_number"])
+            .drop_duplicates(subset=["steamid", "round_number"])
+            .groupby("steamid", dropna=False)
+            .size()
+        )
+    else:
+        rounds_played = stats.groupby("steamid", dropna=False).size()
+
+    sums = stats.groupby("steamid", dropna=False)[numeric_columns].sum()
+    kast_rounds = stats.groupby("steamid", dropna=False)["kast"].sum()
+    names = (
+        stats[["steamid", "name"]]
+        .dropna(subset=["name"])
+        .drop_duplicates(subset=["steamid"], keep="first")
+        .set_index("steamid")["name"]
+        if "name" in stats.columns
+        else pd.Series(dtype="string")
+    )
+
+    match_stats = sums.reset_index()
+    match_stats["name"] = match_stats["steamid"].map(names)
+    match_stats["rounds_played"] = match_stats["steamid"].map(rounds_played).fillna(0)
+
+    safe_rounds = match_stats["rounds_played"].replace(0, pd.NA)
+    safe_kills = match_stats["kills"].replace(0, pd.NA)
+    match_stats["adr"] = (match_stats["damage_dealt"] / safe_rounds).fillna(0).round(2)
+    match_stats["kast_percent"] = (
+        match_stats["steamid"].map(kast_rounds).fillna(0) / safe_rounds * 100
+    ).fillna(0).round(2)
+    match_stats["headshot_percent"] = (
+        match_stats["headshot_kills"] / safe_kills * 100
+    ).fillna(0).round(2)
+
+    integer_columns = [
+        "rounds_played",
+        "kills",
+        "deaths",
+        "assists",
+        "opening_kills",
+        "opening_deaths",
+        "clutch_attempts",
+        "clutch_wins",
+    ]
+    for column in integer_columns:
+        match_stats[column] = (
+            pd.to_numeric(match_stats[column], errors="coerce").fillna(0).astype(int)
+        )
+
+    return (
+        match_stats[PLAYER_MATCH_STATS_COLUMNS]
+        .sort_values(["kills", "adr", "steamid"], ascending=[False, False, True])
         .reset_index(drop=True)
     )
 
@@ -3035,14 +3164,15 @@ def build_derived(
     weapon_actions = build_weapon_actions(raw_dir, rounds)
     round_outcomes = build_round_outcomes(raw_dir, rounds)
     kills = build_kills(raw_dir, rounds, player_round_sides, trade_tick_window)
+    clutch_attempts = build_clutch_attempts(
+        kills, rounds, round_outcomes, player_round_sides
+    )
     tables = {
         "players": players,
         "rounds": rounds,
         "round_outcomes": round_outcomes,
         "kills": kills,
-        "clutch_attempts": build_clutch_attempts(
-            kills, rounds, round_outcomes, player_round_sides
-        ),
+        "clutch_attempts": clutch_attempts,
         "damage": build_damage(raw_dir, rounds, player_round_sides),
         "shots": build_shots(raw_dir, rounds, weapon_actions),
         "weapon_actions": weapon_actions,
@@ -3057,6 +3187,10 @@ def build_derived(
         tables["damage"],
         tables["shots"],
         tables["bomb_events"],
+        tables["clutch_attempts"],
+    )
+    tables["player_match_stats"] = build_player_match_stats(
+        tables["player_round_stats"]
     )
 
     results = [write_table(tables[name], name, output_dir) for name in DERIVED_TABLES]
