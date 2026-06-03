@@ -51,6 +51,7 @@ DERIVED_TABLES = (
     "weapon_actions",
     "bomb_events",
     "player_round_stats",
+    "clutch_attempts",
 )
 
 
@@ -1856,6 +1857,159 @@ def live_phase_damage_series(damage: pd.DataFrame, rounds: pd.DataFrame) -> pd.S
     return is_live_phase
 
 
+CLUTCH_ATTEMPT_COLUMNS = [
+    "round_number",
+    "steamid",
+    "side",
+    "opponents_alive",
+    "start_tick",
+    "won",
+]
+
+
+def build_clutch_attempts(
+    kills: pd.DataFrame,
+    rounds: pd.DataFrame,
+    round_outcomes: pd.DataFrame,
+    player_round_sides: pd.DataFrame,
+) -> pd.DataFrame:
+    """Build one clutch-attempt row when a player becomes last alive in a round."""
+    if (
+        rounds.empty
+        or player_round_sides.empty
+        or not {"round_number", "steamid"} <= set(player_round_sides.columns)
+    ):
+        return pd.DataFrame(columns=CLUTCH_ATTEMPT_COLUMNS)
+
+    sides = player_round_sides.copy()
+    sides = normalize_steamid_columns(sides)
+    sides["round_number"] = pd.to_numeric(sides["round_number"], errors="coerce")
+    if "team_number" in sides.columns:
+        sides["team_number"] = sides["team_number"].map(normalize_team_number)
+    elif "side" in sides.columns:
+        sides["team_number"] = sides["side"].map(normalize_team_number)
+    else:
+        return pd.DataFrame(columns=CLUTCH_ATTEMPT_COLUMNS)
+    sides["side"] = sides["team_number"].map(TEAM_NUMBER_TO_SIDE)
+    sides = sides.dropna(subset=["round_number", "steamid", "team_number", "side"])
+    sides = sides[sides["team_number"].isin(TEAM_NUMBER_TO_SIDE)]
+    sides = sides.drop_duplicates(subset=["round_number", "steamid"], keep="first")
+    if sides.empty:
+        return pd.DataFrame(columns=CLUTCH_ATTEMPT_COLUMNS)
+
+    winner_by_round: dict[int, str] = {}
+    if not round_outcomes.empty and "round_number" in round_outcomes.columns:
+        outcomes = round_outcomes.copy()
+        outcomes["round_number"] = pd.to_numeric(
+            outcomes["round_number"], errors="coerce"
+        )
+        if "winner_side" in outcomes.columns:
+            outcomes["_winner_side"] = outcomes["winner_side"].map(normalize_side)
+        elif "winner_team_number" in outcomes.columns:
+            outcomes["_winner_side"] = outcomes["winner_team_number"].map(
+                normalize_side
+            )
+        else:
+            outcomes["_winner_side"] = pd.NA
+        for row in outcomes.dropna(subset=["round_number"]).to_dict("records"):
+            winner_side = row.get("_winner_side", pd.NA)
+            if not pd.isna(winner_side):
+                winner_by_round[int(row["round_number"])] = str(winner_side)
+
+    kill_events = kills.copy() if kills is not None else pd.DataFrame()
+    if not kill_events.empty:
+        kill_events = normalize_steamid_columns(kill_events)
+        if (
+            "round_number" not in kill_events.columns
+            or "user_steamid" not in kill_events.columns
+        ):
+            kill_events = pd.DataFrame()
+        else:
+            kill_events["round_number"] = pd.to_numeric(
+                kill_events["round_number"], errors="coerce"
+            )
+            kill_events["tick"] = pd.to_numeric(
+                kill_events.get("tick", pd.Series(pd.NA, index=kill_events.index)),
+                errors="coerce",
+            )
+            kill_events = kill_events.dropna(
+                subset=["round_number", "tick", "user_steamid"]
+            ).copy()
+            kill_events = sort_kills_by_round_and_tick(kill_events)
+
+    rows: list[dict[str, object]] = []
+    for round_row in rounds.to_dict("records"):
+        round_number = pd.to_numeric(
+            pd.Series([round_row.get("round_number", pd.NA)]), errors="coerce"
+        ).iloc[0]
+        if pd.isna(round_number):
+            continue
+        round_int = int(round_number)
+        round_sides = sides[sides["round_number"] == round_int]
+        if round_sides.empty:
+            continue
+
+        player_side = {
+            str(row["steamid"]): str(row["side"])
+            for row in round_sides[["steamid", "side"]].to_dict("records")
+        }
+        alive_by_side: dict[str, set[str]] = {"T": set(), "CT": set()}
+        for steamid, side in player_side.items():
+            alive_by_side.setdefault(side, set()).add(steamid)
+
+        recorded_players: set[str] = set()
+        round_kills = (
+            kill_events[kill_events["round_number"] == round_int]
+            if not kill_events.empty
+            else pd.DataFrame()
+        )
+        for kill in round_kills.to_dict("records"):
+            victim = kill.get("user_steamid", pd.NA)
+            tick = kill.get("tick", pd.NA)
+            if pd.isna(victim) or pd.isna(tick):
+                continue
+            victim_text = str(victim)
+            victim_side = player_side.get(victim_text)
+            if victim_side not in alive_by_side:
+                continue
+
+            alive_by_side[victim_side].discard(victim_text)
+            for side in ("T", "CT"):
+                alive = alive_by_side.get(side, set())
+                opponent_side = "CT" if side == "T" else "T"
+                opponents_alive = len(alive_by_side.get(opponent_side, set()))
+                if len(alive) != 1 or opponents_alive <= 0:
+                    continue
+                clutcher = next(iter(alive))
+                if clutcher in recorded_players:
+                    continue
+                recorded_players.add(clutcher)
+                winner_side = winner_by_round.get(round_int, pd.NA)
+                rows.append(
+                    {
+                        "round_number": round_int,
+                        "steamid": clutcher,
+                        "side": side,
+                        "opponents_alive": opponents_alive,
+                        "start_tick": int(tick),
+                        "won": (
+                            bool(winner_side == side)
+                            if not pd.isna(winner_side)
+                            else pd.NA
+                        ),
+                    }
+                )
+
+    if not rows:
+        return pd.DataFrame(columns=CLUTCH_ATTEMPT_COLUMNS)
+
+    return (
+        pd.DataFrame(rows, columns=CLUTCH_ATTEMPT_COLUMNS)
+        .sort_values(["round_number", "start_tick", "side", "steamid"])
+        .reset_index(drop=True)
+    )
+
+
 def build_damage(
     raw_dir: Path, rounds: pd.DataFrame, player_round_sides: pd.DataFrame
 ) -> pd.DataFrame:
@@ -2879,11 +3033,16 @@ def build_derived(
     rounds = build_rounds(raw_dir)
     player_round_sides = build_player_round_sides(raw_dir, rounds)
     weapon_actions = build_weapon_actions(raw_dir, rounds)
+    round_outcomes = build_round_outcomes(raw_dir, rounds)
+    kills = build_kills(raw_dir, rounds, player_round_sides, trade_tick_window)
     tables = {
         "players": players,
         "rounds": rounds,
-        "round_outcomes": build_round_outcomes(raw_dir, rounds),
-        "kills": build_kills(raw_dir, rounds, player_round_sides, trade_tick_window),
+        "round_outcomes": round_outcomes,
+        "kills": kills,
+        "clutch_attempts": build_clutch_attempts(
+            kills, rounds, round_outcomes, player_round_sides
+        ),
         "damage": build_damage(raw_dir, rounds, player_round_sides),
         "shots": build_shots(raw_dir, rounds, weapon_actions),
         "weapon_actions": weapon_actions,
