@@ -1,0 +1,5 @@
+tick,user_steamid,user_name,weapon,silenced
+130,A,Alpha,ak47,false
+135,A,Alpha,hegrenade,false
+330,B,Bravo,weapon_m4a1_silencer,true
+335,C,Charlie,flashbang,false

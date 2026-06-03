@@ -1,0 +1,5 @@
+tick,user_steamid,user_name,attacker_steamid,attacker_name,assister_steamid,weapon,headshot
+150,B,Bravo,A,Alpha,C,ak47,true
+180,C,Charlie,C,Charlie,,world,false
+350,A,Alpha,B,Bravo,,m4a1,false
+360,D,Delta,B,Bravo,,m4a1,false
