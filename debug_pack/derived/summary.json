@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-06-03T07:18:29.611587Z",
+  "built_at": "2026-06-03T07:44:32.412656Z",
   "source_derived_directory": "derived",
   "sample_rows_per_table": 25,
   "tables": [
@@ -230,7 +230,7 @@
     },
     {
       "table": "clutch_attempts",
-      "rows": 0,
+      "rows": 2,
       "columns": [
         "round_number",
         "steamid",

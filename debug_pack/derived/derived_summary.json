@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-06-03T07:18:29.503087Z",
+  "built_at": "2026-06-03T07:44:32.231692Z",
   "raw_input_directory": ".",
   "derived_output_directory": "derived",
   "tables": [
@@ -221,7 +221,7 @@
     {
       "name": "clutch_attempts",
       "relative_path": "derived/clutch_attempts.csv",
-      "rows": 0,
+      "rows": 2,
       "columns": [
         "round_number",
         "steamid",
@@ -259,8 +259,8 @@
     "closed_unknown": 0
   },
   "player_round_side_sources": {
-    "tick_data_rows": 0,
-    "fallback_rows": 220
+    "tick_data_rows": 10,
+    "fallback_rows": 210
   },
   "player_round_participation": {
     "participation_source": "ticks_player_core",
